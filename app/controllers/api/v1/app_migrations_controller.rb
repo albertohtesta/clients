@@ -5,13 +5,13 @@ class Api::V1::AppMigrationsController < JwtAuthAppsController
 
   #POST /api/v1/apps/accounts
   def accounts
-    Account.migrate(resource_params(:accounts))
+    #Account.migrate(resource_params(:accounts))
     render json: @accounts
   end
 
   #POST /api/v1/apps/projects
   def projects
-    Project.migrate(resource_params(:projects))
+    #Project.migrate(resource_params(:projects))
     render json: @projects
   end
 
