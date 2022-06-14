@@ -1,0 +1,2 @@
+class CreateAppConnection < ApplicationRecord
+end

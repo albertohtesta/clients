@@ -35,13 +35,13 @@ services:
 
   redis:
     image: redis:7.0-alpine
-    env_file: .env
+    env_file: .env.dev
     ports:
       - 6379:6379
     volumes:
       - ./config/redis.conf:/redis.conf
     command: [ "redis-server", "/redis.conf", "--requirepass ${REDIS_PASSWORD}" ]
-    
+
   rabbitmq:
     image: rabbitmq:3.10-management-alpine
     ports:
