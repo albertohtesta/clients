@@ -1,2 +1,0 @@
-class CreateAppConnection < ApplicationRecord
-end
