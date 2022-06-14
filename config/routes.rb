@@ -6,5 +6,17 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  get "/build_info", to: "info#build_info"
+  namespace :api do
+    namespace :v1 do
+
+      #salesforce from data
+      post "/app/accounts", to: "app_migrations#accounts"
+      post "/app/products", to: "app_migrations#products"
+
+      get "/collaborators/:id/accounts", to: "collaborators#accounts"
+      get "/accounts/:id/projects", to: "accounts#projects"
+
+      post "/auth", to: "app_auth#authenticate"
+    end
+  end
 end
