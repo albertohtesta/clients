@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  get "/build-info", to: "health#status"
-  root "health#status"
 
   namespace :api do
     namespace :v1 do
@@ -20,4 +18,6 @@ Rails.application.routes.draw do
       post "/auth", to: "app_auth#authenticate"
     end
   end
+
+  get "/build_info", to: "info#build_info"
 end
