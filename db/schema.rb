@@ -10,16 +10,127 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_14_013604) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_14_184434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
+  
   create_table "app_connections", force: :cascade do |t|
     t.string "name", null: false
     t.string "api_token", null: false
     t.string "secret_token_digest", null: false
+  end
+
+  create_table "account_statuses", force: :cascade do |t|
+    t.string "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "accounts", force: :cascade do |t|
+    t.string "account_uuid", null: false
+    t.string "name", null: false
+    t.string "contact_name"
+    t.string "contact_email"
+    t.string "contact_phone"
+    t.string "account_web_page"
+    t.string "service_duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "colaborators", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "uuid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "colaborators_teams", id: false, force: :cascade do |t|
+    t.bigint "colaborator_id", null: false
+    t.bigint "team_id", null: false
+  end
+
+  create_table "colaborators_tech_stacks", id: false, force: :cascade do |t|
+    t.bigint "colaborator_id", null: false
+    t.bigint "tech_stack_id", null: false
+    t.index ["colaborator_id", "tech_stack_id"], name: "index_colaborators_tech_stacks_on_colaborator_id_and_tech_stack"
+  end
+
+  create_table "colaborators_tools", id: false, force: :cascade do |t|
+    t.bigint "colaborator_id", null: false
+    t.bigint "tool_id", null: false
+    t.index ["colaborator_id", "tool_id"], name: "index_colaborators_tools_on_colaborator_id_and_tool_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.datetime "payment_date"
+    t.date "cut_off_date", null: false
+    t.date "payday_limit", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_payments_on_account_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.date "start_date", null: false
+    t.date "end_date"
+    t.string "description"
+    t.date "delivery_dates"
+    t.date "demo_dates"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_projects_on_account_id"
+  end
+
+  create_table "projects_teams", id: false, force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "team_id", null: false
+    t.index ["project_id", "team_id"], name: "index_projects_teams_on_project_id_and_team_id"
+  end
+
+  create_table "projects_tech_stacks", id: false, force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "tech_stack_id", null: false
+    t.index ["project_id", "tech_stack_id"], name: "index_projects_tech_stacks_on_project_id_and_tech_stack_id"
+  end
+
+  create_table "projects_tools", id: false, force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "tool_id", null: false
+    t.index ["project_id", "tool_id"], name: "index_projects_tools_on_project_id_and_tool_id"
+  end
+
+  create_table "team_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.datetime "added_date", null: false
+    t.bigint "team_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_type_id"], name: "index_teams_on_team_type_id"
+  end
+
+  create_table "tech_stacks", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tools", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "payments", "accounts"
+  add_foreign_key "projects", "accounts"
+  add_foreign_key "teams", "team_types"
 end
