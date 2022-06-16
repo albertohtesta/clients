@@ -1,7 +1,8 @@
 require "test_helper"
 
 class ToolTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "can create tool" do
+    assert build_stubbed(:tool)
+    assert build_stubbed(:tool).valid?
+  end
 end

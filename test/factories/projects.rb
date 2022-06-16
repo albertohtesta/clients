@@ -6,6 +6,6 @@ FactoryBot.define do
     description { "MyString" }
     delivery_dates { "2022-06-14" }
     demo_dates { "2022-06-14" }
-    account { nil }
+    account { Account.new }
   end
 end
