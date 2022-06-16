@@ -2,19 +2,14 @@
 
 module Api
   module V1
-    class AppMigrationsController < JwtAuthAppsController
+    module Salesforce
+    class AccountsController < JwtAuthAppsController
       before_action :authenticate_request
 
-      # POST /api/v1/apps/accounts
+      # POST /api/v1/salesforce/accounts/import
       def accounts
         # Account.migrate(resource_params(:accounts))
         render json: @accounts
-      end
-
-      # POST /api/v1/apps/projects
-      def projects
-        # Project.migrate(resource_params(:projects))
-        render json: @projects
       end
 
       private

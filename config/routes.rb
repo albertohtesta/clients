@@ -7,16 +7,25 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      # salesforce from data
-      post "/app/accounts", to: "app_migrations#accounts"
-      post "/app/products", to: "app_migrations#products"
+      namespace :salesforce do
+        # salesforce from data
+        resources :accounts do
+          post :import
+        end
 
+        resources :projects do
+          post :import
+        end
+
+      end
 
       resources :collaborators do
         get :accounts, on: :member
       end
 
-      get "/accounts/:id/projects", to: "accounts#projects"
+      resources :accounts do
+        get :projects, on: :member
+      end
 
       post "/auth", to: "app_auth#authenticate"
     end
