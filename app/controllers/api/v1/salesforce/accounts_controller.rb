@@ -8,7 +8,6 @@ module Api
 
         # POST /api/v1/salesforce/accounts/import
         def import
-          # Account.migrate(resource_params(:accounts))
           render json: @accounts
         end
 

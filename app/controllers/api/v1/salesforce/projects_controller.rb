@@ -8,7 +8,6 @@ module Api
 
         # POST /api/v1/salesforce/projects/import
         def index
-          # Project.migrate(resource_params(:projects))
           render json: @projects
         end
 

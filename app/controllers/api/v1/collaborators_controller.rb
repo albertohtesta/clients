@@ -208,7 +208,7 @@ module Api
       private
 
       def set_collaborator
-        @collaborator_id = params[:id]
+        @collaborator = Collaborator.find( params[:id] )
       end
     end
   end
