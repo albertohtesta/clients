@@ -9,7 +9,7 @@ class TeamTest < ActiveSupport::TestCase
   end
 
   test "is invalid without added_date" do
-    refute Team.new(added_date: "2021-12-12").valid?
+    refute Team.new.valid?
   end
 
   test "belongs to team type" do
