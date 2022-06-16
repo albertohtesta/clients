@@ -1,6 +1,5 @@
+# frozen_string_literal: true
 
-class Api::V1::AccountsController < ApplicationController
-  def projects
-
-  end
+class AccountsController < ApplicationController
+  def projects; end
 end

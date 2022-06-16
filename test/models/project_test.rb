@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class ProjectTest < ActiveSupport::TestCase
@@ -5,7 +7,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert build_stubbed(:project)
     assert build_stubbed(:project).valid?
   end
-  
+
   test "is invalid without name start_date" do
     refute Project.new(name: "2021-12-12").valid?
     refute Project.new(start_date: "2021-12-12").valid?

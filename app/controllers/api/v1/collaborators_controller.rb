@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class Api::V1::CollaboratorsController < ApplicationController
   before_action :set_collaborator
@@ -80,5 +81,4 @@ private
   def set_collaborator
     @collaborator_id = params[:id]
   end
-
 end

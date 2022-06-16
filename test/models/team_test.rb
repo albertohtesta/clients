@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class TeamTest < ActiveSupport::TestCase
@@ -5,7 +7,7 @@ class TeamTest < ActiveSupport::TestCase
     assert build_stubbed(:team)
     assert build_stubbed(:team).valid?
   end
-  
+
   test "is invalid without added_date" do
     refute Team.new(added_date: "2021-12-12").valid?
   end

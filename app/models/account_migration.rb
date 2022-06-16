@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccountMigration < ApplicationRecord
-  self.table_name :accounts
+  table_name :accounts
 end
