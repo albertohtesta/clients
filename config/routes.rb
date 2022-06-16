@@ -9,14 +9,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :salesforce do
         # salesforce from data
-        resources :accounts do
-          post :import
+        resources :accounts, only: [] do
+          post :import, on: :collection
         end
 
-        resources :projects do
-          post :import
+        resources :projects, only: [] do
+          post :import, on: :collection
         end
-
       end
 
       resources :collaborators do

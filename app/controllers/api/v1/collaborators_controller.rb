@@ -20,20 +20,20 @@ module Api
                 "JavaScript",
                 "C#"
               ],
-              tools:[
-                "JIRA",
-                "Git"
+              tools: %w[
+                JIRA
+                Git
               ],
-              productivity_kpis:{
+              productivity_kpis: {
                 speed: 4,
                 bugs_detected: "95%",
                 permanence: 8,
                 productivity: 8
               },
-              details:{
+              details: {
                 total_teams: 4,
                 balance: "95%",
-                total_projects: 8,
+                total_projects: 8
               },
               health: {
                 client_satisfaction: "97%",
@@ -58,20 +58,20 @@ module Api
                 "JavaScript",
                 "C#"
               ],
-              tools:[
-                "JIRA",
-                "Git"
+              tools: %w[
+                JIRA
+                Git
               ],
-              productivity_kpis:{
+              productivity_kpis: {
                 speed: 4,
                 bugs_detected: "95%",
                 permanence: 8,
                 productivity: 8
               },
-              details:{
+              details: {
                 total_teams: 4,
                 balance: "95%",
-                total_projects: 8,
+                total_projects: 8
               },
               health: {
                 client_satisfaction: "97%",
@@ -96,20 +96,20 @@ module Api
                 "JavaScript",
                 "C#"
               ],
-              tools:[
-                "JIRA",
-                "Git"
+              tools: %w[
+                JIRA
+                Git
               ],
-              productivity_kpis:{
+              productivity_kpis: {
                 speed: 4,
                 bugs_detected: "95%",
                 permanence: 8,
                 productivity: 8
               },
-              details:{
+              details: {
                 total_teams: 4,
                 balance: "95%",
-                total_projects: 8,
+                total_projects: 8
               },
               health: {
                 client_satisfaction: "97%",
@@ -134,20 +134,20 @@ module Api
                 "JavaScript",
                 "C#"
               ],
-              tools:[
-                "JIRA",
-                "Git"
+              tools: %w[
+                JIRA
+                Git
               ],
-              productivity_kpis:{
+              productivity_kpis: {
                 speed: 4,
                 bugs_detected: "95%",
                 permanence: 8,
                 productivity: 8
               },
-              details:{
+              details: {
                 total_teams: 4,
                 balance: "95%",
-                total_projects: 8,
+                total_projects: 8
               },
               health: {
                 client_satisfaction: "97%",
@@ -172,20 +172,20 @@ module Api
                 "JavaScript",
                 "C#"
               ],
-              tools:[
-                "JIRA",
-                "Git"
+              tools: %w[
+                JIRA
+                Git
               ],
-              productivity_kpis:{
+              productivity_kpis: {
                 speed: 4,
                 bugs_detected: "95%",
                 permanence: 8,
                 productivity: 8
               },
-              details:{
+              details: {
                 total_teams: 4,
                 balance: "95%",
-                total_projects: 8,
+                total_projects: 8
               },
               health: {
                 client_satisfaction: "97%",
@@ -205,7 +205,7 @@ module Api
         render json: @accounts, status: :ok
       end
 
-    private
+      private
 
       def set_collaborator
         @collaborator_id = params[:id]
