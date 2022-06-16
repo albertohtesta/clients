@@ -12,7 +12,11 @@ Rails.application.routes.draw do
       post "/app/accounts", to: "app_migrations#accounts"
       post "/app/products", to: "app_migrations#products"
 
-      get "/collaborators/:id/accounts", to: "collaborators#accounts"
+
+      resources :collaborators do
+        get :accounts, on: :member
+      end
+
       get "/accounts/:id/projects", to: "accounts#projects"
 
       post "/auth", to: "app_auth#authenticate"
