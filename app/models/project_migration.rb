@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectMigration < ApplicationRecord
-  self.table_name :projects
+  table_name :projects
 end

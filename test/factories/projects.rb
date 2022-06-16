@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :project do
     name { "MyString" }
@@ -6,6 +8,6 @@ FactoryBot.define do
     description { "MyString" }
     delivery_dates { "2022-06-14" }
     demo_dates { "2022-06-14" }
-    account { nil }
+    account { Account.new }
   end
 end

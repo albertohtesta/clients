@@ -1,16 +1,14 @@
+# frozen_string_literal: true
 
 class AppConnection < ApplicationRecord
   has_secure_password :secret_token
 
   def authenticate(secret_token)
-    if BCrypt::Password.new(secret_token_digest) == secret_token
-      self
-    else
-      nil
-    end
+    self if BCrypt::Password.new(secret_token_digest) == secret_token
   end
 
-private
+  private
+
   def generate_tokens
     credentials = { api_token: generate_api_token, secret_token: generate_secret_token }
   end
