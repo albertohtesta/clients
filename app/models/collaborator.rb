@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Colaborator < ApplicationRecord
+class Collaborator < ApplicationRecord
   validates :name, :email, :uuid, presence: true
 end

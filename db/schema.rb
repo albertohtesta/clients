@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_14_184434) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_17_172445) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_184434) do
     t.bigint "colaborator_id", null: false
     t.bigint "tool_id", null: false
     t.index ["colaborator_id", "tool_id"], name: "index_colaborators_tools_on_colaborator_id_and_tool_id"
+  end
+
+  create_table "collaborators", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "uuid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "collaborators_teams", id: false, force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
+    t.bigint "team_id", null: false
+    t.index ["collaborator_id", "team_id"], name: "index_collaborators_teams_on_collaborator_id_and_team_id"
+  end
+
+  create_table "collaborators_tech_stacks", id: false, force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
+    t.bigint "tech_stack_id", null: false
+    t.index ["collaborator_id", "tech_stack_id"], name: "index_collaborators_tech_stacks_on_colaborator_and_tech_stack"
+  end
+
+  create_table "collaborators_tools", id: false, force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
+    t.bigint "tool_id", null: false
+    t.index ["collaborator_id", "tool_id"], name: "index_collaborators_tools_on_collaborator_id_and_tool_id"
   end
 
   create_table "payments", force: :cascade do |t|
