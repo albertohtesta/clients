@@ -8,24 +8,17 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       namespace :salesforce do
-        resources :accounts, only: [] do
-          post :import, on: :collection
-        end
-
-        resources :projects, only: [] do
-          post :import, on: :collection
-        end
+        resources :project_imports, only: [:create]
+        resources :account_imports, only: [:create]
       end
 
       resources :collaborators do
-        get :accounts, on: :member
+        resources :accounts, only: [:show] do
+          resources :projects, only: [:show]
+        end
       end
 
-      resources :accounts do
-        get :projects, on: :member
-      end
-
-      post "/auth", to: "app_auth#authenticate"
+      resources :app_auth, only: [:create]
     end
   end
 

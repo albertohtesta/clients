@@ -6,7 +6,6 @@ module Api
       class ProjectsController < JwtAuthAppsController
         before_action :authenticate_request
 
-        # POST /api/v1/salesforce/projects/import
         def index
           render json: @projects
         end
