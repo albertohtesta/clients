@@ -5,7 +5,7 @@ module Api
     class CollaboratorsController < ApplicationController
       before_action :retrieve_collaborator
 
-      def accounts
+      def show
         file      = File.read(Rails.root.join("public", "assets", "collaborator_1_account.json"))
         @accounts = JSON.parse(file)
 
@@ -15,7 +15,7 @@ module Api
       private
 
       def retrieve_collaborator
-        # TODO: uncomment code to get collaborator @collaborator = Collaborator.find(params[:id])
+        # TODO: uncomment code to get collaborator @collaborator = Collaborator.find(params[:collaborator_id])
       end
     end
   end

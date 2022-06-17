@@ -3,10 +3,10 @@
 module Api
   module V1
     module Salesforce
-      class AccountsController < JwtAuthAppsController
+      class AccountImportsController < JwtAuthAppsController
         before_action :authenticate_request
 
-        def import
+        def create
           render json: @accounts
         end
 

@@ -3,10 +3,10 @@
 module Api
   module V1
     module Salesforce
-      class ProjectsController < JwtAuthAppsController
+      class ProjectImportsController < JwtAuthAppsController
         before_action :authenticate_request
 
-        def index
+        def create
           render json: @projects
         end
 
