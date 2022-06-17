@@ -12,20 +12,20 @@ class AppConnectionTest < ActiveSupport::TestCase
   end
 
   test "Tokens generated should be greater than 32 characters" do
-    assert( AppConnection.generate_token("secret").size > 32 )
+    assert(AppConnection.generate_token("secret").size > 32)
   end
 
   test "Secret key should be saved encrypted" do
     tokens = AppConnection.generate_tokens
-    app_connection = AppConnection.create(  tokens.merge( {name: "test"}) )
+    app_connection = AppConnection.create(tokens.merge({ name: "test" }))
 
-    assert BCrypt::Password.new( app_connection.secret_token_digest ) == tokens[:secret_token]
+    assert BCrypt::Password.new(app_connection.secret_token_digest) == tokens[:secret_token]
   end
 
   test "token should be authenticated" do
     tokens = AppConnection.generate_tokens
-    app_connection = AppConnection.create(  tokens.merge( {name: "test"}) )
+    app_connection = AppConnection.create(tokens.merge({ name: "test" }))
 
-    assert app_connection.authenticate( tokens[:secret_token] )
+    assert app_connection.authenticate(tokens[:secret_token])
   end
 end
