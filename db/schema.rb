@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_172445) do
     t.string "service_duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "account_status_id", null: false
+    t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
   end
 
   create_table "app_connections", force: :cascade do |t|
@@ -158,6 +160,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_172445) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "accounts", "account_statuses"
   add_foreign_key "payments", "accounts"
   add_foreign_key "projects", "accounts"
   add_foreign_key "teams", "team_types"
