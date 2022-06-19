@@ -9,8 +9,8 @@ class PaymentTest < ActiveSupport::TestCase
   end
 
   test "is invalid without cut_off_date payday_limit" do
-    assert_not Payment.new(payday_limit: "2021-12-12").valid?
-    assert_not Payment.new(cut_off_date: "2021-12-12").valid?
+    assert_not build(:payment, cut_off_date: nil).valid?
+    assert_not build(:payment, payday_limit: nil).valid?
   end
 
   test "belongs to account" do
