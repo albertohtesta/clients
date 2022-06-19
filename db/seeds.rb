@@ -39,18 +39,18 @@ Account.first.update(account_status: AccountStatus.find_by(status: "Finished"))
 Account.last.update(account_status: AccountStatus.find_by(status: "Cancelled"))
 
 # **************************************
-# CREATING 40 COLABORATORS
+# CREATING 40 COLLABORATORS
 # **************************************
 40.times do
-  Colaborator.create([
-                       {
-                         name: Faker::Name.unique.name,
-                         uuid: Faker::IDNumber.unique.invalid,
-                         email: Faker::Internet.unique.email,
-                         tech_stacks: TechStack.all.sample(2),
-                         tools: Tool.all.sample(2)
-                       }
-                     ])
+  Collaborator.create([
+                        {
+                          name: Faker::Name.unique.name,
+                          uuid: Faker::IDNumber.unique.invalid,
+                          email: Faker::Internet.unique.email,
+                          tech_stacks: TechStack.all.sample(2),
+                          tools: Tool.all.sample(2)
+                        }
+                      ])
 end
 
 # ************************************************
@@ -87,13 +87,13 @@ Account.all.each do |account|
 end
 
 # **************************************
-# CREATING 7 TEAMS WITH 5 COLABORATORS AND LINKED WITH A PROJECT
+# CREATING 7 TEAMS WITH 5 COLLABORATORS AND LINKED WITH A PROJECT
 # **************************************
 7.times do |idx|
   Team.create(
     added_date: Faker::Date.between(from: 5.months.ago, to: DateTime.yesterday),
     team_type_id: TeamType.all.to_a.sample.id,
-    colaborators: Colaborator.limit(5).offset(idx * 5),
+    collaborators: Collaborator.limit(5).offset(idx * 5),
     projects: Project.limit(1).offset(idx)
   )
 end
@@ -105,5 +105,5 @@ p "Seed... #{TechStack.count} TechStack created"
 p "Seed... #{Account.count} Account created"
 p "Seed... #{Payment.count} Payment created"
 p "Seed... #{Project.count} Project created"
-p "Seed... #{Colaborator.count} Colaborator created"
+p "Seed... #{Collaborator.count} Collaborator created"
 p "Seed... #{Team.count} Teams created"
