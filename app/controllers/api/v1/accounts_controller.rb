@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
-class AccountsController < ApplicationController
-  def show; end
+module Api
+  module V1
+    class AccountsController < ApplicationController
+      def show; end
+    end
+  end
 end

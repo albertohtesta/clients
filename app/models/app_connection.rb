@@ -12,8 +12,6 @@ class AppConnection < ApplicationRecord
       { api_token: generate_token("api"), secret_token: generate_token("secret") }
     end
 
-    private
-
     def generate_token(type)
       "#{type}_#{SecureRandom.hex}"
     end
