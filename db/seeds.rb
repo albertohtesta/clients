@@ -7,7 +7,7 @@ AccountStatus.create([
                        { status: "In Development" }, { status: "Finished" }, { status: "Cancelled" }
                      ])
 TeamType.create([
-                  { name: "POD" }, { name: "Big POD" }, { name: "Staff Ahugmentation" }
+                  { name: "POD" }, { name: "Big POD" }, { name: "Staff Augmentation" }
                 ])
 Tool.create([
               { name: "AWS" }, { name: "Rails" }, { name: "Azure" }, { name: "Cognito" }, { name: "Sentry" }
