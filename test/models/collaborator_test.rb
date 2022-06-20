@@ -3,7 +3,7 @@
 require "test_helper"
 
 class CollaboratorTest < ActiveSupport::TestCase
-  test "can create colaborator" do
+  test "can create collaborator" do
     assert build_stubbed(:collaborator)
     assert build_stubbed(:collaborator).valid?
   end

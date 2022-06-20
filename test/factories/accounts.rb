@@ -9,5 +9,6 @@ FactoryBot.define do
     contact_phone { "MyString" }
     account_web_page { "MyString" }
     service_duration { "MyString" }
+    account_status
   end
 end

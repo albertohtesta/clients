@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_17_172445) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_17_183337) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_172445) do
     t.string "service_duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "account_status_id", null: false
+    t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
   end
 
   create_table "app_connections", force: :cascade do |t|
@@ -46,23 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_172445) do
     t.string "uuid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "colaborators_teams", id: false, force: :cascade do |t|
-    t.bigint "colaborator_id", null: false
-    t.bigint "team_id", null: false
-  end
-
-  create_table "colaborators_tech_stacks", id: false, force: :cascade do |t|
-    t.bigint "colaborator_id", null: false
-    t.bigint "tech_stack_id", null: false
-    t.index ["colaborator_id", "tech_stack_id"], name: "index_colaborators_tech_stacks_on_colaborator_id_and_tech_stack"
-  end
-
-  create_table "colaborators_tools", id: false, force: :cascade do |t|
-    t.bigint "colaborator_id", null: false
-    t.bigint "tool_id", null: false
-    t.index ["colaborator_id", "tool_id"], name: "index_colaborators_tools_on_colaborator_id_and_tool_id"
   end
 
   create_table "collaborators", force: :cascade do |t|
@@ -158,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_172445) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "accounts", "account_statuses"
   add_foreign_key "payments", "accounts"
   add_foreign_key "projects", "accounts"
   add_foreign_key "teams", "team_types"
