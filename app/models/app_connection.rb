@@ -7,17 +7,15 @@ class AppConnection < ApplicationRecord
     self if BCrypt::Password.new(secret_token_digest) == secret_token
   end
 
-  private
+  class << self
+    def generate_tokens
+      { api_token: generate_token("api"), secret_token: generate_token("secret") }
+    end
 
-  def generate_tokens
-    credentials = { api_token: generate_api_token, secret_token: generate_secret_token }
-  end
+    private
 
-  def self.generate_api_token
-    "api_#{SecureRandom.urlsafe_base64(16)}"
-  end
-
-  def self.generate_secret_token
-    "scr_#{SecureRandom.urlsafe_base64(16)}"
+    def generate_token(type)
+      "#{type}_#{SecureRandom.hex}"
+    end
   end
 end
