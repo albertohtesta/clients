@@ -5,6 +5,6 @@ FactoryBot.define do
     payment_date { "2022-06-14 13:44:34" }
     cut_off_date { "2022-06-14" }
     payday_limit { "2022-06-14" }
-    account { Account.new }
+    account
   end
 end
