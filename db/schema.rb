@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_17_183337) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_20_233829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,21 +31,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_183337) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "account_status_id", null: false
+    t.bigint "manager_id"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "salesforce_id", default: "0", null: false
+    t.integer "balance", default: 0
+    t.decimal "blended_rate", default: "0.0"
+    t.decimal "gross_profit", default: "0.0"
+    t.decimal "payroll", default: "0.0"
+    t.decimal "total_expenses", default: "0.0"
+    t.decimal "total_revenue", default: "0.0"
+    t.integer "client_satisfaction", default: 0
+    t.integer "moral", default: 0
+    t.integer "bugs_detected", default: 0
+    t.integer "permanence", default: 0
+    t.integer "productivity", default: 0
+    t.integer "speed", default: 0
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
+    t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
 
   create_table "app_connections", force: :cascade do |t|
     t.string "name", null: false
     t.string "api_token", null: false
     t.string "secret_token_digest", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "colaborators", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "uuid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -144,6 +154,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_183337) do
   end
 
   add_foreign_key "accounts", "account_statuses"
+  add_foreign_key "accounts", "collaborators", column: "manager_id"
   add_foreign_key "payments", "accounts"
   add_foreign_key "projects", "accounts"
   add_foreign_key "teams", "team_types"

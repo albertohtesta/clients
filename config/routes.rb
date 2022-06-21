@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
 
-  namespace :api do
+  namespace :api, defaults: { format: "json" } do
     namespace :v1 do
       namespace :salesforce do
         resources :project_imports, only: [:create]
