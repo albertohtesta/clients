@@ -20,23 +20,6 @@ TechStack.create([
 # **************************************
 # CREATE 7 ACCOUNT'S FIELDS
 # **************************************
-7.times do
-  Account.create([
-                   {
-                     account_uuid: Faker::IDNumber.unique.invalid,
-                     name: Faker::Company.unique.bs,
-                     contact_name: Faker::Name.unique.name,
-                     contact_email: Faker::Internet.unique.email,
-                     contact_phone: Faker::PhoneNumber.unique.phone_number,
-                     account_web_page: Faker::Internet.unique.url,
-                     account_status_id: AccountStatus.first.id
-                   }
-                 ])
-end
-
-# ADD TWO ACCOUNTS WITH NO USED STATUS
-Account.first.update(account_status: AccountStatus.find_by(status: "Finished"))
-Account.last.update(account_status: AccountStatus.find_by(status: "Cancelled"))
 
 # **************************************
 # CREATING 40 COLLABORATORS
@@ -52,6 +35,58 @@ Account.last.update(account_status: AccountStatus.find_by(status: "Cancelled"))
                         }
                       ])
 end
+
+def random_price
+  rand(500_000.00..10_000_000.00).round(2)
+end
+
+def account_amounts
+  {
+    balance: rand(0..100),
+    blended_rate: random_price,
+    gross_profit: random_price,
+    payroll: random_price,
+    total_expenses: random_price,
+    total_revenue: random_price
+  }
+end
+
+def random_salesforce_id(length, id = "")
+  id = random_salesforce_id(length, id += (0..9).to_a.union(("A".."Z").to_a).sample.to_s) if id.length < length
+
+  id
+end
+
+# GET 2 COLLABORATORS AS MANAGERS TO ASSIGN ACCOUNTS TO
+managers = Collaborator.limit(2)
+locations = ["California", "New York City", "Washington", "San Francisco"]
+
+7.times do
+  Account.create([
+                   {
+                     account_uuid: Faker::IDNumber.unique.invalid,
+                     manager: managers.sample,
+                     name: Faker::Company.unique.bs,
+                     contact_name: Faker::Name.unique.name,
+                     contact_email: Faker::Internet.unique.email,
+                     contact_phone: Faker::PhoneNumber.unique.phone_number,
+                     account_web_page: Faker::Internet.unique.url,
+                     account_status_id: AccountStatus.first.id,
+                     salesforce_id: random_salesforce_id(15),
+                     city: locations.sample,
+                     client_satisfaction: rand(0..100),
+                     moral: rand(0..100),
+                     bugs_detected: rand(0..100),
+                     permanence: rand(0..100),
+                     productivity: rand(0..100),
+                     speed: rand(0..100)
+                   }.merge(account_amounts)
+                 ])
+end
+
+# ADD TWO ACCOUNTS WITH NO USED STATUS
+Account.first.update(account_status: AccountStatus.find_by(status: "Finished"))
+Account.last.update(account_status: AccountStatus.find_by(status: "Cancelled"))
 
 # ************************************************
 # CREATE 2 PAYMENTS AND 1 PROJECT BY EACH ACCOUNT

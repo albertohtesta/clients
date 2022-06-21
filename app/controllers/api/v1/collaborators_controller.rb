@@ -6,15 +6,14 @@ module Api
       before_action :retrieve_collaborator
 
       def show
-        file = File.read(Rails.root.join("public", "assets", "collaborator_1_account.json"))
-        @accounts = JSON.parse(file)
-
-        render json: @accounts, status: :ok
+        @collaborator.accounts
       end
 
       private
 
-      def retrieve_collaborator; end
+      def retrieve_collaborator
+        @collaborator = Collaborator.find params[:id]
+      end
     end
   end
 end
