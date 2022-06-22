@@ -22,5 +22,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/build_info", to: "info#build_info"
+  get "/build-info", to: "info#build_info"
 end
