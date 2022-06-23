@@ -1,8 +1,8 @@
 FROM ruby:3.1.1-alpine
 
-RUN apk --update add build-base tzdata postgresql-dev postgresql-client bash
+RUN apk --update add build-base tzdata postgresql-dev postgresql-client
 
-ENV APP_DIR /core
+ENV APP_DIR /app
 
 WORKDIR $APP_DIR
 
@@ -14,12 +14,10 @@ ENV RACK_ENV=$RAILS_ENV
 
 RUN gem install bundler
 
-RUN if [[ "$RAILS_ENV" == "production" ]]; then bundle install --without development test; else bundle install; fi
+RUN bundle install --path=vendor/bundle
 
 COPY . ./
 
 EXPOSE 80
-
-ENV PORT 80
 
 CMD bundle exec rails s -b '0.0.0.0'
