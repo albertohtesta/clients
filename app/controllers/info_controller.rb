@@ -3,12 +3,9 @@
 # endpoint to response with json body to set deployed commit info
 class InfoController < ApplicationController
   def build_info
-    @info_response = {
-      build_id: "#BUILD_ID#",
-      build_date: "#BUILD_DATE#",
-      build_branch: "#BUILD_BRANCH#"
-    }
+    file = File.read(Rails.root.join("build-info.json"))
+    @info_response = JSON.parse(file)
 
-    render json: @info_response
+    render json: @info_response, status: :ok
   end
 end
