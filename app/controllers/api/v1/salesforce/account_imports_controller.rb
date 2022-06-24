@@ -7,7 +7,9 @@ module Api
         before_action :authenticate_request
 
         def create
-          render json: @accounts
+          @imported_accounts = Account.import(JSON.parse(resource_params, symbolize_names: true))
+
+          render json: { accounts: @imported_accounts }, status: :created
         end
 
         private

@@ -9,11 +9,19 @@ class AppConnection < ApplicationRecord
 
   class << self
     def generate_tokens
-      { api_token: generate_token("api"), secret_token: generate_token("secret") }
+      { api_name: generate_api_name, secret_token: generate_secret_token }
     end
 
-    def generate_token(type)
-      "#{type}_#{SecureRandom.hex}"
+    private
+
+    def generate_api_name(name = nil)
+      app_connection = AppConnection.where(api_name: name).first
+      name = generate_api_name("api_#{SecureRandom.hex}") if name.nil? || app_connection
+      name
+    end
+
+    def generate_secret_token
+      "secret_#{SecureRandom.urlsafe_base64}"
     end
   end
 end
