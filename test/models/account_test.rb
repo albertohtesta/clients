@@ -9,7 +9,6 @@ class AccountTest < ActiveSupport::TestCase
   end
 
   test "account is invalid without account_uuid and name" do
-    assert_not build(:account, name: "hcp", account_uuid: nil).valid?
     assert_not build(:account, name: nil, account_uuid: "xxxxx").valid?
   end
 end

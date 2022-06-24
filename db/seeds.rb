@@ -4,7 +4,7 @@ require "faker"
 
 ######### ADD CATALOGS FIELDS
 AccountStatus.create([
-                       { status: "In Development" }, { status: "Finished" }, { status: "Cancelled" }
+                       { status: "New", status_code: "new_project" },{ status: "In Development", status_code: "in_development" }, { status: "Finished", status_code: "finished" }, { status: "Cancelled", status_code: "cancelled" }
                      ])
 TeamType.create([
                   { name: "POD" }, { name: "Big POD" }, { name: "Staff Augmentation" }
