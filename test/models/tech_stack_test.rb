@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class TechStackTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "can create tech stack" do
+    assert build_stubbed(:tech_stack)
+    assert build_stubbed(:tech_stack).valid?
+  end
 end

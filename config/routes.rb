@@ -5,19 +5,22 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
 
-  namespace :api do
+  namespace :api, defaults: { format: "json" } do
     namespace :v1 do
+      namespace :salesforce do
+        resources :project_imports, only: [:create]
+        resources :account_imports, only: [:create]
+      end
 
-      #salesforce from data
-      post "/app/accounts", to: "app_migrations#accounts"
-      post "/app/products", to: "app_migrations#products"
+      resources :collaborators do
+        resources :accounts, only: [:show] do
+          resources :projects, only: [:show]
+        end
+      end
 
-      get "/collaborators/:id/accounts", to: "collaborators#accounts"
-      get "/accounts/:id/projects", to: "accounts#projects"
-
-      post "/auth", to: "app_auth#authenticate"
+      resources :app_auth, only: [:create]
     end
   end
 
-  get "/build_info", to: "info#build_info"
+  get "/build-info", to: "info#build_info"
 end
