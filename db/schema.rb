@@ -10,20 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_14_184434) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  
-  create_table "app_connections", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "api_token", null: false
-    t.string "secret_token_digest", null: false
-  end
 
   create_table "account_statuses", force: :cascade do |t|
     t.string "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status_code"
+    t.index ["status_code"], name: "index_account_statuses_on_status_code", unique: true
   end
 
   create_table "accounts", force: :cascade do |t|
@@ -36,9 +32,38 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_184434) do
     t.string "service_duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "account_status_id", null: false
+    t.bigint "manager_id"
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "salesforce_id", default: "0", null: false
+    t.integer "balance", default: 0
+    t.decimal "blended_rate", default: "0.0"
+    t.decimal "gross_profit", default: "0.0"
+    t.decimal "payroll", default: "0.0"
+    t.decimal "total_expenses", default: "0.0"
+    t.decimal "total_revenue", default: "0.0"
+    t.integer "client_satisfaction", default: 0
+    t.integer "moral", default: 0
+    t.integer "bugs_detected", default: 0
+    t.integer "permanence", default: 0
+    t.integer "productivity", default: 0
+    t.integer "speed", default: 0
+    t.datetime "deleted_at", precision: nil
+    t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
+    t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
 
-  create_table "colaborators", force: :cascade do |t|
+  create_table "app_connections", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "api_name", null: false
+    t.string "secret_token_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "collaborators", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "uuid", null: false
@@ -46,21 +71,44 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_184434) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "colaborators_teams", id: false, force: :cascade do |t|
-    t.bigint "colaborator_id", null: false
+  create_table "collaborators_teams", id: false, force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
     t.bigint "team_id", null: false
+    t.index ["collaborator_id", "team_id"], name: "index_collaborators_teams_on_collaborator_id_and_team_id"
   end
 
-  create_table "colaborators_tech_stacks", id: false, force: :cascade do |t|
-    t.bigint "colaborator_id", null: false
+  create_table "collaborators_tech_stacks", id: false, force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
     t.bigint "tech_stack_id", null: false
-    t.index ["colaborator_id", "tech_stack_id"], name: "index_colaborators_tech_stacks_on_colaborator_id_and_tech_stack"
+    t.index ["collaborator_id", "tech_stack_id"], name: "index_collaborators_tech_stacks_on_colaborator_and_tech_stack"
   end
 
-  create_table "colaborators_tools", id: false, force: :cascade do |t|
-    t.bigint "colaborator_id", null: false
+  create_table "collaborators_tools", id: false, force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
     t.bigint "tool_id", null: false
-    t.index ["colaborator_id", "tool_id"], name: "index_colaborators_tools_on_colaborator_id_and_tool_id"
+    t.index ["collaborator_id", "tool_id"], name: "index_collaborators_tools_on_collaborator_id_and_tool_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "salesforce_id"
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.bigint "account_id", null: false
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_contacts_on_account_id"
+  end
+
+  create_table "follow_histories", force: :cascade do |t|
+    t.date "follow_date"
+    t.string "description"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_follow_histories_on_account_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -83,6 +131,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_184434) do
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "salesforce_id"
+    t.datetime "deleted_at", precision: nil
     t.index ["account_id"], name: "index_projects_on_account_id"
   end
 
@@ -130,6 +180,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_14_184434) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "accounts", "account_statuses"
+  add_foreign_key "accounts", "collaborators", column: "manager_id"
+  add_foreign_key "contacts", "accounts"
+  add_foreign_key "follow_histories", "accounts"
   add_foreign_key "payments", "accounts"
   add_foreign_key "projects", "accounts"
   add_foreign_key "teams", "team_types"

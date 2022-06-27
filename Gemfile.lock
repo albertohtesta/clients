@@ -75,6 +75,7 @@ GEM
     bunny (2.19.0)
       amq-protocol (~> 2.3, >= 2.3.1)
       sorted_set (~> 1, >= 1.0.2)
+    choice (0.2.0)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     debug (1.5.0)
@@ -88,6 +89,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -160,6 +163,11 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
+    rails-erd (1.7.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     railties (7.0.3)
@@ -193,6 +201,8 @@ GEM
     rubocop-performance (1.14.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby-progressbar (1.11.0)
     serverengine (2.0.7)
       sigdump (~> 0.2.2)
@@ -234,6 +244,7 @@ DEPENDENCIES
   bootsnap
   debug
   factory_bot_rails
+  faker
   jbuilder
   json
   jwt
@@ -243,6 +254,7 @@ DEPENDENCIES
   pundit
   rack-cors
   rails (~> 7.0.2, >= 7.0.2.3)
+  rails-erd
   redis
   rubocop
   rubocop-minitest
