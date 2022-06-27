@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-
   namespace :api, defaults: { format: "json" } do
     namespace :v1 do
       namespace :salesforce do
@@ -15,6 +11,7 @@ Rails.application.routes.draw do
       resources :collaborators do
         resources :accounts, only: [:show] do
           resources :projects, only: [:show]
+          resources :account_follow_ups, only: %i[create index]
         end
       end
 
