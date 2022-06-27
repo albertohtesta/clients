@@ -6,8 +6,12 @@ class JwtAuthAppsController < ActionController::API
   def authenticate_request
     header  = request.headers["Authorization"]
     header  = header.split.last if header
-    decoded = JsonWebToken.jwt_decode(header)
 
-    @current_app = AppConnection.find decoded[:app_id]
+    begin
+      decoded = JsonWebToken.jwt_decode(header)
+      @current_app = AppConnection.find(decoded[:app_id])
+    rescue StandardError
+      render json: { error: "Invalid Credentials" }, status: :unauthorized
+    end
   end
 end

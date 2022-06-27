@@ -19,7 +19,7 @@ class Account < ApplicationRecord
   end
 
   def assign_status_by_default
-    self.account_status = AccountStatus.new_project_status if account_status.nil?
+    self.account_status = AccountStatusRepository.new_project_status if account_status.nil?
   end
 
   def tech_stacks

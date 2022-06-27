@@ -34,5 +34,6 @@ group :development do
 end
 
 group :test do
+  gem "byebug"
   gem "simplecov"
 end
