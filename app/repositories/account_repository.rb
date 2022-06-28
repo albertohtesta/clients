@@ -7,12 +7,16 @@ class AccountRepository < ApplicationRepository
       scope.where(salesforce_id:).first_or_initialize
     end
 
-    def tech_stacks(model_object)
-      model_object.projects.map { |project| project.tech_stacks.pluck(:name) }.flatten.uniq
-    end
-
-    def tools(model_object)
-      model_object.projects.map { |project| project.tools.pluck(:name) }.flatten.uniq
+    def import(accounts)
+      accounts.map do |item|
+        ActiveRecord::Base.transaction do
+          account = AccountRepository.first_or_initialize_by_salesforce_id(item[:account][:Id])
+          account.update_from_salesforce(item[:account], item[:contacts])
+          Contact.update_contacts_from_salesforce(account, item[:contacts])
+          Project.update_project_by_salesforce(account, item[:opportunity])
+          account.attributes.slice("name", "id", "salesforce_id")
+        end
+      end
     end
   end
 end
