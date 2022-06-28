@@ -23,11 +23,11 @@ class Account < ApplicationRecord
   end
 
   def tech_stacks
-    AccountRepository.tech_stacks self
+    projects.map { |project| project.tech_stacks.pluck(:name) }.flatten.uniq
   end
 
   def tools
-    AccountRepository.tools self
+    projects.map { |project| project.tools.pluck(:name) }.flatten.uniq
   end
 
   def status
@@ -81,18 +81,6 @@ class Account < ApplicationRecord
 
   def payment_status
     debt? ? "Debt" : "On Time"
-  end
-
-  def self.import(accounts)
-    accounts.map do |item|
-      ActiveRecord::Base.transaction do
-        account = AccountRepository.first_or_initialize_by_salesforce_id(item[:account][:Id])
-        account.update_from_salesforce(item[:account], item[:contacts])
-        Contact.update_contacts_from_salesforce(account, item[:contacts])
-        Project.update_project_by_salesforce(account, item[:opportunity])
-        account.attributes.slice("name", "id", "salesforce_id")
-      end
-    end
   end
 
   def update_from_salesforce(client, contacts)
