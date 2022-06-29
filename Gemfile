@@ -7,6 +7,7 @@ ruby "3.1.1"
 
 gem "bcrypt"
 gem "bootsnap", require: false
+gem "faker"
 gem "jbuilder"
 gem "json"
 gem "jwt", require: false
@@ -22,7 +23,6 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
-  gem "faker"
   gem "minitest"
   gem "rails-erd"
 end

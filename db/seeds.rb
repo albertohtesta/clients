@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "faker"
 
 ######### Generate Salesforce user and pass
 AppConnection.create({ name: "Salesforce", api_name: "api_26d680024c3374525178568bc7db51e2", secret_token: "secret_VAvIwWA__1uppDBR2aBxnA"} )
