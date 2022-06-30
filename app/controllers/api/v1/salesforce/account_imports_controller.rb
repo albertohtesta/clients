@@ -5,16 +5,23 @@ module Api
     module Salesforce
       class AccountImportsController < JwtAuthAppsController
         def create
-          @imported_accounts = AccountRepository.import(JSON.parse(resource_params, symbolize_names: true))
-          render json: { accounts: @imported_accounts }, status: :created
+          @imported_account = AccountRepository.import(resource_params)
+          render json: { account: @imported_account }, status: :created
         rescue StandardError
-          render json: { error: "Invalid Data Provided" }, status: :unprocessable_entity
+          render json: { error: "Error processing data provided" }, status: :unprocessable_entity
         end
 
         private
 
         def resource_params
-          params.require(:accounts)
+          resources = ActionController::Parameters.new(JSON.parse(request.raw_post, symbolize_names: true))
+          account_params, opportunity_params, contacts_params = resources.require(%i[account opportunity contacts])
+
+          {
+            account: account_params,
+            opportunity: opportunity_params,
+            contacts: contacts_params
+          }
         end
       end
     end
