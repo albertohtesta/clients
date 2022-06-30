@@ -12,6 +12,7 @@ Rails.application.configure do
 
   config.hosts << "localhost:4001"
   config.hosts << "qa-clients-api.nordhen.com"
+  config.hosts << "norden-clients-integration.herokuapp.com"
 
   # Do not eager load code on boot.
   config.eager_load = false

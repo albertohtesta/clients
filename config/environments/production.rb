@@ -10,7 +10,7 @@ Rails.application.configure do
 
   config.hosts << "localhost:4000"
   config.hosts << "qa-core-api.nordhen.com"
-
+  config.hosts << "norden-clients-integration.herokuapp.com"
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
