@@ -93,7 +93,6 @@ publish-image-qa:
   when: manual 
   except:
     - main
-    - develop
     - /^release\/.*$/
   after_script:
     - echo after script
@@ -162,7 +161,6 @@ deploy-qa:
   when: manual 
   except:
     - main
-    - develop
     - /^release\/.*$/
   after_script:
     - echo after script
