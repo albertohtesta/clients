@@ -7,11 +7,12 @@ module Api
     module Salesforce
       class AccountImportsControllerTest < ActionDispatch::IntegrationTest
         def correct_request(params = nil)
-          post api_v1_salesforce_account_imports_url, params: params || { accounts: @accounts }
+          params = @account if params.nil?
+          post api_v1_salesforce_account_imports_url, params:
         end
 
         setup do
-          @accounts = File.read Rails.root.join("test", "files", "test_salesforce.json")
+          @account = File.read Rails.root.join("test", "files", "test_salesforce.json")
           create(:account_status, { status: "New", status_code: "new_project" })
         end
 
@@ -20,14 +21,14 @@ module Api
           assert_response :created
         end
 
-        test "should return saved accounts" do
+        test "should return saved account" do
           correct_request
           response_body = JSON.parse(response.body, symbolize_names: true)
-          assert response_body[:accounts][0][:salesforce_id].present?
+          assert response_body[:account][:salesforce_id].present?
         end
 
         test "should get unprocessable_entity code" do
-          correct_request({ account: [] })
+          correct_request("{ account: [] }")
           assert_response :unprocessable_entity
         end
       end
