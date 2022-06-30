@@ -2,16 +2,22 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USER") { "postgres" } %>
+  username: <%= ENV.fetch("DB_USER") { "clients" } %>
   password: <%= ENV["DB_PASSWORD"] %>
   host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
 
 development:
   <<: *default
-  database: core_backend_development
+  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
 test:
   <<: *default
-  database: core_backend_test
+  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
+qa:
+  <<: *default
+  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
+staging:
+  <<: *default
+  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
 production:
   <<: *default
-  database: core_backend_production
+  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
