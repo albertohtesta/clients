@@ -13,21 +13,20 @@ class ApplicationSubscriber < ApplicationJob
   end
 
   protected
-
-  def permitted_attributes
-    self.class::ATTRS.keys.each_with_object({}) do |key, memo|
-      memo[key] = attribute(key)
-      memo
+    def permitted_attributes
+      self.class::ATTRS.keys.each_with_object({}) do |key, memo|
+        memo[key] = attribute(key)
+        memo
+      end
     end
-  end
 
-  def attribute(key)
-    @payload[self.class::ATTRS[key]]
-  end
+    def attribute(key)
+      @payload[self.class::ATTRS[key]]
+    end
 
-  def safe_json(content)
-    JSON.parse(content, symbolize_names: true)
-  rescue JSON::ParserError
-    {}
-  end
+    def safe_json(content)
+      JSON.parse(content, symbolize_names: true)
+    rescue JSON::ParserError
+      {}
+    end
 end

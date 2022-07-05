@@ -8,10 +8,10 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
+  database: 'clients_development'
 test:
   <<: *default
-  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
+  database: 'clients_test'
 qa:
   <<: *default
   database: <%= ENV.fetch("DB_NAME") { "clients" } %>

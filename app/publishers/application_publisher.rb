@@ -23,16 +23,14 @@ class ApplicationPublisher
   end
 
   protected
+    def exchange
+      @exchange ||= channel.direct("amq.direct")
+    end
 
-  def exchange
-    @exchange ||= channel.direct("amq.direct")
-  end
-
-  def channel
-    @channel ||= conn.create_channel
-  end
+    def channel
+      @channel ||= conn.create_channel
+    end
 
   private
-
-  attr_reader :conn
+    attr_reader :conn
 end

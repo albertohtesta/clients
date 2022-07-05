@@ -1,0 +1,35 @@
+PreCommit:
+  ALL:
+    problem_on_unmodified_line: report
+    requires_files: true
+    required: false
+    quiet: false
+  RuboCop:
+    enabled: true
+    command: ['bundle', 'exec', 'rubocop', '-c', './.rubocop.yml']
+    on_warn: fail
+  BundleAudit:
+    enabled: true
+    on_warn: fail
+  YamlSyntax:
+    enabled: true
+    on_warn: fail
+
+CommitMsg:
+  CapitalizedSubject:
+    enabled: false
+  MessageFormat:
+    enabled: true
+    pattern: '^((ci|feat|fix|docs|style|refactor|perf|test|chore|build)\: (.+))'
+    expected_pattern_message: '<type>: <subject>'
+    sample_message: 'feat: add very important sidebar'
+    on_fail: fail
+  RussianNovel:
+    enabled: true
+    description: 'Checking length of your commit message...'
+  TextWidth:
+    enabled: true
+    description: 'Checking text width...'
+    max_subject_width: 50
+    min_subject_width: 5
+    max_body_width: 72

@@ -31,7 +31,7 @@ services:
 
 stages:
   - build
-  - rubocop
+  - bundle-audit
   - test
   - publish-image
   - publish-image-qa
@@ -49,8 +49,16 @@ build:
   script:
     - bundle install
 
+bundle-audit:
+  stage: bundle-audit
+  cache:
+    <<: *global_cache
+  script:
+    - bundle install
+    - bundle exec bundler-audit
+
 rubocop:
-  stage: rubocop
+  stage: test
   cache:
     <<: *global_cache
     policy: pull

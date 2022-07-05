@@ -10,12 +10,11 @@ module Api
       end
 
       private
+        def retrieve_collaborator
+          return if (@collaborator = Collaborator.find_by(id: params[:id]))
 
-      def retrieve_collaborator
-        return if (@collaborator = Collaborator.find_by(id: params[:id]))
-
-        render json: { error: "Collaborator not found" }, status: :not_found
-      end
+          render json: { error: "Collaborator not found" }, status: :not_found
+        end
     end
   end
 end

@@ -20,10 +20,9 @@ module Api
       end
 
       private
-
-      def account_follow_ups_params
-        params.require(:account_follow_ups).permit(:follow_date, :account_id)
-      end
+        def account_follow_ups_params
+          params.require(:account_follow_ups).permit(:follow_date, :account_id)
+        end
     end
   end
 end
