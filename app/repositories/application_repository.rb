@@ -24,17 +24,16 @@ class ApplicationRepository
     end
 
     protected
+      def class_name
+        to_s.delete_suffix("Repository")
+      end
 
-    def class_name
-      to_s.delete_suffix("Repository")
-    end
+      def model
+        class_name.constantize
+      end
 
-    def model
-      class_name.constantize
-    end
-
-    def scope
-      model
-    end
+      def scope
+        model
+      end
   end
 end

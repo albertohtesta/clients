@@ -12,17 +12,16 @@ module Api
         end
 
         private
+          def resource_params
+            resources = ActionController::Parameters.new(JSON.parse(request.raw_post, symbolize_names: true))
+            account_params, opportunity_params, contacts_params = resources.require(%i[account opportunity contacts])
 
-        def resource_params
-          resources = ActionController::Parameters.new(JSON.parse(request.raw_post, symbolize_names: true))
-          account_params, opportunity_params, contacts_params = resources.require(%i[account opportunity contacts])
-
-          {
-            account: account_params,
-            opportunity: opportunity_params,
-            contacts: contacts_params
-          }
-        end
+            {
+              account: account_params,
+              opportunity: opportunity_params,
+              contacts: contacts_params
+            }
+          end
       end
     end
   end

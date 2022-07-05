@@ -13,15 +13,14 @@ class AppConnection < ApplicationRecord
     end
 
     private
+      def generate_api_name(name = nil)
+        app_connection = AppConnection.where(api_name: name).first
+        name = generate_api_name("api_#{SecureRandom.hex}") if name.nil? || app_connection
+        name
+      end
 
-    def generate_api_name(name = nil)
-      app_connection = AppConnection.where(api_name: name).first
-      name = generate_api_name("api_#{SecureRandom.hex}") if name.nil? || app_connection
-      name
-    end
-
-    def generate_secret_token
-      "secret_#{SecureRandom.urlsafe_base64}"
-    end
+      def generate_secret_token
+        "secret_#{SecureRandom.urlsafe_base64}"
+      end
   end
 end

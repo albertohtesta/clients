@@ -21,6 +21,7 @@ gem "sneakers"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
+  gem "bundler-audit"
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "minitest"
@@ -28,9 +29,11 @@ group :development, :test do
 end
 
 group :development do
-  gem "rubocop"
+  gem "overcommit", require: false
+  gem "rubocop-rails_config"
   gem "rubocop-minitest"
   gem "rubocop-performance"
+  gem "rubocop", require: false
 end
 
 group :test do
