@@ -6,12 +6,12 @@ module Api
       before_action :retrieve_collaborator
 
       def show
-        @collaborator.accounts
+        render json: CollaboratorPresenter.json(@collaborator)
       end
 
       private
         def retrieve_collaborator
-          return if (@collaborator = Collaborator.find_by(id: params[:id]))
+          return if (@collaborator = Collaborator.includes(:accounts).find_by(id: params[:id]))
 
           render json: { error: "Collaborator not found" }, status: :not_found
         end

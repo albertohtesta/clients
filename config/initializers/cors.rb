@@ -2,7 +2,10 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "qa-clients.nordhen.com", "localhost:4001", "arkusimpel.my.salesforce.com", "arkusimpel--restapidev.sandbox.lightning.force.com"
+    origins "qa-clients.nordhen.com",
+            "localhost:4001",
+            "arkusimpel.my.salesforce.com",
+            "arkusimpel--restapidev.sandbox.lightning.force.com"
 
     resource "*",
       headers: :any,
