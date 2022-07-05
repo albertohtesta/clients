@@ -83,6 +83,10 @@ class Account < ApplicationRecord
     debt? ? "Debt" : "On Time"
   end
 
+  def review_outdated?
+    [true, false].sample
+  end
+
   def update_from_salesforce(client, contacts)
     update({ name: client[:Name], contact_name: contacts.first[:Name],
              contact_email: client[:Email__c], contact_phone: client[:Phone],

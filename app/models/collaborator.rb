@@ -7,4 +7,8 @@ class Collaborator < ApplicationRecord
   has_many :accounts, foreign_key: :manager_id
 
   validates :name, :email, :uuid, presence: true
+
+  def accounts_count
+    accounts.size
+  end
 end
