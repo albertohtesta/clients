@@ -13,6 +13,7 @@ Rails.application.routes.draw do
           resources :projects, only: [:show]
           resources :account_follow_ups, only: %i[create index]
         end
+        resources :posts, only: [:show]
       end
 
       resources :app_auth, only: [:create]
