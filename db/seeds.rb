@@ -133,6 +133,19 @@ end
   )
 end
 
+
+posts_for_collaborators = []
+Collaborator.all.each do |collaborator|
+  posts_for_collaborators << {
+    title: Faker::Name.unique.name,
+    description: Faker::Lorem.sentence,
+    collaborator_id: collaborator.id,
+    project_id: collaborator.teams&.first&.projects&.first&.id
+  }
+end
+Post.create(posts_for_collaborators)
+
+
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"
 p "Seed... #{Tool.count} Tool created"
@@ -142,3 +155,4 @@ p "Seed... #{Payment.count} Payment created"
 p "Seed... #{Project.count} Project created"
 p "Seed... #{Collaborator.count} Collaborator created"
 p "Seed... #{Team.count} Teams created"
+p "Seed... #{Post.count} Posts created"

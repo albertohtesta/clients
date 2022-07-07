@@ -5,9 +5,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.1"
 
+gem "aws-sdk-s3"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "faker"
+gem "image_processing"
 gem "jbuilder"
 gem "json"
 gem "jwt", require: false
