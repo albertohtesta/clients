@@ -30,3 +30,8 @@
 .env
 
 .byebug_history
+/config/credentials/production.key
+
+/config/credentials/qa.key
+
+/config/credentials/staging.key
