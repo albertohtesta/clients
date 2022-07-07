@@ -21,15 +21,14 @@ module Api
       end
 
       private
-
-      def create_fake_post
-        test_post = create(:post)
-        test_post.post.attach(
-          io: File.open(Rails.root.join("test/fixtures/files/example.png")),
-          filename: "example.png"
-        )
-        test_post
-      end
+        def create_fake_post
+          test_post = create(:post)
+          test_post.post.attach(
+            io: File.open(Rails.root.join("test/fixtures/files/example.png")),
+            filename: "example.png"
+          )
+          test_post
+        end
     end
   end
 end

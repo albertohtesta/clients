@@ -14,12 +14,11 @@ module Api
       end
 
       private
-
-      def set_collaborators_post
-        @collaborator_post = PostRepository.find_by(
-          { collaborator_id: params[:collaborator_id], id: params[:id] }
-        )
-      end
+        def set_collaborators_post
+          @collaborator_post = PostRepository.find_by(
+            { collaborator_id: params[:collaborator_id], id: params[:id] }
+          )
+        end
     end
   end
 end
