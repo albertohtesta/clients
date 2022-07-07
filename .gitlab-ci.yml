@@ -119,7 +119,7 @@ publish-image-staging:
     - sed -i "s;#BUILD_ID#;$CI_COMMIT_SHORT_SHA;" ./build-info.json
     - sed -i "s;#BUILD_DATE#;$(TZ=':UTC' date);" ./build-info.json
     - sed -i "s;#BUILD_BRANCH#;$CI_COMMIT_REF_NAME;" ./build-info.json
-    - docker build -t $DOCKER_REGISTRY/$PREFIX-$CI_PROJECT_NAME-staging:$CI_COMMIT_SHORT_SHA .
+    - docker build -f Dockerfile.Staging  -t $DOCKER_REGISTRY/$PREFIX-$CI_PROJECT_NAME-staging:$CI_COMMIT_SHORT_SHA .
     - docker push $DOCKER_REGISTRY/$PREFIX-$CI_PROJECT_NAME-staging:$CI_COMMIT_SHORT_SHA
   when: manual
   only:
@@ -189,6 +189,11 @@ deploy-staging:
     - COMPLETE_ROUTE="$DOCKER_REGISTRY/$PREFIX-$CI_PROJECT_NAME-qa:$CI_COMMIT_SHORT_SHA"
     - echo `aws ecs describe-task-definition --task-definition $PREFIX-$CI_PROJECT_NAME-staging --region $AWS_DEFAULT_REGION` > input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].image="#COMPLETE_ROUTE#"') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"#NAME_SECRET_KEY_VALUE#","value":"#SECRET_KEY_VALUE#"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_ENV","value":"staging"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"PORT","value":"80"}]') >  input.json
+    - sed -i "s@#NAME_SECRET_KEY_VALUE#@SECRET_KEY_BASE@" input.json
+    - sed -i "s@#SECRET_KEY_VALUE#@$RAILS_QA_SECRET_KEY_BASE@" input.json
     - sed -i "s@#COMPLETE_ROUTE#@$COMPLETE_ROUTE@" input.json
     - echo $(cat input.json | jq '.taskDefinition') > input.json
     - echo $(cat input.json | jq  'del(.taskDefinitionArn)' | jq 'del(.revision)' | jq 'del(.status)' | jq 'del(.requiresAttributes)' | jq 'del(.compatibilities) | del(.registeredAt) | del(.registeredBy)') > input.json
@@ -212,10 +217,15 @@ deploy-production:
     - COMPLETE_ROUTE="$DOCKER_REGISTRY/$PREFIX-$CI_PROJECT_NAME-qa:$CI_COMMIT_SHORT_SHA"
     - echo `aws ecs describe-task-definition --task-definition $PREFIX-$CI_PROJECT_NAME-production --region $AWS_DEFAULT_REGION` > input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].image="#COMPLETE_ROUTE#"') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"#NAME_SECRET_KEY_VALUE#","value":"#SECRET_KEY_VALUE#"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_ENV","value":"production"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"PORT","value":"80"}]') >  input.json
+    - sed -i "s@#NAME_SECRET_KEY_VALUE#@SECRET_KEY_BASE@" input.json
+    - sed -i "s@#SECRET_KEY_VALUE#@$RAILS_QA_SECRET_KEY_BASE@" input.json
     - sed -i "s@#COMPLETE_ROUTE#@$COMPLETE_ROUTE@" input.json
     - echo $(cat input.json | jq '.taskDefinition') > input.json
-    - echo $(cat input.json | jq  'del(.taskDefinitionArn)' | jq 'del(.revision)' | jq 'del(.status)' | jq 'del(.requiresAttributes)' | jq 'del(.compatibilities)') > input.json
-    - aws ecs register-task-definition --cli-input-json file://input.json --region $AWS_DEFAULT_REGION
+    - echo $(cat input.json | jq  'del(.taskDefinitionArn)' | jq 'del(.revision)' | jq 'del(.status)' | jq 'del(.requiresAttributes)' | jq 'del(.compatibilities) | del(.registeredAt) | del(.registeredBy)') > input.json
+    - aws ecs register-task-definition --cli-input-json file://input.json --region $AWS_DEFAULT_REGION 
     - revision=$(aws ecs describe-task-definition --task-definition $PREFIX-$CI_PROJECT_NAME-production --region $AWS_DEFAULT_REGION | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//' | cut -d "," -f 1)
     - aws ecs update-service --cluster $PREFIX-production --service $PREFIX-$CI_PROJECT_NAME-production  --task-definition $PREFIX-$CI_PROJECT_NAME-production:$revision --region $AWS_DEFAULT_REGION
   only:

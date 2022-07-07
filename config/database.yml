@@ -14,10 +14,10 @@ test:
   database: 'clients_test'
 qa:
   <<: *default
-  database: <%= ENV.fetch("DB_NAME") { "clients_qa" } %>
+  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
 staging:
   <<: *default
-  database: <%= ENV.fetch("DB_NAME") { "clients_staging" } %>
+  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
 production:
   <<: *default
-  database: <%= ENV.fetch("DB_NAME") { "clients_production" } %>
+  database: <%= ENV.fetch("DB_NAME") { "clients" } %>
