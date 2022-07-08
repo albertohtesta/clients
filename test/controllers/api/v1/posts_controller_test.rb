@@ -8,10 +8,8 @@ module Api
       test "should get success response" do
         test_post = create_fake_post
         get api_v1_collaborator_post_path(collaborator_id: test_post.collaborator_id, id: test_post.id)
-        res = JSON.parse(@response.body)
 
         assert_response :success
-        assert res.keys.include?("post_url")
       end
 
       test "should get 'post not found' error" do
