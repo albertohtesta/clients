@@ -8,8 +8,4 @@ class Collaborator < ApplicationRecord
   has_many :posts
 
   validates :name, :email, :uuid, presence: true
-
-  def accounts_count
-    accounts.size
-  end
 end

@@ -8,11 +8,14 @@ Rails.application.routes.draw do
         resources :account_imports, only: [:create]
       end
 
-      resources :collaborators do
+      resources :managers do
         resources :accounts, only: [:show] do
           resources :projects, only: [:show]
           resources :account_follow_ups, only: %i[create index]
         end
+      end
+
+      resources :collaborators do
         resources :posts, only: [:show]
       end
 

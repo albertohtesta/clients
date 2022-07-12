@@ -2,7 +2,7 @@
 
 module Api
   module  V1
-    class CollaboratorsController < ApplicationController
+    class ManagersController < ApplicationController
       before_action :retrieve_manager
 
       def show
