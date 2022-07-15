@@ -146,6 +146,24 @@ end
 Post.create(posts_for_collaborators)
 
 
+metric_per_month = {"project_indicators"=> [
+  {"id"=> 1, "label"=> "January", "value"=> 50},
+  {"id"=> 2, "label"=> "February", "value"=> 70},
+  {"id"=> 3, "label"=> "March", "value"=> 80},
+  {"id"=> 4, "label"=> "April", "value"=> 95},
+  {"id"=> 5, "label"=> "May", "value"=> 45}
+]}
+metric_per_quarter = {"project_indicators": [
+    {"id": 1, "label": "Q1", "value": 50},
+    {"id": 2, "label": "Q2", "value": 70},
+    {"id": 3, "label": "Q3", "value": 80},
+    {"id": 4, "label": "Q4", "value": 95}
+]}
+Metric.create([
+  {from_date: "2022-01-01", to_date: "2022-05-31", metrics: metric_per_month.to_json, project_id: Project.first.id, indicator_type: "performance", group_by: "monthly"},
+  {from_date: "2022-01-01", to_date: "2022-05-31", metrics: metric_per_month.to_json, project_id: Project.first.id, indicator_type: "performance", group_by: "monthly"}
+])
+
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"
 p "Seed... #{Tool.count} Tool created"
@@ -156,3 +174,4 @@ p "Seed... #{Project.count} Project created"
 p "Seed... #{Collaborator.count} Collaborator created"
 p "Seed... #{Team.count} Teams created"
 p "Seed... #{Post.count} Posts created"
+p "Seed... #{Metric.count} Metrics created"
