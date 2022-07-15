@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_05_171449) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_11_175656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -148,6 +148,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_171449) do
     t.index ["account_id"], name: "index_follow_histories_on_account_id"
   end
 
+  create_table "metrics", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.text "metrics", null: false
+    t.string "indicator_type", null: false
+    t.string "group_by", null: false
+    t.date "from_date", null: false
+    t.date "to_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_metrics_on_project_id"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.datetime "payment_date"
     t.date "cut_off_date", null: false
@@ -234,6 +246,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_171449) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "contacts", "accounts"
+  add_foreign_key "metrics", "projects"
   add_foreign_key "payments", "accounts"
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
