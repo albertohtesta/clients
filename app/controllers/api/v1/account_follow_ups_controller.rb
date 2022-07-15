@@ -5,12 +5,12 @@ module Api
     class AccountFollowUpsController < ApplicationController
       def index
         # TODO: Pass current_user with cognito
-        @account_follow_ups = FollowUpsRepository.by_account_manager(current_user)
+        @account_follow_ups = AccountFollowUpRepository.by_account_manager(current_user)
         render json: @account_follow_ups, status: :ok
       end
 
       def create
-        @account_follow_ups = AccountFollowUps.new(account_follow_ups_params)
+        @account_follow_ups = AccountFollowUpRepository.new_entity(account_follow_ups_params)
 
         if @account_follow_ups.save
           render json: @account_follow_ups, status: :created

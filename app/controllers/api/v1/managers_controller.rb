@@ -3,7 +3,7 @@
 module Api
   module  V1
     class ManagersController < ApplicationController
-      before_action :retrieve_manager
+      before_action :retrieve_manager, only: %i[show]
 
       def show
         if @manager

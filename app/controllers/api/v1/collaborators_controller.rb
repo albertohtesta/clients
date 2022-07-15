@@ -3,20 +3,7 @@
 module Api
   module  V1
     class CollaboratorsController < ApplicationController
-      before_action :retrieve_manager
-
-      def show
-        if @manager
-          render json: ManagerPresenter.new(@manager).json
-        else
-          render json: { error: "Manager not found" }, status: :not_found
-        end
-      end
-
-      private
-        def retrieve_manager
-          @manager = ManagerRepository.with_accounts_by_id(params[:id])
-        end
+      def show; end
     end
   end
 end

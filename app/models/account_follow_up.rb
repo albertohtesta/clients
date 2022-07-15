@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AccountFollowUps < ApplicationRecord
+class AccountFollowUp < ApplicationRecord
   belongs_to :account
 
   validates :follow_date, presence: true
