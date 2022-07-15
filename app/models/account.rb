@@ -14,62 +14,8 @@ class Account < ApplicationRecord
   before_validation :assign_uuid, on: :create
   before_validation :assign_status_by_default
 
-  def assign_uuid
-    self.account_uuid = SecureRandom.uuid unless account_uuid
-  end
-
-  def assign_status_by_default
-    self.account_status = AccountStatusRepository.new_project_status if account_status.nil?
-  end
-
   def tech_stacks
     projects.map { |project| project.tech_stacks.pluck(:name) }.flatten.uniq
-  end
-
-  def tools
-    projects.map { |project| project.tools.pluck(:name) }.flatten.uniq
-  end
-
-  def status
-    account_status.status
-  end
-
-  def location
-    city
-  end
-
-  def details
-    {
-      balance:,
-      total_projects: projects.count,
-      total_teams: projects.map { |project| project.teams.count }.sum
-    }
-  end
-
-  def finance
-    {
-      blended_rate:,
-      gross_profit:,
-      payroll:,
-      total_expenses:,
-      total_revenue:
-    }
-  end
-
-  def health
-    {
-      client_satisfaction:,
-      moral:
-    }
-  end
-
-  def productivity_kpis
-    {
-      bugs_detected:,
-      permanence:,
-      productivity:,
-      speed:
-    }
   end
 
   def debt?
@@ -79,12 +25,19 @@ class Account < ApplicationRecord
     false
   end
 
-  def payment_status
-    debt? ? "Debt" : "On Time"
+  def tools
+    projects.map { |project| project.tools.pluck(:name) }.flatten.uniq
   end
 
-  def review_outdated?
-    [true, false].sample
+  def status
+    account_status.status
+  end
+  def assign_uuid
+    self.account_uuid = SecureRandom.uuid unless account_uuid
+  end
+
+  def assign_status_by_default
+    self.account_status = AccountStatusRepository.find_by(status_code: :new_project) if account_status.nil?
   end
 
   def update_from_salesforce(client, contacts)

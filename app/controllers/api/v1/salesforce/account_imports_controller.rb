@@ -3,7 +3,7 @@
 module Api
   module V1
     module Salesforce
-      class AccountImportsController < JwtAuthAppsController
+      class AccountImportsController < ApplicationController
         def create
           @imported_account = AccountRepository.import(resource_params)
           render json: { account: @imported_account }, status: :created

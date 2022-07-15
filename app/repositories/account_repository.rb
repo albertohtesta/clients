@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
-# Base class for repositories
 class AccountRepository < ApplicationRepository
   class << self
     def first_or_initialize_by_salesforce_id(salesforce_id)
       scope.where(salesforce_id:).first_or_initialize
+    end
+
+    def with_projects
+      scope.includes(:projects)
     end
 
     def import(resources)

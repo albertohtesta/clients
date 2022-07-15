@@ -2,13 +2,13 @@
 
 class ManagerPresenter < ApplicationPresenter
   ATTRS = %i[id name email].freeze
-  METHODS = [:accounts_count].freeze
-  ASSOCIATIONS = [accounts: { only:
-        %i[id name contact_name contact_email account_web_page],
-          methods: %i[review_outdated? location tech_stacks
-                    tools payment_status status details finance health productivity_kpis] }].freeze
+  METHODS = [:accounts_count, :accounts].freeze
 
   def accounts_count
     accounts.size
+  end
+
+  def accounts
+    AccountPresenter.json_collection(__getobj__.accounts)
   end
 end

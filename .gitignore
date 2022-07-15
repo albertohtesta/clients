@@ -35,3 +35,4 @@
 /config/credentials/qa.key
 
 /config/credentials/staging.key
+docker-compose-jacr.yml

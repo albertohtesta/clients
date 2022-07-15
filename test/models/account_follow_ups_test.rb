@@ -2,10 +2,10 @@
 
 require "test_helper"
 
-class AccountFollowUpsTest < ActiveSupport::TestCase
+class AccountFollowUpTest < ActiveSupport::TestCase
   test "Should validate follow up" do
-    assert build(:account_follow_ups).valid?
-    assert_not build(:account_follow_ups, account_id: nil).valid?
-    assert_not build(:account_follow_ups, follow_date: nil).valid?
+    assert build(:account_follow_up).valid?
+    assert_not build(:account_follow_up, account_id: nil).valid?
+    assert_not build(:account_follow_up, follow_date: nil).valid?
   end
 end
