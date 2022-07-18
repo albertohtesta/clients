@@ -28,6 +28,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "minitest"
   gem "rails-erd"
+  gem "byebug"
 end
 
 group :development do
@@ -39,6 +40,5 @@ group :development do
 end
 
 group :test do
-  gem "byebug"
   gem "simplecov"
 end
