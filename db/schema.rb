@@ -101,11 +101,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_175656) do
   end
 
   create_table "collaborators", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "first_name", null: false
     t.string "email", null: false
     t.string "uuid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "role_id", null: false
+    t.string "last_name"
+    t.index ["role_id"], name: "index_collaborators_on_role_id"
   end
 
   create_table "collaborators_teams", id: false, force: :cascade do |t|
@@ -214,6 +217,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_175656) do
     t.index ["project_id", "tool_id"], name: "index_projects_tools_on_project_id_and_tool_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "team_types", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -245,6 +254,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_175656) do
   add_foreign_key "accounts", "collaborators", column: "manager_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collaborators", "roles"
   add_foreign_key "contacts", "accounts"
   add_foreign_key "metrics", "projects"
   add_foreign_key "payments", "accounts"

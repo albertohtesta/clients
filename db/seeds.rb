@@ -22,16 +22,28 @@ TechStack.create([
 # **************************************
 
 # **************************************
+# CREATE 7 ACCOUNT'S FIELDS
+# **************************************
+Role.create!([
+  {name: 'Developer'},
+  {name: 'Scrum master'},
+  {name: 'QA'},
+  {name: 'UI/UX'}]
+)
+# **************************************
 # CREATING 40 COLLABORATORS
 # **************************************
+role = Role.find_by(name: 'Developer')
 40.times do
   Collaborator.create([
                         {
-                          name: Faker::Name.unique.name,
+                          first_name: Faker::Name.unique.name,
+                          last_name: Faker::Name.unique.name,
                           uuid: Faker::IDNumber.unique.invalid,
                           email: Faker::Internet.unique.email,
                           tech_stacks: TechStack.all.sample(2),
-                          tools: Tool.all.sample(2)
+                          tools: Tool.all.sample(2),
+                          role: role
                         }
                       ])
 end

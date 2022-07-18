@@ -4,8 +4,8 @@ require "test_helper"
 
 class ManagersControllerTest < ActionDispatch::IntegrationTest
   test "should get success response" do
-    create(:collaborator, id: 1)
-    get api_v1_manager_path(1)
+    @collaborator = create(:collaborator)
+    get api_v1_manager_path(@collaborator.id)
     assert_response :success
   end
 

@@ -18,7 +18,11 @@ Rails.application.routes.draw do
       resources :collaborators do
         resources :posts, only: [:show]
       end
-      
+
+      namespace :account do
+        resources :collaborators
+      end
+
       resources :metrics, only: [:index]
       resources :app_auth, only: [:create]
     end

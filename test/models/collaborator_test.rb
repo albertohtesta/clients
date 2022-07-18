@@ -10,7 +10,7 @@ class CollaboratorTest < ActiveSupport::TestCase
 
   test "is invalid without name email uuid" do
     assert_not Collaborator.new(email: "exmaple@gmail.com", uuid: "123").valid?
-    assert_not Collaborator.new(name: "Jonh Doe", uuid: "123").valid?
-    assert_not Collaborator.new(name: "Jonh Doe", email: "exmaple@gmail.com").valid?
+    assert_not Collaborator.new(first_name: "Jonh Doe", uuid: "123").valid?
+    assert_not Collaborator.new(first_name: "Jonh Doe", email: "exmaple@gmail.com").valid?
   end
 end
