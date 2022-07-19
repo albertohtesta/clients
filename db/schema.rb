@@ -142,15 +142,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_11_175656) do
     t.index ["account_id"], name: "index_contacts_on_account_id"
   end
 
-  create_table "follow_histories", force: :cascade do |t|
-    t.date "follow_date"
-    t.string "description"
-    t.bigint "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_follow_histories_on_account_id"
-  end
-
   create_table "metrics", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.text "metrics", null: false

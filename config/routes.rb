@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
       resources :managers do
         resources :accounts, only: [:show] do
+          resources :contacts, only: [:index]
           resources :projects, only: [:show]
           resources :account_follow_ups, only: %i[create index]
         end
