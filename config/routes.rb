@@ -10,22 +10,25 @@ Rails.application.routes.draw do
 
       resources :managers do
         resources :accounts, only: [:show] do
-          resources :contacts, only: [:index]
-          resources :projects, only: [:show]
           resources :account_follow_ups, only: %i[create index]
         end
       end
 
+      resources :accounts do
+        resources :contacts, only: [:index]
+        resources :projects
+      end
+
+      resources :projects do
+        resources :collaborators, only: [:index]
+      end
+
       resources :collaborators do
-        resources :posts, only: [:show]
+        resources :posts
       end
 
-      namespace :account do
-        resources :collaborators
-      end
-
+      resources :posts, only: [:show]
       resources :metrics, only: [:index]
-      resources :app_auth, only: [:create]
     end
   end
 

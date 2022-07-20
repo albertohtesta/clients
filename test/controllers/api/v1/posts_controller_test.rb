@@ -7,13 +7,13 @@ module Api
     class PostsControllerTest < ActionDispatch::IntegrationTest
       test "should get success response" do
         test_post = create_fake_post
-        get api_v1_collaborator_post_path(collaborator_id: test_post.collaborator_id, id: test_post.id)
+        get api_v1_post_path(collaborator_id: test_post.collaborator_id, id: test_post.id)
 
         assert_response :success
       end
 
       test "should get 'post not found' error" do
-        get api_v1_collaborator_post_path(:collaborator, id: 0)
+        get api_v1_post_path(:collaborator, id: 0)
 
         assert_response :not_found
       end
