@@ -8,10 +8,11 @@ module Api
       class AccountImportsControllerTest < ActionDispatch::IntegrationTest
         def correct_request(params = nil)
           params = @account if params.nil?
-          post api_v1_salesforce_account_imports_url, params:
+          post api_v1_salesforce_account_imports_url, headers: { "Authorization" => @token }, params:
         end
 
         setup do
+          stub_cognito_uri
           @account = File.read Rails.root.join("test", "files", "test_salesforce.json")
           create(:account_status, { status: "New", status_code: "new_project" })
         end
