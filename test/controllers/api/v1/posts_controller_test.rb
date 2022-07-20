@@ -5,15 +5,20 @@ require "test_helper"
 module Api
   module V1
     class PostsControllerTest < ActionDispatch::IntegrationTest
+      setup do
+        stub_cognito_uri
+      end
+
       test "should get success response" do
         test_post = create_fake_post
-        get api_v1_post_path(collaborator_id: test_post.collaborator_id, id: test_post.id)
+
+        get api_v1_post_path(id: test_post.id), headers: { "Authorization" => @token }
 
         assert_response :success
       end
 
       test "should get 'post not found' error" do
-        get api_v1_post_path(:collaborator, id: 0)
+        get api_v1_post_path(id: 0), headers: { "Authorization" => @token }
 
         assert_response :not_found
       end
