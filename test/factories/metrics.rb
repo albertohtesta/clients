@@ -2,13 +2,9 @@
 
 FactoryBot.define do
   factory :metric do
-    project
-    metrics { { "project_indicators": [
-      { "id": 1, "label": "Q1", "value": 50 }, { "id": 2, "label": "Q2", "value": 70 } ] }.to_json
-    }
-    to_date { "2022-05-31" }
-    from_date { "2022-01-01" }
+    team
+    metrics { { "team_id" => 1, "date" => "21-05-2022", "value" => 75 }.to_json }
+    date { Date.today.beginning_of_year }
     indicator_type { "performance" }
-    group_by { "monthly" }
   end
 end

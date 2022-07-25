@@ -158,23 +158,20 @@ end
 Post.create(posts_for_collaborators)
 
 
-metric_per_month = {"project_indicators"=> [
-  {"id"=> 1, "label"=> "January", "value"=> 50},
-  {"id"=> 2, "label"=> "February", "value"=> 70},
-  {"id"=> 3, "label"=> "March", "value"=> 80},
-  {"id"=> 4, "label"=> "April", "value"=> 95},
-  {"id"=> 5, "label"=> "May", "value"=> 45}
-]}
-metric_per_quarter = {"project_indicators": [
-    {"id": 1, "label": "Q1", "value": 50},
-    {"id": 2, "label": "Q2", "value": 70},
-    {"id": 3, "label": "Q3", "value": 80},
-    {"id": 4, "label": "Q4", "value": 95}
-]}
-Metric.create([
-  {from_date: "2022-01-01", to_date: "2022-05-31", metrics: metric_per_month.to_json, project_id: Project.first.id, indicator_type: "performance", group_by: "monthly"},
-  {from_date: "2022-01-01", to_date: "2022-05-31", metrics: metric_per_month.to_json, project_id: Project.first.id, indicator_type: "performance", group_by: "monthly"}
-])
+one_single_metric = {
+  "team_id"=> 1, "date" => "21-05-2022", "value"=> 75, "total_tickets" => 20, "finished_tickets" => 15, "missing_tickets" => 5
+}
+Team.all.each_with_index do |team, idx|
+  Metric.create([
+    {date: Date.tomorrow.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance"},
+    {date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance"},
+    {date: Date.yesterday.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance"},
+
+    {date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "velocity"},
+    {date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "morale"},
+    {date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "balance"}
+  ])
+end
 
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"
