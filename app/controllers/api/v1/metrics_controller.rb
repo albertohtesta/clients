@@ -3,31 +3,29 @@
 module Api
   module  V1
     class MetricsController < ApplicationController
-      before_action :set_metric, only: %i[ index ]
+      before_action :validate_required_params, :set_metric, only: %i[ index ]
 
       def index
         if @metrics
-          render json: MetricPresenter.new(@metrics).json
+          render json: { team_indicators: @metrics }
         else
-          render json: {}, status: :not_found
+          render json: { message: "Not metrics found" }, status: :not_found
         end
       end
 
       private
         def set_metric
-          @metrics = MetricRepository.get_metrics_per_project(from_date, to_date, metric_params)
+          @metrics = PresenterMetricService.new(params[:group_by], metrics_filters).present
         end
 
-        def metric_params
-          params.permit([:project_id, :group_by, :indicator_type])
+        def metrics_filters
+          params.permit([:team_id, :indicator_type])
         end
 
-        def from_date
-          params.require(:from_date)
-        end
-
-        def to_date
-          params.require(:to_date)
+        def validate_required_params
+          params.require([:group_by, :indicator_type, :team_id])
+        rescue ActionController::ParameterMissing
+          render json: { message: "Parameters missing" }, status: :bad_request
         end
     end
   end
