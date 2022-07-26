@@ -6,7 +6,7 @@ module Api
       before_action :collaborators_by_project, only: :index
 
       def index
-        return render json: { message: "No collaborators", status: "404" } if @collaborators.empty?
+        return render json: { message: "No collaborators" }, status: :not_found if @collaborators.empty?
 
         render json: CollaboratorPresenter.json_collection(@collaborators), status: :ok
       end
