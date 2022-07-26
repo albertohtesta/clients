@@ -4,7 +4,7 @@ require "faker"
 
 ######### ADD CATALOGS FIELDS
 AccountStatus.create([
-                       { status: "New", status_code: "new_project" },{ status: "In Development", status_code: "in_development" }, { status: "Finished", status_code: "finished" }, { status: "Cancelled", status_code: "cancelled" }
+                       { status: "New", status_code: "new_project" }, { status: "In Development", status_code: "in_development" }, { status: "Finished", status_code: "finished" }, { status: "Cancelled", status_code: "cancelled" }
                      ])
 TeamType.create([
                   { name: "POD" }, { name: "Big POD" }, { name: "Staff Augmentation" }
@@ -25,15 +25,15 @@ TechStack.create([
 # CREATE 7 ACCOUNT'S FIELDS
 # **************************************
 Role.create!([
-  {name: 'Developer'},
-  {name: 'Scrum master'},
-  {name: 'QA'},
-  {name: 'UI/UX'}]
-)
+  { name: "Developer" },
+  { name: "Scrum master" },
+  { name: "QA" },
+  { name: "UI/UX" }]
+            )
 # **************************************
 # CREATING 40 COLLABORATORS
 # **************************************
-role = Role.find_by(name: 'Developer')
+role = Role.find_by(name: "Developer")
 40.times do
   Collaborator.create([
                         {
@@ -43,7 +43,7 @@ role = Role.find_by(name: 'Developer')
                           email: Faker::Internet.unique.email,
                           tech_stacks: TechStack.all.sample(2),
                           tools: Tool.all.sample(2),
-                          role: role
+                          role:
                         }
                       ])
 end
@@ -150,7 +150,7 @@ end
   20.times do |t|
     team.investments.create({
       value: rand(1000.00..500000.00).round(2),
-      date: rand( -current_month.months..(12-current_month).months).ago
+      date: rand(-current_month.months..(12 - current_month).months).ago
     })
   end
 end
@@ -169,17 +169,17 @@ Post.create(posts_for_collaborators)
 
 
 one_single_metric = {
-  "team_id"=> 1, "date" => "21-05-2022", "value"=> 75, "total_tickets" => 20, "finished_tickets" => 15, "missing_tickets" => 5
+  "team_id" => 1, "date" => "21-05-2022", "value" => 75, "total_tickets" => 20, "finished_tickets" => 15, "missing_tickets" => 5
 }
 Team.all.each_with_index do |team, idx|
   Metric.create([
-    {date: Date.tomorrow.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance"},
-    {date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance"},
-    {date: Date.yesterday.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance"},
+    { date: Date.tomorrow.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance" },
+    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance" },
+    { date: Date.yesterday.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance" },
 
-    {date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "velocity"},
-    {date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "morale"},
-    {date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "balance"}
+    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "velocity" },
+    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "morale" },
+    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "balance" }
   ])
 end
 

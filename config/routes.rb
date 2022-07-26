@@ -30,12 +30,11 @@ Rails.application.routes.draw do
 
       resources :teams, only: [:index] do
         resources :collaborators, only: [:index]
-          get 'investments/:order_by' => 'investments#show', as: :investments_organized
+        get "investments/:order_by" => "investments#show", as: :investments_organized
       end
 
       resources :posts, only: [:show]
       resources :metrics, only: [:index]
-
     end
   end
 
