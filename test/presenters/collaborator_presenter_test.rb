@@ -7,8 +7,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
     @collaborator ||= build(:collaborator)
     @account ||= create(:account)
     @project ||= create(:project, account: @account)
-    @team ||= create(:team)
-    @project_teams ||= create(:projects_team, project: @project, team: @team)
+    @team ||= create(:team, { project: @project })
     @collaborator ||= create(:collaborator)
     @collaborator2 ||= create(:collaborator)
   end

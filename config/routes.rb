@@ -8,27 +8,34 @@ Rails.application.routes.draw do
         resources :account_imports, only: [:create]
       end
 
-      resources :managers do
+      resources :managers, only: [:show] do
         resources :accounts, only: [:show] do
           resources :account_follow_ups, only: %i[create index]
         end
       end
 
-      resources :accounts do
+      resources :accounts, only: [:index] do
         resources :contacts, only: [:index]
-        resources :projects
+        resources :projects, only: [:index]
       end
 
-      resources :projects do
+      resources :projects, only: [:index] do
+        resources :investments, only: [:show]
         resources :collaborators, only: [:index]
       end
 
-      resources :collaborators do
-        resources :posts
+      resources :collaborators, only: [:index] do
+        resources :posts, only: [:index]
+      end
+
+      resources :teams, only: [:index] do
+        resources :collaborators, only: [:index]
+          get 'investments/:order_by' => 'investments#show', as: :investments_organized
       end
 
       resources :posts, only: [:show]
       resources :metrics, only: [:index]
+
     end
   end
 
