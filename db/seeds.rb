@@ -110,6 +110,9 @@ def payment_field
     payday_limit: Date.new(Date.today.year, Date.today.month, 28)
   }
 end
+
+current_month = Time.now.month
+
 Account.all.each do |account|
   Payment.create([
                    payment_field.merge({ account_id: account.id }),
@@ -121,7 +124,7 @@ Account.all.each do |account|
                                          )
                                        })
                  ])
-  Project.create([
+  Project.create(
                    {
                      name: account.name,
                      start_date: Faker::Date.between(from: 5.months.ago, to: (DateTime.now + 1.year)),
@@ -130,19 +133,26 @@ Account.all.each do |account|
                      tech_stacks: TechStack.all.sample(2),
                      tools: Tool.all.sample(2)
                    }
-                 ])
+                 )
 end
 
 # **************************************
 # CREATING 7 TEAMS WITH 5 COLLABORATORS AND LINKED WITH A PROJECT
 # **************************************
 7.times do |idx|
-  Team.create(
+  team = Team.create(
     added_date: Faker::Date.between(from: 5.months.ago, to: DateTime.yesterday),
     team_type_id: TeamType.all.to_a.sample.id,
     collaborators: Collaborator.limit(5).offset(idx * 5),
-    projects: Project.limit(1).offset(idx)
+    project: Project.limit(1).offset(idx).first
   )
+
+  20.times do |t|
+    team.investments.create({
+      value: rand(1000.00..500000.00).round(2),
+      date: rand( -current_month.months..(12-current_month).months).ago
+    })
+  end
 end
 
 
@@ -152,7 +162,7 @@ Collaborator.all.each do |collaborator|
     title: Faker::Name.unique.name,
     description: Faker::Lorem.sentence,
     collaborator_id: collaborator.id,
-    project_id: collaborator.teams&.first&.projects&.first&.id
+    project_id: collaborator.teams&.first&.project&.id
   }
 end
 Post.create(posts_for_collaborators)
@@ -173,6 +183,7 @@ Team.all.each_with_index do |team, idx|
   ])
 end
 
+
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"
 p "Seed... #{Tool.count} Tool created"
@@ -182,5 +193,6 @@ p "Seed... #{Payment.count} Payment created"
 p "Seed... #{Project.count} Project created"
 p "Seed... #{Collaborator.count} Collaborator created"
 p "Seed... #{Team.count} Teams created"
+p "Seed... #{Investment.count} Investment created"
 p "Seed... #{Post.count} Posts created"
 p "Seed... #{Metric.count} Metrics created"

@@ -37,3 +37,6 @@
 /config/credentials/staging.key
 /vendor/bundle/
 docker-compose-jacr.yml
+Dockerfile.jacr
+.DS_Store
+.ssh

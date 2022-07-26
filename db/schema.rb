@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_18_181312) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -142,16 +142,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_181312) do
     t.index ["account_id"], name: "index_contacts_on_account_id"
   end
 
+  create_table "investments", force: :cascade do |t|
+    t.bigint "team_id"
+    t.float "value", default: 0.0
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["date"], name: "index_investments_on_date"
+    t.index ["team_id"], name: "index_investments_on_team_id"
+  end
+
   create_table "metrics", force: :cascade do |t|
     t.text "metrics", null: false
     t.string "indicator_type", null: false
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "teams_id"
     t.bigint "team_id"
     t.index ["team_id"], name: "index_metrics_on_team_id"
-    t.index ["teams_id"], name: "index_metrics_on_teams_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -190,12 +198,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_181312) do
     t.index ["account_id"], name: "index_projects_on_account_id"
   end
 
-  create_table "projects_teams", id: false, force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.bigint "team_id", null: false
-    t.index ["project_id", "team_id"], name: "index_projects_teams_on_project_id_and_team_id"
-  end
-
   create_table "projects_tech_stacks", id: false, force: :cascade do |t|
     t.bigint "project_id", null: false
     t.bigint "tech_stack_id", null: false
@@ -225,6 +227,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_181312) do
     t.bigint "team_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "project_id"
+    t.index ["project_id"], name: "index_teams_on_project_id"
     t.index ["team_type_id"], name: "index_teams_on_team_type_id"
   end
 
@@ -247,10 +251,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_181312) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "collaborators", "roles"
   add_foreign_key "contacts", "accounts"
+  add_foreign_key "investments", "teams"
   add_foreign_key "metrics", "teams"
   add_foreign_key "payments", "accounts"
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
   add_foreign_key "projects", "accounts"
+  add_foreign_key "teams", "projects"
   add_foreign_key "teams", "team_types"
 end
