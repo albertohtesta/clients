@@ -6,7 +6,7 @@ class MetricsControllerTest < ActionDispatch::IntegrationTest
   setup do
     stub_cognito_uri
     @team = create(:team)
-    create(:metric, team: @team)
+    create(:metric, related: @team)
   end
 
   test "should get team metrics by month" do

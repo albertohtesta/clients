@@ -158,8 +158,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "team_id"
-    t.index ["team_id"], name: "index_metrics_on_team_id"
+    t.bigint "teams_id"
+    t.string "related_type"
+    t.bigint "related_id"
+    t.index ["related_type", "related_id"], name: "index_metrics_on_related"
+    t.index ["teams_id"], name: "index_metrics_on_teams_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -252,7 +255,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
   add_foreign_key "collaborators", "roles"
   add_foreign_key "contacts", "accounts"
   add_foreign_key "investments", "teams"
-  add_foreign_key "metrics", "teams"
   add_foreign_key "payments", "accounts"
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
