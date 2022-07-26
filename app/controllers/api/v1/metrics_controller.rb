@@ -19,7 +19,9 @@ module Api
         end
 
         def metrics_filters
-          params.permit([:team_id, :indicator_type])
+          replacement_filters = params.permit([:team_id, :indicator_type]).merge({ related_type: "Team" })
+          replacement_filters[:related_id] = replacement_filters.delete(:team_id)
+          replacement_filters
         end
 
         def validate_required_params

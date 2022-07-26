@@ -7,6 +7,7 @@ class Account < ApplicationRecord
   has_many :projects
   has_many :payments
   has_many :contacts
+  has_many :metrics, as: :related
 
   validates :account_uuid, :name, presence: true
 
