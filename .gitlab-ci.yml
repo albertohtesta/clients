@@ -64,7 +64,7 @@ rubocop:
     policy: pull
   script:
     - bundle install
-    - bundle exec rubocop
+    - bundle exec rubocop --config .rubocop.yml
 
 test:
   stage: test
