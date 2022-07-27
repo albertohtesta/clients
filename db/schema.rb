@@ -158,11 +158,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "teams_id"
     t.string "related_type"
     t.bigint "related_id"
     t.index ["related_type", "related_id"], name: "index_metrics_on_related"
-    t.index ["teams_id"], name: "index_metrics_on_teams_id"
   end
 
   create_table "payments", force: :cascade do |t|

@@ -173,13 +173,13 @@ one_single_metric = {
 }
 Team.all.each_with_index do |team, idx|
   Metric.create([
-    { date: Date.tomorrow.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance" },
-    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance" },
-    { date: Date.yesterday.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "performance" },
+    { date: Date.tomorrow.months_ago(idx), metrics: one_single_metric.to_json, related: Team.all.sample, indicator_type: "performance" },
+    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, related: Team.all.sample, indicator_type: "performance" },
+    { date: Date.yesterday.months_ago(idx), metrics: one_single_metric.to_json, related: Team.all.sample, indicator_type: "performance" },
 
-    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "velocity" },
-    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "morale" },
-    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, team_id: Team.all.sample.id, indicator_type: "balance" }
+    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, related: Team.all.sample, indicator_type: "velocity" },
+    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, related: Team.all.sample, indicator_type: "morale" },
+    { date: Date.today.months_ago(idx), metrics: one_single_metric.to_json, related: Team.all.sample, indicator_type: "balance" }
   ])
 end
 
