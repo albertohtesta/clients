@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  before_action :access_token, :verify_token
+  # TODO: temporalily disable the requirement of access token, enable when login be ready
+  # before_action :access_token, :verify_token
 
   def access_token
     @access_token ||= request.headers["Authorization"]
