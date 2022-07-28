@@ -14,29 +14,88 @@ Tool.create([
             ])
 
 TechStack.create([
-                   { name: "Java" }, { name: "Ruby" }, { name: "JavaScript" }, { name: "ReactJS" }, { name: "C#" }
-                 ])
+  { name: "AGILE COACH" },
+  { name: "BACKEND DEVELOPER" },
+  { name: "FRONTEND DEVELOPER" },
+  { name: "FULL STACK DEVELOPER" },
+  { name: "PRODUCT OWNER" },
+  { name: "QUALITY ASURANCE" },
+  { name: "SCRUM MASTER" },
+  { name: "SCRUM PRODUCT OWNER" },
+  { name: "UX/UI" },
+  { name: "Java" }, { name: "Ruby" }, { name: "JavaScript" }, { name: "ReactJS" }, { name: "C#" }
+])
 
 # **************************************
-# CREATE 7 ACCOUNT'S FIELDS
+# CREATE 7 BADGES FIELDS
 # **************************************
+Badge.create!([
+  { id: 1, name: "1 YEAR" },
+  { id: 2, name: "5 YEARS" },
+  { id: 3, name: "10 YEARS" },
+  { id: 4, name: "15 YEARS" },
+  { id: 5, name: "20 YEARS" },
+  { id: 6, name: "ACCOUNT" },
+  { id: 7, name: "ADAPTABILITY" },
+  { id: 8, name: "CRITICAL THINKING" },
+  { id: 9, name: "EFFECTIVE COMMUNICATION" },
+  { id: 10, name: "EMPATHY" },
+  { id: 11, name: "MIND TEAMS" },
+  { id: 12, name: "OPENING" },
+  { id: 13, name: "PLANNING" },
+  { id: 14, name: "RESPONSIBILITY" },
+  { id: 15, name: "SALARY GROWTH" },
+  { id: 16, name: "SENIORITY GROWTH" },
+  { id: 17, name: "TEAMWORK" }
+])
+
 
 # **************************************
-# CREATE 7 ACCOUNT'S FIELDS
+# CREATE 7 ROLES FIELDS
 # **************************************
 Role.create!([
+  { name: "AGILE COACH" },
+  { name: "BACKEND DEVELOPER" },
+  { name: "FRONTEND DEVELOPER" },
+  { name: "FULL STACK DEVELOPER" },
+  { name: "PRODUCT OWNER" },
+  { name: "QUALITY ASURANCE" },
+  { name: "SCRUM MASTER" },
+  { name: "SCRUM PRODUCT OWNER" },
+  { name: "UX/UI" },
   { name: "Developer" },
   { name: "Scrum master" },
   { name: "QA" },
-  { name: "UI/UX" }]
-            )
+  { name: "UI/UX" }
+])
 # **************************************
 # CREATING 40 COLLABORATORS
 # **************************************
 role = Role.find_by(name: "Developer")
-40.times do
+
+# TODO: position of this collabs need be a relation with ROLE table
+Collaborator.create([
+  { id: 1, seniority: "MIDDLE", english_level: "B2", profile: "https://res.cloudinary.com/drakarzamael/image/upload/v1657736359/norden/image_cpp_nbi_francisco_rosete.jpg", work_modality: "REMOTE", position: "PRODUCT OWNER", first_name: "FRANCISCO JAVIER", last_name: "GONZALEZ ROSETE", email: "frosete@arkusnexus.com", role:, uuid: Faker::IDNumber.unique.invalid, about: "Certified Product Owner and Scrum Master, specialist in Product Management and SAFe with the objective to deliver constant value to the clients through Agile Methodologies. Professional with +15 years of experience in Marketing, Communication and Change Management for local and global companies." },
+  { id: 2, seniority: "JUNIOR", english_level: "B2", profile: "https://res.cloudinary.com/drakarzamael/image/upload/v1657736363/norden/image_cpp_nbi_emmanuel_juarez.jpg", work_modality: "REMOTE", position: "SOFTWARE ENGINEER", first_name: "SALVADOR EMMANUEL", last_name: "JUAREZ\tGRANADOS", email: "sjuarez@arkusnexus.com", role:, uuid: Faker::IDNumber.unique.invalid, about: "Front-end developer and teacher assistant on Iron Hack. I like to create applications for digitalization and progress in eclectic environments from dog apps to security systems, over wit 5 years of experience working closely with javascript my goal is to keep up with tech and new languages and grow up mi skills to contribute in any possible way to my company" },
+  { id: 3, seniority: "MIDDLE", english_level: "B2", profile: "https://res.cloudinary.com/drakarzamael/image/upload/v1657736368/norden/image_cpp_nbi_jesus_beltran.jpg", work_modality: "REMOTE", position: "SCRUM MASTER", first_name: "JESUS ALEJANDRO", last_name: "BELTRAN\tHERNANDEZ", email: "jbeltran@arkusnexus.com", role:, uuid: Faker::IDNumber.unique.invalid, about: "Mid developer with 3 years of experience working with clients from Mexico. Jesus has experience with some technologies and he is always looking for new things to learn. During these last 3 years he had the opportunity to implement solutions and resolve problems with software." },
+  { id: 4, seniority: "JUNIOR", english_level: "C1", profile: "https://res.cloudinary.com/drakarzamael/image/upload/v1657736354/norden/image_cpp_nbi_brandom_rodriguez.jpg", work_modality: "REMOTE", position: "QA ENGINEER", first_name: "BRANDOM", last_name: "RODRIGUEZ\tBORQUEZ", email: "bborquez@arkusnexus.com", role:, uuid: Faker::IDNumber.unique.invalid, about: "Junior developer freshly graduated from university as a software engineer with experience with agile methodologies and modern backend frameworks such as Express on Node and Flask on Python. Worked previously on teams that developed different projects, like a real estate selling app, and a classroom status monitoring system. I also developed by myself an Android app meant to help students organize their time and remind them about homeworks." },
+  { id: 5, seniority: "JUNIOR", english_level: "C1", profile: "https://res.cloudinary.com/drakarzamael/image/upload/v1657736361/norden/image_cpp_nbi_angel_davila.png", work_modality: "REMOTE", position: "SOFTWARE ENGINEER", first_name: "ANGEL ARTURO", last_name: "DAVILA\tGOVEA", email: "adavila@arkusnexus.com", role:, uuid: Faker::IDNumber.unique.invalid, about: "Engineer in software development, aiming to develop backend solutions yet focused on learning any technology required." },
+  { id: 6, seniority: "MIDDLE", english_level: "C1", profile: "https://res.cloudinary.com/drakarzamael/image/upload/v1657736360/norden/image_cpp_nbi_luis_ayon.jpg", work_modality: "REMOTE", position: "SOFTWARE ENGINEER", first_name: "ANGEL", last_name: "AYON\tLUIS", email: "layon@arkusnexus.com", role:, uuid: Faker::IDNumber.unique.invalid, about: "Web and Desktop Software Developer. I am a passionate person in what I do, I constantly seek personal and work growth where I fulfill all the goals that are assigned to me. My hobbies are drawing, exercising, playing video games, reading articles, and playing guitar." },
+  { id: 7, seniority: "SENIOR", english_level: "B2", profile: "", work_modality: "SITE", position: "SOFTWARE ENGINEER", first_name: "IVAN", last_name: "DE ANDA\tOSORIO", email: "iosorio@arkusnexus.com", role:, uuid: Faker::IDNumber.unique.invalid, about: "Engineer in software development, aiming to develop backend solutions yet focused on learning any technology required." }
+])
+
+Collaborator.find(1).update(badges: Badge.where({ id: [9, 11, 13, 17] }))
+Collaborator.find(2).update(badges: Badge.where({ id: [7, 9, 10, 11, 14] }))
+Collaborator.find(3).update(badges: Badge.where({ id: [1, 7, 8, 11, 14, 17] }))
+Collaborator.find(4).update(badges: Badge.where({ id: [7, 11, 14, 17] }))
+Collaborator.find(5).update(badges: Badge.where({ id: [7, 11, 14] }))
+Collaborator.find(6).update(badges: Badge.where({ id: [7, 11, 14, 17] }))
+Collaborator.find(7).update(badges: Badge.where({ id: [1, 2, 3, 11] }))
+
+40.times.each do |idx|
   Collaborator.create([
                         {
+                          id: idx + 8,
                           first_name: Faker::Name.unique.name,
                           last_name: Faker::Name.unique.name,
                           uuid: Faker::IDNumber.unique.invalid,
@@ -196,3 +255,4 @@ p "Seed... #{Team.count} Teams created"
 p "Seed... #{Investment.count} Investment created"
 p "Seed... #{Post.count} Posts created"
 p "Seed... #{Metric.count} Metrics created"
+p "Seed... #{Badge.count} Badges created"

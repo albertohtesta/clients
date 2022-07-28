@@ -35,6 +35,10 @@ Rails.application.routes.draw do
 
       resources :posts, only: [:show]
       resources :metrics, only: [:index]
+
+      namespace :public do
+        resources :collaborators, only: [:index, :show]
+      end
     end
   end
 

@@ -100,6 +100,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "badges", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "collaborators", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "email", null: false
@@ -108,7 +114,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
     t.datetime "updated_at", null: false
     t.bigint "role_id", null: false
     t.string "last_name"
+    t.string "position"
+    t.string "profile"
+    t.string "seniority"
+    t.string "english_level"
+    t.text "about"
+    t.string "work_modality"
     t.index ["role_id"], name: "index_collaborators_on_role_id"
+  end
+
+  create_table "collaborators_badges", force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
+    t.bigint "badge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["badge_id"], name: "index_collaborators_badges_on_badge_id"
+    t.index ["collaborator_id"], name: "index_collaborators_badges_on_collaborator_id"
   end
 
   create_table "collaborators_teams", id: false, force: :cascade do |t|
@@ -251,6 +272,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "collaborators", "roles"
+  add_foreign_key "collaborators_badges", "badges"
+  add_foreign_key "collaborators_badges", "collaborators"
   add_foreign_key "contacts", "accounts"
   add_foreign_key "investments", "teams"
   add_foreign_key "payments", "accounts"
