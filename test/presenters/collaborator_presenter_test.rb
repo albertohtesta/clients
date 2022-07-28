@@ -24,8 +24,10 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
 
     expected_json = {
       "id" => @collaborator.id,
-      "first_name" => "MyString",
-      "last_name" => "MyString",
+      "name" => "MyString MyString",
+      "position" => "Developer",
+      "posts_count" => 1,
+      "img" => "",
       "post" => {
         "id" => @post.id,
         "title" => "MyString",
@@ -46,8 +48,10 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
 
     expected_json = {
       "id" => @collaborator.id,
-      "first_name" => "MyString",
-      "last_name" => "MyString",
+      "name" => "MyString MyString",
+      "position" => "Developer",
+      "posts_count" => 0,
+      "img" => "",
       "post" => []
     }
 
