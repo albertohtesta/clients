@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_29_171757) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -238,6 +238,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.integer "status"
+    t.string "survey_monkey_url"
+    t.integer "requested_answers"
+    t.integer "current_answers"
+    t.date "deadline"
+    t.integer "period"
+    t.jsonb "questions_detail"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["period"], name: "index_surveys_on_period"
+    t.index ["questions_detail"], name: "index_surveys_on_questions_detail", using: :gin
+    t.index ["team_id"], name: "index_surveys_on_team_id"
+  end
+
   create_table "team_types", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -280,6 +296,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
   add_foreign_key "projects", "accounts"
+  add_foreign_key "surveys", "teams"
   add_foreign_key "teams", "projects"
   add_foreign_key "teams", "team_types"
 end
