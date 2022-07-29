@@ -6,7 +6,7 @@ module Api
       before_action :retrieve_contacts, only: %i[index]
 
       def index
-        return render json: { message: "Contacts not found", status: "404" } if @account_info.empty?
+        return render json: { message: "Contacts not found" }, status: :not_found if @account_info.empty?
 
         render json: ContactPresenter.json_collection(@account_info), status: :ok
       end
