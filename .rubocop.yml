@@ -1,11 +1,6 @@
-inherit_from: .rubocop_todo.yml
-
-AllCops:
-  TargetRubyVersion: 3.1.1
-  NewCops: enable
-  Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
+inherit_gem:
+  rubocop-rails_config:
+    - config/rails.yml
 
 Style/StringLiterals:
   Enabled: true
@@ -17,3 +12,9 @@ Style/StringLiteralsInInterpolation:
 
 Style/Documentation:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+  Exclude:
+    - 'db/migrate/**/*.rb'

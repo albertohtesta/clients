@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_26_150854) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_follow_ups", force: :cascade do |t|
+    t.date "follow_date"
+    t.string "description"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_follow_ups_on_account_id"
+  end
 
   create_table "account_statuses", force: :cascade do |t|
     t.string "status", null: false
@@ -55,6 +64,34 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "app_connections", force: :cascade do |t|
     t.string "name", null: false
     t.string "api_name", null: false
@@ -63,12 +100,36 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "collaborators", force: :cascade do |t|
+  create_table "badges", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "collaborators", force: :cascade do |t|
+    t.string "first_name", null: false
     t.string "email", null: false
     t.string "uuid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "role_id", null: false
+    t.string "last_name"
+    t.string "position"
+    t.string "profile"
+    t.string "seniority"
+    t.string "english_level"
+    t.text "about"
+    t.string "work_modality"
+    t.index ["role_id"], name: "index_collaborators_on_role_id"
+  end
+
+  create_table "collaborators_badges", force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
+    t.bigint "badge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["badge_id"], name: "index_collaborators_badges_on_badge_id"
+    t.index ["collaborator_id"], name: "index_collaborators_badges_on_collaborator_id"
   end
 
   create_table "collaborators_teams", id: false, force: :cascade do |t|
@@ -102,13 +163,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
     t.index ["account_id"], name: "index_contacts_on_account_id"
   end
 
-  create_table "follow_histories", force: :cascade do |t|
-    t.date "follow_date"
-    t.string "description"
-    t.bigint "account_id", null: false
+  create_table "investments", force: :cascade do |t|
+    t.bigint "team_id"
+    t.float "value", default: 0.0
+    t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_follow_histories_on_account_id"
+    t.index ["date"], name: "index_investments_on_date"
+    t.index ["team_id"], name: "index_investments_on_team_id"
+  end
+
+  create_table "metrics", force: :cascade do |t|
+    t.text "metrics", null: false
+    t.string "indicator_type", null: false
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "related_type"
+    t.bigint "related_id"
+    t.index ["related_type", "related_id"], name: "index_metrics_on_related"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -119,6 +192,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_payments_on_account_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "collaborator_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collaborator_id"], name: "index_posts_on_collaborator_id"
+    t.index ["project_id"], name: "index_posts_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -136,12 +220,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
     t.index ["account_id"], name: "index_projects_on_account_id"
   end
 
-  create_table "projects_teams", id: false, force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.bigint "team_id", null: false
-    t.index ["project_id", "team_id"], name: "index_projects_teams_on_project_id_and_team_id"
-  end
-
   create_table "projects_tech_stacks", id: false, force: :cascade do |t|
     t.bigint "project_id", null: false
     t.bigint "tech_stack_id", null: false
@@ -152,6 +230,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
     t.bigint "project_id", null: false
     t.bigint "tool_id", null: false
     t.index ["project_id", "tool_id"], name: "index_projects_tools_on_project_id_and_tool_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_types", force: :cascade do |t|
@@ -165,6 +249,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
     t.bigint "team_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "project_id"
+    t.index ["project_id"], name: "index_teams_on_project_id"
     t.index ["team_type_id"], name: "index_teams_on_team_type_id"
   end
 
@@ -180,11 +266,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_23_210218) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "account_follow_ups", "accounts"
   add_foreign_key "accounts", "account_statuses"
   add_foreign_key "accounts", "collaborators", column: "manager_id"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collaborators", "roles"
+  add_foreign_key "collaborators_badges", "badges"
+  add_foreign_key "collaborators_badges", "collaborators"
   add_foreign_key "contacts", "accounts"
-  add_foreign_key "follow_histories", "accounts"
+  add_foreign_key "investments", "teams"
   add_foreign_key "payments", "accounts"
+  add_foreign_key "posts", "collaborators"
+  add_foreign_key "posts", "projects"
   add_foreign_key "projects", "accounts"
+  add_foreign_key "teams", "projects"
   add_foreign_key "teams", "team_types"
 end

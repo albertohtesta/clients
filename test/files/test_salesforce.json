@@ -1,4 +1,4 @@
-[{
+{
   "opportunity": {
     "AccountId": "00174000009m8FfAAI",
     "Description": "test",
@@ -46,4 +46,4 @@
     "ShippingCity": "test shipping city",
     "Website": "asdasdasd"
   }
-}]
+}

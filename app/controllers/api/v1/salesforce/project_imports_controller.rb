@@ -11,10 +11,9 @@ module Api
         end
 
         private
-
-        def resource_params
-          params.require(:projects)
-        end
+          def resource_params
+            params.require(:projects)
+          end
       end
     end
   end

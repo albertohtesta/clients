@@ -2,8 +2,10 @@
 
 FactoryBot.define do
   factory :collaborator do
-    name { "MyString" }
+    first_name { "MyString" }
+    last_name { "MyString" }
     email { "MyString" }
     uuid { "MyString" }
+    role
   end
 end

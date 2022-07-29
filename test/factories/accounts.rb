@@ -10,5 +10,6 @@ FactoryBot.define do
     account_web_page { "MyString" }
     service_duration { "MyString" }
     account_status
+    manager { association :collaborator }
   end
 end
