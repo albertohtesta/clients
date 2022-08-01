@@ -5,7 +5,6 @@ module Api
     module TeamMoraleSurveys
       # surveys distribution controller
       class DistributionsController < ApiController
-
         def create
           survey_monkey_response = true
           if survey_monkey_response
