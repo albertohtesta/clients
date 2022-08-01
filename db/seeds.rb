@@ -26,6 +26,7 @@ TechStack.create([
 # **************************************
 Role.create!([
   { name: "Developer" },
+  { name: "Account Manager" },
   { name: "Scrum master" },
   { name: "QA" },
   { name: "UI/UX" }]
@@ -35,6 +36,24 @@ Role.create!([
 # **************************************
 role = Role.find_by(name: "Developer")
 40.times do
+  Collaborator.create([
+                        {
+                          first_name: Faker::Name.unique.name,
+                          last_name: Faker::Name.unique.name,
+                          uuid: Faker::IDNumber.unique.invalid,
+                          email: Faker::Internet.unique.email,
+                          tech_stacks: TechStack.all.sample(2),
+                          tools: Tool.all.sample(2),
+                          role:
+                        }
+                      ])
+end
+
+# **************************************
+# CREATING 2 ACCOUNT MANAGERS
+# **************************************
+role = Role.find_by(name: "Account Manager")
+2.times do
   Collaborator.create([
                         {
                           first_name: Faker::Name.unique.name,
@@ -70,7 +89,7 @@ def random_salesforce_id(length, id = "")
 end
 
 # GET 2 COLLABORATORS AS MANAGERS TO ASSIGN ACCOUNTS TO
-managers = Collaborator.limit(2)
+managers = CollaboratorRepository.account_managers.limit(2)
 locations = ["California", "New York City", "Washington", "San Francisco"]
 
 7.times do
@@ -143,7 +162,7 @@ end
   team = Team.create(
     added_date: Faker::Date.between(from: 5.months.ago, to: DateTime.yesterday),
     team_type_id: TeamType.all.to_a.sample.id,
-    collaborators: Collaborator.limit(5).offset(idx * 5),
+    collaborators: CollaboratorRepository.developers.limit(5).offset(idx * 5),
     project: Project.limit(1).offset(idx).first
   )
 
@@ -152,12 +171,18 @@ end
       value: rand(1000.00..500000.00).round(2),
       date: rand(-current_month.months..(12 - current_month).months).ago
     })
+
+    rand(0..5).times do |t|
+      team.team_requirements.create({
+
+      })
+    end
   end
 end
 
 
 posts_for_collaborators = []
-Collaborator.all.each do |collaborator|
+CollaboratorRepository.developers.all.each do |collaborator|
   posts_for_collaborators << {
     title: Faker::Name.unique.name,
     description: Faker::Lorem.sentence,
@@ -191,8 +216,10 @@ p "Seed... #{TechStack.count} TechStack created"
 p "Seed... #{Account.count} Account created"
 p "Seed... #{Payment.count} Payment created"
 p "Seed... #{Project.count} Project created"
-p "Seed... #{Collaborator.count} Collaborator created"
+p "Seed... #{CollaboratorRepository.account_managers.count} Collaborator created"
+p "Seed... #{CollaboratorRepository.account_managers.count} Managers created"
 p "Seed... #{Team.count} Teams created"
+p "Seed... #{TeamRequirement.count} Teams Requirements created"
 p "Seed... #{Investment.count} Investment created"
 p "Seed... #{Post.count} Posts created"
 p "Seed... #{Metric.count} Metrics created"

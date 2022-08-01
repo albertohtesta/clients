@@ -9,3 +9,10 @@ METRICS_TYPES = {
   gross_marging: "gross marging", # account
   client_engagement: "client engagement" # account
 }
+
+
+SENIORITY_TYPES = {
+  junnior: "junnior",
+  middle: "middle",
+  sennior: "sennior"
+}
