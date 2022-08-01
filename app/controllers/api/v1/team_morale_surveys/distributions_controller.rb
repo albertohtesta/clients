@@ -5,7 +5,6 @@ module Api
     module TeamMoraleSurveys
       # surveys distribution controller
       class DistributionsController < ApiController
-        skip_before_action :verify_token, :current_user, only: :create
 
         def create
           survey_monkey_response = true
