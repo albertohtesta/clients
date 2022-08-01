@@ -6,6 +6,7 @@ FactoryBot.define do
     last_name { "MyString" }
     email { "MyString" }
     uuid { "MyString" }
+    position { "Developer" }
     role
   end
 end
