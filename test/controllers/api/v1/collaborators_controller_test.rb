@@ -8,8 +8,8 @@ class Api::V1::CollaboratorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    params = { project_id: 1 }
-    get api_v1_project_collaborators_path(params), headers: { "Authorization" => @token }
+    params = { team_id: 1 }
+    get api_v1_team_collaborators_path(params), headers: { "Authorization" => @token }
     assert_equal(response.parsed_body, { "message" => "No collaborators" })
     assert_response(:not_found)
   end
