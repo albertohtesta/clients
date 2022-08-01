@@ -9,12 +9,11 @@ class CollaboratorService < CognitoService
   end
 
   private
-
-  def logged_user
-    stub_get_user if Rails.env.test?
-    CLIENT.get_user(access_token: @user_object[:token]).to_h
-  rescue StandardError => e
-    @error = e
-    false
-  end
+    def logged_user
+      stub_get_user if Rails.env.test?
+      CLIENT.get_user(access_token: @user_object[:token]).to_h
+    rescue StandardError => e
+      @error = e
+      false
+    end
 end
