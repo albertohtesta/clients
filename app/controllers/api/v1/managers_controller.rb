@@ -2,7 +2,7 @@
 
 module Api
   module  V1
-    class ManagersController < ApplicationController
+    class ManagersController < ApiController
       before_action :retrieve_manager, only: %i[show]
 
       def show

@@ -15,4 +15,17 @@ class CognitoService < ApplicationService
   def initialize(user_object)
     @user_object = user_object
   end
+
+  private
+
+  def stub_get_user
+    CLIENT.stub_responses(:get_user, {
+      username: Collaborator.last.uuid,
+      user_attributes: [
+                        { name: "sub", value: Collaborator.last.uuid },
+                        { name: "email_verified", value: "true" },
+                        { name: "email", value: Collaborator.last.email }
+                      ]
+    })
+  end
 end
