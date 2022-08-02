@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_29_171757) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_02_171122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_collaborators", id: false, force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "collaborator_id"
+    t.index ["account_id"], name: "index_account_collaborators_on_account_id"
+    t.index ["collaborator_id"], name: "index_account_collaborators_on_collaborator_id"
+  end
 
   create_table "account_follow_ups", force: :cascade do |t|
     t.date "follow_date"
@@ -120,6 +127,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_29_171757) do
     t.string "english_level"
     t.text "about"
     t.string "work_modality"
+    t.string "phone"
     t.index ["role_id"], name: "index_collaborators_on_role_id"
   end
 
