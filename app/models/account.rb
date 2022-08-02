@@ -8,6 +8,7 @@ class Account < ApplicationRecord
   has_many :payments
   has_many :contacts
   has_many :metrics, as: :related
+  has_many :team_requirements
 
   validates :account_uuid, :name, presence: true
 

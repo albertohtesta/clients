@@ -171,12 +171,15 @@ end
       value: rand(1000.00..500000.00).round(2),
       date: rand(-current_month.months..(12 - current_month).months).ago
     })
+  end
 
-    rand(0..5).times do |t|
-      team.team_requirements.create({
-
-      })
-    end
+  rand(1..5).times do |t|
+    team.team_requirements.create({
+      account: team.project.account,
+      role: Role.all.sample,
+      seniority: SENIORITY_TYPES.to_a.sample[1],
+      tech_stacks: TechStack.all.sample(2),
+    })
   end
 end
 
