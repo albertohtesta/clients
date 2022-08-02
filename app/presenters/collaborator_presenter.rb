@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CollaboratorPresenter < ApplicationPresenter
-  ATTRS = %i[id]
-  METHODS = %i[name position posts_count img post]
+  ATTRS = %i[id position]
+  METHODS = %i[name posts_count img post]
   ASSOCIATIONS = []
 
   private
@@ -14,10 +14,6 @@ class CollaboratorPresenter < ApplicationPresenter
 
     def name
       "#{first_name} #{last_name}"
-    end
-
-    def position
-      role.name
     end
 
     def posts_count
