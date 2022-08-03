@@ -12,5 +12,10 @@ module TypeFormService
     def find(form_id, options = {})
       Client.new.get("forms/#{form_id}", query: options)
     end
+
+    # Returns surveys' information with details
+    def url(form_id, options = {})
+      find(form_id, options)[:_links][:display]
+    end
   end
 end
