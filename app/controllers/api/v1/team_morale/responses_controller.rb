@@ -5,8 +5,13 @@ module Api
     module TeamMorale
       class ResponsesController < ApplicationController
         def index
-          @survey_responses = TypeFormService::SurveyResponses.new
-          render json: @survey_responses.responses(params[:survey_id])
+          @survey_responses = TypeFormService::Responses.new
+          render json: @survey_responses.all(params[:survey_id])
+        end
+
+        def show
+          @survey_responses = TypeFormService::Responses.new
+          render json: @survey_responses.insights(params[:survey_id])
         end
       end
     end
