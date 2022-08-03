@@ -181,6 +181,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_230130) do
     t.index ["team_id"], name: "index_investments_on_team_id"
   end
 
+  create_table "metric_follow_ups", force: :cascade do |t|
+    t.date "follow_date"
+    t.string "metric_type"
+    t.bigint "account_id", null: false
+    t.bigint "manager_id", null: false
+    t.text "mitigation_strategy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_metric_follow_ups_on_account_id"
+    t.index ["manager_id"], name: "index_metric_follow_ups_on_manager_id"
+  end
+
   create_table "metrics", force: :cascade do |t|
     t.text "metrics", null: false
     t.string "indicator_type", null: false
@@ -302,6 +314,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_230130) do
   add_foreign_key "collaborators_badges", "collaborators"
   add_foreign_key "contacts", "accounts"
   add_foreign_key "investments", "teams"
+  add_foreign_key "metric_follow_ups", "accounts"
+  add_foreign_key "metric_follow_ups", "collaborators", column: "manager_id"
   add_foreign_key "payments", "accounts"
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
