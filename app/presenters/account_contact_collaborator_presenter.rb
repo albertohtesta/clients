@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AccountCollaboratorPresenter < ApplicationPresenter
+class AccountContactCollaboratorPresenter < ApplicationPresenter
   METHODS = %i[contact]
 
   private

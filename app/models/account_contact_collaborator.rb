@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AccountCollaborator < ApplicationRecord
+class AccountContactCollaborator < ApplicationRecord
   belongs_to :account
   belongs_to :collaborator
 end
