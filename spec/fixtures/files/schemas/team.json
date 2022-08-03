@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "metric": {
+      "type": "object",
+      "properties": {
+        "added_date": { "type": "string" },
+        "team_type_id": { "type": "integer" },
+        "project_id": { "type": "integer" }
+      },
+      "required": [ "added_date", "team_type_id", "project_id" ]
+    }
+  }
+}
+    
