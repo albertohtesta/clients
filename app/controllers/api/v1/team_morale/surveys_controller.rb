@@ -11,7 +11,7 @@ module Api
 
         def show
           @surveys = TypeFormService::Surveys.new
-          render json: @surveys.find_with_details(params[:id])
+          render json: @surveys.find(params[:id])
         end
       end
     end

@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       namespace :team_morale do
         resources :surveys, only: %i[index show] do
           resources :responses, only: %i[index show]
+          resources :webhooks
         end
       end
     end
