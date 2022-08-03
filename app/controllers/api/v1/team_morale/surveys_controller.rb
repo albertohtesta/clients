@@ -5,12 +5,12 @@ module Api
     module TeamMorale
       class SurveysController < ApplicationController
         def index
-          @surveys = SurveyMonkeyService::Surveys.new
+          @surveys = TypeFormService::Surveys.new
           render json: @surveys.all
         end
 
         def show
-          @surveys = SurveyMonkeyService::Surveys.new
+          @surveys = TypeFormService::Surveys.new
           render json: @surveys.find_with_details(params[:id])
         end
       end

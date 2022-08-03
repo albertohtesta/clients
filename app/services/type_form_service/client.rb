@@ -2,13 +2,13 @@
 
 require "net/http"
 
-module SurveyMonkeyService
+module TypeFormService
   class Client < ApplicationService
     attr_reader :base_url
 
     def initialize
-      @base_url = "https://api.surveymonkey.net"
-      @access_token = ENV["SURVEY_MONKEY_TOKEN"]
+      @base_url = "https://api.typeform.com/"
+      @access_token = ENV["TYPE_FORM_ACCESS_TOKEN"]
     end
 
     def get(path, **args)
