@@ -9,32 +9,35 @@ Rails.application.routes.draw do
       end
 
       resources :managers, only: [:show] do
-        resources :accounts, only: [:show] do
-          resources :account_follow_ups, only: %i[create index]
+        scope module: :managers do
+          resources :accounts, only: [:show] do
+            scope module: :accounts do
+              resources :account_follow_ups, only: %i[create index]
+            end
+          end
         end
       end
 
       resources :accounts, only: [:index] do
-        resources :contacts, only: [:index]
-        resources :projects, only: [:index]
-      end
-
-      resources :projects, only: [:index] do
-        resources :investments, only: [:show]
-        resources :collaborators, only: [:index]
-      end
-
-      resources :collaborators, only: [:index] do
-        resources :posts, only: [:index]
+        scope module: :accounts do
+          resources :contacts, only: [:index]
+        end
       end
 
       resources :teams, only: [:index] do
-        resources :collaborators, only: [:index]
-        get "investments/:order_by" => "investments#show", as: :investments_organized
+        scope module: :teams do
+          resources :collaborators, only: [:index]
+          get "investments/:order_by" => "investments#show", as: :investments_organized
+        end
       end
 
-      resources :posts, only: [:show]
+      resources :projects, only: [:index]
       resources :metrics, only: [:index]
+      resources :posts, only: [:show]
+
+      namespace :public do
+        resources :collaborators, only: [:index, :show]
+      end
     end
   end
 

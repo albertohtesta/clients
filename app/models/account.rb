@@ -9,6 +9,7 @@ class Account < ApplicationRecord
   has_many :contacts
   has_many :metrics, as: :related
   has_many :team_requirements
+  has_many :account_contact_collaborators
 
   validates :account_uuid, :name, presence: true
 

@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_01_210424) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_03_230130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_contact_collaborators", id: false, force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "collaborator_id"
+    t.index ["account_id"], name: "index_account_contact_collaborators_on_account_id"
+    t.index ["collaborator_id"], name: "index_account_contact_collaborators_on_collaborator_id"
+  end
 
   create_table "account_follow_ups", force: :cascade do |t|
     t.date "follow_date"
@@ -100,6 +107,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_210424) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "badges", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "collaborators", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "email", null: false
@@ -108,7 +121,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_210424) do
     t.datetime "updated_at", null: false
     t.bigint "role_id", null: false
     t.string "last_name"
+    t.string "position"
+    t.string "profile"
+    t.string "seniority"
+    t.string "english_level"
+    t.text "about"
+    t.string "work_modality"
+    t.string "phone"
     t.index ["role_id"], name: "index_collaborators_on_role_id"
+  end
+
+  create_table "collaborators_badges", force: :cascade do |t|
+    t.bigint "collaborator_id", null: false
+    t.bigint "badge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["badge_id"], name: "index_collaborators_badges_on_badge_id"
+    t.index ["collaborator_id"], name: "index_collaborators_badges_on_collaborator_id"
   end
 
   create_table "collaborators_teams", id: false, force: :cascade do |t|
@@ -240,6 +269,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_210424) do
     t.index ["tech_stack_id"], name: "index_team_requirements_tech_stacks_on_tech_stack_id"
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.integer "status"
+    t.string "survey_url"
+    t.integer "requested_answers"
+    t.integer "current_answers"
+    t.date "deadline"
+    t.integer "period"
+    t.jsonb "questions_detail"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "answers_detail"
+    t.index ["answers_detail"], name: "index_surveys_on_answers_detail", using: :gin
+    t.index ["period"], name: "index_surveys_on_period"
+    t.index ["questions_detail"], name: "index_surveys_on_questions_detail", using: :gin
+    t.index ["team_id"], name: "index_surveys_on_team_id"
+  end
+
   create_table "team_types", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -274,6 +321,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_210424) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "collaborators", "roles"
+  add_foreign_key "collaborators_badges", "badges"
+  add_foreign_key "collaborators_badges", "collaborators"
   add_foreign_key "contacts", "accounts"
   add_foreign_key "investments", "teams"
   add_foreign_key "payments", "accounts"
@@ -284,6 +333,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_210424) do
   add_foreign_key "team_requirements", "collaborators"
   add_foreign_key "team_requirements", "roles"
   add_foreign_key "team_requirements", "teams"
+  add_foreign_key "surveys", "teams"
   add_foreign_key "teams", "projects"
   add_foreign_key "teams", "team_types"
 end
