@@ -7,5 +7,13 @@ FactoryBot.define do
     email { "MyString" }
     uuid { "MyString" }
     role
+
+    trait :developer do
+      association :role, :developer
+    end
+
+    trait :manager do
+      association :role, :manager
+    end
   end
 end
