@@ -53,6 +53,6 @@ class AccountPresenter < ApplicationPresenter
   end
 
   def role_debt
-    team_requirements.where(collaborator: nil)
+    team_requirements.where(collaborator: nil).count
   end
 end

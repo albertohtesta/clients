@@ -8,7 +8,7 @@ class TeamRequirement < ApplicationRecord
 
   has_and_belongs_to_many :tech_stacks
 
-  validates :team, :seniority, :role, presence: true
+  validates :account, :team, :seniority, :role, presence: true
 
   enum seniority: SENIORITY_TYPES
 end

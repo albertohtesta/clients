@@ -6,10 +6,6 @@ class AccountRepository < ApplicationRepository
       scope.where(salesforce_id:).first_or_initialize
     end
 
-    def with_projects
-      scope.includes(:projects)
-    end
-
     def import(resources)
       ActiveRecord::Base.transaction do
         account = AccountRepository.first_or_initialize_by_salesforce_id(resources[:account][:Id])
