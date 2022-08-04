@@ -28,6 +28,10 @@ class Account < ApplicationRecord
     false
   end
 
+  def role_debt
+    team_requirements.where(collaborator: nil).count
+  end
+
   def tools
     projects.map { |project| project.tools.pluck(:name) }.flatten.uniq
   end

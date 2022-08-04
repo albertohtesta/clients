@@ -61,19 +61,28 @@ Role.create!([
 # CREATING 2 ACCOUNT MANAGERS
 # **************************************
 role = Role.find_by(name: "Account Manager")
-2.times do
-  Collaborator.create([
-                        {
-                          first_name: Faker::Name.unique.name,
-                          last_name: Faker::Name.unique.name,
-                          uuid: Faker::IDNumber.unique.invalid,
-                          email: Faker::Internet.unique.email,
-                          tech_stacks: TechStack.all.sample(2),
-                          tools: Tool.all.sample(2),
-                          role:
-                        }
-                      ])
-end
+Collaborator.create([
+                      {
+                        id: 102,
+                        first_name: Faker::Name.unique.name,
+                        last_name: Faker::Name.unique.name,
+                        uuid: Faker::IDNumber.unique.invalid,
+                        email: Faker::Internet.unique.email,
+                        tech_stacks: TechStack.all.sample(2),
+                        tools: Tool.all.sample(2),
+                        role:
+                      },
+                      {
+                        id: 101,
+                        first_name: Faker::Name.unique.name,
+                        last_name: Faker::Name.unique.name,
+                        uuid: Faker::IDNumber.unique.invalid,
+                        email: Faker::Internet.unique.email,
+                        tech_stacks: TechStack.all.sample(2),
+                        tools: Tool.all.sample(2),
+                        role:
+                      }
+                    ])
 
 def random_price
   rand(500_000.00..10_000_000.00).round(2)

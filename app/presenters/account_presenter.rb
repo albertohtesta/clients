@@ -51,8 +51,4 @@ class AccountPresenter < ApplicationPresenter
     # TODO: this is example random data, this needs to be pulled from follow up model
     [true, false].sample
   end
-
-  def role_debt
-    team_requirements.where(collaborator: nil).count
-  end
 end
