@@ -4,8 +4,6 @@ require "net/http"
 
 module TypeFormService
   class Client < ApplicationService
-    attr_reader :base_url
-
     def initialize
       @base_url = "https://api.typeform.com/"
       @access_token = ENV["TYPE_FORM_ACCESS_TOKEN"]
@@ -40,7 +38,7 @@ module TypeFormService
     end
 
     private
-      attr_reader :access_token
+      attr_reader :access_token, :base_url
 
       def make_request(req, uri)
         req["Authorization"] = "Bearer #{access_token}"
