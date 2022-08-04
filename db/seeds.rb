@@ -131,7 +131,7 @@ Collaborator.find(7).update(badges: Badge.where({ id: [1, 2, 3, 11] }))
 
 
 # GET 2 COLLABORATORS AS MANAGERS TO ASSIGN ACCOUNTS TO
-managers = CollaboratorRepository.account_managers.limit(2)
+managers = CollaboratorRepository.by_role_name("Account Manager").limit(2)
 locations = ["California", "New York City", "Washington", "San Francisco"]
 
 
@@ -382,7 +382,7 @@ end
   team = Team.create(
     added_date: Faker::Date.between(from: 5.months.ago, to: DateTime.yesterday),
     team_type_id: TeamType.all.to_a.sample.id,
-    collaborators: CollaboratorRepository.developers.limit(5).offset(idx * 5),
+    collaborators: CollaboratorRepository.by_role_name("Developer").limit(5).offset(idx * 5),
     project: Project.limit(1).offset(idx).first
   )
 
@@ -405,7 +405,7 @@ end
 
 
 posts_for_collaborators = []
-CollaboratorRepository.developers.all.each do |collaborator|
+CollaboratorRepository.by_role_name("Developer").all.each do |collaborator|
   posts_for_collaborators << {
     title: Faker::Name.unique.name,
     description: Faker::Lorem.sentence,
@@ -433,8 +433,8 @@ p "Seed... #{TechStack.count} TechStack created"
 p "Seed... #{Account.count} Account created"
 p "Seed... #{Payment.count} Payment created"
 p "Seed... #{Project.count} Project created"
-p "Seed... #{CollaboratorRepository.account_managers.count} Collaborator created"
-p "Seed... #{CollaboratorRepository.account_managers.count} Managers created"
+p "Seed... #{CollaboratorRepository.by_role_name("Account Manager").count} Collaborator created"
+p "Seed... #{CollaboratorRepository.by_role_name("Account Manager").count} Managers created"
 p "Seed... #{Team.count} Teams created"
 p "Seed... #{TeamRequirement.count} Teams Requirements created"
 p "Seed... #{Investment.count} Investment created"
