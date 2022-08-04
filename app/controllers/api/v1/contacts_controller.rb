@@ -8,11 +8,11 @@ module Api
       def index
         return render json: { message: "Contacts not found" }, status: :not_found if @account_info.empty?
 
-        render json: ContactPresenter.json_collection(@account_info), status: :ok
+        render json: AccountContactCollaboratorPresenter.json_collection(@account_info), status: :ok
       end
 
       def retrieve_contacts
-        @account_info = ContactRepository.contacts_by_account(params[:account_id])
+        @account_info = AccountContactCollaboratorRepository.contacts_by_account(params[:account_id])
       end
     end
   end

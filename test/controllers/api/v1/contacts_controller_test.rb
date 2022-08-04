@@ -9,7 +9,7 @@ class Api::V1::ContactsControllerTest < ActionDispatch::IntegrationTest
 
   test "When the count have contacts" do
     @account = create(:account)
-    @contact = create(:contact, account: @account)
+    @contact = create(:account_contact_collaborator, account: @account)
     get api_v1_account_contacts_path(account_id: @account.id), headers: { "Authorization" => @token }
     assert_response :ok
   end
