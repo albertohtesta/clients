@@ -12,18 +12,18 @@ module Api
         def create
           @webhooks = TypeFormService::Webhooks.new
           options = { enabled: true, url: "my.endpoint.com" }
-          render json: @webhooks.update!(params[:survey_id], options)
+          render json: @webhooks.update!(params[:survey_id], params[:webhook_tag], options)
         end
 
         def update
           @webhooks = TypeFormService::Webhooks.new
           options = { enabled: true, url: "my.endpoint.com" }
-          render json: @webhooks.update!(params[:survey_id], options)
+          render json: @webhooks.update!(params[:survey_id], params[:webhook_tag], options)
         end
 
         def destroy
           @webhooks = TypeFormService::Webhooks.new
-          render json: @webhooks.delete(params[:survey_id])
+          render json: @webhooks.delete(params[:survey_id], params[:webhook_tag])
         end
 
         def show
