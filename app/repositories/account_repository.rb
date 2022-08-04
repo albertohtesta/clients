@@ -15,5 +15,9 @@ class AccountRepository < ApplicationRepository
         account.attributes.slice("name", "id", "salesforce_id")
       end
     end
+
+    def role_debt_by_id(id)
+      scope.find_by(id:).team_requirements.where(collaborator: nil).count
+    end
   end
 end

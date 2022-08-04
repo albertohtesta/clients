@@ -51,4 +51,12 @@ class AccountPresenter < ApplicationPresenter
     # TODO: this is example random data, this needs to be pulled from follow up model
     [true, false].sample
   end
+
+  def method_name
+    role_debt_by_id
+  end
+
+  def role_debt
+    AccountRepository.role_debt_by_id(__getobj__.id)
+  end
 end
