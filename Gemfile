@@ -18,6 +18,8 @@ gem "jwt"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "pundit"
+gem "rswag"
+gem "rswag-ui"
 gem "rack-cors"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem "redis"
@@ -30,6 +32,8 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "minitest"
   gem "rails-erd"
+  gem "rspec-rails", "~> 6.0.0.rc1"
+  gem "rswag-specs"
   gem "byebug"
 end
 

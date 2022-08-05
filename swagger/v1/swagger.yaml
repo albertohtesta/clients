@@ -1,0 +1,121 @@
+---
+openapi: 3.0.1
+info:
+  title: Clients API V1
+  version: v1
+paths:
+  "/api/v1/metrics":
+    get:
+      summary: Get metrics of team
+      tags:
+      - Metrics
+      security:
+      - Bearer: []
+      parameters:
+      - name: group_by
+        in: query
+        description: "[quarters, monthly]"
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        description: team id
+        schema:
+          type: integer
+      - name: indicator_type
+        in: query
+        description: "['balance', 'velocity', 'morale', 'performance']"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: metrics found
+        '404':
+          description: Not metrics found
+  "/build-info":
+    get:
+      summary: gets the build info
+      tags:
+      - Info
+      responses:
+        '200':
+          description: info received
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/info"
+servers:
+- url: https://qa-clients-api.nordhen.com
+- url: http://localhost:3000
+components:
+  securitySchemes:
+    Bearer:
+      description: JWT key necessary to use API calls
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    info:
+      type: object
+      properties:
+        build_id:
+          type: string
+        build_date:
+          type: string
+        build_branch:
+          type: string
+      required:
+      - build_id
+      - build_date
+      - build_branch
+    metric:
+      type: object
+      properties:
+        metric:
+          type: object
+          properties:
+            metrics:
+              type: string
+            indicator_type:
+              type: string
+            date:
+              type: string
+            related_type:
+              type: string
+            related_id:
+              type: integer
+          required:
+          - metrics
+          - indicator_type
+          - date
+          - related_type
+          - related_id
+    team:
+      type: object
+      properties:
+        metric:
+          type: object
+          properties:
+            added_date:
+              type: string
+            team_type_id:
+              type: integer
+            project_id:
+              type: integer
+          required:
+          - added_date
+          - team_type_id
+          - project_id
+    user:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            email:
+              type: string
+            is_enabled:
+              type: boolean
+          required:
+          - email
+          - is_enabled
