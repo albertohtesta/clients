@@ -52,10 +52,6 @@ class AccountPresenter < ApplicationPresenter
     [true, false].sample
   end
 
-  def method_name
-    role_debt_by_id
-  end
-
   def role_debt
     AccountRepository.role_debt_by_id(__getobj__.id)
   end
