@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "metric": {
+      "type": "object",
+      "properties": {
+        "metrics": { "type": "string" },
+        "indicator_type": { "type": "string" },
+        "date": { "type": "string" },
+        "related_type": { "type": "string" },
+        "related_id": { "type": "integer" }
+      },
+      "required": [ "metrics", "indicator_type", "date", "related_type", "related_id" ]
+    }
+  }
+}
+  
