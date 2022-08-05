@@ -21,11 +21,6 @@ module Api
           render json: @webhooks.update!(params[:survey_id], params[:webhook_tag], options)
         end
 
-        def destroy
-          @webhooks = TypeFormService::Webhooks.new
-          render json: @webhooks.delete(params[:survey_id], params[:webhook_tag])
-        end
-
         def show
           @webhooks = TypeFormService::Webhooks.new
           render json: @webhooks.find(params[:survey_id], params[:webhook_tag])

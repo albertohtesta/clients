@@ -17,10 +17,5 @@ module TypeFormService
     def update!(form_id, tag, options = {})
       Client.new.put("forms/#{form_id}/webhooks/#{tag}", query: options)
     end
-
-    # deletes a webhook
-    def delete(form_id, tag, options = {})
-      Client.new.delete("forms/#{form_id}/webhooks/#{tag}", query: options)
-    end
   end
 end
