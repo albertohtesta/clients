@@ -2,14 +2,14 @@
 
 require "test_helper"
 
-class Api::V1::ContactsControllerTest < ActionDispatch::IntegrationTest
+class Api::V1::Accounts::ContactsControllerTest < ActionDispatch::IntegrationTest
   setup do
     stub_cognito_uri
   end
 
   test "When the count have contacts" do
     @account = create(:account)
-    @contact = create(:contact, account: @account)
+    @contact = create(:account_contact_collaborator, account: @account)
     get api_v1_account_contacts_path(account_id: @account.id), headers: { "Authorization" => @token }
     assert_response :ok
   end

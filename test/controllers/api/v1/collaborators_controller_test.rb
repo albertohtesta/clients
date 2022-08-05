@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class Api::V1::CollaboratorsControllerTest < ActionDispatch::IntegrationTest
+class Api::V1::Teams::CollaboratorsControllerTest < ActionDispatch::IntegrationTest
   setup do
     stub_cognito_uri
   end

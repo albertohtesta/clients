@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class InvestmentsControllerTest < ActionDispatch::IntegrationTest
+class Api::V1::Teams::InvestmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     stub_cognito_uri
     @team = create(:team)

@@ -2,7 +2,7 @@
 
 require "test_helper"
 
-class AccountFollowUpsControllerTest < ActionDispatch::IntegrationTest
+class Api::V1::Managers::Accounts::AccountFollowUpsControllerTest < ActionDispatch::IntegrationTest
   setup do
     stub_cognito_uri
   end

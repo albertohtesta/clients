@@ -169,6 +169,37 @@ team_advanta.investments.create([
   { value: 70000.00, date: "15-05-2022".to_date },
   { value: 60000.00, date: "15-06-2022".to_date }
 ])
+# ****************************************************************************
+# CREATING Contact of an account
+# ****************************************************************************
+# ToDo: We have an error when we have to create a new collaborator
+# collaborator_savid = Collaborator.create(
+#   id: Collaborator.last.id + 30,
+#   role: Role.first,
+#   first_name: Faker::Name.unique.name,
+#   last_name: Faker::Name.unique.name,
+#   uuid: Faker::IDNumber.unique.invalid,
+#   email: "ssalazar@arkus-solutions.com",
+#   tech_stacks: TechStack.all.sample(2),
+#   tools: Tool.all.sample(2)
+# )
+
+# collaborator_amunoz = Collaborator.create(
+#   id: Collaborator.last.id + 30,
+#   role: Role.first,
+#   first_name: Faker::Name.unique.name,
+#   last_name: Faker::Name.unique.name,
+#   uuid: Faker::IDNumber.unique.invalid,
+#   email: "amunoz@arkusnexus.com",
+#   tech_stacks: TechStack.all.sample(2),
+#   tools: Tool.all.sample(2)
+# )
+
+# AccountCollaborator.create!([
+#   { account_id: advanta.id, collaborator: collaborator_savid},
+#   { account: advanta.id, collaborator: collaborator_amunoz}
+# ])
+
 Contact.create([
   { email: "ssalazar@arkus-solutions.com", first_name: "Savid", last_name: "Salazar", phone: "5556581111", account_id: advanta.id, salesforce_id: Faker::IDNumber.unique.invalid },
   { email: "amunoz@arkusnexus.com", first_name: "Alvaro", last_name: "Muñoz", phone: "5557802912", account_id: advanta.id, salesforce_id: Faker::IDNumber.unique.invalid }
