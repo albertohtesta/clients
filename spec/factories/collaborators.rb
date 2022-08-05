@@ -8,5 +8,13 @@ FactoryBot.define do
     uuid { "MyString" }
     position { "Developer" }
     role
+
+    trait :developer do
+      association :role, :developer
+    end
+
+    trait :manager do
+      association :role, :manager
+    end
   end
 end

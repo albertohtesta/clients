@@ -258,6 +258,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_230130) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "team_requirements", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "team_id", null: false
+    t.bigint "collaborator_id"
+    t.bigint "role_id", null: false
+    t.string "seniority", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_team_requirements_on_account_id"
+    t.index ["collaborator_id"], name: "index_team_requirements_on_collaborator_id"
+    t.index ["role_id"], name: "index_team_requirements_on_role_id"
+    t.index ["team_id"], name: "index_team_requirements_on_team_id"
+  end
+
+  create_table "team_requirements_tech_stacks", force: :cascade do |t|
+    t.bigint "team_requirement_id"
+    t.bigint "tech_stack_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_requirement_id"], name: "index_team_requirements_tech_stacks_on_team_requirement_id"
+    t.index ["tech_stack_id"], name: "index_team_requirements_tech_stacks_on_tech_stack_id"
+  end
+
   create_table "surveys", force: :cascade do |t|
     t.integer "status"
     t.string "survey_url"
@@ -320,6 +343,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_230130) do
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
   add_foreign_key "projects", "accounts"
+  add_foreign_key "team_requirements", "accounts"
+  add_foreign_key "team_requirements", "collaborators"
+  add_foreign_key "team_requirements", "roles"
+  add_foreign_key "team_requirements", "teams"
   add_foreign_key "surveys", "teams"
   add_foreign_key "teams", "projects"
   add_foreign_key "teams", "team_types"

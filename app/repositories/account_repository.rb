@@ -6,10 +6,6 @@ class AccountRepository < ApplicationRepository
       scope.where(salesforce_id:).first_or_initialize
     end
 
-    def with_projects
-      scope.includes(:projects)
-    end
-
     def import(resources)
       ActiveRecord::Base.transaction do
         account = AccountRepository.first_or_initialize_by_salesforce_id(resources[:account][:Id])
@@ -18,6 +14,10 @@ class AccountRepository < ApplicationRepository
         Project.update_project_by_salesforce(account, resources[:opportunity])
         account.attributes.slice("name", "id", "salesforce_id")
       end
+    end
+
+    def role_debt_by_id(id)
+      scope.find_by(id:).team_requirements.where(collaborator: nil).count
     end
   end
 end

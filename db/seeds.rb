@@ -51,10 +51,38 @@ Role.create!([
   { name: "SCRUM PRODUCT OWNER" },
   { name: "UX/UI" },
   { name: "Developer" },
+  { name: "Account Manager" },
   { name: "Scrum master" },
   { name: "QA" },
   { name: "UI/UX" }
 ])
+
+# **************************************
+# CREATING 2 ACCOUNT MANAGERS
+# **************************************
+role = Role.find_by(name: "Account Manager")
+Collaborator.create([
+                      {
+                        id: 102,
+                        first_name: Faker::Name.unique.name,
+                        last_name: Faker::Name.unique.name,
+                        uuid: Faker::IDNumber.unique.invalid,
+                        email: Faker::Internet.unique.email,
+                        tech_stacks: TechStack.all.sample(2),
+                        tools: Tool.all.sample(2),
+                        role:
+                      },
+                      {
+                        id: 101,
+                        first_name: Faker::Name.unique.name,
+                        last_name: Faker::Name.unique.name,
+                        uuid: Faker::IDNumber.unique.invalid,
+                        email: Faker::Internet.unique.email,
+                        tech_stacks: TechStack.all.sample(2),
+                        tools: Tool.all.sample(2),
+                        role:
+                      }
+                    ])
 
 def random_price
   rand(500_000.00..10_000_000.00).round(2)
@@ -103,7 +131,7 @@ Collaborator.find(7).update(badges: Badge.where({ id: [1, 2, 3, 11] }))
 
 
 # GET 2 COLLABORATORS AS MANAGERS TO ASSIGN ACCOUNTS TO
-managers = Collaborator.limit(2)
+managers = CollaboratorRepository.by_role_name("Account Manager").limit(2)
 locations = ["California", "New York City", "Washington", "San Francisco"]
 
 
@@ -354,7 +382,7 @@ end
   team = Team.create(
     added_date: Faker::Date.between(from: 5.months.ago, to: DateTime.yesterday),
     team_type_id: TeamType.all.to_a.sample.id,
-    collaborators: Collaborator.limit(5).offset(idx * 5),
+    collaborators: CollaboratorRepository.by_role_name("Developer").limit(5).offset(idx * 5),
     project: Project.limit(1).offset(idx).first
   )
 
@@ -364,11 +392,20 @@ end
       date: rand(-current_month.months..(12 - current_month).months).ago
     })
   end
+
+  rand(1..5).times do |t|
+    team.team_requirements.create({
+      account: team.project.account,
+      role: Role.all.sample,
+      seniority: SENIORITY_TYPES.to_a.sample[1],
+      tech_stacks: TechStack.all.sample(2),
+    })
+  end
 end
 
 
 posts_for_collaborators = []
-Collaborator.all.each do |collaborator|
+CollaboratorRepository.by_role_name("Developer").all.each do |collaborator|
   posts_for_collaborators << {
     title: Faker::Name.unique.name,
     description: Faker::Lorem.sentence,
@@ -396,8 +433,10 @@ p "Seed... #{TechStack.count} TechStack created"
 p "Seed... #{Account.count} Account created"
 p "Seed... #{Payment.count} Payment created"
 p "Seed... #{Project.count} Project created"
-p "Seed... #{Collaborator.count} Collaborator created"
+p "Seed... #{CollaboratorRepository.by_role_name("Account Manager").count} Collaborator created"
+p "Seed... #{CollaboratorRepository.by_role_name("Account Manager").count} Managers created"
 p "Seed... #{Team.count} Teams created"
+p "Seed... #{TeamRequirement.count} Teams Requirements created"
 p "Seed... #{Investment.count} Investment created"
 p "Seed... #{Post.count} Posts created"
 p "Seed... #{Metric.count} Metrics created"
