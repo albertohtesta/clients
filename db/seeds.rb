@@ -429,103 +429,103 @@ CollaboratorRepository.by_role_name("Developer").all.each do |collaborator|
 end
 Post.create(posts_for_collaborators)
 
-survey = Survey.create(
-  status: 1, 
-  survey_monkey_url: "www.survey.com", 
+Survey.create(
+  status: 1,
+  survey_monkey_url: "www.survey.com",
   requested_answers: rand(10..50),
-  current_answers: rand(10..50), 
-  deadline: Date.today, 
-  period: [0,1,2].sample,
+  current_answers: rand(10..50),
+  deadline: Date.today,
+  period: [0, 1, 2].sample,
   team_id: 1,
   questions_detail: {
     questions: [
-      { 
-        title: 'Pregunta 1',
-        category: 'Balance de vida',
+      {
+        title: "Pregunta 1",
+        category: "Balance de vida",
         final_score: 100,
         answers: [
           {
-            title: 'respuesta 1',
+            title: "respuesta 1",
             responses: 10,
             score: 100
           },
           {
-            title: 'respuesta 2',
+            title: "respuesta 2",
             responses: 0,
             score: 0
           },
 
           {
-            title: 'respuesta 3',
+            title: "respuesta 3",
             responses: 0,
             score: 0
           }
         ]
       },
-      { 
-        title: 'Pregunta 2',
-        category: 'Balance de vida',
+      {
+        title: "Pregunta 2",
+        category: "Balance de vida",
         final_score: 100,
         answers: [
           {
-            title: 'respuesta 1',
+            title: "respuesta 1",
             responses: 10,
             score: 100
           },
           {
-            title: 'respuesta 2',
+            title: "respuesta 2",
             responses: 0,
             score: 0
           },
 
           {
-            title: 'respuesta 3',
+            title: "respuesta 3",
             responses: 0,
             score: 0
           }
         ]
       },
-      { 
-        title: 'Pregunta 3',
-        category: 'Orgullo',
+      {
+        title: "Pregunta 3",
+        category: "Orgullo",
         final_score: 100,
         answers: [
           {
-            title: 'respuesta 1',
+            title: "respuesta 1",
             responses: 10,
             score: 100
           },
           {
-            title: 'respuesta 2',
+            title: "respuesta 2",
             responses: 0,
             score: 0
           },
 
           {
-            title: 'respuesta 3',
+            title: "respuesta 3",
             responses: 0,
             score: 0
           }
         ]
       },
-      { 
-        title: 'Pregunta 4',
-        category: 'Orgullo',
+      {
+        title: "Pregunta 4",
+        category: "Orgullo",
         final_score: 100,
         answers: [
           {
-            title: 'respuesta 1',
+            title: "respuesta 1",
             responses: 10,
             score: 100
           },
           {
-            title: 'respuesta 2',
+            title: "respuesta 2",
             responses: 0,
             score: 0
           },
 
           {
-            title: 'respuesta 3',
+            title: "respuesta 3",
             responses: 0,
             score: 0
           }
@@ -535,103 +535,103 @@ survey = Survey.create(
   }
 )
 
-survey = Survey.create(
-  status: 1, 
-  survey_monkey_url: "www.survey.com", 
+Survey.create(
+  status: 1,
+  survey_monkey_url: "www.survey.com",
   requested_answers: rand(10..50),
-  current_answers: rand(10..50), 
-  deadline: Date.today + 1.months, 
-  period: [0,1,2].sample,
+  current_answers: rand(10..50),
+  deadline: Date.today + 1.months,
+  period: [0, 1, 2].sample,
   team_id: 1,
   questions_detail: {
     questions: [
-      { 
-        title: 'Pregunta 1',
-        category: 'Orgullo',
+      {
+        title: "Pregunta 1",
+        category: "Orgullo",
         final_score: 50,
         answers: [
           {
-            title: 'respuesta 1',
+            title: "respuesta 1",
             responses: 0,
             score: 0
           },
           {
-            title: 'respuesta 2',
+            title: "respuesta 2",
             responses: 10,
             score: 50
           },
 
           {
-            title: 'respuesta 3',
+            title: "respuesta 3",
             responses: 0,
             score: 0
           }
         ]
       },
-      { 
-        title: 'Pregunta 2',
-        category: 'Orgullo',
+      {
+        title: "Pregunta 2",
+        category: "Orgullo",
         final_score: 50,
         answers: [
           {
-            title: 'respuesta 1',
+            title: "respuesta 1",
             responses: 0,
             score: 0
           },
           {
-            title: 'respuesta 2',
+            title: "respuesta 2",
             responses: 10,
             score: 50
           },
 
           {
-            title: 'respuesta 3',
+            title: "respuesta 3",
             responses: 0,
             score: 0
           }
         ]
       },
-      { 
-        title: 'Pregunta 3',
-        category: 'Balance de vida',
+      {
+        title: "Pregunta 3",
+        category: "Balance de vida",
         final_score: 50,
         answers: [
           {
-            title: 'respuesta 1',
+            title: "respuesta 1",
             responses: 0,
             score: 0
           },
           {
-            title: 'respuesta 2',
+            title: "respuesta 2",
             responses: 10,
             score: 50
           },
 
           {
-            title: 'respuesta 3',
+            title: "respuesta 3",
             responses: 0,
             score: 0
           }
         ]
       },
-      { 
-        title: 'Pregunta 4',
-        category: 'Balance de vida',
+      {
+        title: "Pregunta 4",
+        category: "Balance de vida",
         final_score: 50,
         answers: [
           {
-            title: 'respuesta 1',
+            title: "respuesta 1",
             responses: 0,
             score: 0
           },
           {
-            title: 'respuesta 2',
+            title: "respuesta 2",
             responses: 10,
             score: 50
           },
 
           {
-            title: 'respuesta 3',
+            title: "respuesta 3",
             responses: 0,
             score: 0
           }
