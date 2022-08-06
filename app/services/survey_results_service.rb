@@ -7,6 +7,33 @@ class SurveyResultsService
     @surveys = surveys
   end
 
+  def self.get_surveys(initial_month, end_month, year, team_id, type)
+    initial_month = initial_month.to_i
+    end_month = end_month.to_i
+    year = year.to_i
+    surveys_by_month = {}
+    for m in initial_month..end_month do
+      initial_date = Date.parse("01/#{m}/#{year}")
+      end_date = initial_date.end_of_month
+      a_survey = SurveyResultsService.get_a_survey(initial_date, end_date, team_id, type)
+      surveys_by_month[initial_date.strftime("%B")] = a_survey if !a_survey.empty?
+    end
+    surveys_by_month
+  end
+
+  def self.get_a_survey(initial_date, end_date, team_id, type)
+    surveys = SurveyRepository.surveys_by_team_dates_status(team_id,
+              initial_date, end_date, 1)
+    if !surveys.empty?
+      survey_result_service = SurveyResultsService.new(surveys)
+      surveys = survey_result_service.convert_to_array(type == "detail" ? true : false)
+      surveys = survey_result_service.calc_average(surveys) if type == "global"
+      surveys
+    else
+      surveys
+    end
+  end
+
   def convert_to_array(include_id)
     all_surveys = []  # recibe AR relation y pone surveys en arrays estructura [surveys][survey][questions]
     @surveys.each do |survey|

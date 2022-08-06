@@ -15,8 +15,9 @@ module Api
 
         test "must get a response" do
           get api_v1_team_morale_results_url(), params: {
-            initial_date: Date.today,
-            end_date: Date.today + 1.months,
+            initial_month: survey.deadline.month,
+            end_month: survey.deadline.month,
+            year: survey.deadline.year,
             team_id: survey.team_id,
             type: "global"
           }
@@ -24,38 +25,16 @@ module Api
           assert_response :success
         end
 
-        test "must get surveys results" do
+        test "must get results" do
           get api_v1_team_morale_results_url(), params: {
-            initial_date: survey.deadline,
-            end_date: survey.deadline + 1.months,
+            initial_month: survey.deadline.month,
+            end_month: survey.deadline.month,
+            year: survey.deadline.year,
             team_id: survey.team_id,
             type: "global"
           }
 
-          assert_equal(response.parsed_body,
-            [
-              [
-                  "Pregunta 1",
-                  "Balance de vida",
-                  100
-              ],
-              [
-                  "Pregunta 2",
-                  "Balance de vida",
-                  100
-              ],
-              [
-                  "Pregunta 3",
-                  "Orgullo",
-                  100
-              ],
-              [
-                  "Pregunta 4",
-                  "Orgullo",
-                  100
-              ]
-          ]
-          )
+          assert_not_empty response.body
         end
       end
     end
