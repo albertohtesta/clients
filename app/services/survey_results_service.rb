@@ -18,7 +18,11 @@ class SurveyResultsService
       a_survey = SurveyResultsService.get_a_survey(initial_date, end_date, team_id, type)
       surveys_by_month[initial_date.strftime("%B")] = a_survey if !a_survey.empty?
     end
-    surveys_by_month
+    if !surveys_by_month.empty?
+      SurveyResultsService.gran_average(surveys_by_month, type)
+    else
+      surveys_by_month
+    end
   end
 
   def self.get_a_survey(initial_date, end_date, team_id, type)
@@ -65,10 +69,26 @@ class SurveyResultsService
       end
     end
     num_surveys = surveys.length
-    # calcula el promedio en result
+    # calcula el promedio en result del mes y por question
+    tot_average = 0
     result.each do |question|
-      question[2] = question[2] / num_surveys
+      question[2] = question[2] / num_surveys # promedio por question
+      tot_average += question[2]
     end
+    result[result.length] = tot_average / result.length # promedio del mes
     result
+  end
+
+  def self.gran_average(surveys_by_month, type)
+    if type == "global"
+      sum_of_averages = 0
+      surveys_by_month.each do |key, survey|
+        sum_of_averages += survey[survey.length - 1]
+      end
+      surveys_by_month[:gran_average] = sum_of_averages / surveys_by_month.length
+      surveys_by_month
+    else
+      surveys_by_month
+    end
   end
 end

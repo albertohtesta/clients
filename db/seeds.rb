@@ -431,7 +431,7 @@ Post.create(posts_for_collaborators)
 
 Survey.create(
   status: 1,
-  survey_monkey_url: "www.survey.com",
+  survey_url: "www.survey.com",
   requested_answers: rand(10..50),
   current_answers: rand(10..50),
   deadline: Date.today,
@@ -537,7 +537,7 @@ Survey.create(
 
 Survey.create(
   status: 1,
-  survey_monkey_url: "www.survey.com",
+  survey_url: "www.survey.com",
   requested_answers: rand(10..50),
   current_answers: rand(10..50),
   deadline: Date.today + 1.months,
@@ -640,6 +640,113 @@ Survey.create(
     ]
   }
 )
+
+Survey.create(
+  status: 1,
+  survey_url: "www.survey.com",
+  requested_answers: rand(10..50),
+  current_answers: rand(10..50),
+  deadline: Date.today + 2.months,
+  period: [0, 1, 2].sample,
+  team_id: 1,
+  questions_detail: {
+    questions: [
+      {
+        title: "Pregunta 1",
+        category: "Balance de vida",
+        final_score: 100,
+        answers: [
+          {
+            title: "respuesta 1",
+            responses: 8,
+            score: 80
+          },
+          {
+            title: "respuesta 2",
+            responses: 0,
+            score: 0
+          },
+
+          {
+            title: "respuesta 3",
+            responses: 2,
+            score: 0
+          }
+        ]
+      },
+      {
+        title: "Pregunta 2",
+        category: "Balance de vida",
+        final_score: 80,
+        answers: [
+          {
+            title: "respuesta 1",
+            responses: 8,
+            score: 80
+          },
+          {
+            title: "respuesta 2",
+            responses: 0,
+            score: 0
+          },
+
+          {
+            title: "respuesta 3",
+            responses: 2,
+            score: 0
+          }
+        ]
+      },
+      {
+        title: "Pregunta 3",
+        category: "Orgullo",
+        final_score: 80,
+        answers: [
+          {
+            title: "respuesta 1",
+            responses: 8,
+            score: 80
+          },
+          {
+            title: "respuesta 2",
+            responses: 0,
+            score: 0
+          },
+
+          {
+            title: "respuesta 3",
+            responses: 2,
+            score: 0
+          }
+        ]
+      },
+      {
+        title: "Pregunta 4",
+        category: "Orgullo",
+        final_score: 80,
+        answers: [
+          {
+            title: "respuesta 1",
+            responses: 8,
+            score: 80
+          },
+          {
+            title: "respuesta 2",
+            responses: 0,
+            score: 0
+          },
+
+          {
+            title: "respuesta 3",
+            responses: 0,
+            score: 0
+          }
+        ]
+      },
+    ]
+  }
+)
+
 
 # one_single_metric = {
 #   "team_id" => 1, "date" => "21-05-2022", "value" => 75, "total_tickets" => 20, "finished_tickets" => 15, "missing_tickets" => 5
