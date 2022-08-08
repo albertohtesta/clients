@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
       resources :managers, only: [:show] do
         scope module: :managers do
-          resources :accounts, only: [:show] do
+          resources :accounts, only: [:show, :index] do
             scope module: :accounts do
               resources :account_follow_ups, only: %i[create index]
             end
