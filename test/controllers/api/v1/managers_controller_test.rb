@@ -8,7 +8,7 @@ class ManagersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get success response" do
-    collaborator = create(:collaborator)
+    collaborator = create(:collaborator, :manager)
     get api_v1_manager_path(collaborator.id), headers: { "Authorization" => @token }
     assert_response :success
   end

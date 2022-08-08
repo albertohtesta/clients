@@ -2,7 +2,7 @@
 
 class AccountPresenter < ApplicationPresenter
   ATTRS = %i[id name contact_name contact_email account_web_page].freeze
-  METHODS = %i[review_outdated? location tech_stacks
+  METHODS = %i[review_outdated? location tech_stacks role_debt
                   tools payment_status status details finance health productivity_kpis].freeze
 
   def location
@@ -50,5 +50,9 @@ class AccountPresenter < ApplicationPresenter
   def review_outdated?
     # TODO: this is example random data, this needs to be pulled from follow up model
     [true, false].sample
+  end
+
+  def role_debt
+    AccountRepository.role_debt_by_id(__getobj__.id)
   end
 end
