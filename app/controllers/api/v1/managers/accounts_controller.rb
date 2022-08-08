@@ -5,11 +5,13 @@ module Api
     module Managers
       class AccountsController < ApplicationController
         def index
-          # binding.b
           accounts = ManagerAccountsPresenter.json_collection(accounts_by_managger)
-          render json: accounts, status: :ok
+          if accounts
+            render json: accounts, status: :ok
+          else
+            render json: { message: "Not accounts found" }, status: :not_found
+          end
         end
-
 
         private
           def accounts_by_managger
