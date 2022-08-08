@@ -41,6 +41,13 @@ Rails.application.routes.draw do
       namespace :public do
         resources :collaborators, only: [:index, :show]
       end
+
+      namespace :team_morale do
+        resources :surveys, only: %i[index show] do
+          resources :responses, only: %i[index show]
+          resources :webhooks, except: %i[destroy]
+        end
+      end
     end
   end
 
