@@ -15,8 +15,8 @@ class SurveyResultsService
     for m in initial_month..end_month do
       initial_date = Date.parse("01/#{m}/#{year}")
       end_date = initial_date.end_of_month
-      a_survey = SurveyResultsService.get_a_survey(initial_date, end_date, team_id, type)
-      surveys_by_month[initial_date.strftime("%B")] = a_survey if !a_survey.empty?
+      results_by_month = SurveyResultsService.get_surveys_of_the_month(initial_date, end_date, team_id, type)
+      surveys_by_month[initial_date.strftime("%B")] = results_by_month if !results_by_month.empty?
     end
     if !surveys_by_month.empty?
       SurveyResultsService.gran_average(surveys_by_month, type)
@@ -25,7 +25,7 @@ class SurveyResultsService
     end
   end
 
-  def self.get_a_survey(initial_date, end_date, team_id, type)
+  def self.get_surveys_of_the_month(initial_date, end_date, team_id, type)
     surveys = SurveyRepository.surveys_by_team_dates_status(team_id,
               initial_date, end_date, 1)
     if !surveys.empty?
@@ -86,7 +86,7 @@ class SurveyResultsService
         sum_of_averages += survey[survey.length - 1]
       end
       surveys_by_month[:gran_average] = sum_of_averages / surveys_by_month.length
-      surveys_by_month
+      surveys_by_month                  # el promedio del mes es el ultimo elemento del hash
     else
       surveys_by_month
     end
