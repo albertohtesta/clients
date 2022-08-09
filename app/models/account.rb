@@ -54,6 +54,10 @@ class Account < ApplicationRecord
     self
   end
 
+  def team_requirements_debt
+    team_requirements.where(collaborator_id: nil).count
+  end
+
   def last_follow_up
     account_follow_ups.last&.follow_date
   end

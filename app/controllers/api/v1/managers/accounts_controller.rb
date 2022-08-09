@@ -6,10 +6,11 @@ module Api
       class AccountsController < ApplicationController
         def index
           accounts = ManagerAccountsPresenter.json_collection(accounts_by_managger)
-          if accounts
+
+          if accounts.any?
             render json: accounts, status: :ok
           else
-            render json: { message: "Not accounts found" }, status: :not_found
+            render json: { message: "No accounts found" }, status: :not_found
           end
         end
 

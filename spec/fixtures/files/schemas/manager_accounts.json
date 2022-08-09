@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "manager_accounts": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer"},
+        "name": {"type": "string"},
+        "location": {"type": "string"},
+        "last_follow_up_text": {"type": "string"},
+        "priority": {"type": "string"},
+        "role_debt": {"type": "integer"},
+        "alert": {"type": "boolean"},
+        "team_balance": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "object", "properties": {
+                "value": {"type": "integer"},
+                "alert": {"type": "boolean"}
+              }
+            },
+            "alert": {"type": "boolean"}
+          }
+        },
+        "client_management": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "object", "properties": {
+                "value": {"type": "integer"},
+                "alert": {"type": "boolean"}
+              }
+            },
+            "alert": {"type": "boolean"}
+          }
+        },
+        "performance": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "object", "properties": {
+                "value": {"type": "integer"},
+                "alert": {"type": "boolean"}
+              }
+            },
+            "alert": {"type": "boolean"}
+          }
+        },
+        "gross_margin": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "object", "properties": {
+                "value": {"type": "integer"},
+                "alert": {"type": "boolean"}
+              }
+            },
+            "alert": {"type": "boolean"}
+          }
+        },
+        "morale": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "object", "properties": {
+                "value": {"type": "integer"},
+                "alert": {"type": "boolean"}
+              }
+            },
+            "alert": {"type": "boolean"}
+          }
+        }
+      },
+      "required": [ "id", "name", "location", "last_follow_up_text", "priority", "role_debt", "alert", "team_balance", "client_management", "performance", "gross_margin", "morale" ]
+    }
+  }
+}
+    

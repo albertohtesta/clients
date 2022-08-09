@@ -2,7 +2,7 @@
 
 class ManagerAccountsPresenter < ApplicationPresenter
   ATTRS = %i[id name].freeze
-  METHODS = %i[location last_follow_up_text priority role_debt alert].freeze
+  METHODS = %i[location last_follow_up_text priority role_debt alert team_balance client_management performance gross_margin morale].freeze
 
   def location
     city
@@ -15,13 +15,52 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def role_debt
-    # TODO: do rebase to uncoment here
-    # team_requirements.where(collaborator_id: nil).count
-    rand(0..3)
+    team_requirements_debt
   end
 
   def alert
-    # TODO: Needs alert depending of the priority and some rulex
+    # TODO: Needs alert depending of the priority and some rules
     [true, false].sample
   end
+
+  def team_balance
+    {
+      amount: { value: 85, alert: temp_active_sample },
+      alert: temp_active_sample
+    }
+  end
+
+  def client_management
+    {
+      amount: { value: 85, alert: temp_active_sample },
+      alert: temp_active_sample
+    }
+  end
+
+  def performance
+    {
+      amount: { value: 85, alert: temp_active_sample },
+      alert: temp_active_sample
+    }
+  end
+
+  def gross_margin
+    {
+      amount: { value: 85, alert: temp_active_sample },
+      alert: temp_active_sample
+    }
+  end
+
+  def morale
+    {
+      amount: { value: 85, alert: temp_active_sample },
+      alert: temp_active_sample
+    }
+  end
+
+  private
+    # TODO: this method is just temporally while bussines rules are defined and added into the project
+    def temp_active_sample
+      [true, false].sample
+    end
 end
