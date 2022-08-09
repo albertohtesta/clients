@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SurveyResultsService
+class SurveyResultsService < ApplicationService
   attr_accessor :surveys, :result
 
   def initialize(surveys)
@@ -19,7 +19,7 @@ class SurveyResultsService
       surveys_by_month[initial_date.strftime("%B")] = results_by_month if !results_by_month.empty?
     end
     if !surveys_by_month.empty?
-      SurveyResultsService.gran_average(surveys_by_month, type)
+      SurveyResultsService.grand_average(surveys_by_month, type)
     else
       surveys_by_month
     end
@@ -30,8 +30,8 @@ class SurveyResultsService
               initial_date, end_date, 1)
     if !surveys.empty?
       survey_result_service = SurveyResultsService.new(surveys)
-      surveys = survey_result_service.convert_to_array(type == "detail" ? true : false)
-      surveys = survey_result_service.calc_average(surveys) if type == "global"
+      surveys = survey_result_service.convert_to_array(type == "detail")
+      surveys = survey_result_service.calculate_average(surveys) if type == "global"
       surveys
     else
       surveys
@@ -55,7 +55,7 @@ class SurveyResultsService
     all_surveys
   end
 
-  def calc_average(surveys)   # recibe arrays de surveys y regresa array de results
+  def calculate_average(surveys)   # recibe arrays de surveys y regresa array de results
     result = surveys[0]
     surveys.each_with_index do |survey, x|
       if x > 0  # procesa a partir del 2o. survey (el 1ro esta en result)
@@ -70,16 +70,16 @@ class SurveyResultsService
     end
     num_surveys = surveys.length
     # calcula el promedio en result del mes y por question
-    tot_average = 0
+    total_average = 0
     result.each do |question|
       question[2] = question[2] / num_surveys # promedio por question
-      tot_average += question[2]
+      total_average += question[2]
     end
-    result[result.length] = tot_average / result.length # promedio del mes
+    result[result.length] = total_average / result.length # promedio del mes
     result
   end
 
-  def self.gran_average(surveys_by_month, type)
+  def self.grand_average(surveys_by_month, type)
     if type == "global"
       sum_of_averages = 0
       surveys_by_month.each do |key, survey|
