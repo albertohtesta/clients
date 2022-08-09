@@ -443,7 +443,7 @@ Post.create(posts_for_collaborators)
         {
           title: "Pregunta 1",
           category: "Balance de vida",
-          final_score: [50,60,70,80,90,100].sample,
+          final_score: [50, 60, 70, 80, 90, 100].sample,
           answers: [
             {
               title: "respuesta 1",
@@ -466,7 +466,7 @@ Post.create(posts_for_collaborators)
         {
           title: "Pregunta 2",
           category: "Balance de vida",
-          final_score: [50,60,70,80,90,100].sample,
+          final_score: [50, 60, 70, 80, 90, 100].sample,
           answers: [
             {
               title: "respuesta 1",
@@ -489,7 +489,7 @@ Post.create(posts_for_collaborators)
         {
           title: "Pregunta 3",
           category: "Orgullo",
-          final_score: [50,60,70,80,90,100].sample,
+          final_score: [50, 60, 70, 80, 90, 100].sample,
           answers: [
             {
               title: "respuesta 1",
@@ -512,7 +512,7 @@ Post.create(posts_for_collaborators)
         {
           title: "Pregunta 4",
           category: "Orgullo",
-          final_score: [50,60,70,80,90,100].sample,
+          final_score: [50, 60, 70, 80, 90, 100].sample,
           answers: [
             {
               title: "respuesta 1",

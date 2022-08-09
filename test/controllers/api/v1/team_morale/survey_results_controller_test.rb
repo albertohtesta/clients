@@ -4,7 +4,7 @@ require "test_helper"
 module Api
   module V1
     module Team_morale
-      class ResultsControllerTest < ActionDispatch::IntegrationTest
+      class SurveyResultsControllerTest < ActionDispatch::IntegrationTest
         def survey
           @survey ||= create(:survey)
         end
@@ -14,7 +14,7 @@ module Api
         end
 
         test "must get a response" do
-          get api_v1_team_morale_results_url(), params: {
+          get api_v1_team_morale_survey_results_url(), params: {
             initial_month: survey.deadline.month,
             end_month: survey.deadline.month,
             year: survey.deadline.year,
@@ -26,7 +26,7 @@ module Api
         end
 
         test "must get results" do
-          get api_v1_team_morale_results_url(), params: {
+          get api_v1_team_morale_survey_results_url(), params: {
             initial_month: survey.deadline.month,
             end_month: survey.deadline.month,
             year: survey.deadline.year,
