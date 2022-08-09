@@ -9,14 +9,10 @@ module Api
   module V1
     class InformationController < ApplicationController
       def index
-        accounts = Account.all
+        accounts = AccountRepository.all
         database_information = accounts.map do |account|
           account.attributes.merge({
-            contacts: account.contacts,
-            collaborators_contacts: account.account_contact_collaborators,
-            projects: account.projects,
             teams: account.projects.map(&:teams).flatten,
-            collaborators: account.projects.map(&:teams).flatten.map(&:collaborators),
             metrics: account.metrics
           })
         end
