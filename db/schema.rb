@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_03_230130) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_09_232159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_230130) do
     t.integer "productivity", default: 0
     t.integer "speed", default: 0
     t.datetime "deleted_at", precision: nil
+    t.date "manager_started_date"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
@@ -191,6 +192,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_230130) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_metric_follow_ups_on_account_id"
     t.index ["manager_id"], name: "index_metric_follow_ups_on_manager_id"
+  end
+
+  create_table "metric_limits", force: :cascade do |t|
+    t.string "indicator_type"
+    t.string "label"
+    t.integer "low_priority_min"
+    t.integer "low_priority_max"
+    t.integer "medium_priority_min"
+    t.integer "medium_priority_max"
+    t.integer "high_priority_min"
+    t.integer "high_priority_max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "metrics", force: :cascade do |t|
