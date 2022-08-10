@@ -7,9 +7,9 @@ class SurveyResultsService < ApplicationService
     @surveys = surveys
   end
 
-  def self.get_surveys(initial_month, end_month, year, team_id)
-    initial_month = initial_month.to_i
-    end_month = end_month.to_i
+  def self.get_surveys(period, year, team_id)
+    initial_month = 1
+    end_month = 12
     year = year.to_i
     surveys_by_month = {}
     for m in initial_month..end_month do
@@ -19,7 +19,7 @@ class SurveyResultsService < ApplicationService
       surveys_by_month[initial_date.strftime("%B")] = results_by_month if !results_by_month.empty?
     end
     if !surveys_by_month.empty?
-      SurveyResultsService.grand_average(surveys_by_month)
+      SurveyResultsService.grand_average(surveys_by_month, period)
     else
       surveys_by_month
     end
@@ -39,7 +39,7 @@ class SurveyResultsService < ApplicationService
   end
 
   def convert_to_array
-    all_surveys = []  # recibe AR relation y pone surveys en arrays estructura [surveys][survey][questions]
+    all_surveys = []  # receive AR relation y return surveys in arrays [surveys][survey][questions]
     @surveys.each do |survey|
       survey_data = []
       survey.questions.each do |question|
@@ -47,7 +47,6 @@ class SurveyResultsService < ApplicationService
         questions[0] = question["title"]
         questions[1] = question["category"]
         questions[2] = question["final_score"]
-        questions[3] = survey.id
         survey_data << questions
       end
       all_surveys << survey_data
@@ -55,13 +54,13 @@ class SurveyResultsService < ApplicationService
     all_surveys
   end
 
-  def calculate_average(surveys)   # recibe arrays de surveys y regresa array de results
+  def calculate_average(surveys)   # receive surveys arrayas and return array of results
     result = surveys[0]
     surveys.each_with_index do |survey, x|
-      if x > 0  # procesa a partir del 2o. survey (el 1ro esta en result)
+      if x > 0  # the first survey is the result
         survey.each_with_index do |questions, x|
           questions.each_with_index do |question, i|
-            if i == 2      # incrementa el score en result
+            if i == 2      # increment score in result
               result[x][2] = result[x][2] + question
             end
           end
@@ -69,22 +68,39 @@ class SurveyResultsService < ApplicationService
       end
     end
     num_surveys = surveys.length
-    # calcula el promedio en result del mes y por question
+    # average in result by month and question
     total_average = 0
     result.each do |question|
-      question[2] = question[2] / num_surveys # promedio por question
+      question[2] = question[2] / num_surveys
       total_average += question[2]
     end
-    result[result.length] = total_average / result.length # promedio del mes
+    result[result.length] = total_average / result.length # month average
     result
   end
 
-  def self.grand_average(surveys_by_month)
-    sum_of_averages = 0
+  def self.grand_average(surveys_by_month, period)
+    sum_of_year = 0
+    acum_by_quarter = 0
+    counter = 1
+    quarter_averages = []
+
     surveys_by_month.each do |key, survey|
-      sum_of_averages += survey[survey.length - 1]
+      sum_of_year += survey[survey.length - 1]
+      acum_by_quarter += survey[survey.length - 1]
+      if counter % 3 == 0 # check quarter
+        quarter_averages[(counter / 3) - 1] = acum_by_quarter / 3
+        acum_by_quarter = 0
+      end
+      counter += 1
     end
-    surveys_by_month[:gran_average] = sum_of_averages / surveys_by_month.length
-    surveys_by_month                  # el promedio del mes es el ultimo elemento del hash
+
+    surveys_by_month[:year_average] = sum_of_year / surveys_by_month.length if period.to_i == 2
+    if period.to_i == 1
+      quarter_averages.each_with_index do |value, index|
+        text = "Q#{ index + 1}_average".to_s
+        surveys_by_month[text] = value
+      end
+    end
+    surveys_by_month                  # year and quarterly averages are the last hash elements
   end
 end

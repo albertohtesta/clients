@@ -15,8 +15,7 @@ module Api
 
         test "must get a response" do
           get api_v1_team_morale_survey_results_url(), params: {
-            initial_month: survey.deadline.month,
-            end_month: survey.deadline.month,
+            period: 0,
             year: survey.deadline.year,
             team_id: survey.team_id
           }
@@ -26,8 +25,7 @@ module Api
 
         test "must get results" do
           get api_v1_team_morale_survey_results_url(), params: {
-            initial_month: survey.deadline.month,
-            end_month: survey.deadline.month,
+            period: 0,
             year: survey.deadline.year,
             team_id: survey.team_id
           }
