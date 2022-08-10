@@ -18,8 +18,7 @@ module Api
             initial_month: survey.deadline.month,
             end_month: survey.deadline.month,
             year: survey.deadline.year,
-            team_id: survey.team_id,
-            type: "global"
+            team_id: survey.team_id
           }
 
           assert_response :success
@@ -30,8 +29,7 @@ module Api
             initial_month: survey.deadline.month,
             end_month: survey.deadline.month,
             year: survey.deadline.year,
-            team_id: survey.team_id,
-            type: "global"
+            team_id: survey.team_id
           }
 
           assert_not_empty response.body
