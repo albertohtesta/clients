@@ -27,35 +27,35 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
   def team_balance
     {
-      amount: { value: 85, alert: temp_active_sample },
+      amount: 85,
       alert: temp_active_sample
     }
   end
 
   def client_management
     {
-      amount: { value: 85, alert: temp_active_sample },
+      amount: 85,
       alert: temp_active_sample
     }
   end
 
   def performance
     {
-      amount: { value: 85, alert: temp_active_sample },
+      amount: 85,
       alert: temp_active_sample
     }
   end
 
   def gross_margin
     {
-      amount: { value: 85, alert: temp_active_sample },
+      amount: 85,
       alert: temp_active_sample
     }
   end
 
   def morale
     {
-      amount: { value: 85, alert: temp_active_sample },
+      amount: 85,
       alert: temp_active_sample
     }
   end
