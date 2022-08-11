@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_09_232159) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_11_170254) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_232159) do
     t.integer "productivity", default: 0
     t.integer "speed", default: 0
     t.datetime "deleted_at", precision: nil
+    t.date "manager_started_date"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
@@ -128,8 +129,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_232159) do
     t.text "about"
     t.string "work_modality"
     t.string "phone"
-    t.string "nickname"
     t.string "category"
+    t.string "nickname"
     t.index ["role_id"], name: "index_collaborators_on_role_id"
   end
 
@@ -273,24 +274,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_232159) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "surveys", force: :cascade do |t|
-    t.integer "status"
-    t.string "survey_url"
-    t.integer "requested_answers"
-    t.integer "current_answers"
-    t.date "deadline"
-    t.integer "period"
-    t.jsonb "questions_detail"
-    t.bigint "team_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.jsonb "answers_detail"
-    t.index ["answers_detail"], name: "index_surveys_on_answers_detail", using: :gin
-    t.index ["period"], name: "index_surveys_on_period"
-    t.index ["questions_detail"], name: "index_surveys_on_questions_detail", using: :gin
-    t.index ["team_id"], name: "index_surveys_on_team_id"
-  end
-
   create_table "team_requirements", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "team_id", null: false
@@ -312,6 +295,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_232159) do
     t.datetime "updated_at", null: false
     t.index ["team_requirement_id"], name: "index_team_requirements_tech_stacks_on_team_requirement_id"
     t.index ["tech_stack_id"], name: "index_team_requirements_tech_stacks_on_tech_stack_id"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.integer "status"
+    t.string "survey_url"
+    t.integer "requested_answers"
+    t.integer "current_answers"
+    t.date "deadline"
+    t.integer "period"
+    t.jsonb "questions_detail"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "answers_detail"
+    t.index ["answers_detail"], name: "index_surveys_on_answers_detail", using: :gin
+    t.index ["period"], name: "index_surveys_on_period"
+    t.index ["questions_detail"], name: "index_surveys_on_questions_detail", using: :gin
+    t.index ["team_id"], name: "index_surveys_on_team_id"
   end
 
   create_table "team_types", force: :cascade do |t|
@@ -358,11 +359,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_09_232159) do
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
   add_foreign_key "projects", "accounts"
-  add_foreign_key "surveys", "teams"
   add_foreign_key "team_requirements", "accounts"
   add_foreign_key "team_requirements", "collaborators"
   add_foreign_key "team_requirements", "roles"
   add_foreign_key "team_requirements", "teams"
+  add_foreign_key "surveys", "teams"
   add_foreign_key "teams", "projects"
   add_foreign_key "teams", "team_types"
 end
