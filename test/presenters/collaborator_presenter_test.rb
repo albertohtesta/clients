@@ -20,21 +20,27 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
     collaborator
     @collaborator_team = create(:collaborators_team, collaborator: @collaborator, team: @team)
     @post ||= create(:post, collaborator: @collaborator, project: @project)
+    @post.post.attach(
+      io: File.open(Rails.root.join("test/fixtures/files/example.png")),
+      filename: "example.png"
+    )
+
     collaborator_presenter
 
     expected_json = {
       "id" => @collaborator.id,
-      "name" => "MyString MyString",
       "position" => "Developer",
+      "name" => "MyString MyString",
       "posts_count" => 1,
-      "img" => "",
+      "img" => nil,
       "post" => {
         "id" => @post.id,
         "title" => "MyString",
         "description" => "MyText",
         "collaborator_id" => @collaborator.id,
         "project_id" => @project.id,
-        "created_at" => @post.created_at
+        "created_at" => @post.created_at,
+        "post_url" => Rails.application.routes.url_helpers.rails_blob_path(@post.post, only_path: true)
       }
     }
 
@@ -51,7 +57,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
       "name" => "MyString MyString",
       "position" => "Developer",
       "posts_count" => 0,
-      "img" => "",
+      "img" => nil,
       "post" => []
     }
 
