@@ -10,6 +10,7 @@ class Account < ApplicationRecord
   has_many :metrics, as: :related
   has_many :team_requirements
   has_many :account_contact_collaborators
+  has_many :account_follow_ups
 
   validates :account_uuid, :name, presence: true
 
@@ -51,5 +52,10 @@ class Account < ApplicationRecord
 
     update(deleted_at: Time.now) if client[:IsDeleted]
     self
+  end
+
+  def priority
+    # TODO: Here will'be the logic to decide the priority of the accounnt
+    ["low", "medium", "high"].sample
   end
 end

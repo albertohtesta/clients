@@ -148,7 +148,7 @@ locations = ["California", "New York City", "Washington", "San Francisco"]
 # CREATING ADVANTA ACCOUNT DATA FOR QA
 # ****************************************************************************
 advanta = Account.create(
-  { account_uuid: Faker::IDNumber.unique.invalid, manager: managers.sample, name: "ADVANTA", contact_name: Faker::Name.unique.name, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, salesforce_id: random_salesforce_id(15), city: locations.sample, client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
+  { account_uuid: Faker::IDNumber.unique.invalid, manager: managers.sample, name: "ADVANTA", manager_started_date: 3.months.ago, contact_name: Faker::Name.unique.name, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, salesforce_id: random_salesforce_id(15), city: locations.sample, client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
 )
 project_advanta = Project.create(
   { name: advanta.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "ADVANTA PROJECT", account_id: advanta.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
@@ -246,7 +246,7 @@ Contact.create([
 # CREATING BREAKTHROGHT BROKER ACCOUNT DATA FOR QA
 # ****************************************************************************
 broker = Account.create(
-  { manager: managers.sample, name: "Breakthrough Broker", contact_name: Faker::Name.unique.name, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, account_uuid: Faker::IDNumber.unique.invalid, salesforce_id: random_salesforce_id(15), city: locations.sample, client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
+  { manager: managers.sample, name: "Breakthrough Broker", contact_name: Faker::Name.unique.name, manager_started_date: 3.months.ago, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, account_uuid: Faker::IDNumber.unique.invalid, salesforce_id: random_salesforce_id(15), city: locations.sample, client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
 )
 project_broker = Project.create(
   { name: broker.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "breakthrough_broker project", account_id: broker.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
