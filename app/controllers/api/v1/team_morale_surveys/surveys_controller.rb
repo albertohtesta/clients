@@ -3,20 +3,17 @@
 module Api
   module V1
     module TeamMoraleSurveys
-      # surveys distribution controller
+      # surveys controller
       class SurveysController < ApiController
         def create
-          @team = Team.find_by_id(params[:team_id])
-          render json: { errors: "Team doesn't exist." }, status: :bad_request and return unless @team.present?
-          collaborators = CollaboratorRepository.find_collaborators_by_project_id(params[:team_id])
           @survey = Survey.new(survey_params.merge(status: "preparation"))
-          if self.open_survey? && @survey.save && collaborators.any?
+          if @survey.save
             render json:
             {
-              data: {
-                team_id: params[:team_id],
-                total_team_members: collaborators.count,
-                dateline: Date.parse(params[:deadline])
+              survey: {
+                team_id: @survey.team_id,
+                survey_id: @survey.id,
+                total_team_members: @survey.team.collaborators.count
               }
             }, status: :ok
           else
@@ -27,15 +24,6 @@ module Api
         private
           def survey_params
             params.require(:survey).permit(:team_id, :deadline, :period)
-          end
-
-          def open_survey?
-            unless @team.surveys.last.closed?
-              @errors = "Hay un survey abierto"
-              false
-            else
-              true
-            end
           end
       end
     end
