@@ -9,13 +9,15 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def last_follow_up_text
-    return "#{(Date.today - last_follow_up).to_i} days ago" if last_follow_up
+    last_follow_up = AccountFollowUpRepository.last_follow_up_by_account(id)
+
+    return "#{(Date.today - last_follow_up.follow_date).to_i} days ago" if last_follow_up.any?
 
     "No follow ups found"
   end
 
   def role_debt
-    team_requirements_debt
+    TeamRequirementRepository.role_deb_by_account(id).count
   end
 
   def alert

@@ -54,28 +54,8 @@ class Account < ApplicationRecord
     self
   end
 
-  def team_requirements_debt
-    team_requirements.where(collaborator_id: nil).count
-  end
-
-  def last_follow_up
-    account_follow_ups.last&.follow_date
-  end
-
-
   def priority
-    return "high" if it_has_high_priority?
-
-    return "medium" if it_has_medium_priority?
-
-    "low"
-  end
-
-  def it_has_high_priority?
-    [true, false].sample
-  end
-
-  def it_has_medium_priority?
-    [true, false].sample
+    # TODO: Here will'be the logic to decide the priority of the accounnt
+    ["low", "medium", "high"].sample
   end
 end

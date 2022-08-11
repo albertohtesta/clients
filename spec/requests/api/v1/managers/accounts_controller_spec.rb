@@ -25,12 +25,6 @@ describe "Managers", type: :request do
 
           run_test!
         end
-
-        response "404", "No accounts found" do
-          let(:manager_id) { 1 }
-
-          run_test!
-        end
       end
     end
   end
