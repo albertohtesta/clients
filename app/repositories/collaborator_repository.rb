@@ -19,5 +19,9 @@ class CollaboratorRepository < ApplicationRepository
       public_profiles_ids = [1, 2, 3, 4, 5, 6, 7, 200, 201, 202, 203]
       scope.select([:id, :profile, :position, :nickname, :uuid]).where({ id: public_profiles_ids })
     end
+
+    def filter_by_category(category)
+      scope.where({ category: })
+    end
   end
 end

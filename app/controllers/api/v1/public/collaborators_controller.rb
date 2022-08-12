@@ -11,7 +11,7 @@ module Api
 
           return render(json: { message: "No pool directory found" }, status: :not_found) if pool_directory.empty?
 
-          pool_directory = pool_directory.where(category: params[:category]) if params[:category].present?
+          pool_directory = collaborators_filtered(params[:category]) if params[:category].present?
 
           render json: pool_directory, status: :ok
         end
@@ -31,6 +31,10 @@ module Api
 
           def collaborators_public_pool_directory
             CollaboratorRepository.collaborators_pool_directory
+          end
+
+          def collaborators_filtered(category)
+            CollaboratorRepository.filter_by_category(category)
           end
       end
     end
