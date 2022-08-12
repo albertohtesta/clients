@@ -11,11 +11,7 @@ module Api
 
           return render(json: { message: "No pool directory found" }, status: :not_found) if pool_directory.empty?
 
-          if params[:category].present?
-            pool_directory = pool_directory.where("collaborators.category LIKE ?", params[:category])
-          else
-            pool_directory
-          end
+          pool_directory = pool_directory.where(category: params[:category]) if params[:category].present?
 
           render json: pool_directory, status: :ok
         end
