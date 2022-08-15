@@ -7,25 +7,25 @@ class SurveyResultsService < ApplicationService
     @surveys = surveys
   end
 
-  def self.get_surveys(period, year, team_id)
+  def self.get_results(period, year, team_id)
     initial_month = 1
     end_month = 12
     year = year.to_i
-    surveys_by_month = {}
+    results = {}
     for m in initial_month..end_month do
       initial_date = Date.parse("01/#{m}/#{year}")
       end_date = initial_date.end_of_month
-      results_by_month = SurveyResultsService.get_surveys_of_the_month(initial_date, end_date, team_id)
-      surveys_by_month[initial_date.strftime("%B")] = results_by_month if !results_by_month.empty?
+      results_by_month = SurveyResultsService.process_results(initial_date, end_date, team_id)
+      results[initial_date.strftime("%B")] = results_by_month if !results_by_month.empty?
     end
-    if !surveys_by_month.empty?
-      SurveyResultsService.grand_average(surveys_by_month, period)
+    if !results.empty?
+      SurveyResultsService.grand_average(results, period)
     else
-      surveys_by_month
+      results
     end
   end
 
-  def self.get_surveys_of_the_month(initial_date, end_date, team_id)
+  def self.process_results(initial_date, end_date, team_id)
     surveys = SurveyRepository.surveys_by_team_dates_status(team_id,
               initial_date, end_date, 1)
     if !surveys.empty?
@@ -39,8 +39,8 @@ class SurveyResultsService < ApplicationService
   end
 
   def convert_to_array
-    all_surveys = []  # receive AR relation y return surveys in arrays [surveys][survey][questions]
-    @surveys.each do |survey|
+    all_surveys = []  # receive AR relation y return all_surveys[survey_data[questions[]]]
+    @surveys.each do |survey|  # only get what i need from the original query
       survey_data = []
       survey.questions.each do |question|
         questions = []
@@ -54,7 +54,7 @@ class SurveyResultsService < ApplicationService
     all_surveys
   end
 
-  def calculate_average(surveys)   # receive surveys arrayas and return array of results
+  def calculate_average(surveys)   # receive surveys arrays and return array of results by month
     result = surveys[0]
     surveys.each_with_index do |survey, x|
       if x > 0  # the first survey is the result
@@ -74,8 +74,8 @@ class SurveyResultsService < ApplicationService
       question[2] = question[2] / num_surveys
       total_average += question[2]
     end
-    result[result.length] = total_average / result.length # month average
-    result
+    result[result.length] = total_average / result.length # month average, last element
+    result  # here returns results by month = [[question]]
   end
 
   def self.grand_average(surveys_by_month, period)
@@ -85,7 +85,7 @@ class SurveyResultsService < ApplicationService
     quarter_averages = []
 
     surveys_by_month.each do |key, survey|
-      sum_of_year += survey[survey.length - 1]
+      sum_of_year += survey[survey.length - 1] # month average is last element
       acum_by_quarter += survey[survey.length - 1]
       if counter % 3 == 0 # check quarter
         quarter_averages[(counter / 3) - 1] = acum_by_quarter / 3

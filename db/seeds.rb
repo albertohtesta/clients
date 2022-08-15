@@ -436,7 +436,7 @@ Post.create(posts_for_collaborators)
     requested_answers: rand(10..50),
     current_answers: rand(10..50),
     created_at: Date.today.beginning_of_year + (idx).months,
-    deadline: Date.today.beginning_of_year + (idx+1).months,
+    deadline: Date.today.beginning_of_year + (idx + 1).months,
     period: [0, 1, 2].sample,
     team_id: 1,
     questions_detail: {
