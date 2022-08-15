@@ -6,7 +6,7 @@ module Api
       class SurveyResultsController < ApplicationController
         before_action :validate_required_params, :validate_period, only: %i[ index ]
         def index
-          results = SurveyResultsService.get_surveys(params[:period], params[:year],
+          results = SurveyResultsService.get_results(params[:period], params[:year],
                     params[:team_id])
           render json: results, status: :ok
         end
