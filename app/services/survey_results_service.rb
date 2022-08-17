@@ -39,7 +39,7 @@ class SurveyResultsService < ApplicationService
   end
 
   def convert_to_array
-    all_surveys = @surveys.map do |survey|
+    @surveys.map do |survey|
       survey_data = []
       survey.questions.each do |question|
         questions = []
