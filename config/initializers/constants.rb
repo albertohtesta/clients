@@ -10,9 +10,11 @@ METRICS_TYPES = {
   client_engagement: "client engagement" # account
 }
 
-
 SENIORITY_TYPES = {
   junior: "junior",
   middle: "middle",
   sennior: "sennior"
 }
+
+# TODO: Replace for BI API url
+METRICS_API_BI_URL = "https://qa-clients-api.nordhen.com/api/v1/information"
