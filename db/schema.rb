@@ -292,6 +292,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_15_185403) do
     t.index ["team_id"], name: "index_surveys_on_team_id"
   end
 
+  create_table "team_balances", force: :cascade do |t|
+    t.float "balance"
+    t.date "balance_date"
+    t.integer "team_id"
+    t.integer "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_team_balances_on_account_id"
+    t.index ["team_id"], name: "index_team_balances_on_team_id"
+  end
+
   create_table "team_requirements", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "team_id", null: false
