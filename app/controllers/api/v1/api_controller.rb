@@ -2,7 +2,6 @@
 
 module Api
   module V1
-    # api v1 controller
     class ApiController < ApplicationController
       # TODO: enable the following before_actions when the login logic is ready to use
       # before_action :access_token, :verify_token, :current_user

@@ -12,7 +12,7 @@ class Survey < ApplicationRecord
   validates_inclusion_of :period, in: periods
   validates_inclusion_of :status, in: statuses
 
-  validates :status, uniqueness: { scope: :team_id, message: "There is a sourvey ongoing for this team.", conditions: -> { where.not(status: "closed") } }
+  validates :status, uniqueness: { scope: :team_id, message: "There is a survey ongoing for this team.", conditions: -> { where.not(status: "closed") } }
   validate :deadline_date_cannot_be_in_the_past, unless: -> { deadline.blank? }
 
   def deadline_date_cannot_be_in_the_past

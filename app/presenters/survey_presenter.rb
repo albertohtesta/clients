@@ -5,6 +5,6 @@ class SurveyPresenter < ApplicationPresenter
   METHODS = [:members_count].freeze
 
   def members_count
-    __getobj__.team.collaborators.count
+    self.team.collaborators.count
   end
 end

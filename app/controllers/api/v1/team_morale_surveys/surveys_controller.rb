@@ -3,7 +3,6 @@
 module Api
   module V1
     module TeamMoraleSurveys
-      # surveys controller
       class SurveysController < ApiController
         def create
           @survey = Survey.new(survey_params.merge(status: "preparation"))
