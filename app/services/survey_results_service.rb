@@ -39,7 +39,7 @@ class SurveyResultsService < ApplicationService
   end
 
   def convert_to_array
-    @surveys.map do |survey|
+    @surveys.map do |survey|   # receive AR relation y pone surveys en: surveys[survey[questions[]]]
       survey_data = []
       survey.questions.each do |question|
         questions = []
