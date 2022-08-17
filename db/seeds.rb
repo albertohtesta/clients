@@ -429,6 +429,114 @@ CollaboratorRepository.by_role_name("Developer").all.each do |collaborator|
 end
 Post.create(posts_for_collaborators)
 
+6.times do |idx|
+  Survey.create(
+    status: 1,
+    survey_url: "www.survey.com",
+    requested_answers: rand(10..50),
+    current_answers: rand(10..50),
+    created_at: Date.today.beginning_of_year + (idx).months,
+    deadline: Date.today.beginning_of_year + (idx + 1).months,
+    period: [0, 1, 2].sample,
+    team_id: 1,
+    questions_detail: {
+      questions: [
+        {
+          title: "Pregunta 1",
+          category: "Balance de vida",
+          final_score: [50, 60, 70, 80, 90, 100].sample,
+          answers: [
+            {
+              title: "respuesta 1",
+              responses: 10,
+              score: 100
+            },
+            {
+              title: "respuesta 2",
+              responses: 0,
+              score: 0
+            },
+
+            {
+              title: "respuesta 3",
+              responses: 0,
+              score: 0
+            }
+          ]
+        },
+        {
+          title: "Pregunta 2",
+          category: "Balance de vida",
+          final_score: [50, 60, 70, 80, 90, 100].sample,
+          answers: [
+            {
+              title: "respuesta 1",
+              responses: 10,
+              score: 100
+            },
+            {
+              title: "respuesta 2",
+              responses: 0,
+              score: 0
+            },
+
+            {
+              title: "respuesta 3",
+              responses: 0,
+              score: 0
+            }
+          ]
+        },
+        {
+          title: "Pregunta 3",
+          category: "Orgullo",
+          final_score: [50, 60, 70, 80, 90, 100].sample,
+          answers: [
+            {
+              title: "respuesta 1",
+              responses: 10,
+              score: 100
+            },
+            {
+              title: "respuesta 2",
+              responses: 0,
+              score: 0
+            },
+
+            {
+              title: "respuesta 3",
+              responses: 0,
+              score: 0
+            }
+          ]
+        },
+        {
+          title: "Pregunta 4",
+          category: "Orgullo",
+          final_score: [50, 60, 70, 80, 90, 100].sample,
+          answers: [
+            {
+              title: "respuesta 1",
+              responses: 10,
+              score: 100
+            },
+            {
+              title: "respuesta 2",
+              responses: 0,
+              score: 0
+            },
+
+            {
+              title: "respuesta 3",
+              responses: 0,
+              score: 0
+            }
+          ]
+        },
+      ]
+    }
+  )
+end
 
 # one_single_metric = {
 #   "team_id" => 1, "date" => "21-05-2022", "value" => 75, "total_tickets" => 20, "finished_tickets" => 15, "missing_tickets" => 5
