@@ -11,14 +11,13 @@ module Api
         end
 
         private
-
           def get_results
             SurveyResultsService.get_results(survey_results_params[:period], survey_results_params[:year],
               survey_results_params[:team_id])
           end
 
           def validate_period
-              render json: { message: "Period invalid" }, status: :bad_request unless params[:period].to_i.between?(0, 2)
+            render json: { message: "Period invalid" }, status: :bad_request unless params[:period].to_i.between?(0, 2)
           end
 
           def validate_required_params
@@ -28,7 +27,7 @@ module Api
           end
 
           def survey_results_params
-            params.require(:survey_result).permit(:team_id, :year, :period)
+            params.permit(:team_id, :year, :period)
           end
       end
     end
