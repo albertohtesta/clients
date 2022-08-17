@@ -39,17 +39,21 @@ class SurveyResultsService < ApplicationService
   end
 
   def convert_to_array
-    @surveys.map do |survey|   # receive AR relation y pone surveys en: surveys[survey[questions[]]]
+    @surveys.map do |survey|   # receive AR relation y pone surveys en: surveys[survey[questions{}]]
       survey_data = []
       survey.questions.each do |question|
-        questions = []
-        questions[0] = question["title"]
-        questions[1] = question["category"]
-        questions[2] = question["final_score"]
-        survey_data << questions
+        survey_data << questions_in_hash(question)  # here we have: survey[{question}]
       end
       survey_data
     end
+  end
+
+  def questions_in_hash(question)
+    questions = {}
+    questions[:title] = question["title"]
+    questions[:category] = question["category"]
+    questions[:final_score] = question["final_score"]
+    questions
   end
 
   def calculate_average(surveys)   # receive surveys arrays and return array of results by month
@@ -57,9 +61,9 @@ class SurveyResultsService < ApplicationService
     surveys.each_with_index do |survey, x|
       if x > 0  # the first survey is the result
         survey.each_with_index do |questions, x|
-          questions.each_with_index do |question, i|
-            if i == 2      # increment score in result
-              result[x][2] = result[x][2] + question
+          questions.each_with_index do |key, value|
+            if key == :final_score      # increment score in result
+              result[x][:final_score] = result[x][:final_score] + value
             end
           end
         end
@@ -68,11 +72,11 @@ class SurveyResultsService < ApplicationService
     # average in result by month and question
     total_average = 0
     result.each do |question|
-      question[2] = question[2] / surveys.size
-      total_average += question[2]
+      question[:final_score] = question[:final_score] / surveys.size
+      total_average += question[:final_score]
     end
     result[result.length] = total_average / result.length # month average, last element
-    result  # here returns results by month = [[question]]
+    result  # here returns results by month = [{question}]
   end
 
   def self.grand_average(surveys_by_month, period)
