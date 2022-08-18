@@ -429,6 +429,13 @@ CollaboratorRepository.by_role_name("Developer").all.each do |collaborator|
 end
 Post.create(posts_for_collaborators)
 
+team = Team.create(
+  added_date: Faker::Date.between(from: 5.months.ago, to: DateTime.yesterday),
+  team_type_id: TeamType.all.to_a.sample.id,
+  collaborators: CollaboratorRepository.by_role_name("Developer").limit(5).offset(1 * 5),
+  project: Project.limit(1).offset(1).first, id: 10000
+)
+
 6.times do |idx|
   Survey.create(
     status: 1,
@@ -438,7 +445,7 @@ Post.create(posts_for_collaborators)
     created_at: Date.today.beginning_of_year + (idx).months,
     deadline: Date.today.beginning_of_year + (idx + 1).months,
     period: [0, 1, 2].sample,
-    team_id: 1,
+    team_id: 10000,
     questions_detail: {
       questions: [
         {
