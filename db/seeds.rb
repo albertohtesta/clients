@@ -438,13 +438,13 @@ Team.create(
 
 6.times do |idx|
   Survey.create(
-    status: 1,
+    status: 2,
     survey_url: "www.survey.com",
     requested_answers: rand(10..50),
     current_answers: rand(10..50),
-    created_at: Date.today.beginning_of_year + (idx).months,
-    deadline: Date.today.beginning_of_year + (idx + 1).months,
-    period: [0, 1, 2].sample,
+    created_at: Date.today + (idx).months,
+    deadline: Date.today + (idx + 1).months,
+    period: [0, 1].sample,
     team_id: 10000,
     questions_detail: {
       questions: [

@@ -27,7 +27,7 @@ class SurveyResultsService < ApplicationService
 
   def self.process_results(initial_date, end_date, team_id)
     surveys = SurveyRepository.surveys_by_team_dates_status(team_id,
-              initial_date, end_date, 1)
+              initial_date, end_date, 2)
     if surveys.any?
       survey_result_service = SurveyResultsService.new(surveys)
       surveys = survey_result_service.convert_to_array
