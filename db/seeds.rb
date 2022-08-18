@@ -429,7 +429,7 @@ CollaboratorRepository.by_role_name("Developer").all.each do |collaborator|
 end
 Post.create(posts_for_collaborators)
 
-team = Team.create(
+Team.create(
   added_date: Faker::Date.between(from: 5.months.ago, to: DateTime.yesterday),
   team_type_id: TeamType.all.to_a.sample.id,
   collaborators: CollaboratorRepository.by_role_name("Developer").limit(5).offset(1 * 5),
