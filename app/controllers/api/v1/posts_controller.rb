@@ -2,7 +2,7 @@
 
 module Api
   module  V1
-    class PostsController < ApplicationController
+    class PostsController < ApiController
       before_action :set_collaborators_post, only: %i[show]
 
       def show
