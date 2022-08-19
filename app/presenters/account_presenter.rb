@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AccountPresenter < ApplicationPresenter
-  ATTRS = %i[id name contact_name contact_email account_web_page].freeze
+  ATTRS = %i[id uuid name contact_name contact_email account_web_page].freeze
   METHODS = %i[info review_outdated? location tech_stacks role_debt
                   tools payment_status status details finance health productivity_kpis].freeze
 
