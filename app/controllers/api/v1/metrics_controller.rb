@@ -2,7 +2,7 @@
 
 module Api
   module  V1
-    class MetricsController < ApplicationController
+    class MetricsController < ApiController
       before_action :validate_required_params, :set_metric, only: %i[ index ]
 
       def index
