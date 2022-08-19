@@ -81,27 +81,73 @@ class SurveyResultsService < ApplicationService
 
   def self.grand_average(surveys_by_month, period)
     sum_of_year = 0
-    acum_by_quarter = 0
-    counter = 1
-    quarter_averages = []
-
     surveys_by_month.each do |key, survey|
       sum_of_year += survey[survey.length - 1] # month average is last element
-      acum_by_quarter += survey[survey.length - 1]
-      if counter % 3 == 0 # check quarter
-        quarter_averages[(counter / 3) - 1] = acum_by_quarter / 3
-        acum_by_quarter = 0
-      end
-      counter += 1
     end
+
+    # quarter_averages = []
+    quarter_averages = calculate_quarters(surveys_by_month)
 
     surveys_by_month[:year_average] = sum_of_year / surveys_by_month.length if period.to_i == 2
     if period.to_i == 1
       quarter_averages.each_with_index do |value, index|
-        text = "Q#{ index + 1}_average"
-        surveys_by_month[text] = value
+        if value > 0
+          text = "Q#{ index + 1}_average"
+          surveys_by_month[text] = value
+        end
       end
     end
     surveys_by_month                  # year and quarterly averages are the last hash elements
+  end
+
+  def self.calculate_quarters(surveys_by_month)
+    month_averages = {}
+    quarter_averages = []
+    months = ["January", "February", "March", "April", "May", "June", "July", "August",
+              "September", "October", "November", "December" ]
+    months.each do |value|
+      if surveys_by_month.key?(value)
+        month_array = surveys_by_month[value]
+        month_averages[value] = month_array[month_array.length - 1]
+      else
+        month_averages[value] = 0
+      end
+    end
+
+    quarter_months_with_values = []
+    acum_by_quarter = 0
+    counter = 0
+    month_averages.each do |key, value|
+      if value > 0
+        acum_by_quarter = acum_by_quarter + 1
+      end
+      counter = counter + 1
+      # check quarter-also could be if counter % 3 == 0 # , but but to make it readable
+      if key == "March" || key == "June" || key == "September" || key == "December"
+        quarter_months_with_values[(counter / 3) - 1] = acum_by_quarter
+        acum_by_quarter = 0
+      end
+    end
+    if quarter_months_with_values[0] > 0
+      quarter_averages[0] = (month_averages["January"] + month_averages["February"] + month_averages["March"]) / quarter_months_with_values[0]
+    else
+      quarter_averages[0] = 0
+    end
+    if quarter_months_with_values[1] > 0
+      quarter_averages[1] = (month_averages["April"] + month_averages["May"] + month_averages["June"]) / quarter_months_with_values[1]
+    else
+      quarter_averages[1] = 0
+    end
+    if quarter_months_with_values[2] > 0
+      quarter_averages[2] = (month_averages["July"] + month_averages["August"] + month_averages["September"]) / quarter_months_with_values[2]
+    else
+      quarter_averages[2] = 0
+    end
+    if quarter_months_with_values[3] > 0
+      quarter_averages[3] = (month_averages["October"] + month_averages["November"] + month_averages["December"]) / quarter_months_with_values[3]
+    else
+      quarter_averages[3] = 0
+    end
+    quarter_averages
   end
 end
