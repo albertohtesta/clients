@@ -2,6 +2,7 @@
 
 class Contact < ApplicationRecord
   belongs_to :account
+  enum invitation_status: { invited: "invited", confirmed: "confirmed" }
 
   validates :first_name, :email, presence: true
 
