@@ -2,11 +2,15 @@
 
 class AccountPresenter < ApplicationPresenter
   ATTRS = %i[id name contact_name contact_email account_web_page].freeze
-  METHODS = %i[review_outdated? location tech_stacks role_debt
+  METHODS = %i[info review_outdated? location tech_stacks role_debt
                   tools payment_status status details finance health productivity_kpis].freeze
 
   def location
     city
+  end
+
+  def info
+    "#{uuid} #{name} #{contact_name} #{contact_email}"
   end
 
   def details

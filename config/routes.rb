@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       resources :accounts, only: %i[index show] do
         scope module: :accounts do
           resources :contacts, only: %i[index show]
+          resources :contacts_collaborators, only: %i[index]
         end
       end
 
