@@ -32,6 +32,26 @@ paths:
           description: metrics found
         '404':
           description: Not metrics found
+  "/api/v1/public/collaborators":
+    get:
+      summary: Get talent pool directory
+      tags:
+      - Collaborators
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: talent pool directory filtered found
+        '404':
+          description: talent pool directory not found
+      parameters:
+      - name: category
+        in: query
+        description: filter by category
+        required: false
+        allowReserved: true
+        schema:
+          type: string
   "/build-info":
     get:
       summary: gets the build info
@@ -106,16 +126,3 @@ components:
           - added_date
           - team_type_id
           - project_id
-    user:
-      type: object
-      properties:
-        user:
-          type: object
-          properties:
-            email:
-              type: string
-            is_enabled:
-              type: boolean
-          required:
-          - email
-          - is_enabled

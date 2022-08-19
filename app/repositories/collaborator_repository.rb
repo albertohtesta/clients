@@ -21,7 +21,7 @@ class CollaboratorRepository < ApplicationRepository
     end
 
     def filter_by_category(category)
-      scope.where({ category: })
+      collaborators_pool_directory.where({ category: })
     end
   end
 end
