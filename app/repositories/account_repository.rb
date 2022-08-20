@@ -6,8 +6,12 @@ class AccountRepository < ApplicationRepository
       scope.includes(:account_follow_ups).where(manager_id:)
     end
 
-    def find_by
+    def find_all
       Account.all
+    end
+
+    def find_by(*attrs)
+      Account.find_by(*attrs)
     end
 
     def first_or_initialize_by_salesforce_id(salesforce_id)
