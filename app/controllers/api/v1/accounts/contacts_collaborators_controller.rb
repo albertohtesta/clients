@@ -3,7 +3,7 @@
 module Api
   module V1
     module Accounts
-      class ContactsController < ApplicationController
+      class ContactsCollaboratorsController < ApplicationController
         before_action :retrieve_contacts, only: :index
 
         def index
