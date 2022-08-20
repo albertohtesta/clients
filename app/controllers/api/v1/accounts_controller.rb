@@ -12,7 +12,7 @@ module Api
 
       private
         def accounts_by_managers
-          @accounts = AccountRepository.find_by(id: params[:id])
+          @accounts = AccountRepository.find_by
         end
     end
   end

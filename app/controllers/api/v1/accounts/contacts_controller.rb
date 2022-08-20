@@ -14,7 +14,7 @@ module Api
 
         private
           def retrieve_contacts
-            @contacts = AccountContactRepository.find_contacts_by_account(params[:account_id])
+            @contacts = ContactRepository.contacts_by_account(params[:account_id])
           end
       end
     end

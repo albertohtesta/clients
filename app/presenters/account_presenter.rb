@@ -10,7 +10,7 @@ class AccountPresenter < ApplicationPresenter
   end
 
   def info
-    "#{uuid} #{name} #{contact_name} #{contact_email}"
+    "#{account_uuid} #{name} #{contact_name} #{contact_email}"
   end
 
   def details
