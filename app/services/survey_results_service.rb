@@ -7,7 +7,7 @@ class SurveyResultsService < ApplicationService
     @surveys = surveys
   end
 
-  def self.get_results(period, year, team_id)
+  def self.get_results(period, year, team_id, processing_type)
     initial_month = 1
     end_month = 12
     year = year.to_i
@@ -15,7 +15,7 @@ class SurveyResultsService < ApplicationService
     (initial_month..end_month).each do |month|
       initial_date = "01/#{month}/#{year}".to_date
       end_date = initial_date.end_of_month
-      results_by_month = SurveyResultsService.process_results(initial_date, end_date, team_id)
+      results_by_month = SurveyResultsService.process_results(initial_date, end_date, team_id, processing_type)
       results[initial_date.strftime("%B")] = results_by_month if results_by_month.any?
     end
     if results.any?
@@ -25,13 +25,13 @@ class SurveyResultsService < ApplicationService
     end
   end
 
-  def self.process_results(initial_date, end_date, team_id)
+  def self.process_results(initial_date, end_date, team_id, processing_type)
     surveys = SurveyRepository.surveys_by_team_dates_status(team_id,
               initial_date, end_date, 2)
     if surveys.any?
       survey_result_service = SurveyResultsService.new(surveys)
       surveys = survey_result_service.convert_to_array
-      surveys = survey_result_service.calculate_average(surveys)
+      surveys = survey_result_service.calculate_average(surveys, processing_type)
       surveys
     else
       surveys
@@ -39,7 +39,7 @@ class SurveyResultsService < ApplicationService
   end
 
   def convert_to_array
-    @surveys.map do |survey|   # receive AR relation y pone surveys en: surveys[survey[questions{}]]
+    @surveys.map do |survey|   # receive AR relation y put surveys in: surveys[survey[questions{}]]
       survey_data = []
       survey.questions.each do |question|
         survey_data << questions_in_hash(question)  # here we have: survey[{question}]
@@ -56,7 +56,7 @@ class SurveyResultsService < ApplicationService
     questions
   end
 
-  def calculate_average(surveys)   # receive surveys arrays and return array of results by month
+  def calculate_average(surveys, processing_type)   # receive surveys arrays and return array of results by month
     result = surveys[0]
     surveys.each_with_index do |survey, x|
       if x > 0  # the first survey is the result
@@ -76,7 +76,43 @@ class SurveyResultsService < ApplicationService
       total_average += question[:final_score]
     end
     result[result.length] = total_average / result.length # month average, last element
-    result  # here returns results by month = [{question}]
+    if processing_type == "Q"
+      result
+    else
+      result = calculate_result_by_category(result)
+    end
+    # here returns results by month = [{question}]
+  end
+
+  def calculate_result_by_category(result)
+    result_by_category = []
+    hash_of_categories = {}
+    average = 0
+    result.each_with_index do |value, index|      # put the categories in hash_of_categories
+      if (index + 1) < result.length
+        category = value[:category]
+        if hash_of_categories.key?(category)
+          hash_of_categories[category]["score"] += value[:final_score]
+          hash_of_categories[category]["counter"] += 1
+        else
+          hash_of_categories[category] = {
+            "score" => value[:final_score],
+            "counter" => 1
+          }
+        end
+      else
+        average = result[index]
+      end
+    end
+
+    hash_of_categories.each do |key, value|    # now calculate the average by category with the same structure
+      result = {}
+      result["category"] = key
+      result["final_score"] = value["score"] / value["counter"]
+      result_by_category << result
+    end
+    result_by_category[result_by_category.length] = average
+    result_by_category
   end
 
   def self.grand_average(surveys_by_month, period)
