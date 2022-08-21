@@ -9,9 +9,11 @@ RSpec.describe "api/v1/team_morale/survey_results", type: :request do
       let(:period) { "0" }
       let(:year) { "2022" }
       let(:team_id) { "1" }
+      let(:processing_type) { "A" }
       parameter name: :period, in: :query, type: :string
       parameter name: :year, in: :query, type: :string
       parameter name: :team_id, in: :query, type: :string
+      parameter name: :processing_type, in: :query, type: :string
       produces "application/json"
 
       response 200, "successful" do
