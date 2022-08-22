@@ -6,7 +6,10 @@ FactoryBot.define do
     last_name { "MyString" }
     email { "MyString" }
     uuid { "MyString" }
-    position { "Developer" }
+    position { "Software Engineer" }
+    profile { "www.mystring.com" }
+    nickname { "MyString" }
+    category { "DEVELOPER" }
     role
 
     trait :developer do
