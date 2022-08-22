@@ -19,10 +19,4 @@ class Api::V1::Public::CollaboratorsControllerTest < ActionDispatch::Integration
 
     assert_response :not_found
   end
-
-  test "can't find a talent pool directory" do
-    get api_v1_public_collaborators_path, headers: { "Authorization" => @token }
-
-    assert_response :not_found
-  end
 end
