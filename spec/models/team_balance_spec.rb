@@ -3,15 +3,27 @@
 require "rails_helper"
 
 RSpec.describe TeamBalance, type: :model do
-  describe "validations" do
-    it { should validate_presence_of(:balance) }
-    it { should validate_presence_of(:blance_date) }
-    it { should validate_presence_of(:team_id) }
-    it { should validate_presence_of(:account_id) }
+  subject { TeamBalance.new(balance: 98.5, balance_date: DateTime.now, team_id: 1, account_id: 1) }
+
+  before { subject.save }
+
+  it "should have a balance" do
+    subject.balance = nil
+    expect(subject).to_not be_valid
   end
 
-  describe "associations" do
-    it { should belong_to(:team) }
-    it { should belong_to(:account) }
+  it "should have a date" do
+    subject.balance_date = nil
+    expect(subject).to_not be_valid
+  end
+
+  it "should have a team id" do
+    subject.team_id = nil
+    expect(subject).to_not be_valid
+  end
+
+  it "should have an account id" do
+    subject.account_id = nil
+    expect(subject).to_not be_valid
   end
 end
