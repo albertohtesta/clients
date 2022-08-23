@@ -47,6 +47,7 @@ Rails.application.routes.draw do
           resources :responses, only: %i[index show]
           resources :webhooks, except: %i[destroy]
         end
+        resources :survey_results, only: [:index]
       end
 
       resources :information, only: %i[index] # TODO: DELETE THIS ENDPOINT IT'S JUST TEMPORALLY TO KNOW THE DATABASE INFORMATION IN QA

@@ -429,7 +429,6 @@ CollaboratorRepository.by_role_name("Developer").all.each do |collaborator|
 end
 Post.create(posts_for_collaborators)
 
-
 # one_single_metric = {
 #   "team_id" => 1, "date" => "21-05-2022", "value" => 75, "total_tickets" => 20, "finished_tickets" => 15, "missing_tickets" => 5
 # }
