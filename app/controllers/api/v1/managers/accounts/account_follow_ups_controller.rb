@@ -7,7 +7,7 @@ module Api
         class AccountFollowUpsController < ApplicationController
           def index
             # TODO: Pass current_user with cognito
-            @account_follow_ups = AccountFollowUpRepository.by_account_manager(current_user)
+            @account_follow_ups = Collaborator.first
             render json: @account_follow_ups, status: :ok
           end
 

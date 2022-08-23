@@ -7,9 +7,9 @@ class CollaboratorPresenter < ApplicationPresenter
 
   private
     def post
-      return PostPresenter.new(posts.last).json if !posts.last.nil?
+      return [] if posts.last.nil?
 
-      []
+      PostPresenter.new(posts.last).json
     end
 
     def name
@@ -21,7 +21,6 @@ class CollaboratorPresenter < ApplicationPresenter
     end
 
     def img
-      # TODO return user image
-      ""
+      avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true) : nil
     end
 end

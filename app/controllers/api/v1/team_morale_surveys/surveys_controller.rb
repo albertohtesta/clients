@@ -2,8 +2,8 @@
 
 module Api
   module V1
-    module TeamMorale
-      class SurveysController < ApplicationController
+    module TeamMoraleSurveys
+      class SurveysController < ApiController
         def create
           @survey = Survey.new(survey_params.merge(status: "preparation"))
           if @survey.save
@@ -11,16 +11,6 @@ module Api
           else
             render json: { errors: @survey.errors.full_messages }, status: :bad_request
           end
-        end
-
-        def index
-          @surveys = TypeFormService::Surveys.new
-          render json: @surveys.all
-        end
-
-        def show
-          @surveys = TypeFormService::Surveys.new
-          render json: @surveys.find(params[:id])
         end
 
         private
