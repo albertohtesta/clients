@@ -24,7 +24,7 @@ module Api
           end
 
           def find_contact
-            @contact = ContactRepository.retrieve_contacts_by_id(id: params[:id])
+            @contact = ContactRepository.find_by(id: params[:id])
           end
       end
     end

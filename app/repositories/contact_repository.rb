@@ -5,9 +5,5 @@ class ContactRepository < ApplicationRepository
     def contacts_by_account(account_id)
       scope.where(account_id:)
     end
-
-    def retrieve_contacts_by_id(*attrs)
-      scope.find_by(*attrs)
-    end
   end
 end

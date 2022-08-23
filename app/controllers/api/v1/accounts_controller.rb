@@ -19,11 +19,11 @@ module Api
 
       private
         def retrieve_accounts
-          @accounts = AccountRepository.by_account
+          @accounts = AccountRepository.all
         end
 
         def find_account
-          @account = AccountRepository.retrieve_accounts_by_id(id: params[:id])
+          @account = AccountRepository.find_by(id: params[:id])
         end
     end
   end
