@@ -80,6 +80,7 @@ test:
     - bundle install
     - bin/rails db:create
     - bin/rails db:test:prepare
+    - bundle exec rspec
     - bin/rails test
 
 publish-image-qa:

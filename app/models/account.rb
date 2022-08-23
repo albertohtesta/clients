@@ -53,9 +53,4 @@ class Account < ApplicationRecord
     update(deleted_at: Time.now) if client[:IsDeleted]
     self
   end
-
-  def priority
-    # TODO: Here will'be the logic to decide the priority of the accounnt
-    ["low", "medium", "high"].sample
-  end
 end
