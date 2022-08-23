@@ -23,5 +23,13 @@ class AccountRepository < ApplicationRepository
     def role_debt_by_id(id)
       scope.find_by(id:).team_requirements.where(collaborator: nil).count
     end
+
+    def retrieve_accounts_by_id(*attrs)
+      scope.find_by(*attrs)
+    end
+
+    def by_account
+      scope.all
+    end
   end
 end
