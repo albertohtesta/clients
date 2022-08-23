@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_15_185403) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_15_185403) do
     t.integer "productivity", default: 0
     t.integer "speed", default: 0
     t.datetime "deleted_at", precision: nil
-    t.date "manager_started_date"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
@@ -372,6 +371,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_15_185403) do
   add_foreign_key "posts", "projects"
   add_foreign_key "projects", "accounts"
   add_foreign_key "surveys", "teams"
+  add_foreign_key "team_balances", "accounts"
+  add_foreign_key "team_balances", "teams"
   add_foreign_key "team_requirements", "accounts"
   add_foreign_key "team_requirements", "collaborators"
   add_foreign_key "team_requirements", "roles"
