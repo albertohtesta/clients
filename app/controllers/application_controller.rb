@@ -13,6 +13,15 @@ class ApplicationController < ActionController::API
     render json: { message: "Invalid token" }, status: :unauthorized unless valid_token
   end
 
+  # def access_token
+  #   @access_token ||= request.headers["Authorization"]
+  # end
+
+  # def verify_token
+  #   valid_token = TokenService.new({ token: access_token }).decode
+  #   render json: { message: "Invalid token" }, status: :unauthorized unless valid_token
+  # end
+
   private
     def current_user
       Collaborator.first
