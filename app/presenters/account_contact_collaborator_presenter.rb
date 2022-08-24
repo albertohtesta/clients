@@ -1,17 +1,29 @@
 # frozen_string_literal: true
 
 class AccountContactCollaboratorPresenter < ApplicationPresenter
-  METHODS = %i[contact]
+  METHODS = %i[id first_name last_name email phone position].freeze
 
-  private
-    def contact
-      {
-        id: collaborator.id,
-        first_name: collaborator.first_name,
-        last_name: collaborator.last_name,
-        email: collaborator.email,
-        phone: collaborator.phone,
-        position: collaborator.role.name,
-      }
-    end
+  def id
+    collaborator.id
+  end
+
+  def first_name
+    collaborator.first_name
+  end
+
+  def last_name
+    collaborator.last_name
+  end
+
+  def email
+    collaborator.email
+  end
+
+  def phone
+    collaborator.phone
+  end
+
+  def position
+    collaborator.role.name
+  end
 end
