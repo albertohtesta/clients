@@ -12,4 +12,5 @@ class Team < ApplicationRecord
   belongs_to :project
 
   validates :added_date, presence: true
+  validates :board_id, uniqueness: true
 end
