@@ -67,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_031158) do
     t.integer "productivity", default: 0
     t.integer "speed", default: 0
     t.datetime "deleted_at", precision: nil
-    t.date "manager_started_date"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
@@ -163,9 +162,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_031158) do
 
   create_table "contacts", force: :cascade do |t|
     t.string "salesforce_id"
-    t.string "email"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "email", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "phone"
     t.bigint "account_id", null: false
     t.datetime "deleted_at", precision: nil
@@ -173,7 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_031158) do
     t.datetime "updated_at", null: false
     t.string "invite_status"
     t.date "invite_date"
-    t.string "contact_uuid"
+    t.string "uuid"
     t.index ["account_id"], name: "index_contacts_on_account_id"
   end
 
