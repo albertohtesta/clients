@@ -16,7 +16,7 @@ class ContactRepository < ApplicationRepository
 
     def assign_uuid_and_status_to_contact(email, uuid)
       contact = model.find_or_initialize_by({ email: })
-      contact.attributes = { uuid: uuid, invite_status: :confirmed }
+      contact.attributes = { uuid:, invite_status: :confirmed }
       contact.save
     end
   end
