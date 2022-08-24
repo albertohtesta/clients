@@ -7,8 +7,8 @@ class ClientRegistrationService < ApplicationService
       Accounts::RequestClientUserPublisher.publish(customer_email)
     end
 
-    def save_client_user_created(email, user_contact_data)
-      ContactRepository.assign_uuid_and_status_to_contact(email, user_contact_data)
+    def save_client_user_created(email, contact_uuid)
+      ContactRepository.assign_uuid_and_status_to_contact(email, contact_uuid)
     end
   end
 end
