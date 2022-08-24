@@ -3,11 +3,25 @@
 require "swagger_helper"
 
 RSpec.describe "Contacts", type: :request do
-  describe "GET contacts" do
-    it "should not return all the contacts for an account" do
-      account = create(:account)
-      get api_v1_account_contacts_path(account_id: account.id)
-      expect(response).to have_http_status(404)
+  context "Accounts contacts" do
+    let(:account) { create(:account) }
+    let(:Authorization) { @token }
+
+    path "/api/v1/accounts/{account_id}/contacts" do
+      get "Get all contact from an acccount" do
+        tags "Accounts"
+
+        security [ Bearer: [] ]
+        consumes "application/json"
+        produces "application/json"
+        parameter name: :account_id, in: :path, type: :integer, description: "id of the account"
+
+        response "404", "contacts not found" do
+          let(:account_id) { Contact.first }
+
+          run_test!
+        end
+      end
     end
   end
 end
