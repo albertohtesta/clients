@@ -55,6 +55,18 @@ services:
     restart: always
     ports:
       - 8080:8080
+  sneakers:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bundle exec rake sneakers:run
+    depends_on:
+      - rabbitmq
+    volumes:
+      - .:/core-backend
+    env_file:
+      - .env.dev
+      - .env.dev.local
 volumes:
   gem_cache:
   db_data:
