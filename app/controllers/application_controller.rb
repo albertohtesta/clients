@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
-  before_action :decode_token, :verify_token
+  # before_action :access_token, :verify_token
 
   def access_token
     @access_token ||= request.headers["Authorization"]
