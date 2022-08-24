@@ -1,0 +1,4 @@
+
+shared:
+  workers:
+    - Accounts::ClientUserCreatedSubscriber
