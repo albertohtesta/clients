@@ -15,6 +15,10 @@ class Survey < ApplicationRecord
   validates :status, uniqueness: { scope: :team_id, message: "There is a survey ongoing for this team.", conditions: -> { where.not(status: "closed") } }
   validate :deadline_date_cannot_be_in_the_past, unless: -> { deadline.blank? }
 
+  after_create do
+    get_survey_url
+  end
+
   def deadline_date_cannot_be_in_the_past
     if deadline < Date.today && status != "closed"
       errors.add(:deadline, :blank, message: "can't be in the past.")
@@ -31,5 +35,14 @@ class Survey < ApplicationRecord
     super
   rescue ArgumentError
     @attributes.write_cast_value("status", value)
+  end
+
+  private
+  def get_survey_url
+    data = TypeFormService::RemoteSurveys.new.create
+    if data.key?(:typeform_survey_url)
+      update(survey_url: data[:typeform_survey_url])
+      # TODO: update(id_survey_remote: data[typeform_survey_id)] when there is the field
+    end
   end
 end

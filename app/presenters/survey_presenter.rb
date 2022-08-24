@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SurveyPresenter < ApplicationPresenter
-  ATTRS = %i[team_id id status deadline].freeze
+  ATTRS = %i[team_id id status deadline survey_url].freeze
   METHODS = %i[collaborators_count collaborators_info current_responses missing_responses].freeze
 
   def collaborators_count
