@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module TypeFormService
-    # Services for remote surveys
-    class RemoteSurveys
-      TYPE_FORM_SURVEY_TEMPLATE = '{
+  # Services for remote surveys
+  class RemoteSurveys
+    TYPE_FORM_SURVEY_TEMPLATE = '{
         "type": "score",
         "title": "survey from my APP",
         "workspace": {
@@ -138,39 +138,38 @@ module TypeFormService
             }
         ]
      }'
-  
-      def all
-        HttpClient.new.get("forms")
+
+    def all
+      HttpClient.new.get("forms")
+    end
+    def find(form_id)
+      HttpClient.new.get("forms/#{form_id}")
+    end
+
+    def update(form_id, options = {})
+      HttpClient.new.patch("forms/#{form_id}", options)
+    end
+    # create a remote survey
+    def create
+      data = HttpClient.new.post("forms", JSON.parse(TYPE_FORM_SURVEY_TEMPLATE))
+      if data.present?
+        result = JSON.parse(data, symbolize_names: true)
+        result = { typeform_survey_id: result[:id], typeform_survey_url: result[:_links][:display] }
+      else
+        result = { error: "survey not created" }
       end
-      def find(form_id)
-        HttpClient.new.get("forms/#{form_id}")
+      result
+    end
+    # Returns a survey's url by id
+    def survey_url(form_id)
+      data = find(form_id)
+      if data.present?
+        result = JSON.parse(data, symbolize_names: true)
+        result = { survey_url: result[:_links][:display] }
+      else
+        result = { error: "not found" }
       end
-  
-      def update(form_id, options = {})
-        HttpClient.new.patch("forms/#{form_id}", options)
-      end
-      # create a remote survey
-      def create
-        data = HttpClient.new.post("forms", JSON.parse(TYPE_FORM_SURVEY_TEMPLATE))
-        if data.present?
-          result = JSON.parse(data, symbolize_names: true)
-          result = { typeform_survey_id: result[:id], typeform_survey_url: result[:_links][:display] }
-        else
-          result = { error: "survey not created" }
-        end
-        result
-      end
-      # Returns a survey's url by id
-      def survey_url(form_id)
-        data = find(form_id)
-        if data.present?
-          result = JSON.parse(data, symbolize_names: true)
-          result = { survey_url: result[:_links][:display] }
-        else
-          result = { error: "not found" }
-        end
-        result
-      end
+      result
     end
   end
-  
+end
