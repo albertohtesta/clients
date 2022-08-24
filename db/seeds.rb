@@ -3,16 +3,16 @@
 require "faker"
 
 ######### ADD CATALOGS FIELDS
-AccountStatus.create([
+AccountStatus.create!([
   { status: "New", status_code: "new_project" }, { status: "In Development", status_code: "in_development" }, { status: "Finished", status_code: "finished" }, { status: "Cancelled", status_code: "cancelled" }
 ])
-TeamType.create([
+TeamType.create!([
   { name: "POD" }, { name: "Big POD" }, { name: "Staff Augmentation" }
 ])
-Tool.create([
+Tool.create!([
   { name: "AWS" }, { name: "Rails" }, { name: "Azure" }, { name: "Cognito" }, { name: "Sentry" }
 ])
-TechStack.create([
+TechStack.create!([
   { name: "AGILE COACH" },
   { name: "ANDROID DEVELOPER" },
   { name: "BACKEND DEVELOPER" },
@@ -55,7 +55,7 @@ Role.create!([
   { name: "ACCOUNT MANAGER" }
 ])
 
-MetricLimit.create([
+MetricLimit.create!([
   { indicator_type: :balance, label: METRICS_TYPES[:balance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :client_engagement, label: METRICS_TYPES[:client_engagement], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :performance, label: METRICS_TYPES[:performance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
@@ -143,13 +143,13 @@ Collaborator.find(7).update(badges: Badge.where({ id: [1, 2, 3, 11] }))
 # ****************************************************************************
 # CREATING ADVANTA ACCOUNT DATA FOR QA
 # ****************************************************************************
-advanta = Account.create(
+advanta = Account.create!(
   { id: 1, account_uuid: "8d861f12-2277-11ed-861d-0242ac120002", manager: Collaborator.find(101), name: "ADVANTA", blended_rate: 6400, contact_name: Faker::Name.unique.name, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, salesforce_id: random_salesforce_id(15), city: "New Jersey", client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
 )
-project_advanta = Project.create(
+project_advanta = Project.create!(
   { name: advanta.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "ADVANTA PROJECT", account_id: advanta.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
 )
-advanta_collaborators = Collaborator.create([
+advanta_collaborators = Collaborator.create!([
   { id: 10, role:, position: "PRODUCT OWNER", first_name: "DIEGO", last_name: "MEDRANO", email: "dmorales@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Diego+Medrano.jfif", seniority: "SENIOR", uuid: "93de193e-2270-11ed-861d-0242ac120002" },
   { id: 11, role:, position: "SCRUM MASTER", first_name: "RAUL", last_name: "GALVAN", email: "rrodrigo@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Raul+Galvan.jfif", seniority: "SENIOR", uuid: "93de339c-2270-11ed-861d-0242ac120002" },
   { id: 12, role:, position: "SOFTWARE ENGINEER", first_name: "EDGAR", last_name: "ALCANTARA", email: "ealcantara@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Edgar+Alcantara.jfif", seniority: "MIDDLE", uuid: "93de1b0a-2270-11ed-861d-0242ac120002" },
@@ -159,7 +159,7 @@ advanta_collaborators = Collaborator.create([
   { id: 16, role:, position: "SOFTWARE ENGINEER", first_name: "FERNANDO", last_name: "FUENTES", email: "lfuentes@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Fernando+Fuentes.jfif", seniority: "MIDDLE", uuid: "93de2a46-2270-11ed-861d-0242ac120002" },
   { id: 17, role:, position: "SOFTWARE ENGINEER", first_name: "JORGE", last_name: "JIMENEZ", email: "aljimenez@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Jorge+Alejandro.jfif", seniority: "MIDDLE", uuid: "93de13c6-2270-11ed-861d-0242ac120002" }
 ])
-team_advanta = Team.create(
+team_advanta = Team.create!(
   {
     added_date: project_advanta.start_date,
     team_type_id: TeamType.find_by({ name: "POD" }).id,
@@ -168,7 +168,7 @@ team_advanta = Team.create(
     board_id: 8
   }
 )
-Metric.create([
+Metric.create!([
   # PERFORMANCE
   { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", metrics: { "team_id" => team_advanta.id, "date" => "15-01-2022", "value" => 89 }.to_json },
   { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "performance", metrics: { "team_id" => team_advanta.id, "date" => "15-02-2022", "value" => 66 }.to_json },
@@ -190,7 +190,7 @@ Metric.create([
   { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-06-2022", "value" => 0 }.to_json },
   { date: "15-07-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-07-2022", "value" => 0 }.to_json }
 ])
-team_advanta.investments.create([
+team_advanta.investments.create!([
   { value: 55000.00, date: "15-01-2022".to_date },
   { value: 55000.00, date: "15-02-2022".to_date },
   { value: 60000.00, date: "15-03-2022".to_date },
@@ -205,7 +205,7 @@ team_advanta.investments.create([
 # CREATING CUSTOMER CONTACT DATA
 # **************************************
 
-Contact.create ([
+Contact.create!([
           {
             first_name: "ANGEL",
             last_name: "SANCHEZ",
@@ -230,10 +230,10 @@ Contact.create ([
 # ****************************************************************************
 # CREATING BREAKTHROGHT BROKER ACCOUNT DATA FOR QA
 # ****************************************************************************
-broker = Account.create(
+broker = Account.create!(
   { id: 2, manager: Collaborator.find(101), name: "Breakthrough Broker",  contact_name: "John Doe",  contact_email: "JohnDoe@breakthrough.com",  contact_phone: "1 720-440-6236",  country: "Unitated States", account_status_id: AccountStatus.first.id,  account_uuid: "8d8620e8-2277-11ed-861d-0242ac120002",  salesforce_id: "0014R00002lebET",  city: "Denver, Colorado", client_satisfaction: 100,  moral: rand(0..100),  blended_rate: 4600, bugs_detected: rand(0..100),  permanence: rand(0..100),  productivity: rand(0..100),  speed: rand(0..100)  }.merge(account_amounts)
 )
-project_broker = Project.create(
+project_broker = Project.create!(
   { name: broker.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "breakthrough_broker project", account_id: broker.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
 )
 
@@ -255,10 +255,10 @@ broker_collaborators = Collaborator.create!([
   { id: 29, role:, position: "SOFTWARE ENGINEER", first_name: "DANTE", last_name: "BARBOZA", email: "dbarboza@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/BARBOZA+LOPEZ+DANTE+GAMALIEL.jfif", seniority: "JUNIOR", uuid: "93de1772-2270-11ed-861d-0242ac120002" },
   { id: 30, role:, position: "UX/UI", first_name: "ELBA", last_name: "ECHEVARRIA", email: "eechevarria@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/ECHEVARRIA+ORNELAS+ELBA.jfif", seniority: "JUNIOR", uuid: "93de1e52-2270-11ed-861d-0242ac120002" }
 ])
-team_broker = Team.create(
+team_broker = Team.create!(
   { added_date: project_broker.start_date, team_type_id: TeamType.find_by({ name: "POD" }).id, collaborators: broker_collaborators, project: project_broker, board_id: 18 }
 )
-Metric.create([
+Metric.create!([
   # PERFORMANCE
   { date: "15-05-2022".to_date, related: team_broker, indicator_type: "performance", metrics: { "team_id" => team_broker.id, "date" => "15-05-2022", "value" => 105 }.to_json },
   { date: "15-06-2022".to_date, related: team_broker, indicator_type: "performance", metrics: { "team_id" => team_broker.id, "date" => "15-06-2022", "value" => 103 }.to_json },
@@ -278,7 +278,7 @@ Metric.create([
   { date: "15-06-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-06-2022", "value" => 69 }.to_json },
   { date: "15-07-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-07-2022", "value" => 69 }.to_json }
 ])
-team_broker.investments.create([
+team_broker.investments.create!([
   { value: 70000.00, date: "15-01-2022".to_date },
   { value: 70000.00, date: "15-02-2022".to_date },
   { value: 70000.00, date: "15-03-2022".to_date },
@@ -291,7 +291,7 @@ team_broker.investments.create([
 # CREATING CUSTOMER CONTACT DATA
 # **************************************
 
-Contact.create ([
+Contact.create!([
           { first_name: "ANGEL", last_name: "SANCHEZ", email: "asanchez@arkus-solutions.com", account_id: broker.id },
           { first_name: "ARMANDO", last_name: "TEJEDA", email: "atejeda@arkus-solutions.com", account_id:	broker.id					},
           { first_name: "JONATHAN", last_name: "HERNANDEZ", email: "jrhernandez@arkusnexus.com", account_id: broker.id },
@@ -300,7 +300,7 @@ Contact.create ([
 
 
 posts_for_collaborators = []
-CollaboratorRepository.by_role_name("DEVELOPER").all.each do |collaborator|
+Collaborator.where(id: 10..30).all.each do |collaborator|
   posts_for_collaborators << {
     title: Faker::Name.unique.name,
     description: Faker::Lorem.sentence,
@@ -308,7 +308,7 @@ CollaboratorRepository.by_role_name("DEVELOPER").all.each do |collaborator|
     project_id: collaborator.teams&.first&.project&.id
   }
 end
-Post.create(posts_for_collaborators)
+Post.create!(posts_for_collaborators)
 
 
 
