@@ -14,8 +14,10 @@ class ContactRepository < ApplicationRepository
       scope.where({ email: contacts_emails, account_id: }).update({ invite_status: "invited", invite_date: Date.today })
     end
 
-    def assign_uuid_and_status_to_contact(email, user_data)
-      scope.find_by({ email: }).update(user_data.merge({ invite_status: :confirmed }))
+    def assign_uuid_and_status_to_contact(email, uuid)
+      contact = model.find_or_initialize_by({ email: })
+      contact.attributes = { uuid: uuid, invite_status: :confirmed }
+      contact.save
     end
   end
 end
