@@ -4,6 +4,40 @@ info:
   title: Clients API V1
   version: v1
 paths:
+  "/api/v1/accounts/{account_id}/contacts":
+    get:
+      summary: Get all contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: contacts not found
+  "/api/v1/accounts/{account_id}/contacts_collaborators":
+    get:
+      summary: Get all collaborators contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: contacts collaborators not found
   "/api/v1/metrics":
     get:
       summary: Get metrics of team
