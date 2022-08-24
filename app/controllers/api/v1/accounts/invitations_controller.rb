@@ -5,13 +5,12 @@ module Api
     module Accounts
       class InvitationsController < ApplicationController
         def create
-          invited = []
           get_contacts_from_account.each do |contact|
-            invited << InviteAccountContactsMailer.invite_to(name: contact[:first_name], email: contact[:email], link: get_invitation_link)
+            ClientRegistrationService.request_user_client(contact)
           end
           ContactRepository.create_invitations_for(params[:account_id], invitated_contacts)
 
-          render json: { succes: invited.flatten.join(" ") }, status: :ok
+          render json: { }, status: :ok
         end
 
         private

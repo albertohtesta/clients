@@ -11,7 +11,11 @@ class ContactRepository < ApplicationRepository
     end
 
     def create_invitations_for(account_id, contacts_emails)
-      scope.where({ email: contacts_emails, account_id: }).update({ invite_status: :invited, invite_date: Date.today })
+      scope.where({ email: contacts_emails, account_id: }).update({ invite_status: "invited", invite_date: Date.today })
+    end
+
+    def assign_uuid_and_status_to_contact(email, user_data)
+      scope.find_by({ email: }).update(user_data.merge({ invite_status: :confirmed }))
     end
   end
 end
