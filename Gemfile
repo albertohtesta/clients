@@ -11,6 +11,8 @@ gem "aws-sdk-s3"
 gem "http"
 gem "bcrypt"
 gem "bootsnap", require: false
+gem "bunny"
+gem "bunny-mock"
 gem "faker"
 gem "image_processing"
 gem "jbuilder"
