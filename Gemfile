@@ -8,7 +8,6 @@ ruby "3.1.1"
 gem "aws-sdk-cognitoidentity"
 gem "aws-sdk-cognitoidentityprovider"
 gem "aws-sdk-s3"
-gem "http"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "bunny"
