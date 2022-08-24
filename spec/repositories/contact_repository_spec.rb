@@ -26,7 +26,7 @@ RSpec.describe ContactRepository do
     end
 
     it "must assing uuid and status for an invited contact" do
-      described_class.assign_uuid_and_status_to_contact(contact.email, { uuid: "123456", invite_status: "confirmed" })
+      described_class.assign_uuid_and_status_to_contact(contact.email, "123456")
 
       expect(Contact.first[:uuid]).to eql("123456")
       expect(Contact.first[:invite_status]).to eql("confirmed")
