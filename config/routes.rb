@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         scope module: :accounts do
           resources :contacts, only: %i[index show]
           resources :contacts_collaborators, only: %i[index]
+          resources :invitations, only: [:create]
         end
       end
 
