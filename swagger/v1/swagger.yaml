@@ -4,25 +4,6 @@ info:
   title: Clients API V1
   version: v1
 paths:
-  "/api/v1/managers/{manager_id}/accounts":
-    get:
-      summary: Get all accounts of a mannager and with priorities
-      tags:
-      - Managers
-      security:
-      - Bearer: []
-      parameters:
-      - name: manager_id
-        in: path
-        description: id of the manager
-        required: true
-        schema:
-          type: integer
-      responses:
-        '200':
-          description: accounts found
-        '404':
-          description: No accounts found
   "/api/v1/metrics":
     get:
       summary: Get metrics of team

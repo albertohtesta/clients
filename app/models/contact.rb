@@ -2,8 +2,8 @@
 
 class Contact < ApplicationRecord
   belongs_to :account
-
-  validates :first_name, :email, presence: true
+  enum invite_status: { invited: "invited", confirmed: "confirmed" }
+  validates :first_name, :email, :last_name, presence: true
 
   def self.update_contacts_from_salesforce(account, remote_contacts)
     remote_contacts.each do |remote_contact|

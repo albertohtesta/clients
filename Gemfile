@@ -10,6 +10,8 @@ gem "aws-sdk-cognitoidentityprovider"
 gem "aws-sdk-s3"
 gem "bcrypt"
 gem "bootsnap", require: false
+gem "bunny"
+gem "bunny-mock"
 gem "faker"
 gem "image_processing"
 gem "jbuilder"
