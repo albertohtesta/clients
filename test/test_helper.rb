@@ -8,7 +8,7 @@ require "webmock/minitest"
 
 module ActiveSupport
   class TestCase
-    include FactoryBot::Syntax::Methods
+    include ::Syntax::Methods
     include WebmockHelper
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)

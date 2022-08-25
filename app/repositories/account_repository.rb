@@ -24,8 +24,8 @@ class AccountRepository < ApplicationRepository
       scope.includes(:projects).find(account_id)
     end
 
-    def find_customer_info(uuid)
-      scope.find_by(uuid:)
+    def find_customer_info(account_uuid)
+      scope.find_by(account_uuid:)
     end
   end
 end

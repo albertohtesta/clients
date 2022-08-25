@@ -15,7 +15,7 @@ module Api
 
       private
         def retrieve_data
-          @data = AccountRepository.find_customer_info(@data_token[:account_uuid])
+          @data = AccountRepository.find_customer_info(@data_token[:uuid])
         end
     end
   end
