@@ -3,7 +3,7 @@
 class SurveyRepository < ApplicationRepository
   class << self
     def find_by_id(id)
-      scope.includes(:team).find_by({ id: })
+      scope.includes(team: :collaborators).find_by_id(id)
     end
 
     def surveys_by_team_dates_status(team_id, initial_date, end_date, status)
