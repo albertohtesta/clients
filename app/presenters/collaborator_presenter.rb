@@ -21,6 +21,7 @@ class CollaboratorPresenter < ApplicationPresenter
     end
 
     def img
-      avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true) : nil
+      profile
+      # avatar.attached? ? Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true) : nil
     end
 end
