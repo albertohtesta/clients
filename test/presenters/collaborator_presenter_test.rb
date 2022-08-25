@@ -32,7 +32,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
       "position" => "Software Engineer",
       "name" => "MyString MyString",
       "posts_count" => 1,
-      "img" => nil,
+      "img" => "www.mystring.com",
       "post" => {
         "id" => @post.id,
         "title" => "MyString",
@@ -57,7 +57,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
       "name" => "MyString MyString",
       "position" => "Software Engineer",
       "posts_count" => 0,
-      "img" => nil,
+      "img" => "www.mystring.com",
       "post" => []
     }
 
