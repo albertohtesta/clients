@@ -5,24 +5,20 @@ module Api
     module TeamMorale
       class RemoteSurveysController < ApplicationController
         def index
-          @surveys = TypeFormService::RemoteSurveys.new
-          render json: @surveys.all
+          render json: TypeFormService::RemoteSurveys.all
         end
 
         def show
-          @surveys = TypeFormService::RemoteSurveys.new
-          render json: @surveys.survey_url(params[:id])
+          render json: TypeFormService::RemoteSurveys.survey_url_by_form_id(params[:id])
         end
 
         def update
-          @surveys = TypeFormService::RemoteSurveys.new
           options = { op: params[:op], path: params[:path], value: params[:value] }
-          render json: @surveys.update(params[:id], options)
+          render json: TypeFormService::RemoteSurveys.update(params[:id], options)
         end
 
         def create
-          @surveys = TypeFormService::RemoteSurveys.new
-          render json: @surveys.create
+          render json: TypeFormService::RemoteSurveys.create
         end
       end
     end

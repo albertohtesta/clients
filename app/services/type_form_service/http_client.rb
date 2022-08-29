@@ -9,37 +9,25 @@ module TypeFormService
 
     def get(path)
       path = @base_url + path
-      begin
-        response = RestClient.get path,
+      RestClient.get path,
         { content_type: :json, accept: :json, Authorization: "Bearer #{access_token}" }
-      rescue RestClient::ExceptionWithResponse
-        return nil
-      end
-      response
+      rescue
     end
 
     def patch(path, args)
       path = @base_url + path
       data = [args].to_json
-      begin
-        response = RestClient.patch path, data,
+      RestClient.patch path, data,
         { content_type: :json, accept: :json, Authorization: "Bearer #{access_token}" }
-      rescue RestClient::ExceptionWithResponse
-        return nil
-      end
-      response
+      rescue
     end
 
     def post(path, args)
       path = @base_url + path
       data = args.to_json
-      begin
-        response = RestClient.post path, data,
+      RestClient.post path, data,
         { content_type: :json, accept: :json, Authorization: "Bearer #{access_token}" }
-      rescue RestClient::ExceptionWithResponse
-        return nil
-      end
-      response
+      rescue
     end
 
     private
