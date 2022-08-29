@@ -3,7 +3,7 @@
 module Api
   module V1
     module Teams
-      class BalancessController < ApplicationController
+      class BalancesController < ApplicationController
         def create
           return render json: { message: "Create balance unsuccessfull" }, status: :not_found if @balance.empty?
         end

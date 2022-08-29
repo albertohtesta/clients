@@ -2,7 +2,13 @@
 
 class TeamBalancePresenter < ApplicationPresenter
   ATTRS = %i[balance balance_date team_id collaborator_id].freeze
-  METHODS = %i[calculate_junior_balance seniority_count].freeze
+  METHODS = %i[
+    calculate_junior_seniority
+    calculate_middle_seniority
+    calculate_senior_seniority
+    calculate_seniority_deviation
+    seniority_count
+  ].freeze
 
   private
     def calculate_junior_seniority
