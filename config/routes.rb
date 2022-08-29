@@ -36,8 +36,8 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :projects, only: [:index]
       resources :metrics, only: [:index]
+      resources :projects, only: [:index]
       resources :posts, only: [:show]
 
       namespace :public do
@@ -52,6 +52,7 @@ Rails.application.routes.draw do
         resources :survey_results, only: [:index]
       end
 
+      resources :metric_history, only: %i[show update]
       resources :information, only: %i[index] # TODO: DELETE THIS ENDPOINT IT'S JUST TEMPORALLY TO KNOW THE DATABASE INFORMATION IN QA
     end
   end

@@ -8,10 +8,18 @@ class ManagerAccountsPresenter < ApplicationPresenter
     city
   end
 
-  def last_follow_up_text
-    last_follow_up = AccountFollowUpRepository.last_follow_up_by_account(id)
+  def priority
+    default_priority = "low"
 
-    return "#{(Date.today - last_follow_up.follow_date).to_i} days ago" if last_follow_up.any?
+    return default_priority if last_follow_up.nil?
+
+    return "high" if AccountPriority::PriorityCalculatorRepository.new(self, last_follow_up.follow_date).high_priority
+
+    return "medium" if AccountPriority::PriorityCalculatorRepository.new(self, last_follow_up.follow_date).medium_priority
+  end
+
+  def last_follow_up_text
+    return "#{(Date.today - last_follow_up.follow_date).to_i} days ago" if last_follow_up
 
     "No follow ups found"
   end
@@ -22,47 +30,36 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
   def alert
     # TODO: Needs alert depending of the priority and some rules
-    [true, false].sample
+    true
   end
 
   def team_balance
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "team_balance").priority
   end
 
   def client_management
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "client_management").priority
   end
 
   def performance
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "performance").priority
   end
 
   def gross_margin
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "gross_margin").priority
   end
 
   def morale
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "morale").priority
   end
 
   private
     # TODO: this method is just temporally while bussines rules are defined and added into the project
     def temp_active_sample
-      [true, false].sample
+      true
+    end
+
+    def last_follow_up
+      @last_follow_up ||= AccountFollowUpRepository.last_follow_up_by_account(id).last
     end
 end

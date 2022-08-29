@@ -38,6 +38,8 @@ paths:
       responses:
         '404':
           description: contacts collaborators not found
+        '200':
+          description: accounts found
   "/api/v1/metrics":
     get:
       summary: Get metrics of team

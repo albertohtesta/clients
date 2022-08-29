@@ -168,29 +168,76 @@ team_advanta = Team.create!(
     board_id: 8
   }
 )
-Metric.create!([
+
+advanta_account = Account.find_by(name: "ADVANTA")
+Metric.create([
   # PERFORMANCE
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", metrics: { "team_id" => team_advanta.id, "date" => "15-01-2022", "value" => 89 }.to_json },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "performance", metrics: { "team_id" => team_advanta.id, "date" => "15-02-2022", "value" => 66 }.to_json },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "performance", metrics: { "team_id" => team_advanta.id, "date" => "15-03-2022", "value" => 96 }.to_json },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "performance", metrics: { "team_id" => team_advanta.id, "date" => "15-05-2022", "value" => 85 }.to_json },
+  { date: "15-01-2022".to_date, related: advanta_account, indicator_type: "performance", value: 50 },
+  { date: "15-02-2022".to_date, related: advanta_account, indicator_type: "performance", value: 60 },
+  { date: "15-03-2022".to_date, related: advanta_account, indicator_type: "performance", value: 70 },
+  { date: "15-04-2022".to_date, related: advanta_account, indicator_type: "performance", value: 80 },
+  { date: "15-05-2022".to_date, related: advanta_account, indicator_type: "performance", value: 90 },
+  { date: "15-06-2022".to_date, related: advanta_account, indicator_type: "performance", value: 100 },
+  { date: "15-07-2022".to_date, related: advanta_account, indicator_type: "performance", value: 100 },
   # VELOCITY
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "velocity", metrics: { "team_id" => team_advanta.id, "date" => "15-01-2022", "value" => 207 }.to_json },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "velocity", metrics: { "team_id" => team_advanta.id, "date" => "15-02-2022", "value" => 77 }.to_json },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "velocity", metrics: { "team_id" => team_advanta.id, "date" => "15-03-2022", "value" => 92 }.to_json },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", metrics: { "team_id" => team_advanta.id, "date" => "15-05-2022", "value" => 85 }.to_json },
+  { date: "15-01-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 35 },
+  { date: "15-02-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 45 },
+  { date: "15-03-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 35 },
+  { date: "15-04-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 60 },
+  { date: "15-05-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 70 },
+  { date: "15-06-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 75 },
+  { date: "15-07-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 75 },
   # MORALE
-  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "morale", metrics: { "team_id" => team_advanta.id, "date" => "15-06-2022", "value" => 62 }.to_json },
+  { date: "15-01-2022".to_date, related: advanta_account, indicator_type: "morale", value: 90 },
+  { date: "15-02-2022".to_date, related: advanta_account, indicator_type: "morale", value: 95 },
+  { date: "15-03-2022".to_date, related: advanta_account, indicator_type: "morale", value: 50 },
+  { date: "15-04-2022".to_date, related: advanta_account, indicator_type: "morale", value: 80 },
+  { date: "15-05-2022".to_date, related: advanta_account, indicator_type: "morale", value: 90 },
+  { date: "15-06-2022".to_date, related: advanta_account, indicator_type: "morale", value: 95 },
+  { date: "15-07-2022".to_date, related: advanta_account, indicator_type: "morale", value: 95 },
   # BALANCE
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-01-2022", "value" => 0 }.to_json },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-02-2022", "value" => 0 }.to_json },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-03-2022", "value" => 0 }.to_json },
-  { date: "15-04-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-04-2022", "value" => 0 }.to_json },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-05-2022", "value" => 0 }.to_json },
-  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-06-2022", "value" => 0 }.to_json },
-  { date: "15-07-2022".to_date, related: team_advanta, indicator_type: "balance", metrics: { "team_id" => team_advanta.id, "date" => "15-07-2022", "value" => 0 }.to_json }
+  { date: "15-01-2022".to_date, related: advanta_account, indicator_type: "balance", value: 80 },
+  { date: "15-02-2022".to_date, related: advanta_account, indicator_type: "balance", value: 80 },
+  { date: "15-03-2022".to_date, related: advanta_account, indicator_type: "balance", value: 90 },
+  { date: "15-04-2022".to_date, related: advanta_account, indicator_type: "balance", value: 100 },
+  { date: "15-05-2022".to_date, related: advanta_account, indicator_type: "balance", value: 100 },
+  { date: "15-06-2022".to_date, related: advanta_account, indicator_type: "balance", value: 90 },
+  { date: "15-07-2022".to_date, related: advanta_account, indicator_type: "balance", value: 90 },
 ])
-team_advanta.investments.create!([
+
+Metric.create([
+  # PERFORMANCE
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 50 },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "performance", value: 60 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "performance", value: 70 },
+  { date: "15-04-2022".to_date, related: team_advanta, indicator_type: "performance", value: 80 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "performance", value: 90 },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "performance", value: 100 },
+  # VELOCITY
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 35 },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 45 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 35 },
+  { date: "15-04-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 60 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 70 },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 75 },
+  # MORALE
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "morale", value: 90 },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "morale", value: 95 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "morale", value: 50 },
+  { date: "15-04-2022".to_date, related: team_advanta, indicator_type: "morale", value: 80 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "morale", value: 90 },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "morale", value: 95 },
+  # BALANCE
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "balance", value: 80 },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "balance", value: 80 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "balance", value: 90 },
+  { date: "15-04-2022".to_date, related: team_advanta, indicator_type: "balance", value: 100 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "balance", value: 100 },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "balance", value: 90 },
+])
+
+team_advanta.investments.create([
+>>>>>>> feat/NCM-186-priority-into-accounts-endpoint
   { value: 55000.00, date: "15-01-2022".to_date },
   { value: 55000.00, date: "15-02-2022".to_date },
   { value: 60000.00, date: "15-03-2022".to_date },
@@ -277,6 +324,39 @@ Metric.create!([
   { date: "15-05-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-05-2022", "value" => 69 }.to_json },
   { date: "15-06-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-06-2022", "value" => 69 }.to_json },
   { date: "15-07-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-07-2022", "value" => 69 }.to_json }
+
+# { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 50 },
+
+Metric.create([
+  # PERFORMANCE
+  { date: "15-01-2022".to_date, related: team_broker, indicator_type: "performance", value: 80 },
+  { date: "15-02-2022".to_date, related: team_broker, indicator_type: "performance", value: 80 },
+  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "performance", value: 82 },
+  { date: "15-04-2022".to_date, related: team_broker, indicator_type: "performance", value: 85 },
+  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "performance", value: 90 },
+  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "performance", value: 100 },
+  # VELOCITY
+  { date: "15-01-2022".to_date, related: team_broker, indicator_type: "velocity", value: 40 },
+  { date: "15-02-2022".to_date, related: team_broker, indicator_type: "velocity", value: 45 },
+  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "velocity", value: 50 },
+  { date: "15-04-2022".to_date, related: team_broker, indicator_type: "velocity", value: 40 },
+  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "velocity", value: 70 },
+  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "velocity", value: 70 },
+  # MORALE
+  { date: "15-01-2022".to_date, related: team_broker, indicator_type: "morale", value: 60 },
+  { date: "15-02-2022".to_date, related: team_broker, indicator_type: "morale", value: 80 },
+  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "morale", value: 85 },
+  { date: "15-04-2022".to_date, related: team_broker, indicator_type: "morale", value: 60 },
+  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "morale", value: 90 },
+  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "morale", value: 95 },
+  # BALANCE
+  { date: "15-01-2022".to_date, related: team_broker, indicator_type: "balance", value: 100 },
+  { date: "15-02-2022".to_date, related: team_broker, indicator_type: "balance", value: 100 },
+  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "balance", value: 100 },
+  { date: "15-04-2022".to_date, related: team_broker, indicator_type: "balance", value: 100 },
+  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "balance", value: 90 },
+  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "balance", value: 90 },
+>>>>>>> feat/NCM-186-priority-into-accounts-endpoint
 ])
 team_broker.investments.create!([
   { value: 70000.00, date: "15-01-2022".to_date },

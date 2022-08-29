@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_18_153127) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_19_233048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -199,6 +199,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_153127) do
     t.index ["manager_id"], name: "index_metric_follow_ups_on_manager_id"
   end
 
+  create_table "metric_histories", force: :cascade do |t|
+    t.bigint "metric_follow_ups_id", null: false
+    t.integer "alert_status", default: 0
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["metric_follow_ups_id"], name: "index_metric_histories_on_metric_follow_ups_id"
+  end
+
   create_table "metric_limits", force: :cascade do |t|
     t.string "indicator_type"
     t.string "label"
@@ -213,7 +222,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_153127) do
   end
 
   create_table "metrics", force: :cascade do |t|
-    t.text "metrics", null: false
+    t.integer "value", null: false
     t.string "indicator_type", null: false
     t.date "date", null: false
     t.datetime "created_at", null: false
@@ -359,6 +368,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_153127) do
   add_foreign_key "investments", "teams"
   add_foreign_key "metric_follow_ups", "accounts"
   add_foreign_key "metric_follow_ups", "collaborators", column: "manager_id"
+  add_foreign_key "metric_histories", "metric_follow_ups", column: "metric_follow_ups_id"
   add_foreign_key "payments", "accounts"
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
