@@ -4,7 +4,6 @@ require "swagger_helper"
 
 RSpec.describe "api/v1/team_morale/surveys", type: :request do
   before(:each) do
-    Rails.application.config.action_dispatch.show_exceptions = true
     create(:survey, id: 1)
   end
 
