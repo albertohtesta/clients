@@ -7,14 +7,13 @@ module Api
         account = account_of_contact
         return render json: { message: "No account information" }, status: :not_found if account.nil?
 
-        render json: AccountPresenter.new(account).json, status: :ok
+        render json: AccountInfoPresenter.new(account).json, status: :ok
       end
-
-      def show; end
 
       private
         def account_of_contact
-          AccountRepository.find_by(@current_user[:contact_uuid])
+          contact = ContactRepository.find_by({ uuid: @current_user[:contact_uuid] })
+          AccountRepository.find_by({ id: contact.account_id })
         end
     end
   end

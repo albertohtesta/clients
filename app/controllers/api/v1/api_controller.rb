@@ -31,7 +31,7 @@ module Api
 
       private
         def decoded_token
-          @data_token = TokenService.new({ token: access_token }).decode
+          @data_token ||= TokenService.new({ token: access_token }).decode
         end
     end
   end

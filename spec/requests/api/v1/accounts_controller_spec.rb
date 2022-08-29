@@ -2,6 +2,21 @@
 
 require "swagger_helper"
 
+class TokenService
+  def initialize(token)
+    token
+  end
+
+  def decode
+    email = Contact.first&.email ||= "email@email.com"
+    data = {
+      "role" => "client",
+      "user_attributes" => [{ "name" => "email", "value" => email }]
+    }
+    [data]
+  end
+end
+
 RSpec.describe "Accounts", type: :request do
   include WebmockHelper
 
@@ -23,11 +38,11 @@ RSpec.describe "Accounts", type: :request do
         run_test!
       end
 
-      response(401, "Unauthorized") do
-        let(:Authorization) { "" }
-
-        run_test!
-      end
+      # TODO: text when invalid token is provided
+      # response(401, "Unauthorized") do
+      #   let(:Authorization) { "" }
+      #   run_test!
+      # end
     end
   end
 end
