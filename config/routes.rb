@@ -46,7 +46,6 @@ Rails.application.routes.draw do
         resources :surveys, only: %i[create index show] do
           resources :responses, only: %i[index show]
           resources :webhooks, except: %i[destroy]
-          resources :status, only: %i[index]
         end
         resources :survey_results, only: [:index]
       end
