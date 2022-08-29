@@ -21,8 +21,6 @@ paths:
       responses:
         '200':
           description: accounts found
-        '404':
-          description: No accounts found
   "/api/v1/metrics":
     get:
       summary: Get metrics of team

@@ -15,8 +15,31 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       let!(:account_metric_gross_marging) { create(:metric, related: account, date:, indicator_type: "gross_marging", value: 95) }
 
       let!(:metric_limit_balance) { create(:metric_limit, indicator_type: "balance") }
-      let!(:metric_limit_morale) { create(:metric_limit, indicator_type: "morale") }
-      let!(:metric_limit_performance) { create(:metric_limit, indicator_type: "performance") }
+      let!(:metric_limit_morale) {
+        create(
+          :metric_limit,
+          indicator_type: "morale",
+          low_priority_min: 90,
+          low_priority_max: 100,
+          medium_priority_min: 80,
+          medium_priority_max: 89,
+          high_priority_min: 0,
+          high_priority_max: 79
+        )
+      }
+      let!(:metric_limit_performance) {
+        create(
+          :metric_limit,
+          indicator_type: "performance",
+          low_priority_min: 90,
+          low_priority_max: 100,
+          medium_priority_min: 80,
+          medium_priority_max: 89,
+          high_priority_min: 0,
+          high_priority_max: 79
+        )
+      }
+
       let!(:metric_limit_gross_marging) { create(:metric_limit, indicator_type: "gross_marging") }
 
       it "must return priority eql low" do
@@ -28,11 +51,11 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "priority" => "low",
             "role_debt" => 0,
             "alert" => true,
-            "team_balance" => { "amount" => 85, "alert" => true },
-            "client_management" => { "amount" => 85, "alert" => true },
-            "performance" => { "amount" => 85, "alert" => true },
-            "gross_margin" => { "amount" => 85, "alert" => true },
-            "morale" => { "amount" => 85, "alert" => true }
+            "team_balance" => { "amount" => 0, "alert" => false },
+            "client_management" => { "amount" => 0, "alert" => false },
+            "performance" => { "amount" => 95, "alert" => false },
+            "gross_margin" => { "amount" => 0, "alert" => false },
+            "morale" => { "amount" => 95, "alert" => false }
           }
         ]
 

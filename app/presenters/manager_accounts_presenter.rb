@@ -34,38 +34,23 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def team_balance
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "team_balance").priority
   end
 
   def client_management
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "client_management").priority
   end
 
   def performance
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "performance").priority
   end
 
   def gross_margin
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "gross_margin").priority
   end
 
   def morale
-    {
-      amount: 85,
-      alert: temp_active_sample
-    }
+    MetricPriority::PriorityCalculatorRepository.new(self, "morale").priority
   end
 
   private
