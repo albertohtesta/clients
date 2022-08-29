@@ -5,8 +5,19 @@ module Api
     module Teams
       class BalancesController < ApplicationController
         def create
-          return render json: { message: "Create balance unsuccessfull" }, status: :not_found if @balance.empty?
+          @team_balance = TeamBalanceRepository.new_entity(account_follow_ups_params)
+
+          if @team_balance.save
+            render json: @team_balance, status: :created
+          else
+            render json: @team_balance, status: :unprocessable_entity
+          end
         end
+
+        private
+          def team_balance_params
+            params.require(:team_balance).permit(:team_id, :account_id, :balance, :balance_date)
+          end
       end
     end
   end

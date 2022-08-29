@@ -1,14 +1,24 @@
 # frozen_string_literal: true
 
 class TeamBalancePresenter < ApplicationPresenter
-  ATTRS = %i[balance balance_date team_id collaborator_id].freeze
-  METHODS = %i[
-    calculate_junior_seniority
-    calculate_middle_seniority
-    calculate_senior_seniority
-    calculate_seniority_deviation
-    seniority_count
-  ].freeze
+  ATTRS = %i[team_id account_id balance balance_date].freeze
+  # METHODS = %i[
+  #   team_balance
+  #   calculate_junior_seniority
+  #   calculate_middle_seniority
+  #   calculate_senior_seniority
+  #   calculate_seniority_deviation
+  #   seniority_count
+  # ].freeze
+
+  def team_balance
+    {
+      team_id: team.id,
+      account_id: account.id,
+      balance_date: DateTime.now,
+      balance:,
+    }
+  end
 
   private
     def calculate_junior_seniority
@@ -47,6 +57,7 @@ class TeamBalancePresenter < ApplicationPresenter
     end
 
     def calculate_balance(seniority_deviation)
-      100 - seniority_deviation
+      balance = 100 - seniority_deviation
+      balance
     end
 end
