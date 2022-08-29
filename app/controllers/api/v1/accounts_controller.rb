@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class AccountsController < ApplicationController
+    class AccountsController < ApiController
       def show; end
     end
   end

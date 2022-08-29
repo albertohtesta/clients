@@ -43,10 +43,11 @@ Rails.application.routes.draw do
       end
 
       namespace :team_morale do
-        resources :surveys, only: %i[index show] do
+        resources :surveys, only: %i[create index show] do
           resources :responses, only: %i[index show]
           resources :webhooks, except: %i[destroy]
         end
+        resources :survey_results, only: [:index]
       end
 
       resources :metric_history, only: %i[show update]
