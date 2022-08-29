@@ -237,7 +237,6 @@ Metric.create([
 ])
 
 team_advanta.investments.create([
->>>>>>> feat/NCM-186-priority-into-accounts-endpoint
   { value: 55000.00, date: "15-01-2022".to_date },
   { value: 55000.00, date: "15-02-2022".to_date },
   { value: 60000.00, date: "15-03-2022".to_date },
@@ -305,26 +304,6 @@ broker_collaborators = Collaborator.create!([
 team_broker = Team.create!(
   { added_date: project_broker.start_date, team_type_id: TeamType.find_by({ name: "POD" }).id, collaborators: broker_collaborators, project: project_broker, board_id: 18 }
 )
-Metric.create!([
-  # PERFORMANCE
-  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "performance", metrics: { "team_id" => team_broker.id, "date" => "15-05-2022", "value" => 105 }.to_json },
-  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "performance", metrics: { "team_id" => team_broker.id, "date" => "15-06-2022", "value" => 103 }.to_json },
-  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "performance", metrics: { "team_id" => team_broker.id, "date" => "15-07-2022", "value" => 91 }.to_json },
-  # VELOCITY
-  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "velocity", metrics: { "team_id" => team_broker.id, "date" => "15-05-2022", "value" => 192 }.to_json },
-  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "velocity", metrics: { "team_id" => team_broker.id, "date" => "15-06-2022", "value" => 130 }.to_json },
-  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "velocity", metrics: { "team_id" => team_broker.id, "date" => "15-07-2022", "value" => 142 }.to_json },
-  # MORALE
-  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "morale", metrics: { "team_id" => team_broker.id, "date" => "15-06-2022", "value" => 82 }.to_json },
-  # BALANCE
-  { date: "15-01-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-01-2022", "value" => 69 }.to_json },
-  { date: "15-02-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-02-2022", "value" => 69 }.to_json },
-  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-03-2022", "value" => 69 }.to_json },
-  { date: "15-04-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-04-2022", "value" => 69 }.to_json },
-  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-05-2022", "value" => 69 }.to_json },
-  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-06-2022", "value" => 69 }.to_json },
-  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "balance", metrics: { "team_id" => team_broker.id, "date" => "15-07-2022", "value" => 69 }.to_json }
-
 # { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 50 },
 
 Metric.create([
@@ -356,8 +335,8 @@ Metric.create([
   { date: "15-04-2022".to_date, related: team_broker, indicator_type: "balance", value: 100 },
   { date: "15-05-2022".to_date, related: team_broker, indicator_type: "balance", value: 90 },
   { date: "15-06-2022".to_date, related: team_broker, indicator_type: "balance", value: 90 },
->>>>>>> feat/NCM-186-priority-into-accounts-endpoint
 ])
+
 team_broker.investments.create!([
   { value: 70000.00, date: "15-01-2022".to_date },
   { value: 70000.00, date: "15-02-2022".to_date },
