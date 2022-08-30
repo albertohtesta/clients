@@ -2,24 +2,24 @@
 
 class TeamBalanceRepository < ApplicationRepository
   class << self
-    def retrieve_team_by_id(team_idid)
+    def retrieve_team_by_id(team_id)
       scope.includes(:teams).find_by({ id: team_id })
     end
 
-    def count_collaborators(id)
-      scope.find_by(id:).collaborators.where.count
+    def all_collaborators(id)
+      scope.find_by(id:).collaborators
     end
 
-    def count_junior_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "JUNIOR").count
+    def all_junior_collaborators(id)
+      scope.find_by(id:).collaborators.where(seniority: "JUNIOR")
     end
 
-    def count_middle_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "MIDDLE").count
+    def all_middle_collaborators(id)
+      scope.find_by(id:).collaborators.where(seniority: "MIDDLE")
     end
 
-    def count_senior_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "SENIOR").count
+    def all_senior_collaborators(id)
+      scope.find_by(id:).collaborators.where(seniority: "SENIOR")
     end
   end
 end
