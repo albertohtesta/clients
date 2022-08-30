@@ -6,6 +6,7 @@ class ApplicationRepository
     delegate :all, to: :scope
     delegate :find, to: :scope
     delegate :find_by, to: :scope
+    delegate :create, to: :scope
 
     def new_entity(attrs)
       scope.new(attrs)
