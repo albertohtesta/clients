@@ -4,17 +4,14 @@ module Api
   module V1
     module TeamBalance
       class BalancesController < ApplicationController
+        before_action :balance_by_team_id, only: :index
         def index
-          render json: { message: "No balance found" }, status: :not_found
+          render json: { message: "No balance found" }, status: :not_found if @team.nil
         end
 
         private
-          def retrieve_team
-            @team = TeamRepository.find_by(id: params[:team_id])
-          end
-
           def balance_by_team_id
-            TeamBalanceRepository.retrieve_team_by_id(@team.id) if @team
+            @team = TeamBalanceRepository.retrieve_team_by_id(@team.id)
           end
       end
     end
