@@ -3,27 +3,17 @@
 module Api
   module V1
     class AccountsController < ApiController
-      before_action :retrieve_accounts, only: :index
-      before_action :find_account, only: :show
       def index
-        return render json: { message: "Accounts not found" }, status: :not_found if @accounts.nil?
+        account = account_of_contact
+        return render json: { message: "No account information" }, status: :not_found if account.nil?
 
-        render json: AccountPresenter.json_collection(@accounts), status: :ok
-      end
-
-      def show
-        return render json: { message: "Accounts not found" }, status: :not_found if @account.nil?
-
-        render json: AccountPresenter.new(@account).json, status: :ok
+        render json: AccountInfoPresenter.new(account).json, status: :ok
       end
 
       private
-        def retrieve_accounts
-          @accounts = AccountRepository.all
-        end
-
-        def find_account
-          @account = AccountRepository.find_by(id: params[:id])
+        def account_of_contact
+          contact = ContactRepository.find_by({ uuid: @current_user[:contact_uuid] })
+          AccountRepository.find_by({ id: contact.account_id })
         end
     end
   end

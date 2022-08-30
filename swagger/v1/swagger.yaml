@@ -4,6 +4,46 @@ info:
   title: Clients API V1
   version: v1
 paths:
+  "/api/v1/accounts":
+    get:
+      summary: list accounts
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Authorized
+        '401':
+          description: Unauthorized
+  "/api/v1/accounts/{account_id}/invitations":
+    post:
+      summary: Invite account contacts throght email
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: contacts invited
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
   "/api/v1/accounts/{account_id}/contacts":
     get:
       summary: Get all contact from an acccount
@@ -68,26 +108,6 @@ paths:
           description: metrics found
         '404':
           description: Not metrics found
-  "/api/v1/public/collaborators":
-    get:
-      summary: Get talent pool directory
-      tags:
-      - Collaborators
-      security:
-      - Bearer: []
-      responses:
-        '200':
-          description: talent pool directory filtered found
-        '404':
-          description: talent pool directory not found
-      parameters:
-      - name: category
-        in: query
-        description: filter by category
-        required: false
-        allowReserved: true
-        schema:
-          type: string
   "/build-info":
     get:
       summary: gets the build info
