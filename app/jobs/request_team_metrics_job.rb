@@ -8,16 +8,18 @@ class RequestTeamMetricsJob < ApplicationJob
   queue_as :default
 
   def perform(board_id, team_id)
-    params = { BoardId: board_id, GroupBy: "monthly" }
+    params = { BoardId: board_id, GroupBy: "Month", ToDate: Date.today.strftime("%Y-%m"), FromDate: 5.months.ago.strftime("%Y-%m") }
+
     request = Requests::NetHttpLib.new(url: METRICS_API_BI_URL)
-    request.with_headers(Authorization: "somehere").with_query_params(params)
+    request.with_headers(Authorization: "somehere")
+    request.with_query_params(params)
     response = request.resolve
 
     if response
       puts "API Response success", JSON.parse(response, symbolize_names: true)
-      LoadTeamMetricsService.load_team_metrics(team_id, JSON.parse(response, symbolize_names: true))
+      TeamMetricsService.save_team_metrics(team_id, JSON.parse(response, symbolize_names: true))
+    else
+      puts "API Response Error", response.to_json
     end
-
-    puts "Job ended"
   end
 end

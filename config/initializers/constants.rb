@@ -17,4 +17,4 @@ SENIORITY_TYPES = {
 }
 
 # TODO: Replace for BI API url
-METRICS_API_BI_URL = "https://qa-clients-api.nordhen.com/api/v1/information"
+METRICS_API_BI_URL = "https://qa-bi-api.nordhen.com/TeamPerformanceMetrics"

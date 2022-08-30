@@ -2,14 +2,11 @@
 
 class TeamMetricsService
   class << self
-    def load_team_metrics(team_id, metrics)
-      # TODO: temporally metrics, mujst be replaced with the BI API response
-      metrics = { "January": { "estimatedPoints": 82, "completedPoints": 68, "performance": 81 } }
-
+    def save_team_metrics(team_id, metrics)
       metrics.map do |month, metric|
-        Metric.create!([
-          { metrics: metric[:performance].to_s, indicator_type: :performance, date: Date.today, related_type: "Team", related_id: team_id },
-          { metrics: metric[:completedPoints].to_s, indicator_type: :velocity, date: Date.today, related_type: "Team", related_id: team_id }
+        MetricRepository.create([
+          { metrics: metric[:performance].to_s, indicator_type: :performance, date: month.to_s.to_date, related_type: "Team", related_id: team_id },
+          { metrics: metric[:completedPoints].to_s, indicator_type: :velocity, date: month.to_s.to_date, related_type: "Team", related_id: team_id }
         ])
       end
     end
