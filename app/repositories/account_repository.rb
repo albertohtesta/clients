@@ -2,6 +2,10 @@
 
 class AccountRepository < ApplicationRepository
   class << self
+    def by_manager(manager_id)
+      scope.includes(:account_follow_ups).where(manager_id:)
+    end
+
     def first_or_initialize_by_salesforce_id(salesforce_id)
       scope.where(salesforce_id:).first_or_initialize
     end
