@@ -369,6 +369,108 @@ Collaborator.where(id: 10..30).all.each do |collaborator|
 end
 Post.create!(posts_for_collaborators)
 
+Survey.create(
+  status: 2,
+  survey_url: "www.survey.com",
+  requested_answers: 30,
+  current_answers: 17,
+  created_at: Date.today,
+  deadline: "2022-08-10",
+  period: 0,
+  team_id: 880,
+  questions_detail: {
+  questions: [
+    {
+    title: "Pregunta 1",
+    category: "Balance de vida",
+    final_score: [50, 60, 70, 80, 90, 100].sample,
+    answers: [
+      {
+      title: "respuesta 1",
+      responses: 10,
+      score: 100
+      },
+      {
+      title: "respuesta 2",
+      responses: 0,
+      score: 0
+      },
+      {
+      title: "respuesta 3",
+      responses: 0,
+      score: 0
+      }
+    ]
+    },
+    {
+    title: "Pregunta 2",
+    category: "Balance de vida",
+    final_score: [50, 60, 70, 80, 90, 100].sample,
+    answers: [
+      {
+      title: "respuesta 1",
+      responses: 10,
+      score: 100
+      },
+      {
+      title: "respuesta 2",
+      responses: 0,
+      score: 0
+      },
+      {
+      title: "respuesta 3",
+      responses: 0,
+      score: 0
+      }
+    ]
+    },
+    {
+    title: "Pregunta 3",
+    category: "Orgullo",
+    final_score: [50, 60, 70, 80, 90, 100].sample,
+    answers: [
+      {
+      title: "respuesta 1",
+      responses: 10,
+      score: 100
+      },
+      {
+      title: "respuesta 2",
+      responses: 0,
+      score: 0
+      },
+      {
+      title: "respuesta 3",
+      responses: 0,
+      score: 0
+      }
+    ]
+    },
+    {
+    title: "Pregunta 4",
+    category: "Orgullo",
+    final_score: [50, 60, 70, 80, 90, 100].sample,
+    answers: [
+      {
+      title: "respuesta 1",
+      responses: 10,
+      score: 100
+      },
+      {
+      title: "respuesta 2",
+      responses: 0,
+      score: 0
+      },
+      {
+      title: "respuesta 3",
+      responses: 0,
+      score: 0
+      }
+    ]
+    },
+  ]
+  }
+)
 
 
 
