@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AccountContactCollaboratorPresenter < ApplicationPresenter
-  METHODS = %i[id first_name last_name email phone position].freeze
+  METHODS = %i[id first_name last_name email phone position img].freeze
 
   def id
     collaborator.id
@@ -25,5 +25,9 @@ class AccountContactCollaboratorPresenter < ApplicationPresenter
 
   def position
     collaborator.role.name
+  end
+
+  def img
+    collaborator.profile
   end
 end
