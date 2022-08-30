@@ -9,7 +9,7 @@ class TeamBalanceService < ApplicationService
 
     junior_deviation = 50 - junior_balance
     junior_deviation.abs
-   end
+  end
 
   def calculate_middle_seniority
     total_collaborators = TeamBalanceRepository.all_collaborators(id).count
