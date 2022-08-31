@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CollaboratorPresenter < ApplicationPresenter
-  ATTRS = %i[id position]
+  ATTRS = %i[id uuid position]
   METHODS = %i[name posts_count img post]
   ASSOCIATIONS = []
 
