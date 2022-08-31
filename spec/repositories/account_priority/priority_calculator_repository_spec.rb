@@ -18,8 +18,8 @@ RSpec.describe AccountPriority::PriorityCalculatorRepository do
       let!(:account_metric_performance) { create(:metric, indicator_type: "performance", related: account, date:) }
       let!(:metric_limit_performance) { create(:metric_limit, indicator_type: "performance") }
 
-      let!(:account_metric_gross_marging) { create(:metric, indicator_type: "gross_marging", related: account, date:) }
-      let!(:metric_limit_gross_marging) { create(:metric_limit, indicator_type: "gross_marging") }
+      let!(:account_metric_gross_marging) { create(:metric, indicator_type: "gross_margin", related: account, date:) }
+      let!(:metric_limit_gross_marging) { create(:metric_limit, indicator_type: "gross_margin") }
 
       it "should return true" do
         high_priority = AccountPriority::PriorityCalculatorRepository
@@ -45,9 +45,9 @@ RSpec.describe AccountPriority::PriorityCalculatorRepository do
       let!(:metric_limit_performance) { create(:metric_limit, indicator_type: "performance") }
 
       let!(:account_metric_gross_marging) {
-        create(:metric, indicator_type: "gross_marging", related: account, date:, value: 85)
+        create(:metric, indicator_type: "gross_margin", related: account, date:, value: 85)
       }
-      let!(:metric_limit_gross_marging) { create(:metric_limit, indicator_type: "gross_marging") }
+      let!(:metric_limit_gross_marging) { create(:metric_limit, indicator_type: "gross_margin") }
 
       it "should return true" do
         high_priority = AccountPriority::PriorityCalculatorRepository

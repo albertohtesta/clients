@@ -60,7 +60,7 @@ MetricLimit.create!([
   { indicator_type: :client_engagement, label: METRICS_TYPES[:client_engagement], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :performance, label: METRICS_TYPES[:performance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :morale, label: METRICS_TYPES[:morale], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  { indicator_type: :gross_marging, label: METRICS_TYPES[:gross_marging], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
+  { indicator_type: :gross_margin, label: METRICS_TYPES[:gross_margin], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
 ])
 
 # **************************************
@@ -180,13 +180,13 @@ Metric.create([
   { date: "15-06-2022".to_date, related: advanta_account, indicator_type: "performance", value: 100 },
   { date: "15-07-2022".to_date, related: advanta_account, indicator_type: "performance", value: 100 },
   # VELOCITY
-  { date: "15-01-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 35 },
-  { date: "15-02-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 45 },
-  { date: "15-03-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 35 },
-  { date: "15-04-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 60 },
-  { date: "15-05-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 70 },
-  { date: "15-06-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 75 },
-  { date: "15-07-2022".to_date, related: advanta_account, indicator_type: "gross_marging", value: 75 },
+  { date: "15-01-2022".to_date, related: advanta_account, indicator_type: "gross_margin", value: 35 },
+  { date: "15-02-2022".to_date, related: advanta_account, indicator_type: "gross_margin", value: 45 },
+  { date: "15-03-2022".to_date, related: advanta_account, indicator_type: "gross_margin", value: 35 },
+  { date: "15-04-2022".to_date, related: advanta_account, indicator_type: "gross_margin", value: 60 },
+  { date: "15-05-2022".to_date, related: advanta_account, indicator_type: "gross_margin", value: 70 },
+  { date: "15-06-2022".to_date, related: advanta_account, indicator_type: "gross_margin", value: 75 },
+  { date: "15-07-2022".to_date, related: advanta_account, indicator_type: "gross_margin", value: 75 },
   # MORALE
   { date: "15-01-2022".to_date, related: advanta_account, indicator_type: "morale", value: 90 },
   { date: "15-02-2022".to_date, related: advanta_account, indicator_type: "morale", value: 95 },
