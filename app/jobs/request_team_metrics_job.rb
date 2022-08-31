@@ -1,17 +1,14 @@
 # frozen_string_literal: true
 
-require "net/http"
-require "uri"
-
 class RequestTeamMetricsJob < ApplicationJob
   # repeat 'every week at 3am'
   queue_as :default
+  METRICS_API_BI_URL = ENV.fetch("BASE_URL_BI_API", "") + "/TeamPerformanceMetrics"
 
   def perform(board_id, team_id)
-    params = { BoardId: board_id, GroupBy: "Month", ToDate: Date.today.strftime("%Y-%m"), FromDate: 5.months.ago.strftime("%Y-%m") }
+    params = { BoardId: board_id, GroupBy: "Month", ToDate: Date.today.strftime("%Y-%m"), FromDate: 1.months.ago.strftime("%Y-%m") }
 
     request = Requests::NetHttpLib.new(url: METRICS_API_BI_URL)
-    request.with_headers(Authorization: "somehere")
     request.with_query_params(params)
     response = request.resolve
 
