@@ -29,6 +29,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
 
     expected_json = {
       "id" => @collaborator.id,
+      "uuid" => @collaborator.uuid,
       "position" => "Developer",
       "name" => "MyString MyString",
       "posts_count" => 1,
@@ -54,6 +55,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
 
     expected_json = {
       "id" => @collaborator.id,
+      "uuid" => @collaborator.uuid,
       "name" => "MyString MyString",
       "position" => "Developer",
       "posts_count" => 0,
