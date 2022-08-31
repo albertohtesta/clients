@@ -9,7 +9,6 @@ module Requests
       @uri = prepare_uri(url)
       @http = http_server
       @request = request_entity
-      @response = nil
     end
 
     def resolve
@@ -19,15 +18,11 @@ module Requests
 
     def with_query_params(params)
       uri.query = URI.encode_www_form(params)
-      self
     end
 
     def with_headers(**headers)
       headers.map { |header, value| request[header.to_s] = value }
-      self
     end
-
-    attr_accessor :response
 
     private
       attr_reader :uri, :request, :http
