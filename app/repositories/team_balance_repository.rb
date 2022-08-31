@@ -2,10 +2,6 @@
 
 class TeamBalanceRepository < ApplicationRepository
   class << self
-    def retrieve_team_by_id(team_id)
-      scope.includes(:teams).find_by({ id: team_id })
-    end
-
     def all_collaborators(id)
       scope.find_by(id:).collaborators
     end
