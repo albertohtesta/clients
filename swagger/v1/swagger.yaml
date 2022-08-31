@@ -32,19 +32,39 @@ paths:
           description: metrics found
         '404':
           description: Not metrics found
-  "/api/v1/public/collaborators":
+  "/api/v1/public/collaborators/{id}":
+    get:
+      summary: Get a collaborator
+      tags:
+      - Collaborators
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: id of the collaborator
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: collaborator found
+        '404':
+          description: collaborator not found
+  "/api/v1/public/account/{account_id}/collaborators":
     get:
       summary: Get talent pool directory
       tags:
       - Collaborators
       security:
       - Bearer: []
-      responses:
-        '200':
-          description: talent pool directory filtered found
-        '404':
-          description: talent pool directory not found
       parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
       - name: category
         in: query
         description: filter by category
@@ -52,6 +72,11 @@ paths:
         allowReserved: true
         schema:
           type: string
+      responses:
+        '200':
+          description: talent pool directory filtered found
+        '404':
+          description: talent pool directory not found
   "/build-info":
     get:
       summary: gets the build info
