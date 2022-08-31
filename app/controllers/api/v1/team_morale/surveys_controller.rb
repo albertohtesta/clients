@@ -4,6 +4,8 @@ module Api
   module V1
     module TeamMorale
       class SurveysController < ApplicationController
+        before_action :survey_by_id, only: :show
+
         def create
           @survey = Survey.new(survey_params.merge(status: "preparation"))
           if @survey.save
@@ -19,13 +21,16 @@ module Api
         end
 
         def show
-          @surveys = TypeFormService::Surveys.new
-          render json: @surveys.find(params[:id])
+          render json: SurveyPresenter.new(@survey).json, status: :ok
         end
 
         private
           def survey_params
             params.require(:survey).permit(:team_id, :deadline, :period)
+          end
+
+          def survey_by_id
+            @survey = SurveyRepository.find(params[:id])
           end
       end
     end
