@@ -2,7 +2,7 @@
         "type": "score",
         "title": "survey from my APP",
         "workspace": {
-            "href": "https://api.typeform.com/workspaces/Gmuu7V"
+            "href": "https://api.typeform.com/workspaces/26Wpxy"
         },
         "theme": {
             "href": "https://api.typeform.com/themes/qHWOQ7"

@@ -3,34 +3,38 @@
 module TypeFormService
   class HttpClient < ApplicationService
     def initialize
-      @base_url = "https://api.typeform.com/"
-      @access_token = ENV["TYPE_FORM_ACCESS_TOKEN"]
+      client_params
     end
 
     def get(path)
-      path = @base_url + path
-      RestClient.get path,
+      RestClient.get create_path(path),
         { content_type: :json, accept: :json, Authorization: "Bearer #{access_token}" }
       rescue
     end
 
     def patch(path, args)
-      path = @base_url + path
       data = [args].to_json
-      RestClient.patch path, data,
+      RestClient.patch create_path(path), data,
         { content_type: :json, accept: :json, Authorization: "Bearer #{access_token}" }
       rescue
     end
 
     def post(path, args)
-      path = @base_url + path
       data = args.to_json
-      RestClient.post path, data,
+      RestClient.post create_path(path), data,
         { content_type: :json, accept: :json, Authorization: "Bearer #{access_token}" }
       rescue
     end
 
     private
       attr_reader :access_token, :base_url
+      def client_params
+        @base_url = "https://api.typeform.com/"
+        @access_token = ENV["TYPE_FORM_ACCESS_TOKEN"]
+      end
+
+      def create_path(value)
+        base_url + value
+      end
   end
 end

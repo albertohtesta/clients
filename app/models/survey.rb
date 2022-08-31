@@ -41,9 +41,9 @@ class Survey < ApplicationRecord
   private
     def get_survey_url
       data = TypeFormService::RemoteSurveys.create
-      if data.key?(:typeform_survey_url)
-        self.survey_url = data[:typeform_survey_url]
-        # TODO: update(id_survey_remote: data[typeform_survey_id)] when there is the field
-      end
+      return nil unless data.key?(:typeform_survey_url)
+      self.survey_url = data[:typeform_survey_url]
+      # TODO: self.id_remote_survey: data[typeform_survey_id)]
+      # when we have the field
     end
 end
