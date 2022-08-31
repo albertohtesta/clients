@@ -26,7 +26,7 @@ module Api
 
         private
           def survey_params
-            params.require(:survey).permit(:team_id, :deadline, :period)
+            params.require(:survey).permit(:team_id, :deadline, :period, :survey_url)
           end
 
           def survey_by_id

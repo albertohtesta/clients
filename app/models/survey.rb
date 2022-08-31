@@ -17,7 +17,7 @@ class Survey < ApplicationRecord
   validate :deadline_date_cannot_be_in_the_past, unless: -> { deadline.blank? }
 
   before_validation do
-    get_survey_url
+    get_survey_url unless self.survey_url.present?
   end
 
   def deadline_date_cannot_be_in_the_past
@@ -41,7 +41,8 @@ class Survey < ApplicationRecord
   private
     def get_survey_url
       data = TypeFormService::RemoteSurveys.create
-      return nil unless data.key?(:typeform_survey_url)
+      return unless data.key?(:typeform_survey_url)
+
       self.survey_url = data[:typeform_survey_url]
       # TODO: self.id_remote_survey: data[typeform_survey_id)]
       # when we have the field

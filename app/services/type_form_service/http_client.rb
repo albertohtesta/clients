@@ -28,6 +28,7 @@ module TypeFormService
 
     private
       attr_reader :access_token, :base_url
+
       def client_params
         @base_url = "https://api.typeform.com/"
         @access_token = ENV["TYPE_FORM_ACCESS_TOKEN"]

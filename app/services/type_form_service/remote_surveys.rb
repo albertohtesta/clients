@@ -17,24 +17,17 @@ module TypeFormService
     def self.create
       type_form_survey_template = File.join(Rails.root, "app", "services/type_form_service", "typeform_survey_template.txt")
       data = HttpClient.new.post("forms", JSON.parse(File.read(type_form_survey_template)))
-      if data.present?
-        result = safe_json(data)
-        result = { typeform_survey_id: result[:id], typeform_survey_url: result[:_links][:display] }
-      else
-        result = { error: "survey not created" }
-      end
-      result
+      data = safe_json(data)
+      return { typeform_survey_id: data[:id], typeform_survey_url: data[:_links][:display] } unless data.blank?
+
+      { error: "survey not created" }
     end
 
     def self.survey_url_by_form_id(form_id)
       data = find(form_id)
-      if data.present?
-        result = safe_json(data)
-        result = { survey_url: result[:_links][:display] }
-      else
-        result = { error: "not found" }
-      end
-      result
+      return { survey_url: safe_json(data)[:_links][:display] } unless data.blank?
+
+      { error: "not found" }
     end
 
     protected
