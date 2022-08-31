@@ -32,10 +32,6 @@ module Api
           def survey_by_id
             @survey = SurveyRepository.find(params[:id])
           end
-
-          def survey_by_id
-            @survey = SurveyRepository.find(params[:id])
-          end
       end
     end
   end
