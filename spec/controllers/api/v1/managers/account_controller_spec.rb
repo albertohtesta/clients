@@ -12,7 +12,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       let!(:account_metric_balance) { create(:metric, related: account, date:, indicator_type: "balance", value: 95) }
       let!(:account_metric_morale) { create(:metric, related: account, date:, indicator_type: "morale", value: 95) }
       let!(:account_metric_performance) { create(:metric, related: account, date:, indicator_type: "performance", value: 95) }
-      let!(:account_metric_gross_marging) { create(:metric, related: account, date:, indicator_type: "gross_marging", value: 95) }
+      let!(:account_metric_gross_margin) { create(:metric, related: account, date:, indicator_type: "gross_margin", value: 95) }
 
       let!(:metric_limit_balance) { create(:metric_limit, indicator_type: "balance") }
       let!(:metric_limit_morale) {
@@ -40,7 +40,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
         )
       }
 
-      let!(:metric_limit_gross_marging) { create(:metric_limit, indicator_type: "gross_marging") }
+      let!(:metric_limit_gross_marging) { create(:metric_limit, indicator_type: "gross_margin") }
 
       it "must return priority eql low" do
         expected_keys = [
@@ -54,7 +54,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "team_balance" => { "amount" => 0, "alert" => false },
             "client_management" => { "amount" => 0, "alert" => false },
             "performance" => { "amount" => 95, "alert" => false },
-            "gross_margin" => { "amount" => 0, "alert" => false },
+            "gross_margin" => { "amount" => 95, "alert" => false },
             "morale" => { "amount" => 95, "alert" => false }
           }
         ]

@@ -25,7 +25,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository do
 
       it "should return false because priority is high" do
         gross_marging_priority = MetricPriority::PriorityCalculatorRepository
-          .new(account, "gross_marging")
+          .new(account, "gross_margin")
           .priority
 
         expect(gross_marging_priority).to eq({ amount: 75, alert: false })
