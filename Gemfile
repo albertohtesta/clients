@@ -45,6 +45,7 @@ group :development do
   gem "rubocop-minitest"
   gem "rubocop-performance"
   gem "rubocop", require: false
+  gem "rest-client"
 end
 
 group :test do

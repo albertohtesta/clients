@@ -51,6 +51,7 @@ Rails.application.routes.draw do
           resources :webhooks, except: %i[destroy]
         end
         resources :survey_results, only: [:index]
+        resources :remote_surveys, only: %i[index show update create]
       end
 
       resources :metric_history, only: %i[show update]
