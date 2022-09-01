@@ -11,6 +11,7 @@ class Account < ApplicationRecord
   has_many :team_requirements
   has_many :account_contact_collaborators
   has_many :account_follow_ups
+  has_many :team_balances
 
   validates :account_uuid, :name, presence: true
 
