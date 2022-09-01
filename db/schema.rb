@@ -67,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_19_233048) do
     t.integer "productivity", default: 0
     t.integer "speed", default: 0
     t.datetime "deleted_at", precision: nil
-    t.date "manager_started_date"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
