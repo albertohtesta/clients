@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_19_233048) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -301,17 +301,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_19_233048) do
     t.index ["period"], name: "index_surveys_on_period"
     t.index ["questions_detail"], name: "index_surveys_on_questions_detail", using: :gin
     t.index ["team_id"], name: "index_surveys_on_team_id"
-  end
-
-  create_table "team_balances", force: :cascade do |t|
-    t.float "balance"
-    t.date "balance_date"
-    t.bigint "team_id"
-    t.bigint "account_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_team_balances_on_account_id"
-    t.index ["team_id"], name: "index_team_balances_on_team_id"
   end
 
   create_table "team_requirements", force: :cascade do |t|
