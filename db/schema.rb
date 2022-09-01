@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_30_184003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
     t.date "manager_started_date"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
+  end
+
+  create_table "accounts_collaborators", id: false, force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "collaborator_id", null: false
+    t.integer "status", default: 1
+    t.index ["account_id", "collaborator_id"], name: "index_accounts_collaborators_on_account_id_and_collaborator_id"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|

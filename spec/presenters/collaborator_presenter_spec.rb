@@ -3,16 +3,27 @@
 require "rails_helper"
 
 RSpec.describe CollaboratorPresenter do
-  describe "" do
-    let!(:collaborator) { create(:collaborator) }
-    let!(:team) { create(:team) }
-    let!(:collaborator_team) { create(:collaborators_team, collaborator:, team:) }
+  describe "presenter validation" do
+    let!(:collaborator) { build(:collaborator) }
+    let!(:presenter) { described_class.new(collaborator) }
 
     it "must return formated json" do
       expected_keys = %w[id uuid position name posts_count img post]
-      presenter_result = described_class.json_collection(Collaborator.all)
+      expect(presenter.json.keys).to eq(expected_keys)
+    end
 
-      expect(presenter_result.first.keys).to eq(expected_keys)
+    it "must return json without post" do
+      expected_json = {
+        "id" => collaborator.id,
+        "uuid" => "MyString",
+        "position" => "Software Engineer",
+        "name" => "MyString MyString",
+        "posts_count" => 0,
+        "img" => "www.mystring.com",
+        "post" => []
+      }
+
+      expect(presenter.json).to eq(expected_json)
     end
   end
 end
