@@ -14,17 +14,9 @@ class Team < ApplicationRecord
 
   validates :added_date, presence: true
 
-  # after_create :team_balance
+  after_create :team_balance
 
-  # def team_balance
-  #   TeamBalanceService.new(team.id).process
-  # end
-
-
-  # trigger.after(:insert) do
-  #   "UPDATE teams SET NEW.balance = TeamBalanceService.process"
-  # end
-
-  # trigger.after(:update).of(:collaborators) do
-  #   # "INSERT INTO user_changes(id, name) VALUES(NEW.id, NEW.name);"
-  # end
+  def team_balance
+    TeamBalanceService.new(id).process
+  end
+end

@@ -2,55 +2,54 @@
 
 class TeamBalanceService < ApplicationService
   attr_reader :team_id
-  attr_accessor :balance, :balance_date
 
-  def initialize(team_id, balance, balance_date)
+  def initialize(team_id)
     @team_id = team_id
-    @balance = balance
-    @balance_date = balance_date
   end
 
   def process
-    # ActiveRecord::Base.transaction do
-    #   @balance = calculate_balance
-    #   @balance
-    # end
+    @balance_date = Date.today
+    calculate_junior_seniority
+    calculate_middle_seniority
+    calculate_senior_seniority
+    calculate_seniority_deviation
   end
 
   private
+    def team_balance_params
+      params.permit(:team_id, :balance, :balance_date)
+    end
+
     def calculate_junior_seniority
-      total_collaborators = TeamRepository.find_all_collaborators(id).count
-      total_juniors = TeamRepository.find_all_junior_collaborators(id).count
+      total_collaborators = TeamRepository.find_all_collaborators(team_id).count
+      total_juniors = TeamRepository.find_all_junior_collaborators(team_id).count
 
-      junior_balance = (total_juniors / total_collaborators) * 100 if total_junior.nil?
+      junior_balance = (total_juniors / total_collaborators) * 100 unless total_juniors.nil?
 
-      junior_deviation = 50 - junior_balance
-      junior_deviation.abs
+      @junior_deviation = (50 - junior_balance).abs
     end
 
     def calculate_middle_seniority
-      total_collaborators = TeamRepository.find_all_collaborators(id).count
-      total_middles = TeamRepository.find_all_middle_collaborators(id).count
+      total_collaborators = TeamRepository.find_all_collaborators(team_id).count
+      total_middles = TeamRepository.find_all_middle_collaborators(team_id).count
 
-      middle_balance = (total_middles / total_collaborators) * 100 if total_middle.nil?
+      middle_balance = (total_middles / total_collaborators) * 100 unless total_middles.nil?
 
-      middle_deviation = 30 - middle_balance
-      middle_deviation.abs
+      @middle_deviation = (30 - middle_balance).abs
     end
 
     def calculate_senior_seniority
-      total_collaborators = TeamRepository.find_all_collaborators(id).count
-      total_seniors = TeamRepository.find_all_senior_collaborators(id).count
+      total_collaborators = TeamRepository.find_all_collaborators(team_id).count
+      total_seniors = TeamRepository.find_all_senior_collaborators(team_id).count
 
-      senior_balance = (total_seniors / total_collaborators) * 100 if total_senior.nil?
+      senior_balance = (total_seniors / total_collaborators) * 100 unless total_seniors.nil?
 
-      senior_deviation = 20 - senior_balance
-      senior_deviation.abs
+      @senior_deviation = (20 - senior_balance).abs
     end
 
-    def calculate_seniority_deviation(junior_deviation, middle_deviation, senior_deviation)
-      seniority_deviation = junior_deviation + middle_deviation + senior_deviation
-      seniority_deviation
+    def calculate_seniority_deviation
+      seniority_deviation = @junior_deviation + @middle_deviation + @senior_deviation
+      calculate_balance(seniority_deviation)
     end
 
     def calculate_balance(seniority_deviation)
