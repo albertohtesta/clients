@@ -7,14 +7,14 @@ class TeamBalanceService < ApplicationService
   def initialize(team_id, balance, balance_date)
     @team_id = team_id
     @balance = balance
-    @balance_date = balance_date
+    @balance_date = Date.today
   end
 
   def process
-    ActiveRecord::Base.transaction do
-      @balance = calculate_balance
-      @balance
-    end
+    # ActiveRecord::Base.transaction do
+    #   @balance = calculate_balance
+    #   @balance
+    # end
   end
 
   private
