@@ -14,13 +14,15 @@ class CollaboratorRepository < ApplicationRepository
       scope.includes(:badges).find_by({ id: collaborator_id })
     end
 
-    def collaborators_pool_directory(account_id)
+    def collaborators_pool_directory(account_id, category)
       public_profiles_ids = scope.includes(:accounts_collaborators).where(accounts: { id: account_id }).select(:collaborator_id)
-      scope.includes(:accounts).where(accounts: { id: account_id }).select(:id, :profile, :position, :nickname, :uuid).where(id: public_profiles_ids)
-    end
+      talent_pool = scope.includes(:accounts).where(accounts: { id: account_id }).select(:id, :profile, :position, :nickname, :uuid).where(id: public_profiles_ids)
 
-    def filter_by_category(account_id, category)
-      collaborators_pool_directory(account_id).where(category:)
+      if category.blank?
+        talent_pool
+      else
+        talent_pool.where(category:)
+      end
     end
   end
 end

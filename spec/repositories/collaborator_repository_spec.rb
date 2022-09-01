@@ -29,7 +29,7 @@ RSpec.describe CollaboratorRepository do
     end
 
     it "must return talent pool directory" do
-      pool_directory = described_class.collaborators_pool_directory(Account.first.id)
+      pool_directory = described_class.collaborators_pool_directory(Account.first.id, "")
 
       expect(pool_directory).not_to be_empty
       expect(pool_directory.first).to be_an_instance_of Collaborator
