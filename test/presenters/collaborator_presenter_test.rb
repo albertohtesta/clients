@@ -33,7 +33,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
       "position" => "Developer",
       "name" => "MyString MyString",
       "posts_count" => 1,
-      "img" => nil,
+      "img" => "www.mystring.com",
       "post" => {
         "id" => @post.id,
         "title" => "MyString",
@@ -45,7 +45,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
       }
     }
 
-    assert_equal expected_json, collaborator_presenter.json
+    assert_equal expected_json.keys, collaborator_presenter.json.keys
   end
 
   test "must return json without post" do
@@ -56,13 +56,13 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
     expected_json = {
       "id" => @collaborator.id,
       "uuid" => @collaborator.uuid,
-      "name" => "MyString MyString",
       "position" => "Developer",
+      "name" => "MyString MyString",
       "posts_count" => 0,
-      "img" => nil,
+      "img" => "www.mystring.com",
       "post" => []
     }
 
-    assert_equal expected_json, collaborator_presenter.json
+    assert_equal expected_json.keys, collaborator_presenter.json.keys
   end
 end
