@@ -21,7 +21,6 @@ RSpec.describe CollaboratorRepository do
 
   describe "talent pool repository validation" do
     let!(:account) { create(:account) }
-    # TODO: This list of id's is just temporally, will be replaced
     collaborator_ids = [1, 3, 4, 5, 6, 7, 8, 9, 200, 201, 202, 203]
     collaborator_ids.map do |id|
       let!(:"collaborator#{id}") { create(:collaborator, id:) }

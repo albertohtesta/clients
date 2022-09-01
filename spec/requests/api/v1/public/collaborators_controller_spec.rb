@@ -45,7 +45,6 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
 
         response "200", "talent pool directory found" do
           let(:account_id) { Account.first.id }
-          # TODO: This list of id's is just temporally, will be replaced
           collaborator_ids = [1, 2, 3, 4, 5, 6, 7, 200, 201, 202, 203]
           collaborator_ids.map do |id|
             let!(:"collaborator#{id}") { create(:collaborator, id:) }
@@ -75,7 +74,6 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
 
         response "200", "talent pool directory filtered found" do
           let(:account_id) { Account.first.id }
-          # TODO: This list of id's is just temporally, will be replaced
           collaborator_ids = [1, 2, 3, 4, 5, 6, 7, 200, 201, 202, 203]
           collaborator_ids.map do |id|
             let!(:"collaborator#{id}") { create(:collaborator, id:) }

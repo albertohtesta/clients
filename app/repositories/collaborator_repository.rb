@@ -18,11 +18,9 @@ class CollaboratorRepository < ApplicationRepository
       public_profiles_ids = scope.includes(:accounts_collaborators).where(accounts: { id: account_id }).select(:collaborator_id)
       talent_pool = scope.includes(:accounts).where(accounts: { id: account_id }).select(:id, :profile, :position, :nickname, :uuid).where(id: public_profiles_ids)
 
-      if category.blank?
-        talent_pool
-      else
-        talent_pool.where(category:)
-      end
+      return talent_pool.where(category:) unless category.blank?
+
+      talent_pool
     end
   end
 end
