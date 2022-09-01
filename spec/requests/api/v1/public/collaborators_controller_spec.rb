@@ -34,7 +34,7 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
       end
     end
 
-    path "/api/v1/public/account/{account_id}/collaborators" do
+    path "/api/v1/public/accounts/{account_id}/collaborators" do
       get "Get talent pool directory" do
         tags "Collaborators"
 
@@ -63,7 +63,7 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
       end
     end
 
-    path "/api/v1/public/account/{account_id}/collaborators" do
+    path "/api/v1/public/accounts/{account_id}/collaborators" do
       get "Get talent pool directory" do
         tags "Collaborators"
 

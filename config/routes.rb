@@ -40,7 +40,9 @@ Rails.application.routes.draw do
 
       namespace :public do
         resources :collaborators, only: [:show]
-        get "account/:account_id/collaborators" => "collaborators#index", as: :collaborators
+        resources :accounts do
+          resources :collaborators, only: [:index]
+        end
       end
 
       namespace :team_morale do

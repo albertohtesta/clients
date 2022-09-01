@@ -9,9 +9,7 @@ RSpec.describe CollaboratorRepository do
     it "must return collaborator public profile" do
       public_collaborator = described_class.find_collaborator_public_profile(collaborator.id)
 
-      expect(public_collaborator).to be_an_instance_of Collaborator
-      expect(public_collaborator).not_to be_nil
-      expect(public_collaborator.nickname).to eq("MyString")
+      expect(public_collaborator).to eq(Collaborator.first)
     end
 
     it "must not return collaborator public profile" do
@@ -33,10 +31,8 @@ RSpec.describe CollaboratorRepository do
     it "must return talent pool directory" do
       pool_directory = described_class.collaborators_pool_directory(Account.first.id)
 
-      expect(pool_directory.first).to be_an_instance_of Collaborator
       expect(pool_directory).not_to be_empty
-      expect(pool_directory.length).to equal(collaborator_ids.length)
-      expect(pool_directory.last["nickname"]).to eq("MyString")
+      expect(pool_directory.first).to be_an_instance_of Collaborator
     end
   end
 end

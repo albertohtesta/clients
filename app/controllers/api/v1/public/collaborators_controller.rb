@@ -7,7 +7,7 @@ module Api
         before_action :set_public_collaborator_profile, only: :show
 
         def index
-          pool_directory = params[:category].present? ? collaborators_public_pool_directory_by_category : collaborators_public_pool_directory
+          pool_directory = params[:category].present? ? pool_directory_by_category : talent_pool_directory
 
           return render(json: { message: "No pool directory found" }, status: :not_found) if pool_directory.empty?
 
@@ -27,11 +27,11 @@ module Api
             @collaborator = CollaboratorRepository.find_collaborator_public_profile(params[:id])
           end
 
-          def collaborators_public_pool_directory
+          def talent_pool_directory
             CollaboratorRepository.collaborators_pool_directory(params[:account_id])
           end
 
-          def collaborators_public_pool_directory_by_category
+          def pool_directory_by_category
             CollaboratorRepository.filter_by_category(params[:account_id], params[:category])
           end
       end

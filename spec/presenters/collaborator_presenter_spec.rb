@@ -8,7 +8,7 @@ RSpec.describe CollaboratorPresenter do
     let!(:presenter) { described_class.new(collaborator) }
 
     it "must return formated json" do
-      expected_keys = ["id", "position", "name", "posts_count", "img", "post"]
+      expected_keys = %w[id position name posts_count img post]
 
       expect(presenter.json.keys).to eq(expected_keys)
     end

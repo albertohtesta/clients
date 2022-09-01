@@ -15,13 +15,12 @@ class CollaboratorRepository < ApplicationRepository
     end
 
     def collaborators_pool_directory(account_id)
-      # TODO: This list of id's is just temporally, will be replaced
-      public_profiles_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 200, 201, 202, 203]
-      scope.select([:id, :profile, :position, :nickname, :uuid]).where({ id: public_profiles_ids }).includes(:accounts).where(accounts: { id: account_id })
+      public_profiles_ids = scope.includes(:accounts_collaborators).where(accounts: { id: account_id }).select(:collaborator_id)
+      scope.includes(:accounts).where(accounts: { id: account_id }).select(:id, :profile, :position, :nickname, :uuid).where(id: public_profiles_ids)
     end
 
     def filter_by_category(account_id, category)
-      collaborators_pool_directory(account_id).where({ category: })
+      collaborators_pool_directory(account_id).where(category:)
     end
   end
 end

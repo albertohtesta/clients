@@ -76,6 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_184003) do
     t.bigint "account_id", null: false
     t.bigint "collaborator_id", null: false
     t.integer "status", default: 1
+    t.index ["account_id", "collaborator_id"], name: "index_accounts_collaborators_on_account_id_and_collaborator_id"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|

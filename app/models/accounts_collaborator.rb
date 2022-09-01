@@ -4,5 +4,5 @@ class AccountsCollaborator < ApplicationRecord
   belongs_to :collaborator
   belongs_to :account
 
-  enum :status, { available: 1 }
+  enum :status, { unavailable: 0, available: 1 }
 end
