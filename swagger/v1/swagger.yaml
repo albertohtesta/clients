@@ -51,7 +51,7 @@ paths:
           description: collaborator found
         '404':
           description: collaborator not found
-  "/api/v1/public/account/{account_id}/collaborators":
+  "/api/v1/public/accounts/{account_id}/collaborators":
     get:
       summary: Get talent pool directory
       tags:
