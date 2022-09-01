@@ -14,7 +14,6 @@ gem "bootsnap", require: false
 gem "bunny"
 gem "bunny-mock"
 gem "faker"
-gem "hairtrigger"
 gem "image_processing"
 gem "jbuilder"
 gem "json"
