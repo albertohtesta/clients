@@ -128,6 +128,10 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hairtrigger (0.2.25)
+      activerecord (>= 5.0, < 8)
+      ruby2ruby (~> 2.4)
+      ruby_parser (~> 3.10)
     hashdiff (1.0.1)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -312,9 +316,15 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
+    ruby2ruby (2.4.4)
+      ruby_parser (~> 3.1)
+      sexp_processor (~> 4.6)
+    ruby_parser (3.19.1)
+      sexp_processor (~> 4.16)
     serverengine (2.0.7)
       sigdump (~> 0.2.2)
     set (1.0.2)
+    sexp_processor (4.16.1)
     sigdump (0.2.4)
     simplecov (0.21.2)
       docile (~> 1.1)
@@ -365,6 +375,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  hairtrigger
   image_processing
   jbuilder
   json

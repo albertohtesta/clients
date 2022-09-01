@@ -4,7 +4,7 @@ class TeamBalance < ApplicationRecord
   has_many :metrics, as: :related
 
   belongs_to :team
-  belongs_to :account
+  belongs_to :account, optional: true
 
   validates :balance, :balance_date, :account_id, :team_id, presence: true
   enum seniority: SENIORITY_TYPES

@@ -11,6 +11,7 @@ gem "aws-sdk-s3"
 gem "bcrypt"
 gem "bootsnap", require: false
 gem "faker"
+gem "hairtrigger"
 gem "image_processing"
 gem "jbuilder"
 gem "json"
