@@ -6,6 +6,6 @@ class TeamBalance < ApplicationRecord
   belongs_to :team
   belongs_to :account, optional: true
 
-  validates :balance, :balance_date, :account_id, :team_id, presence: true
+  validates :balance, :balance_date, :team_id, presence: true
   enum seniority: SENIORITY_TYPES
 end

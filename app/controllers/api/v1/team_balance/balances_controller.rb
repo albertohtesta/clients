@@ -12,15 +12,15 @@ module Api
           render json: TeamBalancePresenter.json_collection(@teams), status: :ok
         end
 
-        def create
-          balance = TeamBalanceService.new(team_id).process
+        # def create
+        #   balance = TeamBalanceService.new(team_id).process
 
-          if balance.save
-            render json: { message: "balance save to the database" }, status: :ok
-          else
-            render json: { error: balance.errors.full_messages }, status: :unprocessable_entity
-          end
-        end
+        #   if balance.save
+        #     render json: { message: "balance save to the database" }, status: :ok
+        #   else
+        #     render json: { error: balance.errors.full_messages }, status: :unprocessable_entity
+        #   end
+        # end
 
         private
           def retrieve_teams
@@ -28,7 +28,11 @@ module Api
           end
 
           def retrieve_team_by_id
-            @team = TeamBalanceRepository.find_by(param[:id])
+            @team = TeamBalanceRepository.balance_by_team(param[:team_id])
+          end
+
+          def team_balance_params
+            params.require(:team_balance).permit(:team_id, :balance, :balance_date)
           end
       end
     end

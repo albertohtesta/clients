@@ -14,11 +14,11 @@ class Team < ApplicationRecord
 
   validates :added_date, presence: true
 
-  after_create :team_balance
+  # after_create :team_balance
 
-  def team_balance
-    TeamBalanceService.new(team_id).process
-  end
+  # def team_balance
+  #   TeamBalanceService.new(team.id).process
+  # end
 
 
   # trigger.after(:insert) do
