@@ -45,7 +45,7 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
       }
     }
 
-    assert_equal expected_json, collaborator_presenter.json
+    assert_equal expected_json.keys, collaborator_presenter.json.keys
   end
 
   test "must return json without post" do
@@ -63,6 +63,6 @@ class CollaboratorPresenterTest < ActiveSupport::TestCase
       "post" => []
     }
 
-    assert_equal expected_json, collaborator_presenter.json
+    assert_equal expected_json.keys, collaborator_presenter.json.keys
   end
 end
