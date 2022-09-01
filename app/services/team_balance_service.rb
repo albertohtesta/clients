@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 class TeamBalanceService < ApplicationService
-  attr_reader :team_id, :account_id
+  attr_reader :team_id
   attr_accessor :balance, :balance_date
 
-  def initialize(team_id, account_id, balance, balance_date)
+  def initialize(team_id, balance, balance_date)
     @team_id = team_id
-    @account_id = account_id
     @balance = balance
     @balance_date = balance_date
   end
 
   def process
     ActiveRecord::Base.transaction do
-      calculate_balance
+      @balance = calculate_balance
+      @balance
     end
   end
 

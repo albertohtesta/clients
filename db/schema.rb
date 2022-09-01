@@ -331,8 +331,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_205726) do
   create_table "team_balances", force: :cascade do |t|
     t.float "balance"
     t.date "balance_date"
-    t.integer "team_id"
-    t.integer "account_id"
+    t.bigint "team_id"
+    t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_team_balances_on_account_id"
