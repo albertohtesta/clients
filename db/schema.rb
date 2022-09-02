@@ -302,10 +302,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_031158) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "answers_detail"
-    t.string "period_value"
+    t.integer "period_value"
     t.string "remote_survey_id"
-    t.date "survey_date"
+    t.date "started_at"
     t.string "description"
+    t.integer "year"
     t.index ["answers_detail"], name: "index_surveys_on_answers_detail", using: :gin
     t.index ["period"], name: "index_surveys_on_period"
     t.index ["questions_detail"], name: "index_surveys_on_questions_detail", using: :gin
