@@ -14,8 +14,7 @@ class Team < ApplicationRecord
 
   validates :added_date, presence: true
 
-  after_create :add_team_balance
-  after_update :add_team_balance
+  after_save :add_team_balance
 
   private
     def add_team_balance
