@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_02_031158) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
     t.integer "productivity", default: 0
     t.integer "speed", default: 0
     t.datetime "deleted_at", precision: nil
+    t.date "manager_started_date"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
@@ -219,6 +220,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
     t.index ["related_type", "related_id"], name: "index_metrics_on_related"
   end
 
+  create_table "morale_attributes", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_morale_attributes_on_name", unique: true
+  end
+
   create_table "payments", force: :cascade do |t|
     t.datetime "payment_date"
     t.date "cut_off_date", null: false
@@ -273,6 +281,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "survey_questions", force: :cascade do |t|
+    t.string "question", null: false
+    t.bigint "morale_attribute_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["morale_attribute_id"], name: "index_survey_questions_on_morale_attribute_id"
+    t.index ["question"], name: "index_survey_questions_on_question", unique: true
+  end
+
   create_table "surveys", force: :cascade do |t|
     t.integer "status"
     t.string "survey_url"
@@ -285,6 +302,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "answers_detail"
+    t.integer "period_value"
+    t.string "remote_survey_id"
+    t.date "started_at"
+    t.string "description"
+    t.integer "year"
     t.index ["answers_detail"], name: "index_surveys_on_answers_detail", using: :gin
     t.index ["period"], name: "index_surveys_on_period"
     t.index ["questions_detail"], name: "index_surveys_on_questions_detail", using: :gin
@@ -370,6 +392,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_23_210316) do
   add_foreign_key "posts", "collaborators"
   add_foreign_key "posts", "projects"
   add_foreign_key "projects", "accounts"
+  add_foreign_key "survey_questions", "morale_attributes"
   add_foreign_key "surveys", "teams"
   add_foreign_key "team_balances", "accounts"
   add_foreign_key "team_balances", "teams"
