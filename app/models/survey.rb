@@ -3,7 +3,7 @@
 class Survey < ApplicationRecord
   belongs_to :team
   enum status: %i[preparation sent closed]
-  enum period: %i[month quarter]
+  enum period: %i[month quarter year]
 
   validates :team_id, presence: true
   validates :deadline, presence: true
