@@ -14,9 +14,18 @@ class Team < ApplicationRecord
 
   validates :added_date, presence: true
 
-  after_create :team_balance
+  after_create :add_team_balance
 
-  def team_balance
-    TeamBalanceService.new(id).process
-  end
+  private
+    def add_team_balance
+      balance = TeamBalance.new
+      balance.team_id = self.id
+      balance.balance_date = self.balance_date
+      balance.balance = TeamBalanceService.new(id).process
+      balance.save
+    end
+
+    def balance_date
+      Date.today
+    end
 end

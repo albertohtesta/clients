@@ -11,10 +11,23 @@ module Api
           render json: TeamBalancePresenter.json_collection(@team_balances), status: :ok
         end
 
+        def create
+          @team_balance = TeamBalanceRepository.new_entity(team_balance_params)
+
+          if @team_balance.save
+            render json: @team_balance, status: :created
+          else
+            render json: @team_balance, status: :unprocessable_entity
+          end
+        end
 
         private
           def set_team_balance
             @team_balances = TeamBalanceService.new(params[:team_id]).create
+          end
+
+          def team_balance_params
+            params.permit(:team_id, :balance, :balance_date)
           end
       end
     end

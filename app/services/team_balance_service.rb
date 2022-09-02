@@ -8,7 +8,6 @@ class TeamBalanceService < ApplicationService
   end
 
   def process
-    @balance_date = Date.today
     calculate_junior_seniority
     calculate_middle_seniority
     calculate_senior_seniority
@@ -16,10 +15,6 @@ class TeamBalanceService < ApplicationService
   end
 
   private
-    def team_balance_params
-      params.permit(:team_id, :balance, :balance_date)
-    end
-
     def calculate_junior_seniority
       total_collaborators = TeamRepository.find_all_collaborators(team_id).count
       total_juniors = TeamRepository.find_all_junior_collaborators(team_id).count
