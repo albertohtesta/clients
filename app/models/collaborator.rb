@@ -17,4 +17,19 @@ class Collaborator < ApplicationRecord
   belongs_to :role
 
   validates :first_name, :last_name, :email, :uuid, presence: true
+
+  after_update :add_team_balance
+
+  private
+    def add_team_balance
+      balance = TeamBalance.new
+      balance.team_id = self.id
+      balance.balance_date = self.balance_date
+      balance.balance = TeamBalanceService.new(id).process
+      balance.save
+    end
+
+    def balance_date
+      Date.today
+    end
 end
