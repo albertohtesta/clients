@@ -169,6 +169,7 @@ deploy-qa:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_VHOST","value":"vefqvdwt"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_USERNAME","value":"vefqvdwt"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_PASSWORD","value":"EfI20crJRCDGAu41BpRImZAcDfjg3Ies"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_LOG_TO_STDOUT","value":"true"}]') >  input.json
     - sed -i "s@#NAME_SECRET_KEY_VALUE#@SECRET_KEY_BASE@" input.json
     - sed -i "s@#SECRET_KEY_VALUE#@$RAILS_QA_SECRET_KEY_BASE@" input.json
     - sed -i "s@#COMPLETE_ROUTE#@$COMPLETE_ROUTE@" input.json
