@@ -5,10 +5,11 @@ module Api
     module TeamBalance
       class BalancesController < ApplicationController
         before_action :retrieve_teams, only: :index
-        def index
-          render json: { message: "No balance found" }, status: :not_found if  @team_balances.nil
 
-          render json: TeamBalancePresenter.json_collection(@team_balances), status: :ok
+        def index
+          render json: { message: "No balance found" }, status: :not_found if  @teams.nil?
+
+          render json: TeamBalancePresenter.json_collection(@teams), status: :ok
         end
 
         def create
@@ -22,8 +23,8 @@ module Api
         end
 
         private
-          def set_team_balance
-            @team_balances = TeamBalanceService.new(params[:team_id]).create
+          def retrieve_teams
+            @teams = TeamBalanceRepository.all
           end
 
           def team_balance_params
