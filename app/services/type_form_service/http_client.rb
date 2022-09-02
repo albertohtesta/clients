@@ -31,7 +31,7 @@ module TypeFormService
 
       def client_params
         @base_url = "https://api.typeform.com/"
-        @access_token = ENV["TYPE_FORM_ACCESS_TOKEN"]
+        @access_token = ENV.fetch("TYPE_FORM_ACCESS_TOKEN")
       end
 
       def create_path(value)
