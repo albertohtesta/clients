@@ -24,7 +24,7 @@ class TeamBalanceService < ApplicationService
       total_collaborators = TeamRepository.find_all_collaborators(team_id).count
       total_juniors = TeamRepository.find_all_junior_collaborators(team_id).count
 
-      junior_balance = (total_juniors / total_collaborators) * 100 unless total_juniors.nil?
+      junior_balance = (total_juniors / total_collaborators rescue 0).abs * 100 unless total_juniors.nil?
 
       @junior_deviation = (50 - junior_balance).abs
     end
@@ -33,7 +33,7 @@ class TeamBalanceService < ApplicationService
       total_collaborators = TeamRepository.find_all_collaborators(team_id).count
       total_middles = TeamRepository.find_all_middle_collaborators(team_id).count
 
-      middle_balance = (total_middles / total_collaborators) * 100 unless total_middles.nil?
+      middle_balance = (total_middles / total_collaborators rescue 0).abs * 100 unless total_middles.nil?
 
       @middle_deviation = (30 - middle_balance).abs
     end
@@ -42,7 +42,7 @@ class TeamBalanceService < ApplicationService
       total_collaborators = TeamRepository.find_all_collaborators(team_id).count
       total_seniors = TeamRepository.find_all_senior_collaborators(team_id).count
 
-      senior_balance = (total_seniors / total_collaborators) * 100 unless total_seniors.nil?
+      senior_balance = (total_seniors / total_collaborators rescue 0).abs * 100 unless total_seniors.nil?
 
       @senior_deviation = (20 - senior_balance).abs
     end
