@@ -44,7 +44,6 @@ class Survey < ApplicationRecord
       return unless data.key?(:typeform_survey_url)
 
       self.survey_url = data[:typeform_survey_url]
-      # TODO: self.id_remote_survey: data[typeform_survey_id)]
-      # when we have the field
+      self.remote_survey_id = data[:typeform_survey_id]
     end
 end
