@@ -66,33 +66,35 @@ MetricLimit.create!([
 # **************************************
 # CREATING 2 ACCOUNT MANAGERS
 # **************************************
-role = Role.find_by(name: "ACCOUNT MANAGER")
-Collaborator.create!([
-                      {
-                        id: 102,
-                        first_name: "DIEGO",
-                        last_name: "DE LA FUENTE",
-                        uuid: Faker::IDNumber.unique.invalid,
-                        email: "ddelafuente@arkusnexus.com",
-                        tech_stacks: TechStack.all.sample(2),
-                        tools: Tool.all.sample(2),
-                        role:,
-                        position: "ACCOUNT MANAGER",
-                        phone: "+526646813494",
-                      },
-                      {
-                        id: 101,
-                        first_name: "HECTOR",
-                        last_name: "BUSTILLOS",
-                        uuid: Faker::IDNumber.unique.invalid,
-                        email: "hector@michelada.io",
-                        tech_stacks: TechStack.all.sample(2),
-                        tools: Tool.all.sample(2),
-                        role:,
-                        position: "ACCOUNT MANAGER",
-                        phone: "+523123236909",
-                      }
-                    ])
+ActiveRecord::Base.connection.disable_referential_integrity do
+  role = Role.find_by(name: "ACCOUNT MANAGER")
+  Collaborator.create!([
+                        {
+                          id: 102,
+                          first_name: "DIEGO",
+                          last_name: "DE LA FUENTE",
+                          uuid: Faker::IDNumber.unique.invalid,
+                          email: "ddelafuente@arkusnexus.com",
+                          tech_stacks: TechStack.all.sample(2),
+                          tools: Tool.all.sample(2),
+                          role:,
+                          position: "ACCOUNT MANAGER",
+                          phone: "+526646813494",
+                        },
+                        {
+                          id: 101,
+                          first_name: "HECTOR",
+                          last_name: "BUSTILLOS",
+                          uuid: Faker::IDNumber.unique.invalid,
+                          email: "hector@michelada.io",
+                          tech_stacks: TechStack.all.sample(2),
+                          tools: Tool.all.sample(2),
+                          role:,
+                          position: "ACCOUNT MANAGER",
+                          phone: "+523123236909",
+                        }
+                      ])
+end
 
 def random_price
   rand(500_000.00..10_000_000.00).round(2)
