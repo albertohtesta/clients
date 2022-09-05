@@ -8,9 +8,24 @@ RSpec.describe ManagerAccountsPresenter do
     let!(:presenter) { described_class.new(account) }
 
     it "must return formated json" do
-      expected_keys = ["id", "name", "location", "last_follow_up_text", "priority", "role_debt", "alert", "team_balance", "client_management", "performance", "gross_margin", "morale"]
+      expected_keys = [
+        "id",
+        "account_uuid",
+        "name",
+        "location",
+        "last_follow_up_text",
+        "priority",
+        "role_debt",
+        "alert",
+        "team_balance",
+        "client_management",
+        "performance",
+        "gross_margin",
+        "morale",
+        "manager_id"
+      ]
 
-      expect(presenter.json.keys).to eq(expected_keys)
+      expect(presenter.json.keys).to eql(expected_keys)
     end
   end
 end

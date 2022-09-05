@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ManagerAccountsPresenter < ApplicationPresenter
-  ATTRS = %i[id name].freeze
-  METHODS = %i[location last_follow_up_text priority role_debt alert team_balance client_management performance gross_margin morale].freeze
+  ATTRS = %i[id account_uuid name].freeze
+  METHODS = %i[location last_follow_up_text priority role_debt alert team_balance client_management performance gross_margin morale manager_id].freeze
 
   def location
     city
@@ -34,23 +34,23 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def team_balance
-    MetricPriority::PriorityCalculatorRepository.new(self, "team_balance").priority
+    metric_priority("team_balance")
   end
 
   def client_management
-    MetricPriority::PriorityCalculatorRepository.new(self, "client_management").priority
+    metric_priority("client_management")
   end
 
   def performance
-    MetricPriority::PriorityCalculatorRepository.new(self, "performance").priority
+    metric_priority("performance")
   end
 
   def gross_margin
-    MetricPriority::PriorityCalculatorRepository.new(self, "gross_margin").priority
+    metric_priority("gross_margin")
   end
 
   def morale
-    MetricPriority::PriorityCalculatorRepository.new(self, "morale").priority
+    metric_priority("morale")
   end
 
   private
@@ -61,5 +61,9 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
     def last_follow_up
       @last_follow_up ||= AccountFollowUpRepository.last_follow_up_by_account(id).last
+    end
+
+    def metric_priority(metric_type)
+      MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
     end
 end

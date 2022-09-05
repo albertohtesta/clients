@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_19_233048) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_01_180727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -192,13 +192,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_19_233048) do
     t.text "mitigation_strategy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "alert_status"
     t.index ["account_id"], name: "index_metric_follow_ups_on_account_id"
     t.index ["manager_id"], name: "index_metric_follow_ups_on_manager_id"
   end
 
   create_table "metric_histories", force: :cascade do |t|
     t.bigint "metric_follow_ups_id", null: false
-    t.integer "alert_status", default: 0
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

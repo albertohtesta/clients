@@ -7,5 +7,4 @@ class MetricFollowUp < ApplicationRecord
   has_many :metric_histories
 
   enum metric_type: METRICS_TYPES
-  validates :follow_date, :mitigation_strategy, presence: true
 end

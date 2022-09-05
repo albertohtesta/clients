@@ -10,12 +10,31 @@ module MetricPriority
     def priority
       {
         amount: calculate_amount,
-        alert: nivel_of_priority
+        alert: nivel_of_priority,
+        data_follow_up: create_metric_follow_ups
       }
     end
 
     private
       attr_reader :account, :metric_type
+
+      def create_metric_follow_ups
+        @metric_follow_ups = MetricFollowUp.find_or_create_by(
+           created_at: date_of_last_metric.beginning_of_day..date_of_last_metric.end_of_day,
+           metric_type:,
+           account_id: account.id
+         ) do |metric|
+           metric.follow_date = nil
+           metric.metric_type = METRICS_TYPES[:"#{metric_type}"]
+           metric.account_id = account.id
+           metric.manager_id = account.manager_id
+           metric.mitigation_strategy = ""
+           metric.alert_status = 0
+           metric.created_at = date_of_last_metric
+         end
+
+        JSON.parse(@metric_follow_ups.to_json(except: [:created_at, :updated_at]))
+      end
 
       def calculate_amount
         return 0 if account_metric_result.empty?
