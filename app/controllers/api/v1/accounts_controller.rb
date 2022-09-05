@@ -17,6 +17,7 @@ module Api
           AccountRepository.find_by({ id: contact.account_id })
         rescue => e
           Rollbar.error(e)
+          nil
         end
     end
   end

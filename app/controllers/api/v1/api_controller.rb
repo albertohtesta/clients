@@ -12,22 +12,28 @@ module Api
       def verify_token
         decoded_token
         Rollbar.warning("Data from token ========>")
-        Rollbar.warning(@data_token) # loggin ffrom rollbar
+        Rollbar.warning(@access_token) # loggin from rollbar
+        Rollbar.warning(access_token) # loggin from rollbar
+        Rollbar.warning(@data_token) # loggin from rollbar
+        Rollbar.warning(@data_token.class) # loggin from rollbar
+        Rollbar.warning("Data from token END========>")
+        Rollbar.warning(TokenService.new({ token: access_token }).decode)
+        # render json: { message: "Invalid token" }, status: :unauthorized unless @data_token
         render json: { message: "Invalid token" }, status: :unauthorized unless @data_token
       end
 
       def current_user
         if @data_token[0]["role"] == "client"
-          contact = @data_token[0]["user_attributes"].find { |x| x["name"] == "email" }["value"]
-          @current_user ||= ContactRepository.find_by({ email: contact })
+          # contact = @data_token[0]["user_attributes"].find { |x| x["name"] == "email" }["value"]
+          # @current_user ||= ContactRepository.find_by({ email: contact })
           # TODO: the following lines of code should return the currently logged CONTACT in cognito. Enable when login is ready.
-          # contact = ContactService.new({ token: access_token })
-          # @current_user ||= ContactRepository.find_by({email: contact.logged_contact_email})
+          contact = ContactService.new({ token: access_token })
+          @current_user ||= ContactRepository.find_by({ email: contact.logged_contact_email })
         elsif @data_token[0]["role"] == "collaborator"
-          Collaborator.first
+          # Collaborator.first
           # TODO: the following lines of code should return the currently logged user in cognito. Enable when login is ready.
-          # collaborator = CollaboratorService.new({ token: access_token })
-          # @current_user ||= CollaboratorRepository.find_by_email(collaborator.logged_user_email)
+          collaborator = CollaboratorService.new({ token: access_token })
+          @current_user ||= CollaboratorRepository.find_by({ email: collaborator.logged_user_email })
         end
       end
 

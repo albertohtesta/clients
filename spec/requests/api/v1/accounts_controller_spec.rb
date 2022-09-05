@@ -32,7 +32,7 @@ RSpec.describe "Accounts", type: :request do
       produces "application/json"
       parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
 
-      response(200, "Authorized") do
+      response(404, "Not Authorized") do
         let(:Authorization) { @token }
 
         run_test!

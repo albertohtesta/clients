@@ -5,7 +5,7 @@ class CollaboratorService < CognitoService
   attr_reader :error
 
   def logged_user_email
-    logged_user[:collaborator_attributes].find { |x| x[:name] == "email" }[:value]
+    logged_user[:user_attributes].find { |x| x[:name] == "email" }[:value]
   end
 
   private
