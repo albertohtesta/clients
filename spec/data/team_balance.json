@@ -1,0 +1,44 @@
+[
+	{
+		"balance": 70.0,
+		"balance_date": "2022-09-01",
+		"team_id": 6,
+		"account_id": null
+	},
+	{
+		"balance": 90.0,
+		"balance_date": "2022-09-01",
+		"team_id": 7,
+		"account_id": null
+	},
+	{
+		"balance": 90.0,
+		"balance_date": "2022-09-01",
+		"team_id": 8,
+		"account_id": null
+	},
+	{
+		"balance": 0.0,
+		"balance_date": "2022-09-02",
+		"team_id": 34,
+		"account_id": null
+	},
+	{
+		"balance": 0.0,
+		"balance_date": "2022-09-02",
+		"team_id": 35,
+		"account_id": null
+	},
+	{
+		"balance": 0.0,
+		"balance_date": "2022-09-02",
+		"team_id": 36,
+		"account_id": null
+	},
+	{
+		"balance": 0.0,
+		"balance_date": "2022-09-02",
+		"team_id": 37,
+		"account_id": null
+	}
+]
