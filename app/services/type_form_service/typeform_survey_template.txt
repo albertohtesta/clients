@@ -1,135 +1,975 @@
 {
-        "type": "score",
-        "title": "survey from my APP",
-        "workspace": {
-            "href": "https://api.typeform.com/workspaces/26Wpxy"
+    "type": "score_branching",
+    "title": "NEW Survey from my APP",
+    "workspace": {
+        "href": "https://api.typeform.com/workspaces/26Wpxy"
+    },
+    "theme": {
+        "href": "https://api.typeform.com/themes/qHWOQ7"
+    },
+    "settings": {
+        "language": "en",
+        "progress_bar": "proportion",
+        "meta": {
+            "allow_indexing": false
         },
-        "theme": {
-            "href": "https://api.typeform.com/themes/qHWOQ7"
+        "hide_navigation": false,
+        "is_public": true,
+        "is_trial": false,
+        "show_progress_bar": true,
+        "show_typeform_branding": true,
+        "are_uploads_public": false,
+        "show_time_to_complete": true,
+        "show_number_of_submissions": false,
+        "show_cookie_consent": false,
+        "show_question_number": true,
+        "pro_subdomain_enabled": false,
+        "capabilities": {
+            "e2e_encryption": {
+                "enabled": false,
+                "modifiable": false
+            }
+        }
+    },
+    "thankyou_screens": [
+        {
+            "ref": "01GBQPSVVFRJKCCBQBTMJQ66CG",
+            "title": "",
+            "type": "thankyou_screen",
+            "properties": {
+                "show_button": true,
+                "share_icons": true,
+                "button_mode": "default_redirect",
+                "button_text": "Create a typeform"
+            }
         },
-        "fields": [
-            {
-                "title": "Lenguaje favorito",
-                "ref": "01GA4WRMQYVJTBXMRE0N8F78GA",
-                "properties": {
-                    "randomize": false,
-                    "allow_multiple_selection": false,
-                    "allow_other_choice": false,
-                    "vertical_alignment": true,
-                    "choices": [
-                        {
-                            "ref": "802db58b-9058-4037-bb63-f60ff6561435",
-                            "label": "Ruby"
+        {
+            "ref": "default_tys",
+            "title": "Thanks for completing this typeform\nNow *create your own* — it's free, easy, & beautiful",
+            "type": "thankyou_screen",
+            "properties": {
+                "show_button": true,
+                "share_icons": false,
+                "button_mode": "default_redirect",
+                "button_text": "Create a *typeform*"
+            },
+            "attachment": {
+                "type": "image",
+                "href": "https://images.typeform.com/images/2dpnUBBkz2VN"
+            }
+        }
+    ],
+    "fields": [
+        {
+            "title": "Software",
+            "ref": "09ce9162-678b-4e0d-bc70-d41b0844919e",
+            "properties": {
+                "button_text": "Continue",
+                "show_button": true,
+                "fields": [
+                    {
+                        "title": "Lenguaje favorito",
+                        "ref": "01GBQPSVVFGG926DZ16SR1AN2Y",
+                        "properties": {
+                            "randomize": false,
+                            "allow_multiple_selection": false,
+                            "allow_other_choice": false,
+                            "vertical_alignment": true,
+                            "choices": [
+                                {
+                                    "ref": "01GBQPSVVFQ5W4Z7H4CQ5VK0CD",
+                                    "label": "Ruby"
+                                },
+                                {
+                                    "ref": "c248cc4e-db7a-4bc3-b88c-1138c5c74da8",
+                                    "label": "JS"
+                                },
+                                {
+                                    "ref": "33132118-5e81-4322-8251-7e36bb4aaf40",
+                                    "label": "Phyton"
+                                }
+                            ]
                         },
-                        {
-                            "ref": "cb6a6398-5113-4b3c-883b-c97a68f1f21a",
-                            "label": "JS"
+                        "validations": {
+                            "required": false
                         },
-                        {
-                            "ref": "1e383af9-f6b5-44fb-aa85-a8b9c1d9647c",
-                            "label": "Phyton"
+                        "type": "multiple_choice"
+                    },
+                    {
+                        "title": "Framewrok favorito",
+                        "ref": "a907ccff-52d5-46a0-80d0-b4014157d0ce",
+                        "properties": {
+                            "randomize": false,
+                            "allow_multiple_selection": false,
+                            "allow_other_choice": false,
+                            "vertical_alignment": true,
+                            "choices": [
+                                {
+                                    "ref": "8a82bd7f-8f9d-4d29-aec7-d547b4465ce2",
+                                    "label": "RoR"
+                                },
+                                {
+                                    "ref": "301f3e08-7c82-4904-8e4c-30aaf0cabc52",
+                                    "label": "React"
+                                },
+                                {
+                                    "ref": "5aaf0aea-c3de-411c-abec-9bb411f8997f",
+                                    "label": "Django"
+                                }
+                            ]
+                        },
+                        "validations": {
+                            "required": false
+                        },
+                        "type": "multiple_choice"
+                    }
+                ]
+            },
+            "type": "group"
+        },
+        {
+            "title": "Otros",
+            "ref": "443aabde-9a0e-4356-8f93-33248e7275a5",
+            "properties": {
+                "button_text": "Continue",
+                "show_button": true,
+                "fields": [
+                    {
+                        "title": "Equipo favorito",
+                        "ref": "ba4519ed-793b-4861-b4db-52f35103d461",
+                        "properties": {
+                            "randomize": false,
+                            "allow_multiple_selection": false,
+                            "allow_other_choice": false,
+                            "vertical_alignment": true,
+                            "choices": [
+                                {
+                                    "ref": "891087fb-438b-493a-9060-9bd509300e76",
+                                    "label": "Mac"
+                                },
+                                {
+                                    "ref": "66039017-2199-4614-a18c-63a1b0f3e531",
+                                    "label": "Windows"
+                                },
+                                {
+                                    "ref": "6b2e1080-624e-40ca-8587-4d3a246e814f",
+                                    "label": "Linux"
+                                }
+                            ]
+                        },
+                        "validations": {
+                            "required": false
+                        },
+                        "type": "multiple_choice"
+                    },
+                    {
+                        "title": "Ciudad favorita",
+                        "ref": "d097946f-5754-456a-867f-8992c7b982ab",
+                        "properties": {
+                            "randomize": false,
+                            "allow_multiple_selection": false,
+                            "allow_other_choice": false,
+                            "vertical_alignment": true,
+                            "choices": [
+                                {
+                                    "ref": "de8a760b-00d0-43df-b975-77f032918711",
+                                    "label": "Colima"
+                                },
+                                {
+                                    "ref": "e1bba578-ae24-4f26-ab7b-1513ea85ac0a",
+                                    "label": "Cancun"
+                                },
+                                {
+                                    "ref": "201e406b-ba71-4b7e-aecf-3e2cab4b0baa",
+                                    "label": "CDMX"
+                                }
+                            ]
+                        },
+                        "validations": {
+                            "required": false
+                        },
+                        "type": "multiple_choice"
+                    }
+                ]
+            },
+            "type": "group"
+        },
+        {
+            "title": "THATS ALL THANK YOU press ENTER to continue and submit",
+            "ref": "ac5ad6c3-063c-482c-b5a2-52ba2cebca8e",
+            "properties": {
+                "button_text": "Continue",
+                "hide_marks": false
+            },
+            "type": "statement"
+        }
+    ],
+    "variables": {
+        "a_otros": 0,
+        "a_software": 0,
+        "ciudad": 0,
+        "counter_61b14906_494b_4cbc_8d9f_4ccd6c53fdc2": 0,
+        "equipo": 0,
+        "framework": 0,
+        "lenguaje": 0,
+        "my_score": 0,
+        "score": 0,
+        "winning_outcome_id": "b569d701-385e-4983-bd3a-751f2e8a52ef"
+    },
+    "logic": [
+        {
+            "type": "field",
+            "ref": "01GBQPSVVFGG926DZ16SR1AN2Y",
+            "actions": [
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
                         }
-                    ]
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "01GBQPSVVFGG926DZ16SR1AN2Y"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "01GBQPSVVFQ5W4Z7H4CQ5VK0CD"
+                            }
+                        ]
+                    }
                 },
-                "validations": {
-                    "required": false
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "01GBQPSVVFGG926DZ16SR1AN2Y"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "c248cc4e-db7a-4bc3-b88c-1138c5c74da8"
+                            }
+                        ]
+                    }
                 },
-                "type": "multiple_choice",
-                "attachment": {
-                    "type": "image",
-                    "href": "https://images.typeform.com/images/WMALzu59xbXQ"
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 0
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "01GBQPSVVFGG926DZ16SR1AN2Y"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "33132118-5e81-4322-8251-7e36bb4aaf40"
+                            }
+                        ]
+                    }
                 },
-                "layout": {
-                    "type": "split",
-                    "attachment": {
-                        "type": "image",
-                        "href": "https://images.typeform.com/images/WMALzu59xbXQ"
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "lenguaje"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "01GBQPSVVFGG926DZ16SR1AN2Y"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "01GBQPSVVFQ5W4Z7H4CQ5VK0CD"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "lenguaje"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "01GBQPSVVFGG926DZ16SR1AN2Y"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "c248cc4e-db7a-4bc3-b88c-1138c5c74da8"
+                            }
+                        ]
                     }
                 }
-            },
-            {
-                "title": "Framework favorito",
-                "ref": "01GA4WRMRAHZ5G8QDJKF4S0J21",
-                "properties": {
-                    "randomize": false,
-                    "allow_multiple_selection": false,
-                    "allow_other_choice": false,
-                    "vertical_alignment": true,
-                    "choices": [
-                        {
-                            "ref": "01GA4WRMRAKPRHV39F35AD8ZEF",
-                            "label": "RoR"
+            ]
+        },
+        {
+            "type": "field",
+            "ref": "a907ccff-52d5-46a0-80d0-b4014157d0ce",
+            "actions": [
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
                         },
-                        {
-                            "ref": "01GA4WRMRA6A4EQHM0N07C6VFZ",
-                            "label": "React"
-                        },
-                        {
-                            "ref": "da9cc74b-974d-4a1d-a011-4602babbc168",
-                            "label": "Django"
+                        "value": {
+                            "type": "constant",
+                            "value": 100
                         }
-                    ]
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "a907ccff-52d5-46a0-80d0-b4014157d0ce"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "8a82bd7f-8f9d-4d29-aec7-d547b4465ce2"
+                            }
+                        ]
+                    }
                 },
-                "validations": {
-                    "required": false
-                },
-                "type": "multiple_choice"
-            },
-            {
-                "title": "Equipo favorito",
-                "ref": "2ffd257f-ddf0-40a6-9351-705b42530f28",
-                "properties": {
-                    "randomize": false,
-                    "allow_multiple_selection": false,
-                    "allow_other_choice": false,
-                    "vertical_alignment": true,
-                    "choices": [
-                        {
-                            "ref": "a5bfe8f6-e64e-4381-8859-2ecd4159c1ad",
-                            "label": "Mac"
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
                         },
-                        {
-                            "ref": "92066b2b-2874-4b07-84b0-731d602d1208",
-                            "label": "Windows"
-                        },
-                        {
-                            "ref": "52329ea1-1c3d-470d-9108-dd59f48a6098",
-                            "label": "Linux"
+                        "value": {
+                            "type": "constant",
+                            "value": 50
                         }
-                    ]
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "a907ccff-52d5-46a0-80d0-b4014157d0ce"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "301f3e08-7c82-4904-8e4c-30aaf0cabc52"
+                            }
+                        ]
+                    }
                 },
-                "validations": {
-                    "required": false
-                },
-                "type": "multiple_choice"
-            },
-            {
-                "title": "Ciudad favorita",
-                "ref": "7f711eb0-f37a-4728-a67a-e7d1b8454e4f",
-                "properties": {
-                    "randomize": false,
-                    "allow_multiple_selection": false,
-                    "allow_other_choice": false,
-                    "vertical_alignment": true,
-                    "choices": [
-                        {
-                            "ref": "07b2ce1b-212f-4165-b03b-e465c655a27d",
-                            "label": "Colima"
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
                         },
-                        {
-                            "ref": "40de1173-087d-4de3-977e-3bd0816596b8",
-                            "label": "Cancun"
-                        },
-                        {
-                            "ref": "6fb1a9ac-b35a-4f5a-b472-71a5bf1755f6",
-                            "label": "CDMX"
+                        "value": {
+                            "type": "constant",
+                            "value": 0
                         }
-                    ]
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "a907ccff-52d5-46a0-80d0-b4014157d0ce"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "5aaf0aea-c3de-411c-abec-9bb411f8997f"
+                            }
+                        ]
+                    }
                 },
-                "validations": {
-                    "required": false
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "framework"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "a907ccff-52d5-46a0-80d0-b4014157d0ce"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "8a82bd7f-8f9d-4d29-aec7-d547b4465ce2"
+                            }
+                        ]
+                    }
                 },
-                "type": "multiple_choice"
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "framework"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "a907ccff-52d5-46a0-80d0-b4014157d0ce"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "301f3e08-7c82-4904-8e4c-30aaf0cabc52"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "type": "field",
+            "ref": "ba4519ed-793b-4861-b4db-52f35103d461",
+            "actions": [
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "ba4519ed-793b-4861-b4db-52f35103d461"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "891087fb-438b-493a-9060-9bd509300e76"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "ba4519ed-793b-4861-b4db-52f35103d461"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "66039017-2199-4614-a18c-63a1b0f3e531"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 0
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "ba4519ed-793b-4861-b4db-52f35103d461"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "6b2e1080-624e-40ca-8587-4d3a246e814f"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "equipo"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "ba4519ed-793b-4861-b4db-52f35103d461"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "891087fb-438b-493a-9060-9bd509300e76"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "equipo"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "ba4519ed-793b-4861-b4db-52f35103d461"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "66039017-2199-4614-a18c-63a1b0f3e531"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "type": "field",
+            "ref": "d097946f-5754-456a-867f-8992c7b982ab",
+            "actions": [
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d097946f-5754-456a-867f-8992c7b982ab"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "de8a760b-00d0-43df-b975-77f032918711"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d097946f-5754-456a-867f-8992c7b982ab"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "e1bba578-ae24-4f26-ab7b-1513ea85ac0a"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 0
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d097946f-5754-456a-867f-8992c7b982ab"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "201e406b-ba71-4b7e-aecf-3e2cab4b0baa"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "ciudad"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d097946f-5754-456a-867f-8992c7b982ab"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "de8a760b-00d0-43df-b975-77f032918711"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "ciudad"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "is",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d097946f-5754-456a-867f-8992c7b982ab"
+                            },
+                            {
+                                "type": "choice",
+                                "value": "e1bba578-ae24-4f26-ab7b-1513ea85ac0a"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "type": "field",
+            "ref": "ac5ad6c3-063c-482c-b5a2-52ba2cebca8e",
+            "actions": [
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "a_software"
+                        },
+                        "value": {
+                            "type": "variable",
+                            "value": "lenguaje"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "a_software"
+                        },
+                        "value": {
+                            "type": "variable",
+                            "value": "framework"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "a_otros"
+                        },
+                        "value": {
+                            "type": "variable",
+                            "value": "equipo"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "a_otros"
+                        },
+                        "value": {
+                            "type": "variable",
+                            "value": "ciudad"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "my_score"
+                        },
+                        "value": {
+                            "type": "variable",
+                            "value": "a_software"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "my_score"
+                        },
+                        "value": {
+                            "type": "variable",
+                            "value": "a_otros"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                },
+                {
+                    "action": "divide",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "my_score"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 4
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                },
+                {
+                    "action": "set",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "winning_outcome_id"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": "b569d701-385e-4983-bd3a-751f2e8a52ef"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                },
+                {
+                    "action": "set",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "winning_outcome_id"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": "b569d701-385e-4983-bd3a-751f2e8a52ef"
+                        }
+                    },
+                    "condition": {
+                        "op": "and",
+                        "vars": [
+                            {
+                                "op": "greater_equal_than",
+                                "vars": [
+                                    {
+                                        "type": "variable",
+                                        "value": "score"
+                                    },
+                                    {
+                                        "type": "constant",
+                                        "value": 0
+                                    }
+                                ]
+                            },
+                            {
+                                "op": "lower_equal_than",
+                                "vars": [
+                                    {
+                                        "type": "variable",
+                                        "value": "score"
+                                    },
+                                    {
+                                        "type": "constant",
+                                        "value": 400
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "jump",
+                    "details": {
+                        "to": {
+                            "type": "outcome",
+                            "value": "winning_outcome_id"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
+                    }
+                }
+            ]
+        }
+    ],
+    "outcome": {
+        "variable": "winning_outcome_id",
+        "choices": [
+            {
+                "ref": "b569d701-385e-4983-bd3a-751f2e8a52ef",
+                "title": "",
+                "counter_variable": "counter_61b14906_494b_4cbc_8d9f_4ccd6c53fdc2",
+                "thankyou_screen_ref": "01GBQPSVVFRJKCCBQBTMJQ66CG"
             }
         ]
+    }
 }
