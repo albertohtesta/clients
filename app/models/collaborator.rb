@@ -19,7 +19,7 @@ class Collaborator < ApplicationRecord
 
   validates :first_name, :last_name, :email, :uuid, presence: true
 
-  after_save :add_team_balance
+  after_update :add_team_balance
 
   private
     def add_team_balance
