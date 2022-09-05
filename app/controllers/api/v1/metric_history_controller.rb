@@ -6,8 +6,8 @@ module Api
       before_action :retrive_metric, only: :show
 
       def show
-        if @last_status
-          render json: MetricHistoryPresenter.new(retrive_metric).json
+        if @metric
+          render json: MetricFollowUpPresenter.new(@metric).json
         else
           render json: { error: "Metric not found" }, status: :not_found
         end
@@ -16,10 +16,11 @@ module Api
       def update
         @data = metric_historial_params
         if @data.permitted?
-          MetricHistoryRepository.update_historial(
+          MetricFollowUpRepository.update_historial(
             id: @data[:id],
             alert_status: @data[:alert_status],
-            mitigation_strategy: @data[:mitigation_strategy]
+            mitigation_strategy: @data[:mitigation_strategy],
+            manager_id: @data[:manager_id]
           )
 
           return render json: { message: "Metric updated" }, status: :ok
@@ -30,11 +31,11 @@ module Api
 
       private
         def retrive_metric
-          @last_status = MetricHistoryRepository.last_status(params[:id])
+          @metric = MetricFollowUpRepository.find_by(id: params[:id])
         end
 
         def metric_historial_params
-          params.permit(:id, :alert_status, :mitigation_strategy)
+          params.permit(:id, :manager_id, :alert_status, :mitigation_strategy)
         end
     end
   end
