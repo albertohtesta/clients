@@ -75,7 +75,7 @@ class SurveyResultsService < ApplicationService
       question[:final_score] = question[:final_score] / surveys.size
       total_average += question[:final_score]
     end
-    result[result.length] = total_average / result.length # month average, last element
+    result[result.length] = total_average / result.length unless result.length == 0 # month average, last element
     if processing_type == "Q"
       result
     else
