@@ -2,7 +2,7 @@
 
 require "faker"
 
-  ActiveRecord::Base.connection.disable_referential_integrity do
+ActiveRecord::Base.connection.disable_referential_integrity do
   ######### ADD CATALOGS FIELDS
   AccountStatus.create!([
     { status: "New", status_code: "new_project" }, { status: "In Development", status_code: "in_development" }, { status: "Finished", status_code: "finished" }, { status: "Cancelled", status_code: "cancelled" }
@@ -493,19 +493,19 @@ require "faker"
 end
 
 
-  p "Seed... #{AccountStatus.count} AccountStatus created"
-  p "Seed... #{TeamType.count} TeamType created"
-  p "Seed... #{Tool.count} Tool created"
-  p "Seed... #{TechStack.count} TechStack created"
-  p "Seed... #{Account.count} Account created"
-  p "Seed... #{Payment.count} Payment created"
-  p "Seed... #{Project.count} Project created"
-  p "Seed... #{Collaborator.count} Collaborator created"
-  p "Seed... #{CollaboratorRepository.by_role_name("ACCOUNT MANAGER").count} Managers created"
-  p "Seed... #{Team.count} Teams created"
-  p "Seed... #{TeamRequirement.count} Teams Requirements created"
-  p "Seed... #{Investment.count} Investment created"
-  p "Seed... #{Post.count} Posts created"
-  p "Seed... #{Metric.count} Metrics created"
-  p "Seed... #{Badge.count} Badges created"
-  p "Seed... #{AccountsCollaborator.count} AccountsCollaborator created"
+p "Seed... #{AccountStatus.count} AccountStatus created"
+p "Seed... #{TeamType.count} TeamType created"
+p "Seed... #{Tool.count} Tool created"
+p "Seed... #{TechStack.count} TechStack created"
+p "Seed... #{Account.count} Account created"
+p "Seed... #{Payment.count} Payment created"
+p "Seed... #{Project.count} Project created"
+p "Seed... #{Collaborator.count} Collaborator created"
+p "Seed... #{CollaboratorRepository.by_role_name("ACCOUNT MANAGER").count} Managers created"
+p "Seed... #{Team.count} Teams created"
+p "Seed... #{TeamRequirement.count} Teams Requirements created"
+p "Seed... #{Investment.count} Investment created"
+p "Seed... #{Post.count} Posts created"
+p "Seed... #{Metric.count} Metrics created"
+p "Seed... #{Badge.count} Badges created"
+p "Seed... #{AccountsCollaborator.count} AccountsCollaborator created"
