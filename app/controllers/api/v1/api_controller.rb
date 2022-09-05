@@ -11,8 +11,8 @@ module Api
 
       def verify_token
         decoded_token
-        Rollbar.log("Data from token ========>")
-        Rollbar.log(@data_token) # loggin ffrom rollbar
+        Rollbar.warning("Data from token ========>")
+        Rollbar.warning(@data_token) # loggin ffrom rollbar
         render json: { message: "Invalid token" }, status: :unauthorized unless @data_token
       end
 
