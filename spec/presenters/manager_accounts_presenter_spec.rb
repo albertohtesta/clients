@@ -22,6 +22,7 @@ RSpec.describe ManagerAccountsPresenter do
         "performance",
         "gross_margin",
         "morale",
+        "velocity",
         "manager_id"
       ]
 
