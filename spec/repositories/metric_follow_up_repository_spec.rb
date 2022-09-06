@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe MetricHistoryRepository do
+RSpec.describe MetricFollowUpRepository do
   describe "#update_historial" do
     let(:account) { create(:account) }
     let(:metric_follow_up) { create(:metric_follow_up, account:) }

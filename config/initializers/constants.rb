@@ -7,7 +7,8 @@ METRICS_TYPES = {
   performance: "performance", # both
   team_balance: "team balance", # account
   gross_margin: "gross margin", # account
-  client_engagement: "client engagement" # account
+  client_engagement: "client engagement", # account
+  client_management: "client management" # account
 }
 
 

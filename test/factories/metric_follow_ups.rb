@@ -6,6 +6,7 @@ FactoryBot.define do
     metric_type { "morale" }
     account
     manager { association :collaborator }
-    mitigation_strategy { "MyString" }
+    mitigation_strategy { "" }
+    alert_status { 0 }
   end
 end
