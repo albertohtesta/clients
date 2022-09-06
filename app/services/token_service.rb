@@ -12,8 +12,11 @@ class TokenService < CognitoService
   def decode
     # begin
     Rollbar.error(ISS, "ISS")
+    puts(ISS, "ISS")
     Rollbar.error(URL, "URL")
+    puts(URL, "URL")
     Rollbar.error(jwt_config, "jwt_config")
+    puts(jwt_config, "jwt_config")
     Rollbar.error(@user_object.to_json, "user object")
 
     decoded_token = JWT.decode(@user_object[:token], nil, true,
