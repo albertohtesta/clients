@@ -4,7 +4,7 @@ module Api
   module V1
     module TeamMorale
       class SurveysController < ApplicationController
-        before_action :survey_by_id, only: :show
+        before_action :survey_by_id, only: %i[show destroy]
 
         def create
           @survey = Survey.new(get_survey_params_data)
@@ -22,6 +22,11 @@ module Api
 
         def show
           render json: SurveyPresenter.new(@survey).json, status: :ok
+        end
+
+        def destroy
+          return unless @survey.present? && @survey.status != 2 && @survey.current_answers >= @survey.requested_answers
+          SurveyResponsesService.close_survey(@survey.id)
         end
 
         private
