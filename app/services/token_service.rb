@@ -11,12 +11,15 @@ class TokenService < CognitoService
 
   def decode
     # begin
+    Rollbar.error(ISS, "ISS")
+    Rollbar.error(URL, "URL")
+    Rollbar.error(jwt_config, "jwt_config")
+    Rollbar.error(@user_object.to_json, "user object")
+
     decoded_token = JWT.decode(@user_object[:token], nil, true,
                                { iss: ISS, verify_iss: !Rails.env.test?, algorithms: ["RS256"], jwks: jwt_config })
     # rescue StandardError => e
     # @error = e
-    Rollbar.error(ISS, "ISS")
-    Rollbar.error(@user_object.to_json, "user object")
     # Rollbar.error(e, "error getting token service")
     # return false
     # end
