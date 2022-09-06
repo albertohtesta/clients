@@ -2,9 +2,10 @@
 
 # authenticate cognito user
 class TokenService < CognitoService
-  ISS = "https://cognito-idp.#{ENV.fetch("AWS_REGION", nil)}.amazonaws.com/#{CognitoService::POOL_ID}".freeze
+  POOL_ID = ENV.fetch("AWS_COGNITO_USER_POOL", "local").freeze
+  ISS = "https://cognito-idp.#{ENV.fetch("AWS_REGION", nil)}.amazonaws.com/#{POOL_ID}".freeze
   URL = "https://cognito-idp.#{ENV.fetch("AWS_REGION",
-                                         nil)}.amazonaws.com/#{CognitoService::POOL_ID}/.well-known/jwks.json".freeze
+                                         nil)}.amazonaws.com/#{POOL_ID}/.well-known/jwks.json".freeze
 
   attr_reader :error
 
@@ -14,6 +15,7 @@ class TokenService < CognitoService
                                  { iss: ISS, verify_iss: !Rails.env.test?, algorithms: ["RS256"], jwks: jwt_config })
     rescue StandardError => e
       @error = e
+      Rollbar.error(ISS, "ISS")
       Rollbar.error(e, "error getting token service")
       return false
     end
