@@ -30,10 +30,8 @@ module Api
       end
 
       def decode_token
-        decoded = TokenService.new({ token: @access_token }).decode
-        Rollbar.error(decoded, "<<Data from token")
-
-        @data_token ||= TokenService.new({ token: @access_token }).decode
+        @data_token = TokenService.new({ token: @access_token }).decode
+        Rollbar.error(@data_token, "Token decodificado")
       end
     end
   end
