@@ -10,13 +10,13 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       let(:account) { create(:account, city: "city", manager: collaborator) }
       let(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
 
-      let!(:account_metric_team_balance) { create(:metric, related: account, date:, indicator_type: "team_balance", value: 95) }
+      let!(:account_metric_team_balance) { create(:metric, related: account, date:, indicator_type: "balance", value: 95) }
       let!(:account_metric_client_management) { create(:metric, related: account, date:, indicator_type: "client_management", value: 95) }
       let!(:account_metric_performance) { create(:metric, related: account, date:, indicator_type: "performance", value: 95) }
       let!(:account_metric_gross_margin) { create(:metric, related: account, date:, indicator_type: "gross_margin", value: 95) }
       let!(:account_metric_morale) { create(:metric, related: account, date:, indicator_type: "morale", value: 95) }
 
-      let!(:metric_follow_up_team_balance) { create(:metric_follow_up, follow_date: date, metric_type: "team_balance", account:, manager: collaborator, created_at: date, updated_at: date) }
+      let!(:metric_follow_up_team_balance) { create(:metric_follow_up, follow_date: date, metric_type: "balance", account:, manager: collaborator, created_at: date, updated_at: date) }
       let!(:metric_follow_up_client_management) { create(:metric_follow_up, follow_date: date, metric_type: "client_management", account:, manager: collaborator, created_at: date, updated_at: date) }
       let!(:metric_follow_up_performance) { create(:metric_follow_up, follow_date: date, metric_type: "performance", account:, manager: collaborator, created_at: date, updated_at: date) }
       let!(:metric_follow_up_gross_margin) { create(:metric_follow_up, follow_date: date, metric_type: "gross_margin", account:, manager: collaborator, created_at: date, updated_at: date) }
@@ -48,10 +48,10 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
           high_priority_max: 79
         )
       }
-      let!(:metric_limit_team_balance) {
+      let!(:metric_limit_balance) {
         create(
           :metric_limit,
-          indicator_type: "team_balance",
+          indicator_type: "balance",
           low_priority_min: 90,
           low_priority_max: 100,
           medium_priority_min: 80,

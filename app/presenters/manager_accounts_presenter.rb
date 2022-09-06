@@ -34,7 +34,7 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def team_balance
-    metric_priority("team_balance")
+    metric_priority("balance")
   end
 
   def client_management
