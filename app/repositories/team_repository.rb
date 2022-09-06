@@ -11,15 +11,15 @@ class TeamRepository < ApplicationRepository
     end
 
     def find_all_junior_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "JUNIOR")
+      scope.find_by(id:).collaborators.where(seniority: SENIORITY_TYPES[:junior])
     end
 
     def find_all_middle_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "MIDDLE")
+      scope.find_by(id:).collaborators.where(seniority: SENIORITY_TYPES[:middle])
     end
 
     def find_all_senior_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "SENIOR")
+      scope.find_by(id:).collaborators.where(seniority: SENIORITY_TYPES[:senior])
     end
   end
 end
