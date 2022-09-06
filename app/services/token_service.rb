@@ -14,6 +14,7 @@ class TokenService < CognitoService
                                  { iss: ISS, verify_iss: !Rails.env.test?, algorithms: ["RS256"], jwks: jwt_config })
     rescue StandardError => e
       @error = e
+      Rollbar.error(e, "error getting token service")
       return false
     end
     decoded_token

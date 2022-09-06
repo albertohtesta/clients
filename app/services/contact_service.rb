@@ -14,6 +14,7 @@ class ContactService < CognitoService
       CLIENT.get_user(access_token: @user_object[:token]).to_h
     rescue StandardError => e
       @error = e
+      Rollbar.error(e, "error getting contact service")
       false
     end
 end
