@@ -51,4 +51,10 @@ class SurveyResponsesService < ApplicationService
     TypeFormService::RemoteSurveys.update(survey.remote_survey_id, options)
     survey.save
   end
+
+  def self.check_if_survey_should_be_closed(survey_id)
+    survey = Survey.find(survey_id)
+    return unless survey.present? && survey.status != 2 && survey.current_answers >= survey.requested_answers
+    close_survey(survey_id) unless survey.remote_survey_id.nil?
+  end
 end
