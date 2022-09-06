@@ -12,6 +12,7 @@ module Api
 
       private
         def account_of_contact
+          Rollbar.warning("@CURRENT USER") # loggin from rollbar
           Rollbar.warning(@current_user) # loggin from rollbar
           contact = ContactRepository.find_by({ uuid: @current_user[:uuid] })
           AccountRepository.find_by({ id: contact.account_id })

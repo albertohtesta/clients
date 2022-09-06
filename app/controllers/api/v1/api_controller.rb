@@ -12,13 +12,10 @@ module Api
       def verify_token
         decoded_token
         Rollbar.warning("Data from token ========>")
-        Rollbar.warning(@access_token) # loggin from rollbar
-        Rollbar.warning(access_token) # loggin from rollbar
+        @data_token = TokenService.new({ token: request.headers["Authorization"] }).decode
         Rollbar.warning(@data_token) # loggin from rollbar
         Rollbar.warning(@data_token.class) # loggin from rollbar
         Rollbar.warning("Data from token END========>")
-        Rollbar.warning(TokenService.new({ token: access_token }).decode)
-        # render json: { message: "Invalid token" }, status: :unauthorized unless @data_token
         render json: { message: "Invalid token" }, status: :unauthorized unless @data_token
       end
 
