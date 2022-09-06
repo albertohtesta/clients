@@ -7,9 +7,9 @@ class SurveyResponsesService < ApplicationService
     @surveys = surveys
   end
 
-  def self.get_responses(remote_survey_id)
+  def self.get_responses(survey)
     survey_responses = TypeFormService::Responses.new
-    data = survey_responses.all(remote_survey_id)
+    data = survey_responses.all(survey.remote_survey_id)
     questions = {}
     surveys = data[:items]
     surveys.each do |survey|
@@ -38,35 +38,17 @@ class SurveyResponsesService < ApplicationService
        "final_score": value }
     end
     questions_detail = { questions: questions_detail }
-    survey = Survey.find_by(remote_survey_id:)
     survey.questions_detail = questions_detail
-    survey.status = 2
-    options = { "op": "replace", "path": "/settings/is_public", "value": false }
-    TypeFormService::RemoteSurveys.update(remote_survey_id, options)
     survey.save
   end
 
-  def self.calculate_started_at(period, period_value, year)
-    case period
-    when 0
-      "01/#{period_value}/#{year}".to_date
-    when 1
-      date_for_quarter(period_value, year)
-    else
-      "01/01/#{year}".to_date
-    end
-  end
-
-  def self.date_for_quarter(value, year)
-    case value
-    when 1
-      "01/01/#{year}".to_date
-    when 2
-      "01/04/#{year}".to_date
-    when 3
-      "01/07/#{year}".to_date
-    when 4
-      "01/10/#{year}".to_date
-    end
+  def self.close_survey(survey_id)
+    survey = Survey.find(survey_id)
+    return unless survey.present? && survey.status != 2
+    get_responses(survey)
+    survey.status = 2
+    options = { "op": "replace", "path": "/settings/is_public", "value": false }
+    TypeFormService::RemoteSurveys.update(survey.remote_survey_id, options)
+    survey.save
   end
 end
