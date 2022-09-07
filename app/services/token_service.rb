@@ -20,7 +20,7 @@ class TokenService < CognitoService
     Rollbar.error(@user_object.to_json, "user object")
     puts(@user_object[:token], 'TOKEN')
 
-    decoded_token = JWT.decode(@user_object[:token], nil, true, { algorithm: 'RS256' })
+    decoded_token = JWT.decode(@user_object[:token].gsub("Bearer ", ""), nil, true, { algorithm: 'RS256' })
     # rescue StandardError => e
     # @error = e
     # Rollbar.error(e, "error getting token service")
