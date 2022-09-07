@@ -48,15 +48,11 @@ module Api
           end
 
           def get_survey_params(survey_remote_data)
-            if survey_remote_data.present?
-              survey_params_data = survey_params.merge(status: "preparation", started_at:
-                SurveyCreateService.calculate_started_at(params[:period], params[:period_value], params[:year]),
-                survey_url: survey_remote_data[:survey_url], remote_survey_id: survey_remote_data[:remote_survey_id])
-            else
-              survey_params_data = survey_params.merge(status: "preparation", started_at:
-                SurveyCreateService.calculate_started_at(params[:period], params[:period_value], params[:year]))
-            end
-            survey_params_data
+            local_data = { status: "preparation", started_at:
+                SurveyCreateService.calculate_started_at(params[:period], params[:period_value], params[:year]) }
+            return survey_params.merge(local_data) unless survey_remote_data.present?
+
+            survey_params.merge(local_data).merge(survey_url: survey_remote_data[:survey_url], remote_survey_id: survey_remote_data[:remote_survey_id])
           end
       end
     end
