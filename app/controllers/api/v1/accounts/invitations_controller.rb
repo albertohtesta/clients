@@ -6,7 +6,7 @@ module Api
       class InvitationsController < ApplicationController
         def create
           get_contacts_from_account.each do |contact|
-            ClientRegistrationService.request_user_client(contact)
+            ClientRegistrationService.request_user_client({ email: contact })
           end
           ContactRepository.create_invitations_for(params[:account_id], invitated_contacts)
 
