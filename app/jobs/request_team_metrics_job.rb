@@ -2,7 +2,7 @@
 
 class RequestTeamMetricsJob < ApplicationJob
   queue_as :default
-  METRICS_API_BI_URL = ENV.fetch("BASE_URL_BI_API", "") + "/TeamPerformanceMetrics"
+  METRICS_API_BI_URL = "#{ENV.fetch("BASE_URL_BI_API", "")}/TeamPerformanceMetrics"
 
   def perform(board_id, team_id)
     params = { BoardId: board_id, GroupBy: "Month", ToDate: Date.today.strftime("%Y-%m"), FromDate: 1.months.ago.strftime("%Y-%m") }
