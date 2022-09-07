@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
-# Sneakers.configure  heartbeat: 30,
-#                    amqp: "amqp://guest:guest@#{ENV.fetch("RABBIT_HOST")}:#{ENV.fetch("RABBIT_PORT")}",
-#                    vhost: "/",
-#                    exchange: "sneakers",
-#                    exchange_type: :direct
+ENV["WORKERS"] = Rails.application.config.sneakers.workers.join(",")
+Sneakers.configure(
+  heartbeat: 30,
+  amqp: Rails.application.config.sneakers.amqp_url,
+  vhost: Rails.application.config.sneakers.vhost,
+  exchange: Rails.application.config.sneakers.exchange,
+  exchange_type: :direct,
+  durable: true,
+  workers: Rails.application.config.sneakers.max_workers,
+  threads: Rails.application.config.sneakers.max_threads
+)
