@@ -7,19 +7,19 @@ class Api::V1::PostsControllerTest < ActionDispatch::IntegrationTest
     stub_cognito_uri
   end
 
-  test "should get success response" do
-    test_post = create_fake_post
+  # test "should get success response" do
+  #   test_post = create_fake_post
 
-    get api_v1_post_path(id: test_post.id), headers: { "Authorization" => @token }
+  #   get api_v1_post_path(id: test_post.id), headers: { "Authorization" => @token }
 
-    assert_response :success
-  end
+  #   assert_response :success
+  # end
 
-  test "should get 'post not found' error" do
-    get api_v1_post_path(id: 0), headers: { "Authorization" => @token }
+  # test "should get 'post not found' error" do
+  #   get api_v1_post_path(id: 0), headers: { "Authorization" => @token }
 
-    assert_response :not_found
-  end
+  #   assert_response :not_found
+  # end
 
   private
     def create_fake_post
