@@ -2,7 +2,8 @@
 
 class ManagerAccountsPresenter < ApplicationPresenter
   ATTRS = %i[id account_uuid name].freeze
-  METHODS = %i[location last_follow_up_text priority role_debt alert team_balance client_management performance gross_margin morale manager_id].freeze
+  METHODS = %i[location last_follow_up_text priority role_debt alert team_balance
+    client_management performance gross_margin morale velocity manager_id].freeze
 
   def location
     city
@@ -34,7 +35,7 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def team_balance
-    metric_priority("team_balance")
+    metric_priority("balance")
   end
 
   def client_management
@@ -51,6 +52,10 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
   def morale
     metric_priority("morale")
+  end
+
+  def velocity
+    metric_priority("velocity")
   end
 
   private
