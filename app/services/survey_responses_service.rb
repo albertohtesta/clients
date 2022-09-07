@@ -3,21 +3,20 @@
 class SurveyResponsesService < ApplicationService
   def self.get_responses(survey_id)
     survey = get_survey(survey_id)
+    return unless survey.remote_survey_id.present?
     surveys = get_remote_responses(survey.remote_survey_id)
-    questions = {}
-    questions = get_questions(questions, surveys)
+    questions = get_questions(surveys)
     questions = calculate_questions_average(questions, surveys.length)
     survey.questions_detail = get_questions_detail(questions)
     survey.save
   end
 
-
   def self.close_survey(survey_id)
     survey = get_survey(survey_id)
-    return unless survey.present? && survey.status != 2
+    return unless survey.present? && survey.status != 2 && survey.current_answers >= survey.requested_answers
     get_responses(survey_id)
     survey.reload.status = 2
-    TypeFormService::RemoteSurveys.update(survey.remote_survey_id, { "op": "replace", "path": "/settings/is_public", "value": false })
+    TypeFormService::RemoteSurveys.update(survey.remote_survey_id, { "op": "replace", "path": "/settings/is_public", "value": false }) unless survey.remote_survey_id.blank?
     survey.save
   end
 
@@ -39,7 +38,8 @@ class SurveyResponsesService < ApplicationService
       data[:items]
     end
 
-    def self.get_questions(questions, surveys)
+    def self.get_questions(surveys)
+      questions = {}
       surveys.each do |survey|
         variables = survey[:variables]
         variables.each do |var|
@@ -64,8 +64,8 @@ class SurveyResponsesService < ApplicationService
       questions_detail = questions.map do |key, value|
         question = SurveyQuestion.find_by(question: key)
         { "title": key,
-         "category": question.morale_attribute.name,
-         "final_score": value }
+          "category": question.morale_attribute.name,
+          "final_score": value }
       end
       { questions: questions_detail }
     end

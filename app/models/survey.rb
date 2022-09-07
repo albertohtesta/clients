@@ -16,6 +16,8 @@ class Survey < ApplicationRecord
   validates :status, uniqueness: { scope: :team_id, message: "There is a survey ongoing for this team.", conditions: -> { where.not(status: "closed") } }
   validate :deadline_date_cannot_be_in_the_past, unless: -> { deadline.blank? }
 
+  before_validation :set_defaults
+
   def deadline_date_cannot_be_in_the_past
     if deadline < Date.today && status != "closed"
       errors.add(:deadline, :blank, message: "can't be in the past.")
@@ -33,4 +35,10 @@ class Survey < ApplicationRecord
   rescue ArgumentError
     @attributes.write_cast_value("status", value)
   end
+
+  private
+    def set_defaults
+      self.current_answers = 0 if current_answers.blank?
+      self.requested_answers = 0 if requested_answers.blank?
+    end
 end
