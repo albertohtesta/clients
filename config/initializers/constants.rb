@@ -11,7 +11,6 @@ METRICS_TYPES = {
   client_management: "client management" # account
 }
 
-
 SENIORITY_TYPES = {
   junior: "Junior",
   middle: "Middle",
