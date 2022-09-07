@@ -14,10 +14,10 @@ module Api
       end
 
       def current_user
-        if decoded_token[0]["cognito:groups"].include?("admin")
+        if decoded_token[0]["cognito:groups"]&.include?("admin")
           contact = ContactService.new({ token: access_token })
           @current_user ||= ContactRepository.find_by({ uuid: contact.logged_contact_email })
-        elsif decoded_token[0]["cognito:groups"].include?("collaborator")
+        elsif decoded_token[0]["cognito:groups"]&.include?("collaborator")
           collaborator = CollaboratorService.new({ token: access_token })
           @current_user ||= CollaboratorRepository.find_by({ email: collaborator.logged_user_email })
         end
