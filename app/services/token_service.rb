@@ -18,7 +18,7 @@ class TokenService < CognitoService
     Rollbar.error(jwt_config, "jwt_config")
     puts(jwt_config, "jwt_config")
     Rollbar.error(@user_object.to_json, "user object")
-    puts(@user_object[:token], 'TOKEN')
+    puts(@user_object[:token], "TOKEN")
 
     decoded_token = JWT.decode(@user_object[:token].gsub("Bearer ", ""), Rails.application.secrets.secret_key_base)
     # rescue StandardError => e
