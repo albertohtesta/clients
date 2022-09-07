@@ -10,28 +10,21 @@ module Api
       end
 
       def verify_token
-        # loggin from rollbar
-        Rollbar.warning("Data from token ========>")
-        Rollbar.error(@data_token, @data_token.class)
-        Rollbar.warning("Data from token END========>")
-
         render json: { message: "Invalid token" }, status: :unauthorized unless @data_token
       end
 
       def current_user
-        Rollbar.warning(@data_token, "==current user function==")
-        if @data_token[0]["role"] == "client"
+        if @data_token[0]["cognito:groups"].include?("admin")
           contact = ContactService.new({ token: access_token })
-          @current_user ||= ContactRepository.find_by({ email: contact.logged_contact_email })
-        elsif @data_token[0]["role"] == "collaborator"
+          @current_user ||= ContactRepository.find_by({ uuid: contact.logged_contact_email })
+        elsif @data_token[0]["cognito:groups"].include?("collaborator")
           collaborator = CollaboratorService.new({ token: access_token })
           @current_user ||= CollaboratorRepository.find_by({ email: collaborator.logged_user_email })
         end
       end
 
       def decode_token
-        @data_token = TokenService.new({ token: @access_token }).decode
-        Rollbar.error(@data_token, "Token decodificado")
+        @data_token = TokenService.new({ token: access_token }).decode
       end
     end
   end

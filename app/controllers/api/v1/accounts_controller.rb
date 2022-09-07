@@ -12,12 +12,10 @@ module Api
 
       private
         def account_of_contact
-          Rollbar.error(@current_user, "Controller, currentuser") # loggin from rollbar
           contact = ContactRepository.find_by({ uuid: @current_user[:uuid] })
           AccountRepository.find_by({ id: contact.account_id })
         rescue => e
-          Rollbar.error(e)
-          nil
+          raise e
         end
     end
   end
