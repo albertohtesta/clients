@@ -26,7 +26,7 @@ module Api
           end
 
           def talent_pool_directory
-            CollaboratorRepository.collaborators_pool_directory(params[:account_id], params[:category])
+            @talent_pool_directory ||= CollaboratorRepository.collaborators_pool_directory(params[:account_id], params[:category])
           end
       end
     end
