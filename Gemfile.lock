@@ -49,10 +49,6 @@ GEM
     activejob (7.0.3.1)
       activesupport (= 7.0.3.1)
       globalid (>= 0.3.6)
-    activejob-scheduler (0.0.1)
-      activejob
-      activemodel
-      rufus-scheduler
     activemodel (7.0.3.1)
       activesupport (= 7.0.3.1)
     activerecord (7.0.3.1)
@@ -111,6 +107,9 @@ GEM
     byebug (11.1.3)
     childprocess (4.1.0)
     choice (0.2.0)
+    clockwork (3.0.0)
+      activesupport
+      tzinfo
     concurrent-ruby (1.1.10)
     crack (0.4.5)
       rexml
@@ -122,8 +121,6 @@ GEM
     digest (3.1.0)
     docile (1.4.0)
     erubi (1.10.0)
-    et-orbi (1.2.7)
-      tzinfo
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -132,9 +129,6 @@ GEM
     faker (2.21.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
-    fugit (1.5.3)
-      et-orbi (~> 1, >= 1.2.7)
-      raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashdiff (1.0.1)
@@ -198,7 +192,6 @@ GEM
       nio4r (~> 2.0)
     pundit (2.2.0)
       activesupport (>= 3.0.0)
-    raabro (1.4.0)
     racc (1.6.0)
     rack (2.2.4)
     rack-cors (1.1.1)
@@ -310,8 +303,6 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
-    rufus-scheduler (3.8.2)
-      fugit (~> 1.1, >= 1.1.6)
     serverengine (2.0.7)
       sigdump (~> 0.2.2)
     set (1.0.2)
@@ -352,7 +343,6 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  activejob-scheduler
   aws-sdk-cognitoidentity
   aws-sdk-cognitoidentityprovider
   aws-sdk-s3
@@ -362,6 +352,7 @@ DEPENDENCIES
   bunny
   bunny-mock
   byebug
+  clockwork
   debug
   factory_bot_rails
   faker
