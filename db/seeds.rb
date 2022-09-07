@@ -312,6 +312,26 @@ team_broker = Team.create(
 
 # { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 50 },
 
+# **************************************
+# ASSIGNING PUBLIC COLLABORATORS TO ACCOUNTS
+# **************************************
+AccountsCollaborator.create!([
+  { collaborator_id: 1, account_id: 2 },
+  { collaborator_id: 2, account_id: 2 },
+  { collaborator_id: 3, account_id: 2 },
+  { collaborator_id: 4, account_id: 1 },
+  { collaborator_id: 5, account_id: 1 },
+  { collaborator_id: 6, account_id: 1 },
+  { collaborator_id: 7, account_id: 1 },
+  { collaborator_id: 8, account_id: 1 },
+  { collaborator_id: 9, account_id: 2 },
+  { collaborator_id: 200, account_id: 1 },
+  { collaborator_id: 201, account_id: 1 },
+  { collaborator_id: 202, account_id: 2 },
+  { collaborator_id: 203, account_id: 1 }
+])
+
+
 Metric.create([
   # PERFORMANCE
   { date: "15-01-2022".to_date, related: team_broker, indicator_type: "performance", value: 80 },
@@ -495,3 +515,4 @@ p "Seed... #{Investment.count} Investment created"
 p "Seed... #{Post.count} Posts created"
 p "Seed... #{Metric.count} Metrics created"
 p "Seed... #{Badge.count} Badges created"
+p "Seed... #{AccountsCollaborator.count} AccountsCollaborator created"
