@@ -18,6 +18,7 @@ class TokenService < CognitoService
     Rollbar.error(jwt_config, "jwt_config")
     puts(jwt_config, "jwt_config")
     Rollbar.error(@user_object.to_json, "user object")
+    puts(@user_object[:token], 'TOKEN')
 
     decoded_token = JWT.decode(@user_object[:token], nil, true,
                                { iss: ISS, verify_iss: !Rails.env.test?, algorithms: ["RS256"], jwks: jwt_config })
