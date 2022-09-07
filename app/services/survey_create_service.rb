@@ -6,6 +6,7 @@ class SurveyCreateService < ApplicationService
 
     data = TypeFormService::RemoteSurveys.create
     return unless data.key?(:typeform_survey_url)
+
     send_survey_description(description, data[:typeform_survey_id])
     { survey_url: data[:typeform_survey_url], remote_survey_id: data[:typeform_survey_id] }
   end
