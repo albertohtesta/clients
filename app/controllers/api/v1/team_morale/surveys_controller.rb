@@ -25,8 +25,11 @@ module Api
         end
 
         def destroy
-          return unless @survey.present? && @survey.status != 2 && @survey.current_answers >= @survey.requested_answers
-          SurveyResponsesService.close_survey(@survey.id)
+          if @survey.present? && @survey.status != 2 && @survey.current_answers >= @survey.requested_answers
+            render json: SurveyResponsesService.close_survey(@survey.id), status: :ok
+          else
+            render json: { error: "survey could not be closed" }, status: :bad_request
+          end
         end
 
         private
@@ -48,11 +51,11 @@ module Api
           end
 
           def get_survey_params(survey_remote_data)
-            local_data = { status: "preparation", started_at:
-                SurveyCreateService.calculate_started_at(params[:period], params[:period_value], params[:year]) }
-            return survey_params.merge(local_data) unless survey_remote_data.present?
+            local_data = survey_params.merge(status: "preparation", started_at:
+            SurveyCreateService.calculate_started_at(params[:period], params[:period_value], params[:year]))
+            return local_data unless survey_remote_data.present?
 
-            survey_params.merge(local_data).merge(survey_url: survey_remote_data[:survey_url], remote_survey_id: survey_remote_data[:remote_survey_id])
+            local_data.merge(survey_url: survey_remote_data[:survey_url], remote_survey_id: survey_remote_data[:remote_survey_id])
           end
       end
     end
