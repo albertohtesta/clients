@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class RequestTeamMetricsJob < ApplicationJob
-  # repeat 'every week at 3am'
   queue_as :default
   METRICS_API_BI_URL = ENV.fetch("BASE_URL_BI_API", "") + "/TeamPerformanceMetrics"
 

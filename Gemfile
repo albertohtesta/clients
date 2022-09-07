@@ -5,11 +5,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.1"
 
-gem "activejob-scheduler"
 gem "aws-sdk-cognitoidentity"
 gem "aws-sdk-cognitoidentityprovider"
 gem "aws-sdk-s3"
 gem "bcrypt"
+gem "clockwork"
 gem "bootsnap", require: false
 gem "faker"
 gem "image_processing"
