@@ -11,5 +11,6 @@ module Clockwork
     puts "Running #{job}, at #{time}"
   end
 
+  # TODO: Change programation for every day
   every(1.hour, "Executing Job: ") { TeamsOudatedMetricsJob.perform_now }
 end
