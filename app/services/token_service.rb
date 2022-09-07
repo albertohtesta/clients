@@ -2,31 +2,18 @@
 
 # authenticate cognito user
 class TokenService < CognitoService
-  POOL_ID = ENV.fetch("AWS_COGNITO_USER_POOL", nil).freeze
-  ISS = "https://cognito-idp.#{ENV.fetch("AWS_REGION", nil)}.amazonaws.com/#{POOL_ID}".freeze
+  ISS = "https://cognito-idp.#{ENV.fetch("AWS_REGION", nil)}.amazonaws.com/#{CognitoService::POOL_ID}".freeze
   URL = "https://cognito-idp.#{ENV.fetch("AWS_REGION",
-                                         nil)}.amazonaws.com/#{POOL_ID}/.well-known/jwks.json".freeze
+                                         nil)}.amazonaws.com/#{CognitoService::POOL_ID}/.well-known/jwks.json".freeze
 
   attr_reader :error
 
   def decode
-    # begin
-    Rollbar.error(ISS, "ISS")
-    puts(ISS, "ISS")
-    Rollbar.error(URL, "URL")
-    puts(URL, "URL")
-    Rollbar.error(jwt_config, "jwt_config")
-    puts(jwt_config, "jwt_config")
-    Rollbar.error(@user_object.to_json, "user object")
-    puts(@user_object[:token], "TOKEN")
-
-    decoded_token = JWT.decode(@user_object[:token].gsub("Bearer ", ""), Rails.application.secrets.secret_key_base)
-    # rescue StandardError => e
-    # @error = e
-    # Rollbar.error(e, "error getting token service")
-    # return false
-    # end
+    decoded_token = JWT.decode(@user_object[:token], nil, true,
+                                 { iss: ISS, verify_iss: !Rails.env.test?, algorithms: ["RS256"], jwks: jwt_config })
     decoded_token
+  rescue => e
+    Rollbar.error(e, token: @user_object[:token], iss: ISS, jwt_config:)
   end
 
   private
