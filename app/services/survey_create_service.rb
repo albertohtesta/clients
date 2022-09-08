@@ -39,4 +39,9 @@ class SurveyCreateService < ApplicationService
       "01/10/#{year}".to_date
     end
   end
+
+  def self.create_job(survey)
+    survey_closing_date = survey.deadline.to_datetime + 1
+    SurveyJob.set(wait_until: survey_closing_date).perform_later(survey)
+  end
 end
