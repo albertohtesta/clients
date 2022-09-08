@@ -15,21 +15,8 @@ module Api
           end
         end
 
-        def index
-          @surveys = TypeFormService::Surveys.new
-          render json: @surveys.all
-        end
-
         def show
           render json: SurveyPresenter.new(@survey).json, status: :ok
-        end
-
-        def destroy
-          if @survey.present? && @survey.status != 2 && @survey.current_answers >= @survey.requested_answers
-            render json: SurveyResponsesService.close_survey(@survey.id), status: :ok
-          else
-            render json: { error: "survey could not be closed" }, status: :bad_request
-          end
         end
 
         private
