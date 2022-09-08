@@ -8,7 +8,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
-  config.hosts << "localhost:4000"
+  config.hosts << "localhost:4001"
   config.hosts << "norden-clients-integration.herokuapp.com"
   config.hosts << "qa-clients-api.nordhen.com"
   config.hosts << "qa-clients.nordhen.com"
