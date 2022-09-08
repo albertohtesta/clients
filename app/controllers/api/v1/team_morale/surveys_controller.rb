@@ -9,6 +9,7 @@ module Api
         def create
           @survey = Survey.new(get_survey_params_data)
           if @survey.save
+            SurveyCreateService.create_job(@survey)
             render json: SurveyPresenter.new(@survey).json, status: :ok
           else
             render json: { errors: @survey.errors.full_messages }, status: :bad_request
