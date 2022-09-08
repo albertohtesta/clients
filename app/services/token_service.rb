@@ -11,10 +11,10 @@ class TokenService < CognitoService
   def decode
     decoded_token = JWT.decode(@user_object[:token], nil, true,
                                  { iss: ISS, verify_iss: !Rails.env.test?, algorithms: ["RS256"], jwks: jwt_config })
-    Rollbar.warning("SUCCESS", decoded_token:, token: @user_object[:token], iss: ISS, jwt_config:)
+    Rollbar.warning("SUCCESS DECIDONG", decoded_token:)
     decoded_token
   rescue => e
-    Rollbar.error("FAILS", token: @user_object[:token], iss: ISS, jwt_config:)
+    Rollbar.error("FAIL DECODING", token: @user_object[:token], iss: ISS, jwt_config:)
     raise e
   end
 

@@ -12,10 +12,7 @@ module Api
 
       private
         def account_of_contact
-          contact = ContactRepository.find_by({ uuid: @current_user[:uuid] })
-          AccountRepository.find_by({ id: contact.account_id })
-        rescue => e
-          raise e
+          AccountRepository.find_by({ id: current_user.account_id })
         end
     end
   end
