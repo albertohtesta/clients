@@ -243,6 +243,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
+    rollbar (3.3.1)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -374,7 +375,7 @@ DEPENDENCIES
   rails (~> 7.0.2, >= 7.0.2.3)
   rails-erd
   redis
-  rest-client
+  rollbar
   rspec-rails (~> 6.0.0.rc1)
   rswag
   rswag-specs
