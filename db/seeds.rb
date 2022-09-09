@@ -60,7 +60,7 @@ MetricLimit.create!([
   { indicator_type: :client_engagement, label: METRICS_TYPES[:client_engagement], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :performance, label: METRICS_TYPES[:performance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :morale, label: METRICS_TYPES[:morale], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  # { indicator_type: :gross_marging, label: METRICS_TYPES[:gross_marging], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
+  { indicator_type: :gross_marging, label: METRICS_TYPES[:gross_marging], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
 ])
 
 # **************************************
@@ -180,7 +180,8 @@ Metric.create!([
   { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 92 },
   { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 85 },
   # MORALE
-  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "morale", value: 62 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "morale", value: 82 },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "morale", value: 62 }
   # BALANCE
   { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
   { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
@@ -190,14 +191,15 @@ Metric.create!([
   { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
   { date: "15-07-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  }
 ])
-team_advanta.investments.create!([
-  { value: 55000.00, date: "15-01-2022".to_date },
-  { value: 55000.00, date: "15-02-2022".to_date },
-  { value: 60000.00, date: "15-03-2022".to_date },
-  { value: 70000.00, date: "15-04-2022".to_date },
-  { value: 70000.00, date: "15-05-2022".to_date },
-  { value: 60000.00, date: "15-06-2022".to_date },
-  { value: 60000.00, date: "15-07-2022".to_date }
+team_advanta.investments.create([
+  { value: 37450.00, date: "15-01-2022".to_date },
+  { value: 37450.00, date: "15-02-2022".to_date },
+  { value: 37450.00, date: "15-03-2022".to_date },
+  { value: 37450.00, date: "15-04-2022".to_date },
+  { value: 37450.00, date: "15-05-2022".to_date },
+  { value: 37450.00, date: "15-06-2022".to_date },
+  { value: 37450.00, date: "15-07-2022".to_date },
+  { value: 37450.00, date: "15-08-2022".to_date }
 ])
 
 
@@ -267,6 +269,7 @@ Metric.create!([
   { date: "15-06-2022".to_date, related: team_broker, indicator_type: "velocity", value: 130 },
   { date: "15-07-2022".to_date, related: team_broker, indicator_type: "velocity", value: 142 },
   # MORALE
+  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "morale", value: 88 },
   { date: "15-06-2022".to_date, related: team_broker, indicator_type: "morale", value: 82 },
   # BALANCE
   { date: "15-01-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
@@ -277,13 +280,16 @@ Metric.create!([
   { date: "15-06-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
   { date: "15-07-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 }
 ])
-team_broker.investments.create!([
-  { value: 70000.00, date: "15-01-2022".to_date },
-  { value: 70000.00, date: "15-02-2022".to_date },
-  { value: 70000.00, date: "15-03-2022".to_date },
-  { value: 70000.00, date: "15-04-2022".to_date },
-  { value: 60000.00, date: "15-05-2022".to_date },
-  { value: 60000.00, date: "15-06-2022".to_date }
+team_broker.investments.create([
+  { value: 40400.00, date: "15-01-2022".to_date },
+  { value: 40400.00, date: "15-02-2022".to_date },
+  { value: 40400.00, date: "15-03-2022".to_date },
+  { value: 40400.00, date: "15-04-2022".to_date },
+  { value: 40400.00, date: "15-05-2022".to_date },
+  { value: 55800.00, date: "15-06-2022".to_date },
+  { value: 55800.00, date: "15-07-2022".to_date },
+  { value: 55800.00, date: "15-08-2022".to_date },
+  { value: 55800.00, date: "15-09-2022".to_date }
 ])
 
 # **************************************
