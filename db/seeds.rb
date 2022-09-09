@@ -57,10 +57,11 @@ Role.create!([
 
 MetricLimit.create!([
   { indicator_type: :balance, label: METRICS_TYPES[:balance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  { indicator_type: :client_engagement, label: METRICS_TYPES[:client_engagement], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
+  { indicator_type: :client_management, label: METRICS_TYPES[:client_management], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :performance, label: METRICS_TYPES[:performance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :morale, label: METRICS_TYPES[:morale], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  # { indicator_type: :gross_marging, label: METRICS_TYPES[:gross_marging], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
+  { indicator_type: :gross_margin, label: METRICS_TYPES[:gross_margin], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 },
+  { indicator_type: :velocity, label: METRICS_TYPES[:velocity], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
 ])
 
 # **************************************
@@ -170,15 +171,15 @@ team_advanta = Team.create!(
 )
 Metric.create!([
   # PERFORMANCE
-  { date: "15-01-2022".to_date, related: advanta, indicator_type: "performance", value: 89 },
-  { date: "15-02-2022".to_date, related: advanta, indicator_type: "performance", value: 66 },
-  { date: "15-03-2022".to_date, related: advanta, indicator_type: "performance", value: 96 },
-  { date: "15-05-2022".to_date, related: advanta, indicator_type: "performance", value: 85 },
+  { date: "15-01-2022".to_date, related: advanta, indicator_type: "performance", value: 108 },
+  { date: "15-02-2022".to_date, related: advanta, indicator_type: "performance", value: 103 },
+  { date: "15-03-2022".to_date, related: advanta, indicator_type: "performance", value: 91 },
+  { date: "15-05-2022".to_date, related: advanta, indicator_type: "performance", value: 70 },
   # VELOCITY
-  { date: "15-01-2022".to_date, related: advanta, indicator_type: "velocity", value: 20 },
-  { date: "15-02-2022".to_date, related: advanta, indicator_type: "velocity", value: 77 },
-  { date: "15-03-2022".to_date, related: advanta, indicator_type: "velocity", value: 92 },
-  { date: "15-05-2022".to_date, related: advanta, indicator_type: "velocity", value: 85 },
+  { date: "15-01-2022".to_date, related: advanta, indicator_type: "velocity", value: 65 },
+  { date: "15-02-2022".to_date, related: advanta, indicator_type: "velocity", value: 65 },
+  { date: "15-03-2022".to_date, related: advanta, indicator_type: "velocity", value: 71 },
+  { date: "15-05-2022".to_date, related: advanta, indicator_type: "velocity", value: 28 },
   # MORALE
   { date: "15-03-2022".to_date, related: advanta, indicator_type: "morale", value: 82 },
   { date: "15-06-2022".to_date, related: advanta, indicator_type: "morale", value: 62 },
@@ -194,15 +195,15 @@ Metric.create!([
 ])
 Metric.create!([
   # PERFORMANCE
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 89 },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "performance", value: 66 },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "performance", value: 96 },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "performance", value: 85 },
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 108 },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "performance", value: 103 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "performance", value: 91 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "performance", value: 70 },
   # VELOCITY
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 20 },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 77 },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 92 },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 85 },
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 65 },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 65 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 71 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 28 },
   # MORALE
   { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "morale", value: 82 },
   { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "morale", value: 62 },
