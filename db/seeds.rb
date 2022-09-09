@@ -60,7 +60,7 @@ MetricLimit.create!([
   { indicator_type: :client_engagement, label: METRICS_TYPES[:client_engagement], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :performance, label: METRICS_TYPES[:performance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :morale, label: METRICS_TYPES[:morale], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  { indicator_type: :gross_marging, label: METRICS_TYPES[:gross_marging], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
+  # { indicator_type: :gross_marging, label: METRICS_TYPES[:gross_marging], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
 ])
 
 # **************************************
@@ -72,7 +72,7 @@ Collaborator.create!([
                         id: 102,
                         first_name: "DIEGO",
                         last_name: "DE LA FUENTE",
-                        uuid: Faker::IDNumber.unique.invalid,
+                        uuid: "93de1862-2270-11ed-861d-0242ac120002",
                         email: "ddelafuente@arkusnexus.com",
                         tech_stacks: TechStack.all.sample(2),
                         tools: Tool.all.sample(2),
@@ -170,26 +170,27 @@ team_advanta = Team.create!(
 )
 Metric.create!([
   # PERFORMANCE
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 89 },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "performance", value: 66 },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "performance", value: 96 },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "performance", value: 85 },
+  { date: "15-01-2022".to_date, related: advanta, indicator_type: "performance", value: 89 },
+  { date: "15-02-2022".to_date, related: advanta, indicator_type: "performance", value: 66 },
+  { date: "15-03-2022".to_date, related: advanta, indicator_type: "performance", value: 96 },
+  { date: "15-05-2022".to_date, related: advanta, indicator_type: "performance", value: 85 },
   # VELOCITY
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 20 },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 77 },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 92 },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 85 },
+  { date: "15-01-2022".to_date, related: advanta, indicator_type: "velocity", value: 20 },
+  { date: "15-02-2022".to_date, related: advanta, indicator_type: "velocity", value: 77 },
+  { date: "15-03-2022".to_date, related: advanta, indicator_type: "velocity", value: 92 },
+  { date: "15-05-2022".to_date, related: advanta, indicator_type: "velocity", value: 85 },
   # MORALE
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "morale", value: 82 },
-  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "morale", value: 62 }
+  { date: "15-03-2022".to_date, related: advanta, indicator_type: "morale", value: 82 },
+  { date: "15-06-2022".to_date, related: advanta, indicator_type: "morale", value: 62 },
   # BALANCE
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
-  { date: "15-04-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
-  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
-  { date: "15-07-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  }
+  { date: "15-01-2022".to_date, related: advanta, indicator_type: "balance", value: 0  },
+  { date: "15-01-2022".to_date, related: advanta, indicator_type: "balance", value: 0  },
+  { date: "15-02-2022".to_date, related: advanta, indicator_type: "balance", value: 0  },
+  { date: "15-03-2022".to_date, related: advanta, indicator_type: "balance", value: 0  },
+  { date: "15-04-2022".to_date, related: advanta, indicator_type: "balance", value: 0  },
+  { date: "15-05-2022".to_date, related: advanta, indicator_type: "balance", value: 0  },
+  { date: "15-06-2022".to_date, related: advanta, indicator_type: "balance", value: 0  },
+  { date: "15-07-2022".to_date, related: advanta, indicator_type: "balance", value: 0  }
 ])
 team_advanta.investments.create([
   { value: 37450.00, date: "15-01-2022".to_date },
@@ -261,24 +262,24 @@ team_broker = Team.create!(
 )
 Metric.create!([
   # PERFORMANCE
-  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "performance", value: 105 },
-  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "performance", value: 103 },
-  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "performance", value: 91 },
+  { date: "15-05-2022".to_date, related: broker, indicator_type: "performance", value: 105 },
+  { date: "15-06-2022".to_date, related: broker, indicator_type: "performance", value: 103 },
+  { date: "15-07-2022".to_date, related: broker, indicator_type: "performance", value: 91 },
   # VELOCITY
-  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "velocity", value: 192 },
-  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "velocity", value: 130 },
-  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "velocity", value: 142 },
+  { date: "15-05-2022".to_date, related: broker, indicator_type: "velocity", value: 192 },
+  { date: "15-06-2022".to_date, related: broker, indicator_type: "velocity", value: 130 },
+  { date: "15-07-2022".to_date, related: broker, indicator_type: "velocity", value: 142 },
   # MORALE
-  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "morale", value: 88 },
-  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "morale", value: 82 },
+  { date: "15-03-2022".to_date, related: broker, indicator_type: "morale", value: 88 },
+  { date: "15-06-2022".to_date, related: broker, indicator_type: "morale", value: 82 },
   # BALANCE
-  { date: "15-01-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
-  { date: "15-02-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
-  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
-  { date: "15-04-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
-  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
-  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
-  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 }
+  { date: "15-01-2022".to_date, related: broker, indicator_type: "balance", value: 69 },
+  { date: "15-02-2022".to_date, related: broker, indicator_type: "balance", value: 69 },
+  { date: "15-03-2022".to_date, related: broker, indicator_type: "balance", value: 69 },
+  { date: "15-04-2022".to_date, related: broker, indicator_type: "balance", value: 69 },
+  { date: "15-05-2022".to_date, related: broker, indicator_type: "balance", value: 69 },
+  { date: "15-06-2022".to_date, related: broker, indicator_type: "balance", value: 69 },
+  { date: "15-07-2022".to_date, related: broker, indicator_type: "balance", value: 69 }
 ])
 team_broker.investments.create([
   { value: 40400.00, date: "15-01-2022".to_date },
