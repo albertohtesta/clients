@@ -9,6 +9,7 @@ module Accounts
     }.freeze
 
     def process
+      Rollbar.error("FAIL CLIENT CREATION", error_message: permitted_attributes[:message])
       puts permitted_attributes[:message]
     end
   end

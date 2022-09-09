@@ -4,6 +4,7 @@
 class ClientRegistrationService < ApplicationService
   class << self
     def request_user_client(customer_email)
+      Rollbar.info("Request client user with: ", email: customer_email)
       Accounts::RequestClientUserPublisher.publish(customer_email)
     end
 
