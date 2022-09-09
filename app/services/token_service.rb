@@ -14,8 +14,8 @@ class TokenService < CognitoService
     Rollbar.warning("SUCCESS DECIDONG", decoded_token:)
     decoded_token
   rescue => e
-    Rollbar.error("FAIL DECODING", token: @user_object[:token], iss: ISS, jwt_config:)
-    raise e
+    Rollbar.error("FAIL DECODING", error: e, token: @user_object[:token], iss: ISS, jwt_config:)
+    nil
   end
 
   private
