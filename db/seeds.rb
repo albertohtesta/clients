@@ -192,6 +192,30 @@ Metric.create!([
   { date: "15-06-2022".to_date, related: advanta, indicator_type: "balance", value: 0  },
   { date: "15-07-2022".to_date, related: advanta, indicator_type: "balance", value: 0  }
 ])
+Metric.create!([
+  # PERFORMANCE
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 89 },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "performance", value: 66 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "performance", value: 96 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "performance", value: 85 },
+  # VELOCITY
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 20 },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 77 },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 92 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 85 },
+  # MORALE
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "morale", value: 82 },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "morale", value: 62 },
+  # BALANCE
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
+  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
+  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
+  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
+  { date: "15-04-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
+  { date: "15-07-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  }
+])
 team_advanta.investments.create([
   { value: 37450.00, date: "15-01-2022".to_date },
   { value: 37450.00, date: "15-02-2022".to_date },
@@ -280,6 +304,27 @@ Metric.create!([
   { date: "15-05-2022".to_date, related: broker, indicator_type: "balance", value: 69 },
   { date: "15-06-2022".to_date, related: broker, indicator_type: "balance", value: 69 },
   { date: "15-07-2022".to_date, related: broker, indicator_type: "balance", value: 69 }
+])
+Metric.create!([
+  # PERFORMANCE
+  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "performance", value: 105 },
+  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "performance", value: 103 },
+  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "performance", value: 91 },
+  # VELOCITY
+  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "velocity", value: 192 },
+  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "velocity", value: 130 },
+  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "velocity", value: 142 },
+  # MORALE
+  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "morale", value: 88 },
+  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "morale", value: 82 },
+  # BALANCE
+  { date: "15-01-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
+  { date: "15-02-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
+  { date: "15-03-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
+  { date: "15-04-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
+  { date: "15-05-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
+  { date: "15-06-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 },
+  { date: "15-07-2022".to_date, related: team_broker, indicator_type: "balance", value: 69 }
 ])
 team_broker.investments.create([
   { value: 40400.00, date: "15-01-2022".to_date },
