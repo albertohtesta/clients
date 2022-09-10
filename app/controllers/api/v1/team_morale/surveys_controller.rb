@@ -20,6 +20,14 @@ module Api
           render json: SurveyPresenter.new(@survey).json, status: :ok
         end
 
+        def destroy
+          if SurveyResponsesService.close_survey(@survey.id)
+            render json: { message: "Survey has been closed"}, status: :ok
+          else
+            render json: { error: "survey could not be closed" }, status: :bad_request
+          end
+        end
+
         private
           def survey_params
             params.require(:survey).permit(:team_id, :deadline, :period, :survey_url, :year, :period_value, :description)
