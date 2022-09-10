@@ -29,6 +29,7 @@ gem "redis"
 gem "sneakers"
 gem "rollbar"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem "rest-client"
 
 group :development, :test do
   gem "bundler-audit"
@@ -47,7 +48,6 @@ group :development do
   gem "rubocop-minitest"
   gem "rubocop-performance"
   gem "rubocop", require: false
-  gem "rest-client"
 end
 
 group :test do
