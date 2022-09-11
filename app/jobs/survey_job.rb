@@ -4,6 +4,6 @@ class SurveyJob < ApplicationJob
   queue_as :default
 
   def perform(survey)
-    SurveyResponsesService.close_survey(survey.id) unless survey.status == 2
+    SurveyResponsesService.new(survey.id).close_survey unless survey.status == 2
   end
 end

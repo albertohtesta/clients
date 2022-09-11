@@ -4,11 +4,12 @@ module Api
   module V1
     module TeamMorale
       class SurveysController < ApplicationController
+        # skip_before_action :access_token, :verify_token, :current_user
         before_action :survey_by_id, only: %i[show destroy]
 
         def create
-          @survey = Survey.new(get_survey_params_data)
-          if @survey.save
+          @survey = Survey.new(local_and_remote_survey_params)
+          if SurveyRepository.save(@survey)
             SurveyCreateService.create_job(@survey)
             render json: SurveyPresenter.new(@survey).json, status: :ok
           else
@@ -21,10 +22,10 @@ module Api
         end
 
         def destroy
-          if SurveyResponsesService.close_survey(@survey.id)
-            render json: { message: "Survey has been closed"}, status: :ok
+          if SurveyResponsesService.new(@survey.id).close_survey
+            render json: true, status: :ok
           else
-            render json: { error: "survey could not be closed" }, status: :bad_request
+            render json: false, status: :bad_request
           end
         end
 
@@ -37,16 +38,8 @@ module Api
             @survey = SurveyRepository.find(params[:id])
           end
 
-          def get_survey_params_data
-            survey_remote_data = get_survey_remote_data(params[:description], params[:survey_url])
-            get_survey_params(survey_remote_data)
-          end
-
-          def get_survey_remote_data(description, survey_url)
-            SurveyCreateService.get_survey_remote_data(description, survey_url)
-          end
-
-          def get_survey_params(survey_remote_data)
+          def local_and_remote_survey_params
+            survey_remote_data = SurveyCreateService.get_survey_remote_data(params[:description], params[:survey_url])
             local_data = survey_params.merge(status: "preparation", started_at:
             SurveyCreateService.calculate_started_at(params[:period], params[:period_value], params[:year]))
             return local_data unless survey_remote_data.present?
