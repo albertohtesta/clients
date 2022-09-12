@@ -88,6 +88,31 @@ paths:
           description: metrics found
         '404':
           description: Not metrics found
+  "/api/v1/team_morale/survey_results":
+    get:
+      summary: list survey results
+      tags:
+      - Surveys
+      parameters:
+      - name: period
+        in: query
+        schema:
+          type: string
+      - name: year
+        in: query
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        schema:
+          type: string
+      - name: processing_type
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
   "/build-info":
     get:
       summary: gets the build info
