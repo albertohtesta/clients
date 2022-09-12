@@ -3,6 +3,7 @@
 class TeamsOudatedMetricsJob < ApplicationJob
   def perform
     puts ">>Job Team metrics executing<<"
+    Rollbar.info("Job for teams oudated executing")
 
     teams_with_metrics = TeamRepository.all.includes(:metrics)
     teams_with_metrics.map do |team|
