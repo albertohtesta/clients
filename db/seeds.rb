@@ -250,6 +250,13 @@ Contact.create!([
             last_name: "HERNANDEZ",
             email: "jrhernandez@arkusnexus.com",
             account_id: advanta.id
+          },
+          {
+            first_name: "Bryan",
+            last_name: "Guerrero",
+            email: "bryan.guerrero@michelada.io",
+            uuid: "37efff2c-0399-4f87-8fb3-22a1c1172c12",
+            account_id: advanta.id
           }
         ])
 
