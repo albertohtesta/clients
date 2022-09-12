@@ -10,7 +10,6 @@ METRICS_TYPES = {
   client_engagement: "client engagement" # account
 }
 
-
 SENIORITY_TYPES = {
   junior: "junior",
   middle: "middle",

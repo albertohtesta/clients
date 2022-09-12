@@ -9,6 +9,7 @@ gem "aws-sdk-cognitoidentity"
 gem "aws-sdk-cognitoidentityprovider"
 gem "aws-sdk-s3"
 gem "bcrypt"
+gem "clockwork"
 gem "bootsnap", require: false
 gem "bunny"
 gem "bunny-mock"

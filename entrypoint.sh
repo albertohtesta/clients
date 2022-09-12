@@ -6,6 +6,10 @@ if [ -f /clients-backend/tmp/pids/server.pid ]; then
   rm /clients-backend/tmp/pids/server.pid
 fi
 
-bundle check --path vendor/bundle || bundle install --path vendor/bundle --jobs `expr $(cat /proc/cpuinfo | grep -c "cpu cores") - 1` --retry 3
+bundle install &
+bundle exec rails db:migrate &
+bundle exec rake sneakers:run &
+bundle exec clockwork config/clock.rb &
+
 
 exec "$@"
