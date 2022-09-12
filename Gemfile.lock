@@ -387,6 +387,7 @@ DEPENDENCIES
   rails (~> 7.0.2, >= 7.0.2.3)
   rails-erd
   redis
+  rest-client
   rollbar
   rest-client
   rspec-rails (~> 6.0.0.rc1)
