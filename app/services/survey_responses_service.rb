@@ -9,6 +9,7 @@ class SurveyResponsesService < ApplicationService
 
   def get_responses
     return unless @survey.remote_survey_id.present?
+
     surveys = get_remote_responses(@survey.remote_survey_id)
     questions = get_questions(surveys)
     questions = calculate_questions_average(questions, surveys.length)
@@ -19,13 +20,17 @@ class SurveyResponsesService < ApplicationService
   def close_survey
     return unless survey_should_be_closed
     close_remote_survey unless @survey.remote_survey_id.blank?
-    @survey.reload.status = 2
+    @survey.reload.status = "closed"
     @survey.save
   end
 
   private
     def survey_should_be_closed
-      @survey.present? && @survey.status != 2 && ((@survey.current_answers >= @survey.requested_answers) || @survey.deadline < Date.today)
+      @survey.present? && @survey.status != "closed" && complete_or_deadline
+    end
+
+    def complete_or_deadline
+      @survey.current_answers >= @survey.requested_answers || @survey.deadline < Date.today
     end
 
     def close_remote_survey
@@ -40,16 +45,18 @@ class SurveyResponsesService < ApplicationService
 
     def get_questions(surveys)
       questions = {}
-      surveys.each do |survey|
-        variables = survey[:variables]
-        variables.each do |var|
-          key = var[:key]
-          survey_question = SurveyQuestion.find_by(question: key)
-          if survey_question.present?
-            questions.key?(key) ? questions[key] += var[:number] : questions[key] = var[:number]
-          end
-        end
-      end
+      surveys.map { |survey| questions = check_variables(survey[:variables], questions) }
+      questions
+    end
+
+    def check_variables(variables, questions)
+      variables.each do |var|
+       key = var[:key]
+       survey_question = SurveyQuestion.find_by(question: key)
+       if survey_question.present?
+         questions.key?(key) ? questions[key] += var[:number] : questions[key] = var[:number]
+       end
+     end
       questions
     end
 

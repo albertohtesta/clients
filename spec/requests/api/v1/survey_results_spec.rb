@@ -17,12 +17,29 @@
 #       parameter name: :processing_type, in: :query, type: :string
 #       produces "application/json"
 
-#       response 200, "successful" do
-#         run_test! do |response|
-#           expect(response.body).not_to be_empty
-#           expect(response).to have_http_status(:success)
-#         end
-#       end
-#     end
-#   end
-# end
+      response 200, "successful" do
+        run_test! do |response|
+          expect(response.body).not_to be_empty
+          expect(response).to have_http_status(:success)
+        end
+      end
+    end
+
+    get("list survey results with missing parameter") do
+      tags "Surveys"
+      let(:period) { "0" }
+      let(:year) { "2022" }
+      let(:processing_type) { "A" }
+      parameter name: :period, in: :query, type: :string
+      parameter name: :year, in: :query, type: :string
+      parameter name: :processing_type, in: :query, type: :string
+      produces "application/json"
+
+      response 400, "No results found" do
+        run_test! do |response|
+          expect(response.body).to eq("{\"message\":\"Parameters missing\"}")
+        end
+      end
+    end
+  end
+end
