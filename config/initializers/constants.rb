@@ -12,7 +12,7 @@ METRICS_TYPES = {
 }
 
 SENIORITY_TYPES = {
-  junior: "junior",
-  middle: "middle",
-  sennior: "sennior"
+  junior: "Junior",
+  middle: "Middle",
+  senior: "Senior"
 }

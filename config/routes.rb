@@ -55,6 +55,10 @@ Rails.application.routes.draw do
       end
 
       resources :metric_history, only: %i[show update]
+      namespace :team_balance do
+        resources :balances, only: %i[index]
+      end
+
       resources :information, only: %i[index] # TODO: DELETE THIS ENDPOINT IT'S JUST TEMPORALLY TO KNOW THE DATABASE INFORMATION IN QA
     end
   end

@@ -2,7 +2,7 @@
 
 class Team < ApplicationRecord
   has_many :collaborators_teams
-  has_many :collaborators, through: :collaborators_teams
+  has_many :collaborators, through: :collaborators_teams, dependent: :delete_all
   has_many :metrics, as: :related
   has_many :investments
   has_many :team_requirements
@@ -13,5 +13,19 @@ class Team < ApplicationRecord
   belongs_to :project
 
   validates :added_date, presence: true
-  validates :board_id, uniqueness: true
+
+  after_save :add_team_balance
+
+  private
+    def add_team_balance
+      balance = TeamBalance.new
+      balance.team_id = self.id
+      balance.balance_date = self.balance_date
+      balance.balance = TeamBalanceService.new(id).process
+      balance.save
+    end
+
+    def balance_date
+      Date.today
+    end
 end
