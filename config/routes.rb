@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
       resources :managers, only: [:show] do
         scope module: :managers do
-          resources :accounts, only: [:show] do
+          resources :accounts, only: [:show, :index] do
             scope module: :accounts do
               resources :account_follow_ups, only: %i[create index]
             end
@@ -37,8 +37,8 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :projects, only: [:index]
       resources :metrics, only: [:index]
+      resources :projects, only: [:index]
       resources :posts, only: [:show]
 
       namespace :public do
@@ -54,6 +54,7 @@ Rails.application.routes.draw do
         resources :remote_surveys, only: %i[index show update create]
       end
 
+      resources :metric_history, only: %i[show update]
       resources :information, only: %i[index] # TODO: DELETE THIS ENDPOINT IT'S JUST TEMPORALLY TO KNOW THE DATABASE INFORMATION IN QA
     end
   end
