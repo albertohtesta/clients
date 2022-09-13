@@ -7,8 +7,7 @@ class TeamBalanceService < ApplicationService
   end
 
   def process
-    seniority_deviation = junior_seniority_desviation + middle_seniority_desviation + senior_seniority_desviation
-    calculate_balance(seniority_deviation)
+    junior_seniority_desviation + middle_seniority_desviation + senior_seniority_desviation
   end
 
   private

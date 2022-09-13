@@ -2,7 +2,7 @@
 
 class Team < ApplicationRecord
   has_many :collaborators_teams
-  has_many :collaborators, through: :collaborators_teams
+  has_many :collaborators, through: :collaborators_teams, dependent: :delete_all
   has_many :metrics, as: :related
   has_many :investments
   has_many :team_requirements
