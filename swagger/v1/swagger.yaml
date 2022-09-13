@@ -4,39 +4,6 @@ info:
   title: Clients API V1
   version: v1
 paths:
-  "/api/v1/managers/{manager_id}/accounts":
-    get:
-      summary: Get all accounts of a mannager and with priorities
-      tags:
-      - Managers
-      security:
-      - Bearer: []
-      parameters:
-      - name: manager_id
-        in: path
-        description: id of the manager
-  "/api/v1/accounts/{account_id}/invitations":
-    post:
-      summary: Invite account contacts throght email
-      tags:
-      - Accounts
-      security:
-      - Bearer: []
-      parameters:
-      - name: account_id
-        in: path
-        description: id of the account
-        required: true
-        schema:
-          type: integer
-      responses:
-        '200':
-          description: contacts invited
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
   "/api/v1/accounts/{account_id}/contacts":
     get:
       summary: Get all contact from an acccount
@@ -71,56 +38,60 @@ paths:
       responses:
         '404':
           description: contacts collaborators not found
-  "/api/v1/metrics":
-    get:
-      summary: Get metrics of team
+  "/api/v1/accounts/{account_id}/invitations":
+    post:
+      summary: Invite account contacts throght email
       tags:
-      - Metrics
+      - Accounts
       security:
       - Bearer: []
       parameters:
-      - name: group_by
-        in: query
-        description: "[quarters, monthly]"
-        schema:
-          type: string
-      - name: team_id
-        in: query
-        description: team id
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
         schema:
           type: integer
-      - name: indicator_type
-        in: query
-        description: "['balance', 'velocity', 'morale', 'performance']"
-        schema:
-          type: string
       responses:
         '200':
-          description: metrics found
-        '404':
-          description: Not metrics found
-  "/api/v1/team_morale/survey_results":
+          description: contacts invited
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+  "/api/v1/managers/{manager_id}/accounts":
     get:
-      summary: list survey results
+      summary: Get all accounts of a mannager and with priorities
       tags:
-      - Surveys
+      - Managers
+      security:
+      - Bearer: []
       parameters:
-      - name: period
-        in: query
+      - name: manager_id
+        in: path
+        description: id of the manager
+        required: true
         schema:
-          type: string
-      - name: year
-        in: query
-        schema:
-          type: string
-      - name: team_id
-        in: query
-        schema:
-          type: string
-      - name: processing_type
-        in: query
-        schema:
-          type: string
+          type: integer
+      responses:
+        '200':
+          description: accounts found
+  "/api/v1/team_morale/surveys/not_found":
+    get:
+      summary: Survey does not exist
+      responses:
+        '404':
+          description: not found
+  "/api/v1/team_morale/surveys/2":
+    get:
+      summary: Survey does not exist
+      responses:
+        '404':
+          description: not found
+  "/api/v1/team_morale/surveys/1":
+    get:
+      summary: get survey status
       responses:
         '200':
           description: successful
