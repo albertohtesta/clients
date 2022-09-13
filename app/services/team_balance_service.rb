@@ -1,54 +1,36 @@
 # frozen_string_literal: true
 
 class TeamBalanceService < ApplicationService
-  attr_reader :team_id
-
   def initialize(team_id)
     @team_id = team_id
+    @total_collaborators = TeamRepository.find_all_collaborators(team_id).size
   end
 
   def process
-    calculate_junior_seniority
-    calculate_middle_seniority
-    calculate_senior_seniority
-    calculate_seniority_deviation
+    junior_seniority_desviation + middle_seniority_desviation + senior_seniority_desviation
   end
 
   private
-    def calculate_junior_seniority
-      total_collaborators = TeamRepository.find_all_collaborators(team_id).count
-      total_juniors = TeamRepository.find_all_junior_collaborators(team_id).count
+    attr_reader :team_id, :total_collaborators
 
-      junior_balance = (total_juniors / total_collaborators rescue 0).abs * 100 unless total_juniors.nil?
-
-      @junior_deviation = (50 - junior_balance).abs
+    def junior_seniority_desviation
+      total_juniors = TeamRepository.find_all_collaborators_by_seniority(team_id, SENIORITY_TYPES[:junior])
+      junior_key_percent = total_collaborators * 0.50
+      junior_unbalance = (total_juniors.size - junior_key_percent) * 100 / total_collaborators unless total_juniors.size.zero?
+      junior_unbalance || 33
     end
 
-    def calculate_middle_seniority
-      total_collaborators = TeamRepository.find_all_collaborators(team_id).count
-      total_middles = TeamRepository.find_all_middle_collaborators(team_id).count
-
-      middle_balance = (total_middles / total_collaborators rescue 0).abs * 100 unless total_middles.nil?
-
-      @middle_deviation = (30 - middle_balance).abs
+    def middle_seniority_desviation
+      total_middles = TeamRepository.find_all_collaborators_by_seniority(team_id, SENIORITY_TYPES[:middle])
+      middle_key_percent = total_collaborators * 0.30
+      middle_unbalance = (total_middles.size - middle_key_percent) * 100 / total_collaborators unless total_middles.size.zero?
+      middle_unbalance || 33
     end
 
-    def calculate_senior_seniority
-      total_collaborators = TeamRepository.find_all_collaborators(team_id).count
-      total_seniors = TeamRepository.find_all_senior_collaborators(team_id).count
-
-      senior_balance = (total_seniors / total_collaborators rescue 0).abs * 100 unless total_seniors.nil?
-
-      @senior_deviation = (20 - senior_balance).abs
-    end
-
-    def calculate_seniority_deviation
-      seniority_deviation = @junior_deviation + @middle_deviation + @senior_deviation
-      calculate_balance(seniority_deviation)
-    end
-
-    def calculate_balance(seniority_deviation)
-      balance = 100 - seniority_deviation
-      balance
+    def senior_seniority_desviation
+      total_seniors = TeamRepository.find_all_collaborators_by_seniority(team_id, SENIORITY_TYPES[:senior])
+      senior_key_percent = total_collaborators * 0.20
+      senior_unbalance = (total_seniors.size - senior_key_percent) * 100 / total_collaborators unless total_seniors.size.zero?
+      senior_unbalance || 33
     end
 end

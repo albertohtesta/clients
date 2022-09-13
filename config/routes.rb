@@ -57,6 +57,7 @@ Rails.application.routes.draw do
         resources :remote_surveys, only: %i[index show update create]
       end
 
+      resources :metric_history, only: %i[show update]
       namespace :team_balance do
         resources :balances, only: %i[index]
       end

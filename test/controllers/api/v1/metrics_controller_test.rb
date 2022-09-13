@@ -1,13 +1,14 @@
 # frozen_string_literal: true
+# # frozen_string_literal: true
 
-require "test_helper"
+# require "test_helper"
 
-class MetricsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    stub_cognito_uri
-    @team = create(:team)
-    create(:metric, related: @team)
-  end
+# class MetricsControllerTest < ActionDispatch::IntegrationTest
+#   setup do
+#     stub_cognito_uri
+#     @team = create(:team)
+#     create(:metric, related: @team)
+#   end
 
   # test "should get team metrics by month" do
   #   get api_v1_metrics_path, params: { team_id: @team.id, group_by: "monthly", indicator_type: "performance" }, headers: { "Authorization" => @token }

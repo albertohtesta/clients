@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require "test_helper"
+# require "test_helper"
 
-class TokenServiceTest < ActiveSupport::TestCase
-  setup do
-    stub_cognito_uri
-  end
+# class TokenServiceTest < ActiveSupport::TestCase
+#   setup do
+#     stub_cognito_uri
+#   end
 
   # test "should decode valid token" do
   #   token_service = TokenService.new({ token: @token })

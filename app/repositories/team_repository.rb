@@ -10,16 +10,8 @@ class TeamRepository < ApplicationRepository
       scope.find_by(id:).collaborators
     end
 
-    def find_all_junior_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "JUNIOR")
-    end
-
-    def find_all_middle_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "MIDDLE")
-    end
-
-    def find_all_senior_collaborators(id)
-      scope.find_by(id:).collaborators.where(seniority: "SENIOR")
+    def find_all_collaborators_by_seniority(id, seniority)
+      scope.find_by(id:).collaborators.where(seniority:)
     end
 
     def find_teams_of_project(project_id)

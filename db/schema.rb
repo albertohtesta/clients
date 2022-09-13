@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_05_205726) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_184724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -150,7 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_205726) do
     t.index ["collaborator_id"], name: "index_collaborators_badges_on_collaborator_id"
   end
 
-  create_table "collaborators_teams", id: false, force: :cascade do |t|
+  create_table "collaborators_teams", force: :cascade do |t|
     t.bigint "collaborator_id", null: false
     t.bigint "team_id", null: false
     t.index ["collaborator_id", "team_id"], name: "index_collaborators_teams_on_collaborator_id_and_team_id"

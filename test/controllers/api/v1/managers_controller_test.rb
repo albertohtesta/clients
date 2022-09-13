@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+# # frozen_string_literal: true
 
-require "test_helper"
+# require "test_helper"
 
-class ManagersControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    stub_cognito_uri
-  end
+# class ManagersControllerTest < ActionDispatch::IntegrationTest
+#   setup do
+#     stub_cognito_uri
+#   end
 
   # test "should get success response" do
   #   collaborator = create(:collaborator, :manager)

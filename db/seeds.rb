@@ -217,6 +217,7 @@ Metric.create!([
   { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  },
   { date: "15-07-2022".to_date, related: team_advanta, indicator_type: "balance", value: 0  }
 ])
+
 team_advanta.investments.create([
   { value: 37450.00, date: "15-01-2022".to_date },
   { value: 37450.00, date: "15-02-2022".to_date },

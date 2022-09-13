@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require "test_helper"
+# # frozen_string_literal: true
+
+# require "test_helper"
 
 class Api::V1::Teams::CollaboratorsControllerTest < ActionDispatch::IntegrationTest
   setup do
