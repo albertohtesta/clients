@@ -2,12 +2,13 @@
 
 class SurveyMailer < ApplicationMailer
   def survey_created
-    @collaborator = params[:collaborator]
+    @collaborator_name = params[:collaborator_name]
+    @collaborator_email = params[:collaborator_email]
     @subject = params[:subject]
     @survey_url = params[:survey_url]
 
     mail(
-      to: @collaborator.email,
+      to: @collaborator_email,
       subject: @subject
     )
   end
