@@ -171,15 +171,15 @@ team_advanta = Team.create!(
 )
 Metric.create!([
   # PERFORMANCE
-  { date: "15-01-2022".to_date, related: advanta, indicator_type: "performance", value: 108 },
-  { date: "15-02-2022".to_date, related: advanta, indicator_type: "performance", value: 103 },
-  { date: "15-03-2022".to_date, related: advanta, indicator_type: "performance", value: 91 },
-  { date: "15-05-2022".to_date, related: advanta, indicator_type: "performance", value: 70 },
+  { date: "15-05-2022".to_date, related: advanta, indicator_type: "performance", value: 108 },
+  { date: "15-06-2022".to_date, related: advanta, indicator_type: "performance", value: 103 },
+  { date: "15-07-2022".to_date, related: advanta, indicator_type: "performance", value: 91 },
+  { date: "15-08-2022".to_date, related: advanta, indicator_type: "performance", value: 70 },
   # VELOCITY
-  { date: "15-01-2022".to_date, related: advanta, indicator_type: "velocity", value: 65 },
-  { date: "15-02-2022".to_date, related: advanta, indicator_type: "velocity", value: 65 },
-  { date: "15-03-2022".to_date, related: advanta, indicator_type: "velocity", value: 71 },
-  { date: "15-05-2022".to_date, related: advanta, indicator_type: "velocity", value: 28 },
+  { date: "15-05-2022".to_date, related: advanta, indicator_type: "velocity", value: 65 },
+  { date: "15-06-2022".to_date, related: advanta, indicator_type: "velocity", value: 65 },
+  { date: "15-07-2022".to_date, related: advanta, indicator_type: "velocity", value: 71 },
+  { date: "15-08-2022".to_date, related: advanta, indicator_type: "velocity", value: 28 },
   # MORALE
   { date: "15-03-2022".to_date, related: advanta, indicator_type: "morale", value: 82 },
   { date: "15-06-2022".to_date, related: advanta, indicator_type: "morale", value: 62 },
@@ -195,15 +195,15 @@ Metric.create!([
 ])
 Metric.create!([
   # PERFORMANCE
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "performance", value: 108 },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "performance", value: 103 },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "performance", value: 91 },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "performance", value: 70 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "performance", value: 108 },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "performance", value: 103 },
+  { date: "15-07-2022".to_date, related: team_advanta, indicator_type: "performance", value: 91 },
+  { date: "15-08-2022".to_date, related: team_advanta, indicator_type: "performance", value: 70 },
   # VELOCITY
-  { date: "15-01-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 65 },
-  { date: "15-02-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 65 },
-  { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 71 },
-  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 28 },
+  { date: "15-05-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 65 },
+  { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 65 },
+  { date: "15-07-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 71 },
+  { date: "15-08-2022".to_date, related: team_advanta, indicator_type: "velocity", value: 28 },
   # MORALE
   { date: "15-03-2022".to_date, related: team_advanta, indicator_type: "morale", value: 82 },
   { date: "15-06-2022".to_date, related: team_advanta, indicator_type: "morale", value: 62 },
