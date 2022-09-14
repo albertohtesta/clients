@@ -4,6 +4,62 @@ info:
   title: Clients API V1
   version: v1
 paths:
+  "/api/v1/accounts/{account_id}/contacts":
+    get:
+      summary: Get all contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: contacts not found
+  "/api/v1/accounts/{account_id}/contacts_collaborators":
+    get:
+      summary: Get all collaborators contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: contacts collaborators not found
+  "/api/v1/accounts/{account_id}/invitations":
+    post:
+      summary: Invite account contacts throght email
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: contacts invited
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
   "/api/v1/managers/{manager_id}/accounts":
     get:
       summary: Get all accounts of a mannager and with priorities
@@ -21,8 +77,36 @@ paths:
       responses:
         '200':
           description: accounts found
+  "/api/v1/metric_history/{id}":
+    get:
+      summary: metric_history
+      tags:
+      - MetricHistory
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: filter by category
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: find metric historial
         '404':
-          description: No accounts found
+          description: find metric historial
+    put:
+      summary: update metric
+      tags:
+      - metric
+      parameters:
+      - name: id
+        in: path
+        required: true
+      responses:
+        '200':
+          description: successful
   "/api/v1/metrics":
     get:
       summary: Get metrics of team
@@ -96,9 +180,27 @@ paths:
           description: talent pool directory filtered found
         '404':
           description: talent pool directory not found
+  "/api/v1/team_morale/surveys/not_found":
+    get:
+      summary: Survey does not exist
+      responses:
+        '404':
+          description: not found
+  "/api/v1/team_morale/surveys/2":
+    get:
+      summary: Survey does not exist
+      responses:
+        '404':
+          description: not found
+  "/api/v1/team_morale/surveys/1":
+    get:
+      summary: get survey status
+      responses:
+        '200':
+          description: successful
   "/api/v1/team_morale/survey_results":
     get:
-      summary: list survey results
+      summary: list survey results with missing parameter
       tags:
       - Surveys
       parameters:
@@ -110,14 +212,27 @@ paths:
         in: query
         schema:
           type: string
-      - name: team_id
-        in: query
-        schema:
-          type: string
       - name: processing_type
         in: query
         schema:
           type: string
+      responses:
+        '200':
+          description: successful
+        '400':
+          description: No results found
+  "/api/v1/team_balance/balances":
+    get:
+      summary: list balances
+      tags:
+      - Balances
+      parameters:
+      - name: team_id
+        in: path
+        description: id of the team
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: successful
