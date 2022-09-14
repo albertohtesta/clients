@@ -7,7 +7,10 @@ class SurveyRepository < ApplicationRepository
     end
 
     def surveys_by_team_dates_status(**args)
-      scope.where({ team_id: args[:team_id], status: args[:status], started_at: args[:initial_date]..args[:end_date] }).select(:id, "questions_detail -> 'questions' AS questions")
+      scope.where({ team_id: args[:team_id],
+        status: args[:status],
+        started_at: args[:initial_date]..args[:end_date] }).
+        select(:id, "questions_detail -> 'questions' AS questions")
     end
   end
 end

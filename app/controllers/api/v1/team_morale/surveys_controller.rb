@@ -4,7 +4,6 @@ module Api
   module V1
     module TeamMorale
       class SurveysController < ApplicationController
-        # skip_before_action :access_token, :verify_token, :current_user
         before_action :survey_by_id, only: %i[show destroy]
 
         def create
