@@ -77,6 +77,64 @@ paths:
       responses:
         '200':
           description: accounts found
+  "/api/v1/metric_history/{id}":
+    get:
+      summary: metric_history
+      tags:
+      - MetricHistory
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: filter by category
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: find metric historial
+        '404':
+          description: find metric historial
+    put:
+      summary: update metric
+      tags:
+      - metric
+      parameters:
+      - name: id
+        in: path
+        required: true
+      responses:
+        '200':
+          description: successful
+  "/api/v1/metrics":
+    get:
+      summary: Get metrics of team
+      tags:
+      - Metrics
+      security:
+      - Bearer: []
+      parameters:
+      - name: group_by
+        in: query
+        description: "[quarters, monthly]"
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        description: team id
+        schema:
+          type: integer
+      - name: indicator_type
+        in: query
+        description: "['balance', 'velocity', 'morale', 'performance']"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: metrics found
+        '404':
+          description: Not metrics found
   "/api/v1/public/collaborators/{id}":
     get:
       summary: Get a collaborator
@@ -140,6 +198,31 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/team_morale/survey_results":
+    get:
+      summary: list survey results
+      tags:
+      - Surveys
+      parameters:
+      - name: period
+        in: query
+        schema:
+          type: string
+      - name: year
+        in: query
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        schema:
+          type: string
+      - name: processing_type
+        in: query
+        schema:
+          type: string
+      responses:
+        '400':
+          description: No results found
   "/api/v1/team_balance/balances":
     get:
       summary: list balances

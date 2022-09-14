@@ -10,6 +10,8 @@ class TokenService
   def decode
     email = Contact.first&.email ||= "email@email.com"
     data = {
+      "cognito:groups" => ["client"],
+      "account_id" => "1",
       "role" => "client",
       "user_attributes" => [{ "name" => "email", "value" => email }]
     }
@@ -32,13 +34,12 @@ RSpec.describe "Accounts", type: :request do
       produces "application/json"
       parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
 
-      # response(404, "Not Authorized") do
+      # response(200, "Authorized") do
       #   let(:Authorization) { @token }
 
       #   run_test!
       # end
 
-      # TODO: text when invalid token is provided
       # response(401, "Unauthorized") do
       #   let(:Authorization) { "" }
       #   run_test!
