@@ -41,3 +41,4 @@ docker-compose-jacr.yml
 Dockerfile.jacr
 .DS_Store
 .ssh
+/Gemfile.lock
