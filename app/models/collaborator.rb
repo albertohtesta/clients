@@ -11,6 +11,7 @@ class Collaborator < ApplicationRecord
   has_and_belongs_to_many :tech_stacks
   has_and_belongs_to_many :tools
   has_many :account_contact_collaborators
+  has_and_belongs_to_many :accounts, join_table: "accounts_collaborators"
 
   has_one_attached :avatar
 

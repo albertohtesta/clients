@@ -15,62 +15,14 @@ paths:
       - name: manager_id
         in: path
         description: id of the manager
-  "/api/v1/accounts/{account_id}/invitations":
-    post:
-      summary: Invite account contacts throght email
-      tags:
-      - Accounts
-      security:
-      - Bearer: []
-      parameters:
-      - name: account_id
-        in: path
-        description: id of the account
         required: true
         schema:
           type: integer
       responses:
         '200':
-          description: contacts invited
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-  "/api/v1/accounts/{account_id}/contacts":
-    get:
-      summary: Get all contact from an acccount
-      tags:
-      - Accounts
-      security:
-      - Bearer: []
-      parameters:
-      - name: account_id
-        in: path
-        description: id of the account
-        required: true
-        schema:
-          type: integer
-      responses:
+          description: accounts found
         '404':
-          description: contacts not found
-  "/api/v1/accounts/{account_id}/contacts_collaborators":
-    get:
-      summary: Get all collaborators contact from an acccount
-      tags:
-      - Accounts
-      security:
-      - Bearer: []
-      parameters:
-      - name: account_id
-        in: path
-        description: id of the account
-        required: true
-        schema:
-          type: integer
-      responses:
-        '404':
-          description: contacts collaborators not found
+          description: No accounts found
   "/api/v1/metrics":
     get:
       summary: Get metrics of team
@@ -99,6 +51,51 @@ paths:
           description: metrics found
         '404':
           description: Not metrics found
+  "/api/v1/public/collaborators/{id}":
+    get:
+      summary: Get a collaborator
+      tags:
+      - Collaborators
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: id of the collaborator
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: collaborator found
+        '404':
+          description: collaborator not found
+  "/api/v1/public/accounts/{account_id}/collaborators":
+    get:
+      summary: Get talent pool directory
+      tags:
+      - Collaborators
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      - name: category
+        in: query
+        description: filter by category
+        required: false
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: talent pool directory filtered found
+        '404':
+          description: talent pool directory not found
   "/api/v1/team_morale/survey_results":
     get:
       summary: list survey results
