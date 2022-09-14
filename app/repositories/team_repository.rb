@@ -14,6 +14,10 @@ class TeamRepository < ApplicationRepository
       scope.find_by(id:).collaborators.where(seniority:)
     end
 
+    def find_teams_of_project(project_id)
+      scope.select(:id).find_by(project_id:)
+    end
+
     def retrieve_teams(account_id)
       scope.includes(:accounts).where(accounts: { id: account_id })
     end
