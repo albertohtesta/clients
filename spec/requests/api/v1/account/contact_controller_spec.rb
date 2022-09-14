@@ -2,10 +2,11 @@
 
 require "swagger_helper"
 
-RSpec.describe "Contacts", type: :request do
+RSpec.describe "AccountContacts", type: :request do
   context "Accounts contacts" do
     let(:account) { create(:account) }
-    let(:Authorization) { @token }
+    let(:account_id) { account.id }
+    # let(:Authorization) { @token }
 
     path "/api/v1/accounts/{account_id}/contacts" do
       get "Get all contact from an acccount" do
@@ -15,6 +16,11 @@ RSpec.describe "Contacts", type: :request do
         consumes "application/json"
         produces "application/json"
         parameter name: :account_id, in: :path, type: :integer, description: "id of the account"
+
+        response "200", "metrics found" do
+          let(:account_id) {  accojunt.id }
+          run_test!
+        end
 
         response "404", "contacts not found" do
           let(:account_id) { Contact.first }
