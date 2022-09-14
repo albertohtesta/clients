@@ -9,7 +9,6 @@ fi
 bundle install &
 bundle exec rails db:migrate &
 bundle exec rake sneakers:run &
-bundle exec clockwork config/clock.rb &
 
 
 exec "$@"
