@@ -3,7 +3,7 @@
 module Api
   module  V1
     module Managers
-      class AccountsController < ApplicationController
+      class AccountsController < ApiController
         def index
           accounts = ManagerAccountsPresenter.json_collection(accounts_by_managger)
 

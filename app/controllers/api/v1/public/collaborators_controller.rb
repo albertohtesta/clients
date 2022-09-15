@@ -3,7 +3,7 @@
 module Api
   module V1
     module Public
-      class CollaboratorsController < ApplicationController
+      class CollaboratorsController < ApiController
         before_action :set_public_collaborator_profile, only: :show
 
         def index

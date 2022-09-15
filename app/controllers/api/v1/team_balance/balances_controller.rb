@@ -3,7 +3,7 @@
 module Api
   module V1
     module TeamBalance
-      class BalancesController < ApplicationController
+      class BalancesController < ApiController
         before_action :retrieve_teams, only: :index
 
         def index

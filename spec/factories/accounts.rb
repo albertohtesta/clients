@@ -11,5 +11,9 @@ FactoryBot.define do
     service_duration { "MyString" }
     account_status
     manager { association :collaborator }
+
+    trait :user do
+      association :account_status, status_code: "users", status: "MyString"
+    end
   end
 end

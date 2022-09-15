@@ -3,7 +3,7 @@
 module Api
   module  V1
     module Teams
-      class InvestmentsController < ApplicationController
+      class InvestmentsController < ApiController
         before_action :retrieve_team, only: :show
 
         def show

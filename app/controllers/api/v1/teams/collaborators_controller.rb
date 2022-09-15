@@ -3,7 +3,7 @@
 module Api
   module  V1
     module Teams
-      class CollaboratorsController < ApplicationController
+      class CollaboratorsController < ApiController
         before_action :collaborators_by_team, only: :index
 
         def index
