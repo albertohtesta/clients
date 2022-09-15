@@ -3,7 +3,12 @@
 require "swagger_helper"
 
 describe "Accounts", type: :request do
-  before(:each) do
+  let(:Authorization) { @token }
+
+  before do
+    contact = build(:contact, :user)
+    contact.save
+    login_as(contact)
     account = create(:account)
     project = create(:project, account:)
     create(:team, project:)

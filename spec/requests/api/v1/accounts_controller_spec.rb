@@ -2,29 +2,14 @@
 
 require "swagger_helper"
 
-class TokenService
-  def initialize(token)
-    token
-  end
-
-  def decode
-    email = Contact.first&.email ||= "email@email.com"
-    data = {
-      "cognito:groups" => ["client"],
-      "account_id" => "1",
-      "role" => "client",
-      "user_attributes" => [{ "name" => "email", "value" => email }]
-    }
-    [data]
-  end
-end
-
 RSpec.describe "Accounts", type: :request do
-  include WebmockHelper
+  let(:Authorization) { @token }
 
-  let(:user) { create(:contact) }
-  let(:current_user) { user }
-  before { login_as(user) }
+  before do
+    contact = build(:contact)
+    contact.save
+    login_as(contact)
+  end
 
   path "/api/v1/accounts" do
     get("list accounts") do
@@ -34,16 +19,14 @@ RSpec.describe "Accounts", type: :request do
       produces "application/json"
       parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
 
-      # response(200, "Authorized") do
-      #   let(:Authorization) { @token }
+      response(200, "Account information") do
+        run_test!
+      end
 
-      #   run_test!
-      # end
-
-      # response(401, "Unauthorized") do
-      #   let(:Authorization) { "" }
-      #   run_test!
-      # end
+      response(401, "Unauthorized") do
+        let(:Authorization) { "" }
+        run_test!
+      end
     end
   end
 end
