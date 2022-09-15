@@ -3,13 +3,15 @@
 require "swagger_helper"
 
 RSpec.describe "/api/v1/public/collaborators", type: :request do
-  before(:each) do
-    create(:account)
+  let(:Authorization) { @token }
+
+  before do
+    contact = build(:contact)
+    contact.save
+    login_as(contact)
   end
 
   context "Collaborators" do
-    let(:Authorization) { @token }
-
     path "/api/v1/public/collaborators/{id}" do
       get "Get a collaborator" do
         tags "Collaborators"
@@ -18,6 +20,8 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
         consumes "application/json"
         produces "application/json"
         parameter name: :id, in: :path, type: :integer, description: "id of the collaborator"
+        parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
+
 
         response "200", "collaborator found" do
           let!(:collaborator) { create(:collaborator) }
@@ -41,6 +45,7 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
         security [ Bearer: [] ]
         consumes "application/json"
         produces "application/json"
+        parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
         parameter name: :account_id, in: :path, type: :integer, description: "id of the account"
 
         response "200", "talent pool directory found" do
