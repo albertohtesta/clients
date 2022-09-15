@@ -55,6 +55,8 @@ Rails.application.routes.draw do
         end
         resources :survey_results, only: [:index]
         resources :remote_surveys, only: %i[index show update create]
+        resources :survey_questions, only: [:index]
+        resources :morale_attributes, only: [:index]
       end
 
       resources :metric_history, only: %i[show update]
