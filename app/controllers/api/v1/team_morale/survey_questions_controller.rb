@@ -5,7 +5,7 @@ module Api
     module TeamMorale
       class SurveyQuestionsController < ApplicationController
         def index
-          @survey_questions = SurveyQuestion.all
+          @survey_questions = SurveyQuestionRepository.all
           render json: @survey_questions
         end
       end

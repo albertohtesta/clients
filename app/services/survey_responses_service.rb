@@ -7,7 +7,7 @@ class SurveyResponsesService < ApplicationService
     @survey ||= Survey.find_by_id(survey_id)
   end
 
-  def get_responses_in_survey
+  def put_responses_in_survey
     return unless @survey.remote_survey_id.present?
 
     surveys = get_remote_responses(@survey.remote_survey_id)
@@ -21,20 +21,19 @@ class SurveyResponsesService < ApplicationService
     return unless survey_should_be_closed?
     close_remote_survey unless @survey.remote_survey_id.blank?
     @survey.update(status: :closed)
-    @survey.save
   end
 
   private
     def survey_should_be_closed?
-      @survey.present? && !@survey.closed? && complete_or_time_out?
+      @survey.present? && !@survey.closed? && completed_or_time_out?
     end
 
-    def complete_or_time_out?
+    def completed_or_time_out?
       @survey.current_answers >= @survey.requested_answers || @survey.deadline < Date.today
     end
 
     def close_remote_survey
-      get_responses_in_survey unless @survey.remote_survey_id.nil?
+      put_responses_in_survey unless @survey.remote_survey_id.nil?
       TypeFormService::RemoteSurveys.update(@survey.remote_survey_id, { "op": "replace", "path": "/settings/is_public", "value": false })
     end
 
