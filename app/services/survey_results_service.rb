@@ -26,8 +26,8 @@ class SurveyResultsService < ApplicationService
   end
 
   def self.process_results(initial_date, end_date, team_id, processing_type)
-    surveys = SurveyRepository.surveys_by_team_dates_status(team_id,
-              initial_date, end_date, 2)
+    surveys = SurveyRepository.surveys_by_team_dates_status(team_id:,
+      initial_date:, end_date:, status: 2)
     if surveys.any?
       survey_result_service = SurveyResultsService.new(surveys)
       surveys = survey_result_service.convert_to_array
@@ -75,7 +75,7 @@ class SurveyResultsService < ApplicationService
       question[:final_score] = question[:final_score] / surveys.size
       total_average += question[:final_score]
     end
-    result[result.length] = total_average / result.length # month average, last element
+    result[result.length] = total_average / result.length unless result.length == 0 # month average, last element
     if processing_type == "Q"
       result
     else
