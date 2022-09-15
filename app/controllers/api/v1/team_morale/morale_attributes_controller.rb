@@ -5,7 +5,7 @@ module Api
     module TeamMorale
       class MoraleAttributesController < ApplicationController
         def index
-          @morale_attributes = MoraleAttribute.all
+          @morale_attributes = MoraleAttributeRepository.all
           render json: @morale_attributes, include: [:survey_questions]
         end
       end

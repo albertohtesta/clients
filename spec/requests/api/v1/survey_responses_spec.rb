@@ -11,7 +11,8 @@ RSpec.describe "close survey" do
   end
 
   it "closes the survey" do
-    expect { SurveyResponsesService.new(survey.id).close_survey }.to change { survey.reload.status }.from("preparation").to("closed")
+    expect { SurveyResponsesService.new(survey.id).close_survey }
+    .to change { survey.reload.status }.from("preparation").to("closed")
   end
 
   it "do not close survey that is incomplete" do
