@@ -6,6 +6,11 @@ module Api
       class SurveysController < ApplicationController
         before_action :survey_by_id, only: %i[show destroy]
 
+        def index
+          @surveys = SurveyRepository.all
+          render json: @surveys
+        end
+
         def create
           @survey = Survey.new(local_and_remote_survey_params)
           if SurveyRepository.save(@survey)

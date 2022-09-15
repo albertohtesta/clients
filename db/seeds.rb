@@ -139,8 +139,6 @@ Collaborator.find(5).update(badges: Badge.where({ id: [7, 11, 14] }))
 Collaborator.find(6).update(badges: Badge.where({ id: [7, 11, 14, 17] }))
 Collaborator.find(7).update(badges: Badge.where({ id: [1, 2, 3, 11] }))
 
-
-
 # ****************************************************************************
 # CREATING ADVANTA ACCOUNT DATA FOR QA
 # ****************************************************************************
@@ -407,3 +405,4 @@ p "Seed... #{Investment.count} Investment created"
 p "Seed... #{Post.count} Posts created"
 p "Seed... #{Metric.count} Metrics created"
 p "Seed... #{Badge.count} Badges created"
+p "Seed... #{AccountsCollaborator.count} AccountsCollaborator created"
