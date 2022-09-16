@@ -10,8 +10,8 @@ Rails.application.configure do
 
   config.hosts << "localhost:4000"
   config.hosts << "norden-clients-integration.herokuapp.com"
-  config.hosts << "qa-clients-api.nordhen.com"
-  config.hosts << "qa-clients.nordhen.com"
+  config.hosts << "staging-clients-api.nordhen.com"
+  config.hosts << "staging-clients.nordhen.com"
 
   # Exclude requests for the /build-info path from host checking
   Rails.application.config.host_authorization = {

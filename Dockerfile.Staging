@@ -18,6 +18,12 @@ RUN bundle install --path=vendor/bundle
 
 COPY . ./
 
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
 EXPOSE 80
+
+ENV PORT 80
 
 CMD bundle exec rails db:migrate && bundle exec rails db:seed:replant && bundle exec rails s -p 80 -b '0.0.0.0'
