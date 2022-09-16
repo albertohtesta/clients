@@ -1,14 +1,17 @@
+# frozen_string_literal: true
+
 class SurveySenderJob < ApplicationJob
   queue_as :default
 
-  def perform(survey)
-    survey.team.collaborators.each do |collaborator|
+  def perform(survey_id)
+    survey = Survey.find(survey_id)
+    survey.team.collaborators.find_each do |collaborator|
       SurveyMailer.with(
-        collaborator_name: "#{collaborator.first_name} #{collaborator.last_name}", 
+        collaborator_name: CollaboratorPresenter.new(collaborator).json["name"],
         collaborator_email: collaborator.email,
-        subject: survey.description, 
+        subject: survey.description,
         survey_url: survey.survey_url
-      ).survey_created.deliver_later
+      ).survey_created.deliver_now
     end
   end
 end

@@ -10,7 +10,7 @@ RSpec.describe SurveyMailer, type: :mailer do
     let!(:survey) { create(:survey, team:) }
 
     let(:mail) { SurveyMailer.with(
-      collaborator_name: "#{survey.team.collaborators.first.first_name} #{survey.team.collaborators.first.last_name}",
+      collaborator_name: CollaboratorPresenter.new(survey.team.collaborators.first).json["name"],
       collaborator_email: survey.team.collaborators.first.email,
       subject: survey.description,
       survey_url: survey.survey_url
@@ -20,8 +20,7 @@ RSpec.describe SurveyMailer, type: :mailer do
       expect(mail.subject).to eq(survey.description)
       expect(mail.to).to eq(["MyString"])
       expect(mail.from).to eq(["Info@nordhen.com"])
-      expect(mail.html_part.body.to_s).not_to be_empty
-      expect(mail.html_part.body.to_s).to have_link(survey.survey_url.to_s, href: survey.survey_url)
+      expect(mail.html_part.body.to_s).to match(survey.survey_url)
     end
   end
 end
