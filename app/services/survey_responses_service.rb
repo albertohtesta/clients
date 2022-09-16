@@ -49,14 +49,18 @@ class SurveyResponsesService < ApplicationService
     end
 
     def accumulate_questions(variables, questions)
-      variables.each do |var|
-       key = var[:key]
-       survey_question = SurveyQuestion.find_by(question: key)
-       if survey_question.present?
-         questions.key?(key) ? questions[key] += var[:number] : questions[key] = var[:number]
-       end
-     end
-      questions
+      variables.inject(questions) do |result, element|
+        key = element[:key]
+        if question_exist?(key)
+          questions.key?(key) ? questions[key] += element[:number] : questions[key] = element[:number]
+        end
+        questions
+      end
+    end
+
+    def question_exist?(key)
+      survey_question = SurveyQuestion.find_by(question: key)
+      survey_question.present?
     end
 
     def calculate_questions_average(questions, surveys_length)
