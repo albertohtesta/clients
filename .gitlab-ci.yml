@@ -161,6 +161,8 @@ deploy-qa:
     - COMPLETE_ROUTE="$DOCKER_REGISTRY/$PREFIX-$CI_PROJECT_NAME-qa:$CI_COMMIT_SHORT_SHA"
     - echo `aws ecs describe-task-definition --task-definition $PREFIX-$CI_PROJECT_NAME-qa --region $AWS_DEFAULT_REGION` > input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].image="#COMPLETE_ROUTE#"') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"AWS_ACCESS_KEY_ID","value":"#AWS_ACCESS_KEY_ID#"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"AWS_SECRET_ACCESS_KEY","value":"#AWS_SECRET_ACCESS_KEY#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"#NAME_SECRET_KEY_VALUE#","value":"#SECRET_KEY_VALUE#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_ENV","value":"qa"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"PORT","value":"80"}]') >  input.json
@@ -171,6 +173,8 @@ deploy-qa:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_PASSWORD","value":"EfI20crJRCDGAu41BpRImZAcDfjg3Ies"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_LOG_TO_STDOUT","value":"true"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_GvFAv7rEnRyb24AEyu9xyQ4rxW5XgGcMq5CCfqHo6tYw_h2eKzgc9jw7H"}]') >  input.json
+    - sed -i "s@#AWS_ACCESS_KEY_ID#@$AWS_ACCESS_KEY_ID@" input.json
+    - sed -i "s@#AWS_SECRET_ACCESS_KEY#@$AWS_SECRET_ACCESS_KEY@" input.json
     - sed -i "s@#NAME_SECRET_KEY_VALUE#@SECRET_KEY_BASE@" input.json
     - sed -i "s@#SECRET_KEY_VALUE#@$RAILS_QA_SECRET_KEY_BASE@" input.json
     - sed -i "s@#COMPLETE_ROUTE#@$COMPLETE_ROUTE@" input.json
@@ -197,6 +201,8 @@ deploy-staging:
     - COMPLETE_ROUTE="$DOCKER_REGISTRY/$PREFIX-$CI_PROJECT_NAME-staging:$CI_COMMIT_SHORT_SHA"
     - echo `aws ecs describe-task-definition --task-definition $PREFIX-$CI_PROJECT_NAME-staging --region $AWS_DEFAULT_REGION` > input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].image="#COMPLETE_ROUTE#"') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"AWS_ACCESS_KEY_ID","value":"#AWS_ACCESS_KEY_ID#"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"AWS_SECRET_ACCESS_KEY","value":"#AWS_SECRET_ACCESS_KEY#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"#NAME_SECRET_KEY_VALUE#","value":"#SECRET_KEY_VALUE#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_ENV","value":"staging"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"PORT","value":"80"}]') >  input.json
@@ -206,6 +212,8 @@ deploy-staging:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_USERNAME","value":"wirfzcpt"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_PASSWORD","value":"L6FNqZTsqXPsNArTraTmYXAHEF0v_mGh"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_GvFAv7rEnRyb24AEyu9xyQ4rxW5XgGcMq5CCfqHo6tYw_h2eKzgc9jw7H"}]') >  input.json
+    - sed -i "s@#AWS_ACCESS_KEY_ID#@$AWS_ACCESS_KEY_ID_STAGING@" input.json
+    - sed -i "s@#AWS_SECRET_ACCESS_KEY#@$AWS_SECRET_ACCESS_KEY_STAGING@" input.json
     - sed -i "s@#NAME_SECRET_KEY_VALUE#@SECRET_KEY_BASE@" input.json
     - sed -i "s@#SECRET_KEY_VALUE#@$RAILS_QA_SECRET_KEY_BASE@" input.json
     - sed -i "s@#COMPLETE_ROUTE#@$COMPLETE_ROUTE@" input.json
@@ -231,6 +239,8 @@ deploy-production:
     - COMPLETE_ROUTE="$DOCKER_REGISTRY/$PREFIX-$CI_PROJECT_NAME-production:$CI_COMMIT_SHORT_SHA"
     - echo `aws ecs describe-task-definition --task-definition $PREFIX-$CI_PROJECT_NAME-production --region $AWS_DEFAULT_REGION` > input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].image="#COMPLETE_ROUTE#"') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"AWS_ACCESS_KEY_ID","value":"#AWS_ACCESS_KEY_ID#"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"AWS_SECRET_ACCESS_KEY","value":"#AWS_SECRET_ACCESS_KEY#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"#NAME_SECRET_KEY_VALUE#","value":"#SECRET_KEY_VALUE#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_ENV","value":"production"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"PORT","value":"80"}]') >  input.json
@@ -240,6 +250,8 @@ deploy-production:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_USERNAME","value":"wirfzcpt"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_PASSWORD","value":"L6FNqZTsqXPsNArTraTmYXAHEF0v_mGh"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_GvFAv7rEnRyb24AEyu9xyQ4rxW5XgGcMq5CCfqHo6tYw_h2eKzgc9jw7H"}]') >  input.json
+    - sed -i "s@#AWS_ACCESS_KEY_ID#@$AWS_ACCESS_KEY_ID_STAGING@" input.json
+    - sed -i "s@#AWS_SECRET_ACCESS_KEY#@$AWS_SECRET_ACCESS_KEY_STAGING@" input.json
     - sed -i "s@#NAME_SECRET_KEY_VALUE#@SECRET_KEY_BASE@" input.json
     - sed -i "s@#SECRET_KEY_VALUE#@$RAILS_QA_SECRET_KEY_BASE@" input.json
     - sed -i "s@#COMPLETE_ROUTE#@$COMPLETE_ROUTE@" input.json

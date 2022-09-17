@@ -9,7 +9,7 @@ WORKDIR $APP_DIR
 COPY Gemfile ./
 COPY Gemfile.lock ./
 
-ARG RAILS_ENV
+ARG RAILS_ENV=production
 ENV RACK_ENV=$RAILS_ENV
 
 RUN gem install bundler

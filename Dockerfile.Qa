@@ -9,7 +9,7 @@ WORKDIR $APP_DIR
 COPY Gemfile ./
 COPY Gemfile.lock ./
 
-ARG RAILS_ENV
+ARG RAILS_ENV=qa
 ENV RACK_ENV=$RAILS_ENV
 
 RUN gem install bundler
@@ -24,4 +24,4 @@ ENTRYPOINT ["entrypoint.sh"]
 
 EXPOSE 80
 
-CMD bundle exec rails db:migrate && bundle exec rails db:seed:replant && bundle exec rails s -p 80 -b '0.0.0.0'
+CMD bundle exec rails s -p 80 -b '0.0.0.0'
