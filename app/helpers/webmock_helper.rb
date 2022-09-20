@@ -26,14 +26,6 @@ module WebmockHelper
                                   { name: "email", value: collaborator.email }
                                 ]
               }
-
-    #               [{"username"=>"600be2e4-c80a-42cf-9e77-e11d15b15d51",
-    #   "role"=>"client",
-    #   "user_attributes"=>
-    #    [{"name"=>"sub", "value"=>"600be2e4-c80a-42cf-9e77-e11d15b15d51"},
-    #     {"name"=>"email_verified", "value"=>"true"},
-    #     {"name"=>"email", "value"=>"merrill_jacobs@ledner.com"}]},
-    #  {"kid"=>"optional-kid", "alg"=>"RS256"}]
     headers = { kid: jwk.kid }
 
     keys_body = { keys: [jwk.export] }.to_json
