@@ -4,11 +4,10 @@ require "rails_helper"
 
 RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
   describe "#index" do
-    context "when a metric account is low priority" do
+    context "when an account has metrics follow ups" do
       let(:date) { 2.weeks.ago.beginning_of_day }
       let(:collaborator) { create(:collaborator) }
       let(:account) { create(:account, city: "city", manager: collaborator) }
-      let(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
 
       let!(:account_metric_team_balance) { create(:metric, related: account, date:, indicator_type: "balance", value: 95) }
       let!(:account_metric_velocity) { create(:metric, related: account, date:, indicator_type: "velocity", value: 95) }
@@ -77,14 +76,14 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
         )
       }
 
-      it "must return priority eql low" do
+      it "must return each metric value" do
         expected_keys = [
           { "id" => account.id,
             "account_uuid" => account.account_uuid,
             "name" => "MyString",
             "location" => "city",
             "last_follow_up_text" => "No follow ups found",
-            "priority" => "low",
+            "priority" => "medium",
             "role_debt" => 0,
             "alert" => true,
             "team_balance" => {
