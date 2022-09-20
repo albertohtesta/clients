@@ -6,7 +6,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
   include_context "login_user"
 
   describe "#index" do
-    context "when a metric account is low priority" do
+    context "when an account has metrics follow ups" do
       let(:date) { 2.weeks.ago.beginning_of_day }
       let(:collaborator) { create(:collaborator) }
       let(:account_status) { create(:account_status, status: "new", status_code: "new") }
@@ -82,14 +82,14 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
         )
       }
 
-      it "must return priority eql low" do
+      it "must return each metric value" do
         expected_keys = [
           { "id" => account.id,
             "account_uuid" => account.account_uuid,
             "name" => "MyString",
             "location" => "city",
             "last_follow_up_text" => "No follow ups found",
-            "priority" => "low",
+            "priority" => "medium",
             "role_debt" => 0,
             "alert" => true,
             "team_balance" => {
