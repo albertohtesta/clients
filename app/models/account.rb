@@ -13,8 +13,11 @@ class Account < ApplicationRecord
   has_many :account_follow_ups
   has_many :team_balances
   has_and_belongs_to_many :collaborators
-  has_many :teams, through: :team_balances
-  has_many :teams, through: :projects
+
+  has_many :teams_accounts, through: :team_balances, source: :team
+  has_many :projects_accounts, through: :projects, source: :project
+  # has_many :teams, through: :team_balances
+  # has_many :teams, through: :projects
 
   validates :account_uuid, :name, presence: true
 

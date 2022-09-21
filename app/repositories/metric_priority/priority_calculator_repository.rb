@@ -66,7 +66,7 @@ module MetricPriority
       end
 
       def teams
-        @teams ||= account.teams.includes(:metrics)
+        @teams ||= account.teams_accounts.includes(:metrics)
       end
 
       def date_of_last_metric

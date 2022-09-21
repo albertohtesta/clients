@@ -19,7 +19,7 @@ class TeamRepository < ApplicationRepository
     end
 
     def retrieve_teams(account_id)
-      scope.includes(:accounts).where(accounts: { id: account_id })
+      scope.includes(:teams_accounts).where(teams_accounts: { id: account_id })
     end
   end
 end

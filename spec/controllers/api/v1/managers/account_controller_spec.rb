@@ -6,10 +6,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
   let(:Authorization) { @token }
 
   before do
-    account_status = build(:account_status, status: "please", status_code: "login")
-    build(:account, account_status:)
-    contact = build(:contact)
-    contact.save
+    contact = create(:contact)
     login_as(contact)
   end
 
@@ -17,9 +14,11 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
     context "when a metric account is low priority" do
       let(:date) { 2.weeks.ago.beginning_of_day }
       let(:collaborator) { create(:collaborator) }
-      let(:account) { create(:account, city: "city", manager: collaborator,  account_status: build(:account_status, status: "new", status_code: "new")) }
+      let(:account_status) { create(:account_status, status: "please", status_code: "login") }
+      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
       let(:project) { create(:project, account:) }
       let(:team) { create(:team, project:) }
+      let!(:team_balance) { create(:team_balance, account_id: account.id, team:) }
       let(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
 
       let!(:account_metric_team_balance) { create(:metric, related: team, date:, indicator_type: "balance", value: 95) }

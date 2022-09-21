@@ -8,8 +8,8 @@ class Team < ApplicationRecord
   has_many :team_requirements
   has_many :surveys
   has_many :team_balances
-  has_many :accounts, through: :team_balances
-  has_many :accounts, through: :projects
+  has_many :teams_accounts, through: :team_balances, source: :account
+  has_many :projects_accounts, through: :projects, source: :project
 
   belongs_to :team_type
   belongs_to :project
