@@ -8,18 +8,24 @@ module AccountPriority
     end
 
     def high_priority
-      return true if last_follow_up >= 1.months.ago
-
+      return true if last_follow_up <= 1.months.ago
       are_there_a_metric_in_high_rate = metric_type.map { |metric_name| high_rate?(metric_name) }
-      return true if are_there_a_metric_in_high_rate.include?(true)
+      are_there_a_metric_in_high_rate.include?(true)
     end
 
     def medium_priority
       are_there_a_metric_in_medium_rate = metric_type.map do |metric_name|
         medium_rate?(metric_name)
       end
+      are_there_a_metric_in_medium_rate.include?(true)
+    end
 
-      return true if are_there_a_metric_in_medium_rate.include?(true)
+    def priority
+      return "high" if high_priority
+      if medium_priority
+        return (last_follow_up <= 1.weeks.ago) ? "high" : "medium"
+      end
+      "low"
     end
 
     private
