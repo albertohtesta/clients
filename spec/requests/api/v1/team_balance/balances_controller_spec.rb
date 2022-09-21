@@ -3,13 +3,7 @@
 require "swagger_helper"
 
 RSpec.describe "Balances", type: :request do
-  let(:Authorization) { @token }
-
-  before do
-    contact = build(:contact, :user)
-    contact.save
-    login_as(contact)
-  end
+  include_context "login_user"
 
   context "Team balances" do
     path "/api/v1/team_balance/balances" do

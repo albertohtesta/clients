@@ -4,18 +4,9 @@ require "swagger_helper"
 
 RSpec.describe "Managers", type: :request do
   include WebmockHelper
-
-  before do
-    account = create(:account)
-    account.save
-    contact = build(:contact, account:)
-    contact.save
-    login_as(contact)
-  end
+  include_context "login_user"
 
   context "Managers_accounts" do
-    let(:Authorization) { @token }
-
     path "/api/v1/managers/{manager_id}/accounts" do
       get "Get all accounts of a mannager and with priorities" do
         tags "Managers"

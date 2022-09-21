@@ -3,13 +3,7 @@
 require "swagger_helper"
 
 RSpec.describe "#metric_historial", type: :request do
-  let(:Authorization) { @token }
-
-  before do
-    contact = build(:contact, :user)
-    contact.save
-    login_as(contact)
-  end
+  include_context "login_user"
 
   context "when user visit metric_history" do
     path "/api/v1/metric_history/{id}" do
