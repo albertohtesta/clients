@@ -6,14 +6,15 @@ RSpec.describe "api/v1/team_morale/survey_results", type: :request do
   path "/api/v1/team_morale/survey_results" do
     get("list survey results") do
       tags "Surveys"
-      let(:period) { "0" }
-      let(:year) { "2022" }
-      let(:team_id) { "1" }
-      let(:processing_type) { "A" }
       parameter name: :period, in: :query, type: :string
       parameter name: :year, in: :query, type: :string
       parameter name: :team_id, in: :query, type: :string
       parameter name: :processing_type, in: :query, type: :string
+
+      let(:period) { "0" }
+      let(:year) { "2022" }
+      let(:team_id) { "1" }
+      let(:processing_type) { "A" }
       produces "application/json"
 
       response 200, "successful" do
@@ -26,15 +27,17 @@ RSpec.describe "api/v1/team_morale/survey_results", type: :request do
 
     get("list survey results with missing parameter") do
       tags "Surveys"
-      let(:period) { "0" }
-      let(:year) { "2022" }
-      let(:processing_type) { "A" }
       parameter name: :period, in: :query, type: :string
       parameter name: :year, in: :query, type: :string
       parameter name: :processing_type, in: :query, type: :string
+
+      let(:period) { "0" }
+      let(:year) { "2022" }
+      let(:processing_type) { "A" }
+
       produces "application/json"
 
-      response 400, "No results found" do
+      response 400, "invalid request" do
         run_test! do |response|
           expect(response.body).to eq("{\"message\":\"Parameters missing\"}")
         end

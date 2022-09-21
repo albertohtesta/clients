@@ -7,17 +7,8 @@ class SurveyResultsService < ApplicationService
     @surveys = surveys
   end
 
-  def self.get_results(period, year, team_id, processing_type)
-    initial_month = 1
-    end_month = 12
-    year = year.to_i
-    results = {}
-    (initial_month..end_month).each do |month|
-      initial_date = "01/#{month}/#{year}".to_date
-      end_date = initial_date.end_of_month
-      results_by_month = SurveyResultsService.process_results(initial_date, end_date, team_id, processing_type)
-      results[initial_date.strftime("%B")] = results_by_month if results_by_month.any?
-    end
+  def self.survey_results(period, year, team_id, processing_type)
+    results = process_all_year(period, year, team_id, processing_type)
     if results.any?
       SurveyResultsService.grand_average(results, period)
     else
@@ -25,26 +16,36 @@ class SurveyResultsService < ApplicationService
     end
   end
 
-  def self.process_results(initial_date, end_date, team_id, processing_type)
+  def self.process_all_year(period, year, team_id, processing_type)
+    year = year.to_i
+    (1..12).inject({}) do |memo, month|
+      initial_date = "01/#{month}/#{year}".to_date
+      results_by_month = SurveyResultsService.process_month_results(
+                         initial_date, initial_date.end_of_month, team_id, processing_type)
+      memo[initial_date.strftime("%B")] = results_by_month if results_by_month.any?
+      memo
+    end
+  end
+
+  def self.process_month_results(initial_date, end_date, team_id, processing_type)
     surveys = SurveyRepository.surveys_by_team_dates_status(team_id:,
-      initial_date:, end_date:, status: 2)
+      initial_date:, end_date:, status: :closed)
     if surveys.any?
       survey_result_service = SurveyResultsService.new(surveys)
-      surveys = survey_result_service.convert_to_array
-      surveys = survey_result_service.calculate_average(surveys, processing_type)
-      surveys
+      array_of_surveys = survey_result_service.convert_to_array
+      results_by_month = survey_result_service.calculate_average(array_of_surveys, processing_type)
+      results_by_month
     else
       surveys
     end
   end
 
   def convert_to_array
-    @surveys.map do |survey|   # receive AR relation y put surveys in: surveys[survey[questions{}]]
-      survey_data = []
-      survey.questions.each do |question|
-        survey_data << questions_in_hash(question)  # here we have: survey[{question}]
+    @surveys.map do |survey|   # receive AR relation and return surveys in: surveys[survey[questions{}]]
+      survey.questions.inject([]) do |survey_data, question|
+        survey_data << questions_in_hash(question)
+        survey_data
       end
-      survey_data
     end
   end
 
@@ -56,84 +57,89 @@ class SurveyResultsService < ApplicationService
     questions
   end
 
-  def calculate_average(surveys, processing_type)   # receive surveys arrays and return array of results by month
+  def calculate_average(surveys, processing_type)   # receive surveys arrays and return
+    result = accumulate_scores_in_result(surveys)   # one array of results by month [{question}, ..., month_average]
+    result = calculate_questions_average_in_result(result)
+    result = add_month_average_to_result(result)
+    result = calculate_result_by_category(result) unless processing_type == "Q"
+    result
+  end
+
+  def add_month_average_to_result(result)
+    sum_of_scores = result.inject(0) { |sum, element| sum + element[:final_score] }
+    result[result.length] = sum_of_scores / result.length unless result.length == 0 # month average, last element
+    result
+  end
+
+  def calculate_questions_average_in_result(result)
+    result.map do |question|
+      question[:final_score] = question[:final_score] / surveys.size
+      question
+    end
+  end
+
+  def accumulate_scores_in_result(surveys)
     result = surveys[0]
-    surveys.each_with_index do |survey, x|
-      if x > 0  # the first survey is the result
+    surveys.each_with_index do |survey, index|
+      if index > 0                                  # the first survey is the result
         survey.each_with_index do |questions, x|
-          questions.each_with_index do |key, value|
-            if key == :final_score      # increment score in result
-              result[x][:final_score] = result[x][:final_score] + value
-            end
-          end
+          result[x][:final_score] = result[x][:final_score] + questions[:final_score]
         end
       end
     end
-    # average in result by month and question
-    total_average = 0
-    result.each do |question|
-      question[:final_score] = question[:final_score] / surveys.size
-      total_average += question[:final_score]
-    end
-    result[result.length] = total_average / result.length unless result.length == 0 # month average, last element
-    if processing_type == "Q"
-      result
-    else
-      result = calculate_result_by_category(result)
-    end
-    # here returns results by month = [{question}]
+    result
   end
 
   def calculate_result_by_category(result)
-    result_by_category = []
-    hash_of_categories = {}
-    average = 0
-    result.each_with_index do |value, index|      # put the categories in hash_of_categories
-      if (index + 1) < result.length
+    hash_of_categories = hash_of_categories(result)
+    results_by_category = results_by_category(hash_of_categories)    # here return [{},{}]
+    results_by_category[results_by_category.length] = result.last    # last element is the month average
+    results_by_category
+  end
+
+  def hash_of_categories(result)
+    result.inject({}) do | hash_result, value |
+      if value.is_a? Hash
         category = value[:category]
-        if hash_of_categories.key?(category)
-          hash_of_categories[category]["score"] += value[:final_score]
-          hash_of_categories[category]["counter"] += 1
+        if hash_result.key?(category)
+          hash_result[category]["score"] += value[:final_score]
+          hash_result[category]["counter"] += 1
         else
-          hash_of_categories[category] = {
+          hash_result[category] = {
             "score" => value[:final_score],
             "counter" => 1
           }
         end
-      else
-        average = result[index]
       end
+      hash_result
     end
-
-    hash_of_categories.each do |key, value|    # now calculate the average by category with the same structure
-      result = {}
-      result["category"] = key
-      result["final_score"] = value["score"] / value["counter"]
-      result_by_category << result
-    end
-    result_by_category[result_by_category.length] = average
-    result_by_category
   end
 
-  def self.grand_average(surveys_by_month, period)
-    sum_of_year = 0
-    surveys_by_month.each do |key, survey|
-      sum_of_year += survey[survey.length - 1] # month average is last element
+  def results_by_category(hash_of_categories)
+    hash_of_categories.inject([]) do |result_array, (key, value)|
+      category = {}
+      category[:category] = key
+      category[:final_score] = value["score"] / value["counter"]
+      result_array << category
     end
+  end
 
+  def self.grand_average(results_by_month, period)
+    # month average is last element
+    sum_of_year = results_by_month.inject(0) { |memo, (key, value)| memo + value[value.length - 1] }
     # quarter_averages = []
-    quarter_averages = calculate_quarters(surveys_by_month)
+    quarter_averages = calculate_quarters(results_by_month)
 
-    surveys_by_month[:year_average] = sum_of_year / surveys_by_month.length if period.to_i == 2
+    results_by_month[:year_average] = sum_of_year / results_by_month.length if period.to_i == 2
     if period.to_i == 1
       quarter_averages.each_with_index do |value, index|
         if value > 0
           text = "Q#{ index + 1}_average"
-          surveys_by_month[text] = value
+          results_by_month[text] = value
         end
       end
     end
-    surveys_by_month                  # year and quarterly averages are the last hash elements
+    results_by_month                  # year and quarterly averages are the last hash elements
   end
 
   def self.calculate_quarters(surveys_by_month)

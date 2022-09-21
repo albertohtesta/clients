@@ -7,12 +7,12 @@ module Api
         before_action :validate_required_params, :validate_period, :validate_processing_type, only: %i[ index ]
 
         def index
-          render json: get_results, status: :ok
+          render json: survey_results, status: :ok
         end
 
         private
-          def get_results
-            SurveyResultsService.get_results(survey_results_params[:period], survey_results_params[:year],
+          def survey_results
+            SurveyResultsService.survey_results(survey_results_params[:period], survey_results_params[:year],
               survey_results_params[:team_id], survey_results_params[:processing_type])
           end
 
