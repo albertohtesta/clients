@@ -10,13 +10,13 @@ class InvestmentPresenter < ApplicationPresenter
   end
 
   class << self
-    def order_by_quarters(investments)
+    def order_by_quarter(investments)
       quarters = prepare_items(investments, 4, "quarter")
 
       prepare_hash(quarters, "quarter")
       end
 
-    def order_by_months(investments)
+    def order_by_monthly(investments)
       months = prepare_items(investments, 12, "month")
 
       prepare_hash(months, "month")
@@ -26,8 +26,7 @@ class InvestmentPresenter < ApplicationPresenter
         def prepare_hash(items, type)
           items.map do |id, value|
             {
-              "id" => id,
-              "label" => (type == "month") ? Date::MONTHNAMES[id] : "q#{id}",
+              "label" => (type == "month") ? Date::MONTHNAMES[id] : "Q#{id}",
               "value" => value.round(2)
             }
           end
