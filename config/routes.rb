@@ -34,11 +34,12 @@ Rails.application.routes.draw do
       resources :teams, only: [:index] do
         scope module: :teams do
           resources :collaborators, only: [:index]
-          get "investments/:order_by" => "investments#index", as: :investments_organized
+          get "investments/:order_by" => "investments#index", as: :investments_organized #Legacy route, delete ASAP
+          resources :investments, only: [:index]
+          resources :metrics, only: [:index]
         end
       end
 
-      resources :metrics, only: [:index]
       resources :projects, only: [:index]
       resources :posts, only: [:show]
 
