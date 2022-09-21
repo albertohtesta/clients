@@ -4,7 +4,6 @@ module Api
   module  V1
     module  Teams
       class MetricsController < ApiController
-        skip_before_action :access_token, :verify_token, :current_user
         before_action :validate_required_params, only: %i[ index ]
 
         def index
