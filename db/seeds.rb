@@ -367,6 +367,8 @@ CollaboratorRepository.by_role_name("DEVELOPER").all.each do |collaborator|
 end
 Post.create!(posts_for_collaborators)
 
+Post.where(collaborator_id: 10).update_all(url: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/diego-video.mp4")
+
 
 # **************************************
 # ASSIGNING PUBLIC COLLABORATORS TO ACCOUNTS
