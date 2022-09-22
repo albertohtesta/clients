@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_210816) do
     t.datetime "deleted_at", precision: nil
     t.date "manager_started_date"
     t.string "logo"
+    t.integer "display_brand", default: 2
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end

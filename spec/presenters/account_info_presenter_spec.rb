@@ -8,7 +8,7 @@ RSpec.describe AccountInfoPresenter do
 
   describe "#index" do
     it "renders the accoun as json" do
-      expected_keys = %w[id account_uuid name account_web_page logo projects_ids teams_ids]
+      expected_keys = %w[id account_uuid name account_web_page logo display_brand projects_ids teams_ids]
 
       expect(presenter.json.keys).to eql(expected_keys)
     end
