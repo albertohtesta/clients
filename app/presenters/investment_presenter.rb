@@ -1,46 +1,47 @@
 # frozen_string_literal: true
 
 class InvestmentPresenter < ApplicationPresenter
-  def month
-    date.month
-  end
-
-  def quarter
-    (month / 3.0).ceil
-  end
-
   class << self
     def order_by_quarters(investments)
-      quarters = prepare_items(investments, 4, "quarter")
+      return {} if investments.blank?
 
-      prepare_hash(quarters, "quarter")
-      end
+      current_quarter = (Time.now.month / 3).ceil
+      quarter_first_month = (current_quarter - 1) * 3 + 1
+      month_range = (quarter_first_month..quarter_first_month + 2).to_a
 
-    def order_by_months(investments)
-      months = prepare_items(investments, 12, "month")
+      value_sum = investments
+          .select { |inv| month_range.include? inv.date.month }
+          .sum(&:value)
 
-      prepare_hash(months, "month")
+      quarters = { current_quarter => value_sum }
+      {
+        project_indicators: data_hash(quarters, "quarter")
+      }
     end
 
-      private
-        def prepare_hash(items, type)
-          items.map do |id, value|
-            {
-              "id" => id,
-              "label" => (type == "month") ? Date::MONTHNAMES[id] : "q#{id}",
-              "value" => value.round(2)
-            }
-          end
-          end
+    def order_by_months(investments)
+      return {} if investments.blank?
 
-        def prepare_items(investments, slots, type)
-          items = (1..slots).map { |n| { n => 0 } }.reduce(:merge)
+      month_range = [Time.now.month - 1]
 
-          investments.each do |investment|
-            presenter = InvestmentPresenter.new(investment)
-            items[presenter.send(type)] += presenter.value
-          end
-          items
+      value_sum = investments
+          .select { |inv| month_range.include? inv.date.month }
+          .sum(&:value)
+      months = { month_range[0] => value_sum }
+      {
+        project_indicators: data_hash(months, "month")
+      }
+    end
+
+    private
+      def data_hash(items, type)
+        items.map do |id, value|
+          {
+            "id" => id,
+            "label" => (type == "month") ? Date::MONTHNAMES[id] : "q#{id}",
+            "value" => value.round(2)
+          }
         end
+      end
   end
 end
