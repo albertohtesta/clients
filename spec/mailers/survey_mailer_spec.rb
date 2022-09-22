@@ -9,12 +9,16 @@ RSpec.describe SurveyMailer, type: :mailer do
     let!(:collaborator_team) { create(:collaborators_team, collaborator:, team:) }
     let!(:survey) { create(:survey, team:) }
 
-    let(:mail) { SurveyMailer.with(
-      collaborator_name: CollaboratorPresenter.new(survey.team.collaborators.first).json["name"],
-      collaborator_email: survey.team.collaborators.first.email,
-      subject: survey.description,
-      survey_url: survey.survey_url
-    ).survey_created }
+    let(:mail) do
+      collaborator = survey.team.collaborators.first
+      collaborator_presenter = CollaboratorPresenter.new(collaborator)
+      SurveyMailer.with(
+        collaborator_name: collaborator_presenter.json["name"],
+        collaborator_email: collaborator.email,
+        subject: survey.description,
+        survey_url: survey.survey_url
+      ).survey_created
+    end
 
     it "renders the mail" do
       expect(mail.subject).to eq(survey.description)
