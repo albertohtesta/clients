@@ -3,7 +3,9 @@
 require "swagger_helper"
 
 describe "Accounts", type: :request do
-  before(:each) do
+  include_context "login_user"
+
+  before do
     account = create(:account)
     project = create(:project, account:)
     create(:team, project:)
@@ -11,7 +13,6 @@ describe "Accounts", type: :request do
   end
 
   context "invite_accounts_contacts" do
-    let(:Authorization) { @token }
     let(:contact) { Contact.first }
     let(:account_id) { contact.account_id }
     let(:emails) { { emails: [contact.email] } }

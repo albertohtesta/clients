@@ -4,7 +4,7 @@ module Api
   module  V1
     module Managers
       module Accounts
-        class AccountFollowUpsController < ApplicationController
+        class AccountFollowUpsController < ApiController
           def index
             # TODO: Pass current_user with cognito
             @account_follow_ups = Collaborator.first

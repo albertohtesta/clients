@@ -18,7 +18,8 @@ module WebmockHelper
   def login_as(collaborator)
     jwk = JWT::JWK.new(OpenSSL::PKey::RSA.new(2048), "optional-kid")
     payload = { username: collaborator.uuid,
-                role: "client",
+                sub: collaborator.uuid,
+                "cognito:groups" => ["client"],
                 user_attributes: [
                                   { name: "sub", value: collaborator.uuid },
                                   { name: "email_verified", value: "true" },

@@ -2,11 +2,11 @@
 
 FactoryBot.define do
   factory :collaborator do
-    first_name { "MyString" }
     last_name { "MyString" }
-    email { "MyString" }
-    uuid { "MyString" }
-    position { "Software Engineer" }
+    first_name { Faker::Name.name }
+    email { Faker::Internet.email }
+    uuid { Faker::Internet.uuid }
+    position { "Developer" }
     profile { "www.mystring.com" }
     nickname { "MyString" }
     category { "DEVELOPER" }

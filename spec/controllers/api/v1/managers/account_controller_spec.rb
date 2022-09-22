@@ -3,11 +3,14 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
+  include_context "login_user"
+
   describe "#index" do
     context "when a metric account is low priority" do
       let(:date) { 2.weeks.ago.beginning_of_day }
       let(:collaborator) { create(:collaborator) }
-      let(:account) { create(:account, city: "city", manager: collaborator) }
+      let(:account_status) { create(:account_status, status: "new", status_code: "new") }
+      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
       let(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
 
       let!(:account_metric_team_balance) { create(:metric, related: account, date:, indicator_type: "balance", value: 95) }
@@ -121,6 +124,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
           }
         ]
 
+        request.headers["Authorization"] = @token
         get :index, params: { manager_id: account.manager_id }
         expect(JSON.parse(response.body)).to eql(expected_keys)
       end

@@ -13,6 +13,16 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+RSpec.shared_context "login_user", shared_context: :metadata do
+  # Auth as user and share login with requests
+  before do
+    contact = create(:contact, :user)
+    login_as(contact)
+  end
+  let(:Authorization) { @token }
+end
+
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include WebmockHelper
@@ -25,4 +35,5 @@ RSpec.configure do |config|
   end
 
   config.filter_rails_from_backtrace!
+  config.include_context "login_user", include_shared: true
 end

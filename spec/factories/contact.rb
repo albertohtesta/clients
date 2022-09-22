@@ -2,11 +2,16 @@
 
 FactoryBot.define do
   factory :contact do
-    first_name { "First name" }
-    last_name { "my string" }
-    email { "email@email.com" }
     salesforce_id { "Id" }
     phone { "23345234" }
     account
+    last_name { "MyString" }
+    first_name { Faker::Name.name }
+    email { Faker::Internet.email }
+    uuid { Faker::Internet.uuid }
+
+    trait :user do
+      association :account, :user
+    end
   end
 end

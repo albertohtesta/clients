@@ -2,7 +2,7 @@
 
 module Api
   module  V1
-    class MetricHistoryController < ApplicationController
+    class MetricHistoryController < ApiController
       before_action :retrive_metric, only: :show
 
       def show

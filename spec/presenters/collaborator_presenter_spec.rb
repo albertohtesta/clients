@@ -14,17 +14,9 @@ RSpec.describe CollaboratorPresenter do
     end
 
     it "must return json without post" do
-      expected_json = {
-        "id" => collaborator.id,
-        "uuid" => "MyString",
-        "position" => "Software Engineer",
-        "name" => "MyString MyString",
-        "posts_count" => 0,
-        "img" => "www.mystring.com",
-        "post" => []
-      }
+      expected_keys = %w[id uuid position name posts_count img post]
 
-      expect(presenter.json).to eq(expected_json)
+      expect(presenter.json.keys).to eql(expected_keys)
     end
   end
 end

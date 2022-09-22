@@ -3,9 +3,9 @@
 require "swagger_helper"
 
 RSpec.describe "#metric_historial", type: :request do
-  context "when user visit metric_history" do
-    let(:Authorization) { @token }
+  include_context "login_user"
 
+  context "when user visit metric_history" do
     path "/api/v1/metric_history/{id}" do
       get "metric_history" do
         tags "MetricHistory"
@@ -13,11 +13,9 @@ RSpec.describe "#metric_historial", type: :request do
         security [ Bearer: [] ]
         consumes "application/json"
         produces "application/json"
-        parameter name: :id,
-          in: :path,
-          type: :string,
-          description: "filter by category",
-          required: false
+        parameter name: :id, in: :path, type: :string, description: "filter by category", required: false
+        parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
+
 
         response "200", "find metric historial" do
           let!(:account) { create(:account, city: "city") }
@@ -34,19 +32,16 @@ RSpec.describe "#metric_historial", type: :request do
           run_test!
         end
       end
-    end
-  end
 
-  context "when user visit metric_history" do
-    let(:Authorization) { @token }
-    path "/api/v1/metric_history/{id}" do
-      put("update metric") do
+      put "update metric" do
         tags "metric"
+        security [ Bearer: [] ]
         consumes "application/json"
         produces "application/json"
         parameter name: :id, in: :path
         parameter name: :metric_follow_up, in: :body
         parameter name: :metric_historial, in: :body
+        parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
 
         response(200, "successful") do
           let!(:account) { create(:account, city: "city") }
