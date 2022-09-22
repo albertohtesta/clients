@@ -374,17 +374,6 @@ Contact.create ([
         ])
 
 
-posts_for_collaborators = []
-CollaboratorRepository.by_role_name("DEVELOPER").all.each do |collaborator|
-  posts_for_collaborators << {
-    title: Faker::Name.unique.name,
-    description: Faker::Lorem.sentence,
-    collaborator_id: collaborator.id,
-    project_id: collaborator.teams&.first&.project&.id
-  }
-end
-Post.create(posts_for_collaborators)
-
 attributes =
 {
   "IMPARCIALIDAD" => ["question01", "question02" ],
