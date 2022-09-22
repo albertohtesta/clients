@@ -91,6 +91,18 @@ Collaborator.create!([
                         role:,
                         position: "ACCOUNT MANAGER",
                         phone: "+523123236909",
+                      },
+                      {
+                        id: 103,
+                        first_name: "Savid",
+                        last_name: "Salazar",
+                        uuid: "a08de416-5545-4a0a-971c-6387296f8804",
+                        email: "ssalazar@arkus-solutions.com",
+                        tech_stacks: TechStack.all.sample(2),
+                        tools: Tool.all.sample(2),
+                        role:,
+                        position: "ADMIN",
+                        phone: "+523123236909",
                       }
                     ])
 

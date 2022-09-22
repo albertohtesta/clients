@@ -25,4 +25,29 @@ RSpec.describe "Managers", type: :request do
       end
     end
   end
+
+  context "Managers_accounts by admin user" do
+    before do
+      collaborator = create(:collaborator, :admin)
+      login_as(collaborator, "admin")
+    end
+
+    let(:Authorization) { @token }
+    path "/api/v1/managers/{manager_id}/accounts" do
+      get "Get all accounts of a mannager and with priorities" do
+        tags "Managers"
+        security [ Bearer: [] ]
+        consumes "application/json"
+        produces "application/json"
+        parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
+        parameter name: :manager_id, in: :path, type: :integer, description: "id of the manager"
+
+        response "200", "when I am an admin" do
+          let(:manager_id) { Account.first.manager_id }
+
+          run_test!
+        end
+      end
+    end
+  end
 end
