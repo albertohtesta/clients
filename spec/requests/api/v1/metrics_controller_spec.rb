@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/api/v1/metrics", type: :request do
+RSpec.describe "/api/v1/teams/{team_id}/metrics", type: :request do
   include_context "login_user"
 
   before do
@@ -11,19 +11,18 @@ RSpec.describe "/api/v1/metrics", type: :request do
   end
 
   context "Metric" do
-    let(:Authorization) { @token }
     let(:team) { Team.first }
     let(:group_by) { "monthly" }
     let(:indicator_type) {  "performance" }
 
-    path "/api/v1/metrics" do
+    path "/api/v1/teams/{team_id}/metrics" do
       get "Get metrics of team" do
         tags "Metrics"
         security [ Bearer: [] ]
         consumes "application/json"
         produces "application/json"
         parameter name: :group_by, in: :query, type: :string, description: "[quarters, monthly]"
-        parameter name: :team_id, in: :query, type: :integer, description: "team id"
+        parameter name: :team_id, in: :path, type: :integer, description: "team id"
         parameter name: :indicator_type, in: :query, type: :string, description: "['balance', 'velocity', 'morale', 'performance']"
 
         response "200", "metrics found" do
