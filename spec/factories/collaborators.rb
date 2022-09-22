@@ -6,8 +6,7 @@ FactoryBot.define do
     first_name { Faker::Name.name }
     email { Faker::Internet.email }
     uuid { Faker::Internet.uuid }
-    position { "Software Engineer" }
-    # position { "Developer"}
+    position { "Developer" }
     profile { "www.mystring.com" }
     nickname { "MyString" }
     category { "DEVELOPER" }

@@ -13,9 +13,9 @@ RSpec.describe CollaboratorPresenter do
     end
 
     it "must return json without post" do
-      expected_json_keys = %w[ id uuid position name posts_count img post ]
+      expected_keys = %w[id uuid position name posts_count img post]
 
-      expect(presenter.json.keys).to eq(expected_json_keys)
+      expect(presenter.json.keys).to eql(expected_keys)
     end
   end
 end

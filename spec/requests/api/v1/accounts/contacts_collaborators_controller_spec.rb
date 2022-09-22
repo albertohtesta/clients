@@ -3,13 +3,7 @@
 require "swagger_helper"
 
 RSpec.describe "Accounts", type: :request do
-  let(:Authorization) { @token }
-
-  before do
-    contact = build(:contact, :user)
-    contact.save
-    login_as(contact)
-  end
+  include_context "login_user"
 
   context "Accounts contacts collaborators" do
     let(:contact_collaborator) { create(:account_contact_collaborator) }

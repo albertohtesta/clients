@@ -5,26 +5,24 @@ module Api
     module Accounts
       class ContactsController < ApiController
         def index
-          contacts = retrieve_contacts
           return render json: { message: "Contacts not found" }, status: :not_found if contacts.empty?
 
           render json: AccountContactPresenter.json_collection(contacts), status: :ok
         end
 
         def show
-          contact = find_contact
           return render json: { message: "Contacts not found" }, status: :not_found if contact.nil?
 
           render json: AccountContactPresenter.new(contact).json, status: :ok
         end
 
         private
-          def retrieve_contacts
-            ContactRepository.contacts_by_account(params[:account_id])
+          def contacts
+            @contacts ||= ContactRepository.contacts_by_account(params[:account_id])
           end
 
-          def find_contact
-            ContactRepository.find_by(id: params[:id], account_id: params[:account_id])
+          def contact
+            @contact ||= ContactRepository.find_by(id: params[:id], account_id: params[:account_id])
           end
       end
     end

@@ -3,23 +3,18 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
-  let(:Authorization) { @token }
-
-  before do
-    contact = create(:contact)
-    login_as(contact)
-  end
+  include_context "login_user"
 
   describe "#index" do
     context "when an account has metrics follow ups" do
       let(:date) { 2.weeks.ago.beginning_of_day }
       let(:collaborator) { create(:collaborator) }
-      let(:account_status) { create(:account_status, status: "please", status_code: "login") }
+      let(:account_status) { create(:account_status, status: "new", status_code: "new") }
       let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
+      let(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
       let(:project) { create(:project, account:) }
       let(:team) { create(:team, project:) }
       let!(:team_balance) { create(:team_balance, account_id: account.id, team:) }
-      let(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
 
       let!(:account_metric_team_balance) { create(:metric, related: team, date:, indicator_type: "balance", value: 95) }
       let!(:account_metric_velocity) { create(:metric, related: team, date:, indicator_type: "velocity", value: 95) }

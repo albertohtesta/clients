@@ -5,10 +5,10 @@ class AccountInfoPresenter < ApplicationPresenter
   METHODS = %i[projects_ids teams_ids].freeze
 
   def projects_ids
-    ProjectRepository.find_projects_of_account(id)
+    ProjectRepository.find_projects_ids_of_account(id)
   end
 
   def teams_ids
-    TeamRepository.find_teams_of_project(projects_ids)
+    TeamRepository.find_teams_ids_of_project(projects_ids)
   end
 end

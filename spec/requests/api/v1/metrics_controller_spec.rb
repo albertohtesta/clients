@@ -3,12 +3,9 @@
 require "swagger_helper"
 
 RSpec.describe "/api/v1/metrics", type: :request do
-  let(:Authorization) { @token }
+  include_context "login_user"
 
   before do
-    contact = build(:contact, :user)
-    contact.save
-    login_as(contact)
     team = create(:team)
     create(:metric, related: team)
   end

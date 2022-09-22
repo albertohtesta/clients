@@ -4,23 +4,6 @@ info:
   title: Clients API V1
   version: v1
 paths:
-  "/api/v1/accounts/{account_id}/contacts":
-    get:
-      summary: Get all contact from an acccount
-      tags:
-      - Accounts
-      security:
-      - Bearer: []
-      parameters:
-      - name: account_id
-        in: path
-        description: id of the account
-        required: true
-        schema:
-          type: integer
-      responses:
-        '404':
-          description: contacts not found
   "/api/v1/accounts/{account_id}/contacts_collaborators":
     get:
       summary: Get all collaborators contact from an acccount
@@ -38,6 +21,52 @@ paths:
       responses:
         '404':
           description: contacts collaborators not found
+        '200':
+          description: contacts collaborators found
+  "/api/v1/accounts/{account_id}/contacts":
+    get:
+      summary: Get all contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: contacts found
+        '404':
+          description: contacts not found
+  "/api/v1/accounts/{account_id}/contacts/{id}":
+    get:
+      summary: Get information of a contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: id of the contact related to the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: contacts found
+        '404':
+          description: contacts not found
   "/api/v1/accounts/{account_id}/invitations":
     post:
       summary: Invite account contacts throght email
@@ -60,6 +89,24 @@ paths:
           application/json:
             schema:
               type: array
+  "/api/v1/accounts":
+    get:
+      summary: list accounts
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account information
+        '401':
+          description: Unauthorized
   "/api/v1/managers/{manager_id}/accounts":
     get:
       summary: Get all accounts of a mannager and with priorities
@@ -68,6 +115,11 @@ paths:
       security:
       - Bearer: []
       parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
       - name: manager_id
         in: path
         description: id of the manager
@@ -91,6 +143,11 @@ paths:
         required: true
         schema:
           type: string
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
       responses:
         '200':
           description: find metric historial
@@ -100,10 +157,17 @@ paths:
       summary: update metric
       tags:
       - metric
+      security:
+      - Bearer: []
       parameters:
       - name: id
         in: path
         required: true
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
       responses:
         '200':
           description: successful
@@ -127,14 +191,12 @@ paths:
           type: integer
       - name: indicator_type
         in: query
-        description: filter by category
-        required: false
-        allowReserved: true
+        description: "['balance', 'velocity', 'morale', 'performance']"
         schema:
           type: string
       responses:
         '200':
-          description: talent pool directory filtered found
+          description: metrics found
         '404':
           description: Not metrics found
   "/api/v1/public/collaborators/{id}":
@@ -151,6 +213,11 @@ paths:
         required: true
         schema:
           type: integer
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
       responses:
         '200':
           description: collaborator found
@@ -202,7 +269,7 @@ paths:
           description: successful
   "/api/v1/team_morale/survey_results":
     get:
-      summary: list survey results
+      summary: list survey results with missing parameter
       tags:
       - Surveys
       parameters:
@@ -214,15 +281,13 @@ paths:
         in: query
         schema:
           type: string
-      - name: team_id
-        in: query
-        schema:
-          type: string
       - name: processing_type
         in: query
         schema:
           type: string
       responses:
+        '200':
+          description: successful
         '400':
           description: No results found
   "/api/v1/team_balance/balances":
@@ -230,13 +295,14 @@ paths:
       summary: list balances
       tags:
       - Balances
+      security:
+      - Bearer: []
       parameters:
-      - name: team_id
-        in: path
-        description: id of the team
-        required: true
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
         schema:
-          type: integer
+          type: string
       responses:
         '200':
           description: successful

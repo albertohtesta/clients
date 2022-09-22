@@ -3,13 +3,7 @@
 require "swagger_helper"
 
 RSpec.describe "Accounts", type: :request do
-  let(:Authorization) { @token }
-
-  before do
-    contact = build(:contact)
-    contact.save
-    login_as(contact)
-  end
+  include_context "login_user"
 
   path "/api/v1/accounts" do
     get("list accounts") do
