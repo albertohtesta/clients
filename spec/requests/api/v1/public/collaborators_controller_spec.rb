@@ -3,12 +3,13 @@
 require "swagger_helper"
 
 RSpec.describe "/api/v1/public/collaborators", type: :request do
+  include_context "login_user"
   before(:each) do
     create(:account)
   end
 
   context "Collaborators" do
-    let(:Authorization) { @token }
+    # let(:Authorization) { @token }
 
     path "/api/v1/public/collaborators/{id}" do
       get "Get a collaborator" do
