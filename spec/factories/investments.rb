@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :investment do
     value { 250000.00 }
-    date { "#{Time.now.year}-11-19" }
+    date { "#{1.month.ago.to_date}" }
     team
   end
 end
