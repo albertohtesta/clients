@@ -19,7 +19,7 @@ class InvestmentPresenter < ApplicationPresenter
       }
     end
 
-    def order_by_months(investments)
+    def order_by_monthly(investments)
       return {} if investments.blank?
 
       month_range = [Time.now.month - 1]
@@ -37,8 +37,7 @@ class InvestmentPresenter < ApplicationPresenter
       def data_hash(items, type)
         items.map do |id, value|
           {
-            "id" => id,
-            "label" => (type == "month") ? Date::MONTHNAMES[id] : "q#{id}",
+            "label" => (type == "month") ? Date::MONTHNAMES[id] : "Q#{id}",
             "value" => value.round(2)
           }
         end
