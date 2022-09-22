@@ -386,18 +386,6 @@ Contact.create ([
         ])
 
 
-posts_for_collaborators = []
-CollaboratorRepository.by_role_name("DEVELOPER").all.each do |collaborator|
-  posts_for_collaborators << {
-    title: Faker::Name.unique.name,
-    description: Faker::Lorem.sentence,
-    collaborator_id: collaborator.id,
-    project_id: collaborator.teams&.first&.project&.id
-  }
-end
-Post.create(posts_for_collaborators)
-
-Post.where(collaborator_id: 10).update_all(url: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/diego-video.mp4")
 attributes =
 {
   "IMPARCIALIDAD" => ["question01", "question02" ],
