@@ -13,6 +13,12 @@ class SurveyResponsesService < ApplicationService
     @survey.update(status: :closed)
   end
 
+  def self.average_of_last_survey_of_team(team_id)
+    survey = SurveyRepository.last_survey_of_team(team_id)
+    return unless survey
+    survey.questions.inject(0) { |sum, element| sum + element["final_score"] } / survey.questions.length
+  end
+
   private
     def survey_should_be_closed?
       @survey.present? && !@survey.closed? && completed_or_time_out?
