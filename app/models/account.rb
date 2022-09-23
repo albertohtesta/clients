@@ -10,7 +10,7 @@ class Account < ApplicationRecord
   has_many :metrics, as: :related
   has_many :team_requirements
   has_many :account_contact_collaborators
-  has_many :account_follow_ups
+  has_many :account_follow_ups, -> { order("follow_date ASC") }
   has_many :team_balances
   has_and_belongs_to_many :collaborators
 
@@ -38,6 +38,11 @@ class Account < ApplicationRecord
   def status
     account_status.status
   end
+
+  def last_follow_up
+    account_follow_ups.blank? ? nil : account_follow_ups.last
+  end
+
   def assign_uuid
     self.account_uuid = SecureRandom.uuid unless account_uuid
   end

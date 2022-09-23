@@ -10,18 +10,15 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def priority
-    default_priority = "low"
-
-    return default_priority if last_follow_up.nil?
-
-    return "high" if AccountPriority::PriorityCalculatorRepository.new(self, last_follow_up.follow_date).high_priority
-
-    return "medium" if AccountPriority::PriorityCalculatorRepository.new(self, last_follow_up.follow_date).medium_priority
+    if last_follow_up.nil?
+      just_assigned = manager_started_date.nil? || manager_started_date > 1.month.ago
+      return just_assigned ? "medium" : "high"
+    end
+    AccountPriority::PriorityCalculatorRepository.new(self, last_follow_up.follow_date).priority
   end
 
   def last_follow_up_text
     return "#{(Date.today - last_follow_up.follow_date).to_i} days ago" if last_follow_up
-
     "No follow ups found"
   end
 
@@ -64,9 +61,6 @@ class ManagerAccountsPresenter < ApplicationPresenter
       true
     end
 
-    def last_follow_up
-      @last_follow_up ||= AccountFollowUpRepository.last_follow_up_by_account(id).last
-    end
 
     def metric_priority(metric_type)
       MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
