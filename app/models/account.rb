@@ -25,6 +25,8 @@ class Account < ApplicationRecord
   before_validation :assign_uuid, on: :create
   before_validation :assign_status_by_default
 
+  enum display_brand: { logo: 0, company_name: 1, logo_and_company_name: 2 }
+
   def tech_stacks
     projects.map { |project| project.tech_stacks.pluck(:name) }.flatten.uniq
   end
