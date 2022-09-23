@@ -8,6 +8,7 @@ class Team < ApplicationRecord
   has_many :team_requirements
   has_many :surveys
   has_many :team_balances
+  has_many :accounts, through: :team_balances
 
   belongs_to :team_type
   belongs_to :project

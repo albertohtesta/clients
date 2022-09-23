@@ -27,6 +27,7 @@ Rails.application.routes.draw do
           resources :contacts_collaborators, only: %i[index]
           resources :invitations, only: [:create]
           resources :customers_information, only: %i[index]
+          resources :teams, only: %i[index]
         end
       end
 
