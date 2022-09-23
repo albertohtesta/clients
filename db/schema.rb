@@ -269,6 +269,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_215443) do
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url"
     t.index ["collaborator_id"], name: "index_posts_on_collaborator_id"
     t.index ["project_id"], name: "index_posts_on_project_id"
   end

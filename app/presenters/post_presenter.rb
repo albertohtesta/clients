@@ -5,6 +5,8 @@ class PostPresenter < ApplicationPresenter
   METHODS = [:post_url].freeze
 
   def post_url
+    # TODO: remove url field from post, to properly use ActiveStorage.
+    return url unless url.nil?
     post.attached? ? Rails.application.routes.url_helpers.rails_blob_path(post, only_path: true) : nil
   end
 end
