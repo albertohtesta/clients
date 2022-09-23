@@ -4,7 +4,9 @@ require "test_helper"
 
 class Api::V1::Accounts::ContactsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    user = create(:contact, :user)
     stub_cognito_uri
+    login_as(user)
   end
 
   test "When the count have contacts" do

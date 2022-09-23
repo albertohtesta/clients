@@ -4,7 +4,9 @@ require "test_helper"
 
 class ManagersControllerTest < ActionDispatch::IntegrationTest
   setup do
+    user = create(:contact, :user)
     stub_cognito_uri
+    login_as(user)
   end
 
   test "should get success response" do
