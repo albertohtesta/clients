@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rails_helper"
+
 RSpec.describe InvestmentPresenter, type: :presenter do
   include ActiveSupport::Testing::TimeHelpers
 
@@ -13,7 +15,7 @@ RSpec.describe InvestmentPresenter, type: :presenter do
 
     it "expects data for last month" do
       investments = [investment_previous, investment_current]
-      response = described_class.order_by_months(investments)
+      response = described_class.order_by_monthly(investments)
       expect(response[:project_indicators]).not_to be_empty
       expect(response[:project_indicators].last["label"]).to eq "August"
       expect(response[:project_indicators].last["value"]).to eq investment_previous.value
@@ -21,9 +23,9 @@ RSpec.describe InvestmentPresenter, type: :presenter do
 
     it "expects investment sum for current quarter" do
       investments = [investment_previous, investment_current]
-      response = described_class.order_by_quarters(investments)
+      response = described_class.order_by_quarter(investments)
       expect(response[:project_indicators].length).to eq 1
-      expect(response[:project_indicators].last["label"]).to eq "q3"
+      expect(response[:project_indicators].last["label"]).to eq "Q3"
       expect(response[:project_indicators].last["value"]).to eq (investment_current.value + investment_previous.value)
     end
   end

@@ -7,16 +7,16 @@ module Api
         before_action :validate_required_params
 
         def index
-          investments = investments_of_team_of_this_year
-          return render json: { message: "No investments data found" }, status: :not_found unless investments
+          investments = InvestmentService.investments_by_team_for_period(params[:team_id], params[:group_by])
 
-          investments_formated = InvestmentPresenter.send("order_by_#{params[:group_by]}", investments)
-          render json: { team_indicators: investments_formated }
+          return render json: { message: "No investments data found" }, status: :not_found if investments.blank?
+
+          render json: InvestmentPresenter.send("order_by_#{params[:group_by]}", investments)
         end
 
         private
           def investments_of_team_of_this_year
-            InvestmentRepository.retrieve_current_year_investments_by_team_id(params[:team_id])
+            InvestmentRepository.retrieve_previous_months_by_team(params[:team_id], Date.current.beginning_of_year, Date.current.end_of_year)
           end
 
           def validate_required_params
