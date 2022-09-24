@@ -107,7 +107,6 @@ class SurveyResultsService < ApplicationService
         end
       end
 
-
       def results_by_category(hash_of_categories)
         hash_of_categories.inject([]) do |result_array, (key, value)|
           category = {}
@@ -133,7 +132,7 @@ class SurveyResultsService < ApplicationService
       end
 
       def calculate_quarters(results_by_month)
-        months_with_quarters = { "January" => 0, "February" => 0, "March": 0, "April" => 1, "May" => 1, "June" => 1,
+        months_with_quarters = { "January" => 0, "February" => 0, "March" => 0, "April" => 1, "May" => 1, "June" => 1,
           "July" => 2, "August" => 2, "September" => 2, "October" => 3, "November" => 3, "December" => 3 }
         number_of_months_with_values_in_quarter = Array.new(4, 0)
         sum_of_scores_in_quarter = months_with_quarters.inject(Array.new(4, 0)) do |memo, (key, value)|

@@ -9,7 +9,6 @@ class Survey < ApplicationRecord
   validates :deadline, presence: true
   validates :period, presence: true
   validates :status, presence: true
-  validates :survey_url, presence: true
   validates_inclusion_of :period, in: periods
   validates_inclusion_of :status, in: statuses
 
@@ -17,6 +16,10 @@ class Survey < ApplicationRecord
   validate :deadline_date_cannot_be_in_the_past, unless: -> { deadline.blank? }
 
   before_validation :set_defaults
+
+  before_create do
+    get_survey_url unless self.survey_url.present?
+  end
 
   def deadline_date_cannot_be_in_the_past
     if deadline < Date.today && status != "closed"
@@ -40,5 +43,11 @@ class Survey < ApplicationRecord
     def set_defaults
       self.current_answers = 0 if current_answers.blank?
       self.requested_answers = 0 if requested_answers.blank?
+    end
+
+    def get_survey_url
+      survey_remote_data = SurveyCreateService.get_survey_remote_data(self.description, self.survey_url)
+      self.survey_url = survey_remote_data[:survey_url]
+      self.remote_survey_id = survey_remote_data[:remote_survey_id]
     end
 end

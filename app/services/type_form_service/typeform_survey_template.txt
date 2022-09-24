@@ -2,7 +2,7 @@
     "type": "quiz",
     "title": "Survey from my App",
     "workspace": {
-        "href": "https://api.typeform.com/workspaces/26Wpxy"
+        "href": "https://api.typeform.com/workspaces/jvyy2L"
     },
     "theme": {
         "href": "https://api.typeform.com/themes/qHWOQ7"
