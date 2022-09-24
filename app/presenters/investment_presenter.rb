@@ -4,16 +4,12 @@ class InvestmentPresenter < ApplicationPresenter
   class << self
     def order_by_quarters(investments)
       return {} if investments.blank?
-
-      current_quarter = (Time.now.month / 3).ceil
-      quarter_first_month = (current_quarter - 1) * 3 + 1
-      month_range = (quarter_first_month..quarter_first_month + 2).to_a
-
-      value_sum = investments
-          .select { |inv| month_range.include? inv.date.month }
-          .sum(&:value)
-
-      quarters = { current_quarter => value_sum }
+      # quarters setup for a single year
+      quarters = {}
+      investments.each do |invested|
+        quarter = (invested.date.month / 3.0).ceil
+        quarters[quarter] = quarters[quarter].to_d + invested.value
+      end
       {
         project_indicators: data_hash(quarters, "quarter")
       }
@@ -21,13 +17,10 @@ class InvestmentPresenter < ApplicationPresenter
 
     def order_by_months(investments)
       return {} if investments.blank?
-
-      month_range = [Time.now.month - 1]
-
-      value_sum = investments
-          .select { |inv| month_range.include? inv.date.month }
-          .sum(&:value)
-      months = { month_range[0] => value_sum }
+      months = {}
+      investments.each do |invested|
+        months[invested.date.month] = months[invested.date.month].to_d + invested.value
+      end
       {
         project_indicators: data_hash(months, "month")
       }
