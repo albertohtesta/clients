@@ -70,7 +70,7 @@ module MetricPriority
       end
 
       def date_of_last_metric
-        last_record = metrics_by_teams.where(indicator_type: metric_type).last
+        last_record = metrics_by_teams.where(indicator_type: metric_type)&.last
 
         return 1.month.ago if last_record.blank?
 
