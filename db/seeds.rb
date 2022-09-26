@@ -386,6 +386,7 @@ AccountsCollaborator.create!([
   { collaborator_id: 203, account_id: 1 }
 ])
 
+Post.where(collaborator_id: 10).update_all(url: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/diego-video.mp4")
 attributes =
 {
   "IMPARCIALIDAD" => ["question01", "question02" ],
