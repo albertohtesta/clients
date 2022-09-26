@@ -17,7 +17,7 @@ class Api::V1::Accounts::ContactsControllerTest < ActionDispatch::IntegrationTes
   end
 
   test "When the count doesnt have contacts" do
-    get api_v1_account_contacts_path(account_id: 1), headers: { "Authorization" => @token }
+    get api_v1_account_contacts_path(account_id: 0), headers: { "Authorization" => @token }
     assert_equal response.parsed_body, { "message" => "Contacts not found" }
   end
 end
