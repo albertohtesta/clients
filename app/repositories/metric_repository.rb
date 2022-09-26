@@ -10,8 +10,10 @@ class MetricRepository < ApplicationRepository
         monthly_metrics = team_metrics.where("extract(month from date) = ?", month_idx)
         monthly_metrics = last_team_metrics_in_a_month(filter_params, month_idx) if monthly_metrics.empty?
 
-        { value: promediate_metrics(monthly_metrics), label: Date::MONTHNAMES[month_idx] }
-      end
+        unless monthly_metrics.empty?
+          { value: promediate_metrics(monthly_metrics), label: Date::MONTHNAMES[month_idx] }
+        end
+      end.compact_blank
     end
 
     def team_metrics_per_quarter(filter_params)
@@ -22,14 +24,14 @@ class MetricRepository < ApplicationRepository
         quarter_metrics = team_metrics.where("extract(month from date) IN (?)", (quarter..quarter + 3))
         quarter_metrics = last_team_metrics_in_a_month(filter_params, quarter + 3) if quarter_metrics.empty?
 
-        { value: promediate_metrics(quarter_metrics), label: "Q#{quarter / 3 + 1}" }
-      end
+        unless quarter_metrics.empty?
+          { value: promediate_metrics(quarter_metrics), label: "Q#{quarter / 3 + 1}" }
+        end
+      end.compact_blank
     end
 
     private
       def promediate_metrics(metrics)
-        return 0 if metrics.empty?
-
         metrics.map { |metric| metric["value"] }.sum / metrics.size
       end
 
