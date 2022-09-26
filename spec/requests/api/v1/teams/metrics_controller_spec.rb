@@ -13,7 +13,6 @@ RSpec.describe "Team metrcis", type: :request do
   end
 
   context "Metric" do
-    let(:Authorization) { @token }
     let(:team) { Team.first }
     let(:group_by) { "monthly" }
     let(:indicator_type) {  "performance" }
@@ -25,7 +24,7 @@ RSpec.describe "Team metrcis", type: :request do
         consumes "application/json"
         produces "application/json"
         parameter name: :group_by, in: :query, type: :string, description: "[quarters, monthly]"
-        parameter name: :team_id, in:  :path, type: :integer, description: "team id"
+        parameter name: :team_id, in: :path, type: :integer, description: "team id"
         parameter name: :indicator_type, in: :query, type: :string, description: "['balance', 'velocity', 'morale', 'performance']"
 
         response "200", "metrics found" do
