@@ -41,8 +41,10 @@ class Survey < ApplicationRecord
 
   private
     def set_defaults
-      self.current_answers = 0 if current_answers.blank?
-      self.requested_answers = 0 if requested_answers.blank?
+      self.current_answers ||= 0
+      self.requested_answers ||= 0
+      self.status ||= "preparation"
+      self.started_at = SurveyCreateService.calculate_started_at(self.period, self.period_value, self.year)
     end
 
     def get_survey_url

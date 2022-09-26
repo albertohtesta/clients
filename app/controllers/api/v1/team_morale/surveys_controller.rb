@@ -12,7 +12,7 @@ module Api
         end
 
         def create
-          @survey = Survey.new(local_and_remote_survey_params)
+          @survey = Survey.new(survey_params)
           if SurveyRepository.save(@survey)
             SurveyCreateService.create_job(@survey)
             render json: SurveyPresenter.new(@survey).json, status: :ok
@@ -35,19 +35,13 @@ module Api
 
         private
           def survey_params
-            params.require(:survey).permit(:team_id, :deadline, :period, :survey_url, :year,
+            params.require(:survey).permit(:team_id, :deadline, :period, :survey_url, :year, :status,
                                            :remote_survey_id, :period_value, :description,
                                            { questions_detail: { questions: [:title, :category, :final_score] } })
           end
 
           def survey_by_id
             @survey = SurveyRepository.find(params[:id])
-          end
-
-          def local_and_remote_survey_params
-            local_data = survey_params.merge(status: "preparation", started_at:
-            SurveyCreateService.calculate_started_at(params[:period], params[:period_value], params[:year]))
-            local_data
           end
       end
     end
