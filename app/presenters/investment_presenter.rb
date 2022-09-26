@@ -6,6 +6,10 @@ class InvestmentPresenter < ApplicationPresenter
       return {} if investments.blank?
       # quarters setup for a single year
       quarters = {}
+      current_quarter = (Time.now.to_date.month / 3.0).ceil
+      (1..current_quarter).each do |q|
+        quarters[q] = 0.to_d
+      end
       investments.each do |invested|
         quarter = (invested.date.month / 3.0).ceil
         quarters[quarter] = quarters[quarter].to_d + invested.value
@@ -18,6 +22,10 @@ class InvestmentPresenter < ApplicationPresenter
     def order_by_months(investments)
       return {} if investments.blank?
       months = {}
+      final_month = Time.now.to_date.month
+      (1...final_month).each do |m|
+        months[m] = 0.to_d
+      end
       investments.each do |invested|
         months[invested.date.month] = months[invested.date.month].to_d + invested.value
       end
