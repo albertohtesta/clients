@@ -41,7 +41,7 @@ RSpec.describe "Team Investments", type: :request do
   end
 
   context "on investment data non existent" do
-    path "/api/v1/teams/{team_id}/investments" do
+    path "/api/v1/teams/{team_id}/investments?group_by=months" do
       get "Investment data not found" do
         security [ Bearer: [] ]
         produces "application/json"
