@@ -22,8 +22,8 @@ class InvestmentPresenter < ApplicationPresenter
     def order_by_months(investments)
       return {} if investments.blank?
       months = {}
-      final_month = Time.now.to_date.month
-      (1...final_month).each do |m|
+      final_month = Time.now.to_date.month - 1
+      (1..final_month).each do |m|
         months[m] = 0.to_d
       end
       investments.each do |invested|
