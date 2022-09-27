@@ -16,7 +16,7 @@ class SurveyResponsesService < ApplicationService
   def self.average_of_last_survey_of_team(team_id)
     survey = SurveyRepository.last_survey_of_team(team_id)
     return unless survey
-    survey.questions.inject(0) { |sum, element| sum + element["final_score"] } / survey.questions.length
+    survey.questions.avg(:final_score)
   end
 
   private
@@ -29,7 +29,7 @@ class SurveyResponsesService < ApplicationService
     end
 
     def close_remote_survey
-      include_responses_in_survey unless @survey.remote_survey_id.nil?
+      include_responses_in_survey unless !@survey.remote_survey_id
       TypeFormService::RemoteSurveys.update(@survey.remote_survey_id, { "op": "replace", "path": "/settings/is_public", "value": false })
     end
 

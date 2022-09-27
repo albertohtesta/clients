@@ -35,8 +35,8 @@ module Api
 
         private
           def survey_params
-            params.require(:survey).permit(:team_id, :deadline, :period, :survey_url, :year, :status,
-                                           :remote_survey_id, :period_value, :description,
+            params.require(:survey).permit(:team_id, :deadline, :period, :survey_url, :year, :status, :requested_answers,
+                                           :remote_survey_id, :period_value, :description, :current_answers,
                                            { questions_detail: { questions: [:title, :category, :final_score] } })
           end
 
