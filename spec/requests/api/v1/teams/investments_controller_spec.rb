@@ -6,7 +6,7 @@ require "swagger_helper"
 RSpec.describe "Team Investments", type: :request do
   include WebmockHelper
 
-  let(:Authorization) { @token }
+  include_context "login_user"
   let(:team) { create(:team) }
   let(:team_id) { team.id }
 
@@ -15,6 +15,7 @@ RSpec.describe "Team Investments", type: :request do
 
     path "/api/v1/teams/{team_id}/investments/quarters" do
       get "Investments for a quarter" do
+        security [ Bearer: [] ]
         produces "application/json"
         parameter name: :team_id, in: :path
         response(200, "successful") do
@@ -25,6 +26,7 @@ RSpec.describe "Team Investments", type: :request do
 
     path "/api/v1/teams/{team_id}/investments/months" do
       get "Investments for the previous month" do
+        security [ Bearer: [] ]
         produces "application/json"
         parameter name: :team_id, in: :path
         response(200, "successful") do
@@ -37,6 +39,7 @@ RSpec.describe "Team Investments", type: :request do
   context "on investment data non existent" do
     path "/api/v1/teams/{team_id}/investments/quarters" do
       get "Investment data not found" do
+        security [ Bearer: [] ]
         produces "application/json"
         parameter name: :team_id, in: :path
         response(404, "not found") do
