@@ -218,7 +218,7 @@ paths:
           description: collaborator found
         '404':
           description: collaborator not found
-  "/api/v1/public/accounts/{account_id}/collaborators":
+  "/api/v1/public/collaborators":
     get:
       summary: Get talent pool directory
       tags:
@@ -226,12 +226,6 @@ paths:
       security:
       - Bearer: []
       parameters:
-      - name: account_id
-        in: path
-        description: id of the account
-        required: true
-        schema:
-          type: integer
       - name: category
         in: query
         description: filter by category
