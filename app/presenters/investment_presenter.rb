@@ -21,7 +21,7 @@ class InvestmentPresenter < ApplicationPresenter
     def group_by_monthly(investments)
       return {} if investments.blank?
       months = {}
-      final_month = Time.now.to_date.month
+      final_month = Time.now.to_date.month - 1
       (1..final_month).each do |m|
         months[m] = 0.to_d
       end
