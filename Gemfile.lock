@@ -107,6 +107,9 @@ GEM
     byebug (11.1.3)
     childprocess (4.1.0)
     choice (0.2.0)
+    clockwork (3.0.0)
+      activesupport
+      tzinfo
     concurrent-ruby (1.1.10)
     crack (0.4.5)
       rexml
@@ -117,6 +120,8 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     docile (1.4.0)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     erubi (1.10.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -129,6 +134,9 @@ GEM
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashdiff (1.0.1)
+    http-accept (1.7.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -243,6 +251,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
+    rollbar (3.3.1)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -333,6 +342,9 @@ GEM
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8.2)
     unicode-display_width (2.2.0)
     webmock (3.14.0)
       addressable (>= 2.8.0)
@@ -358,6 +370,7 @@ DEPENDENCIES
   bunny
   bunny-mock
   byebug
+  clockwork
   debug
   factory_bot_rails
   faker
@@ -374,6 +387,8 @@ DEPENDENCIES
   rails (~> 7.0.2, >= 7.0.2.3)
   rails-erd
   redis
+  rest-client
+  rollbar
   rest-client
   rspec-rails (~> 6.0.0.rc1)
   rswag

@@ -2,11 +2,14 @@
 
 FactoryBot.define do
   factory :collaborator do
-    first_name { "MyString" }
     last_name { "MyString" }
-    email { "MyString" }
-    uuid { "MyString" }
+    first_name { Faker::Name.name }
+    email { Faker::Internet.email }
+    uuid { Faker::Internet.uuid }
     position { "Developer" }
+    profile { "www.mystring.com" }
+    nickname { "MyString" }
+    category { "DEVELOPER" }
     role
 
     trait :developer do
@@ -15,6 +18,10 @@ FactoryBot.define do
 
     trait :manager do
       association :role, :manager
+    end
+
+    trait :admin do
+      association :role, :admin
     end
   end
 end

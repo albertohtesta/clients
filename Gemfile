@@ -9,6 +9,7 @@ gem "aws-sdk-cognitoidentity"
 gem "aws-sdk-cognitoidentityprovider"
 gem "aws-sdk-s3"
 gem "bcrypt"
+gem "clockwork"
 gem "bootsnap", require: false
 gem "bunny"
 gem "bunny-mock"
@@ -26,7 +27,9 @@ gem "rack-cors"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem "redis"
 gem "sneakers"
+gem "rollbar"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem "rest-client"
 
 group :development, :test do
   gem "bundler-audit"
@@ -45,7 +48,6 @@ group :development do
   gem "rubocop-minitest"
   gem "rubocop-performance"
   gem "rubocop", require: false
-  gem "rest-client"
 end
 
 group :test do

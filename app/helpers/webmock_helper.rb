@@ -15,9 +15,11 @@ module WebmockHelper
 
   # TODO: Use this method for tests instead of the stub_cognito_uri when login is ready to use
   # check the core-backend repo for reference
-  def login_as(collaborator)
+  def login_as(collaborator, user_type = "client")
     jwk = JWT::JWK.new(OpenSSL::PKey::RSA.new(2048), "optional-kid")
     payload = { username: collaborator.uuid,
+                sub: collaborator.uuid,
+                "cognito:groups" => [user_type],
                 user_attributes: [
                                   { name: "sub", value: collaborator.uuid },
                                   { name: "email_verified", value: "true" },

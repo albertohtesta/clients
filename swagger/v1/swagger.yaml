@@ -4,6 +4,69 @@ info:
   title: Clients API V1
   version: v1
 paths:
+  "/api/v1/accounts/{account_id}/contacts_collaborators":
+    get:
+      summary: Get all collaborators contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: contacts collaborators not found
+        '200':
+          description: contacts collaborators found
+  "/api/v1/accounts/{account_id}/contacts":
+    get:
+      summary: Get all contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: contacts found
+        '404':
+          description: contacts not found
+  "/api/v1/accounts/{account_id}/contacts/{id}":
+    get:
+      summary: Get information of a contact from an acccount
+      tags:
+      - Accounts
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: id of the contact related to the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: contacts found
+        '404':
+          description: contacts not found
   "/api/v1/accounts/{account_id}/invitations":
     post:
       summary: Invite account contacts throght email
@@ -26,40 +89,88 @@ paths:
           application/json:
             schema:
               type: array
-  "/api/v1/accounts/{account_id}/contacts":
+  "/api/v1/accounts":
     get:
-      summary: Get all contact from an acccount
+      summary: list accounts
       tags:
       - Accounts
       security:
       - Bearer: []
       parameters:
-      - name: account_id
-        in: path
-        description: id of the account
-        required: true
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
         schema:
-          type: integer
+          type: string
       responses:
-        '404':
-          description: contacts not found
-  "/api/v1/accounts/{account_id}/contacts_collaborators":
+        '200':
+          description: Account information
+        '401':
+          description: Unauthorized
+  "/api/v1/managers/{manager_id}/accounts":
     get:
-      summary: Get all collaborators contact from an acccount
+      summary: Get all accounts of a mannager and with priorities
       tags:
-      - Accounts
+      - Managers
       security:
       - Bearer: []
       parameters:
-      - name: account_id
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: manager_id
         in: path
-        description: id of the account
+        description: id of the manager
         required: true
         schema:
           type: integer
       responses:
+        '200':
+          description: accounts found
+  "/api/v1/metric_history/{id}":
+    get:
+      summary: metric_history
+      tags:
+      - MetricHistory
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: filter by category
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      responses:
+        '200':
+          description: find metric historial
         '404':
-          description: contacts collaborators not found
+          description: find metric historial
+    put:
+      summary: update metric
+      tags:
+      - metric
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
   "/api/v1/metrics":
     get:
       summary: Get metrics of team
@@ -88,6 +199,108 @@ paths:
           description: metrics found
         '404':
           description: Not metrics found
+  "/api/v1/public/collaborators/{id}":
+    get:
+      summary: Get a collaborator
+      tags:
+      - Collaborators
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: id of the collaborator
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: collaborator found
+        '404':
+          description: collaborator not found
+  "/api/v1/public/accounts/{account_id}/collaborators":
+    get:
+      summary: Get talent pool directory
+      tags:
+      - Collaborators
+      security:
+      - Bearer: []
+      parameters:
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      - name: category
+        in: query
+        description: filter by category
+        required: false
+        allowReserved: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: talent pool directory filtered found
+        '404':
+          description: talent pool directory not found
+  "/api/v1/team_morale/surveys/not_found":
+    get:
+      summary: Survey does not exist
+      responses:
+        '404':
+          description: not found
+  "/api/v1/team_morale/surveys/2":
+    get:
+      summary: Survey does not exist
+      responses:
+        '404':
+          description: not found
+  "/api/v1/team_morale/surveys/1":
+    get:
+      summary: get survey status
+      responses:
+        '200':
+          description: successful
+  "/api/v1/team_morale/survey_results":
+    get:
+      summary: list survey results with missing parameter
+      tags:
+      - Surveys
+      parameters:
+      - name: period
+        in: query
+        schema:
+          type: string
+      - name: year
+        in: query
+        schema:
+          type: string
+      - name: processing_type
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+        '400':
+          description: No results found
+  "/api/v1/team_balance/balances":
+    get:
+      summary: list balances
+      tags:
+      - Balances
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
   "/build-info":
     get:
       summary: gets the build info
@@ -124,6 +337,99 @@ components:
       - build_id
       - build_date
       - build_branch
+    manager_accounts:
+      type: object
+      properties:
+        manager_accounts:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            location:
+              type: string
+            last_follow_up_text:
+              type: string
+            priority:
+              type: string
+            role_debt:
+              type: integer
+            alert:
+              type: boolean
+            team_balance:
+              type: object
+              properties:
+                amount:
+                  type: object
+                  properties:
+                    value:
+                      type: integer
+                    alert:
+                      type: boolean
+                alert:
+                  type: boolean
+            client_management:
+              type: object
+              properties:
+                amount:
+                  type: object
+                  properties:
+                    value:
+                      type: integer
+                    alert:
+                      type: boolean
+                alert:
+                  type: boolean
+            performance:
+              type: object
+              properties:
+                amount:
+                  type: object
+                  properties:
+                    value:
+                      type: integer
+                    alert:
+                      type: boolean
+                alert:
+                  type: boolean
+            gross_margin:
+              type: object
+              properties:
+                amount:
+                  type: object
+                  properties:
+                    value:
+                      type: integer
+                    alert:
+                      type: boolean
+                alert:
+                  type: boolean
+            morale:
+              type: object
+              properties:
+                amount:
+                  type: object
+                  properties:
+                    value:
+                      type: integer
+                    alert:
+                      type: boolean
+                alert:
+                  type: boolean
+          required:
+          - id
+          - name
+          - location
+          - last_follow_up_text
+          - priority
+          - role_debt
+          - alert
+          - team_balance
+          - client_management
+          - performance
+          - gross_margin
+          - morale
     metric:
       type: object
       properties:

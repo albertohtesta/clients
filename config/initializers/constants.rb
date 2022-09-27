@@ -6,13 +6,13 @@ METRICS_TYPES = {
   morale: "morale", # both
   performance: "performance", # both
   team_balance: "team balance", # account
-  gross_marging: "gross marging", # account
-  client_engagement: "client engagement" # account
+  gross_margin: "gross margin", # account
+  client_engagement: "client engagement", # account
+  client_management: "client management" # account
 }
 
-
 SENIORITY_TYPES = {
-  junior: "junior",
-  middle: "middle",
-  sennior: "sennior"
+  junior: "Junior",
+  middle: "Middle",
+  senior: "Senior"
 }

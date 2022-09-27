@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :manager do
       name { "Account Manager" }
     end
+
+    trait :admin do
+      name { "admin" }
+    end
   end
 end

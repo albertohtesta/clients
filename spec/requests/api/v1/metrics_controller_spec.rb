@@ -3,7 +3,9 @@
 require "swagger_helper"
 
 RSpec.describe "/api/v1/metrics", type: :request do
-  before(:each) do
+  include_context "login_user"
+
+  before do
     team = create(:team)
     create(:metric, related: team)
   end

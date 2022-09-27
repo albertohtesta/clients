@@ -3,7 +3,7 @@
 module Api
   module  V1
     module Teams
-      class InvestmentsController < ApplicationController
+      class InvestmentsController < ApiController
         def index
           investments = InvestmentService.investments_by_team_for_period(params[:team_id], params[:order_by])
           if investments.blank?

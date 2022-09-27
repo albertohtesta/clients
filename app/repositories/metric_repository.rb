@@ -25,12 +25,12 @@ class MetricRepository < ApplicationRepository
     private
       def promediate_metrics(metrics)
         return 0 if metrics.empty?
-        metrics.map { |m| JSON.parse(m.metrics)["value"] }.sum / metrics.size
+        metrics.map { |metric| metric["value"] }.sum / metrics.size
       end
 
       def team_metrics_in_this_year(filter_params)
         dates_range = Date.today.beginning_of_year..Date.today
-        scope.select([:metrics, :date]).where(filter_params.merge({ date: dates_range }))
+        scope.select([:value, :date]).where(filter_params.merge({ date: dates_range }))
       end
   end
 end
