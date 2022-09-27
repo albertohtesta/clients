@@ -11,16 +11,12 @@ module Api
 
           return render json: { message: "No investments data found" }, status: :not_found if investments.blank?
 
-          render json: InvestmentPresenter.send("order_by_#{params[:group_by]}", investments)
+          render json: InvestmentPresenter.send("group_by_#{params[:group_by]}", investments)
         end
 
         private
-          def investments_of_team_of_this_year
-            InvestmentRepository.retrieve_previous_months_by_team(params[:team_id], Date.current.beginning_of_year, Date.current.end_of_year)
-          end
-
           def validate_required_params
-            params.require([:group_by])
+            params.require([:group_by, :team_id])
           rescue ActionController::ParameterMissing
             render json: { message: "Parameters missing" }, status: :bad_request
           end
