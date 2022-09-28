@@ -7,7 +7,7 @@ class InvestmentRepository < ApplicationRepository
         .where(team_id:)
         .where("date BETWEEN ? AND ?", start_date, end_date)
         .group(Arel.sql("team_id, date_trunc('month',date)"))
-        .select("team_id, sum(value) value, date_trunc('month',date) date")
+        .select("team_id, sum(value) as value, date_trunc('month',date) as date")
         .order(Arel.sql("date_trunc('month',date)"))
     end
   end
