@@ -215,7 +215,7 @@ paths:
           type: integer
       - name: Authorization
         in: headers
-        description: autorizartion token with the user info
+        description: authorization token with the user info
         schema:
           type: string
       responses:
@@ -223,7 +223,7 @@ paths:
           description: collaborator found
         '404':
           description: collaborator not found
-  "/api/v1/public/accounts/{account_id}/collaborators":
+  "/api/v1/public/collaborators":
     get:
       summary: Get talent pool directory
       tags:
@@ -231,17 +231,16 @@ paths:
       security:
       - Bearer: []
       parameters:
-      - name: account_id
-        in: path
-        description: id of the account
-        required: true
-        schema:
-          type: integer
       - name: category
         in: query
         description: filter by category
         required: false
         allowReserved: true
+        schema:
+          type: string
+      - name: Authorization
+        in: headers
+        description: authorization token with the user info
         schema:
           type: string
       responses:
