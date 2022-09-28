@@ -3,7 +3,7 @@
 class ManagerAccountsPresenter < ApplicationPresenter
   ATTRS = %i[id account_uuid name].freeze
   METHODS = %i[location last_follow_up_text priority role_debt alert team_balance
-    client_management performance gross_margin morale velocity manager_id].freeze
+    performance morale velocity manager_id].freeze
 
   def location
     city
@@ -18,8 +18,13 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def last_follow_up_text
-    return "#{(Date.today - last_follow_up.follow_date).to_i} days ago" if last_follow_up
-    "No follow ups found"
+    return "No follow ups found" if last_follow_up.nil? && last_metric_follow_up_date.nil?
+    if last_follow_up.nil? || last_metric_follow_up_date.nil?
+      date = last_follow_up.present? ? last_follow_up.follow_date : last_metric_follow_up_date
+    else
+      date = [last_follow_up.follow_date, last_metric_follow_up_date].max
+    end
+    "#{(Date.today - date).to_i} days ago"
   end
 
   def role_debt
@@ -27,41 +32,29 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def alert
-    # TODO: Needs alert depending of the priority and some rules
-    true
+    (team_balance[:alert] && !team_balance[:attended_after_metric]) ||
+    (performance[:alert] && !performance[:attended_after_metric]) ||
+    (morale[:alert] && !morale[:attended_after_metric]) ||
+    (velocity[:alert] && !velocity[:attended_after_metric])
   end
 
   def team_balance
-    metric_priority("balance")
-  end
-
-  def client_management
-    metric_priority("client_management")
+    @team_balance ||= metric_priority("balance")
   end
 
   def performance
-    metric_priority("performance")
-  end
-
-  def gross_margin
-    metric_priority("gross_margin")
+    @performance ||= metric_priority("performance")
   end
 
   def morale
-    metric_priority("morale")
+    @morale ||= metric_priority("morale")
   end
 
   def velocity
-    metric_priority("velocity")
+    @velocity ||= metric_priority("velocity")
   end
 
   private
-    # TODO: this method is just temporally while bussines rules are defined and added into the project
-    def temp_active_sample
-      true
-    end
-
-
     def metric_priority(metric_type)
       MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
     end
