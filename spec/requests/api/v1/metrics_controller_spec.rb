@@ -15,6 +15,7 @@ RSpec.describe "/api/v1/metrics", type: :request do
     let(:team) { Team.first }
     let(:group_by) { "monthly" }
     let(:indicator_type) {  "performance" }
+    let(:team_id) {  team.id }
 
     path "/api/v1/metrics" do
       get "Get metrics of team" do
@@ -27,8 +28,11 @@ RSpec.describe "/api/v1/metrics", type: :request do
         parameter name: :indicator_type, in: :query, type: :string, description: "['balance', 'velocity', 'morale', 'performance']"
 
         response "200", "metrics found" do
-          let(:team_id) {  team.id }
+          run_test!
+        end
 
+        response "200", "metrics found" do
+          let(:group_by) { "quarter" }
           run_test!
         end
 

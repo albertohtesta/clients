@@ -65,6 +65,8 @@ and run
 ```console
 bin/rails test
 ```
+## Important Note:
+ - Minitest are deprecated from this repository, please use rspec + rswag to document your changes. Minitest is not used any more in this repo and **it will be removed** ASAP.
 
 ## Services (job queues, cache servers, search engines, etc.)
 **Soon**
