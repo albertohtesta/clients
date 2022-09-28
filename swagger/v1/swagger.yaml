@@ -213,6 +213,11 @@ paths:
         required: true
         schema:
           type: integer
+      - name: Authorization
+        in: headers
+        description: authorization token with the user info
+        schema:
+          type: string
       responses:
         '200':
           description: collaborator found
@@ -231,6 +236,11 @@ paths:
         description: filter by category
         required: false
         allowReserved: true
+        schema:
+          type: string
+      - name: Authorization
+        in: headers
+        description: authorization token with the user info
         schema:
           type: string
       responses:
