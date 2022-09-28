@@ -27,7 +27,8 @@ class SurveyResultsService < ApplicationService
         surveys = SurveyRepository.surveys_by_team_dates_status(team_id:,
           initial_date:, end_date:, status: :closed)
         if surveys.any?
-          array_of_surveys = convert_to_array(surveys)
+          array_of_surveys = convert_to_array(surveys).compact
+          return array_of_surveys unless !array_of_surveys.empty?
           results_by_month = calculate_average(array_of_surveys, processing_type)
           results_by_month
         else
@@ -37,19 +38,22 @@ class SurveyResultsService < ApplicationService
 
       def convert_to_array(surveys)
         surveys.map do |survey|   # receive AR relation and return surveys in: surveys[survey[questions{}]]
-          survey.questions.inject([]) do |survey_data, question|
-            survey_data << questions_in_hash(question)
-            survey_data
+          if survey.questions
+            survey.questions.inject([]) do |survey_data, question|
+              survey_data << questions_in_hash(question)
+              survey_data
+            end
           end
         end
       end
 
       def questions_in_hash(question)
         questions = {}
-        questions[:title] = question["title"]
-        questions[:category] = question["category"]
-        questions[:final_score] = question["final_score"]
-        questions
+        questions.tap do |questions|
+          questions[:title] = question["title"]
+          questions[:category] = question["category"]
+          questions[:final_score] = question["final_score"]
+        end
       end
 
       def calculate_average(surveys, processing_type)   # receive surveys arrays and return
