@@ -9,8 +9,6 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
   end
 
   context "Collaborators" do
-    let(:Authorization) { @token }
-
     path "/api/v1/public/collaborators/{id}" do
       get "Get a collaborator" do
         tags "Collaborators"
