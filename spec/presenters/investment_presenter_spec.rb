@@ -19,6 +19,7 @@ RSpec.describe InvestmentPresenter, type: :presenter do
       expect(response[:project_indicators].length).to eq 9
       expect(response[:project_indicators].last["label"]).to eq "September"
       expect(response[:project_indicators].last["value"]).to eq september_investment.value
+      expect(response[:project_indicators].last["value"]).to be_a Float
     end
 
     it "expects investment sum for current quarter" do
@@ -27,6 +28,7 @@ RSpec.describe InvestmentPresenter, type: :presenter do
       expect(response[:project_indicators].length).to eq 3
       expect(response[:project_indicators].last["label"]).to eq "Q3"
       expect(response[:project_indicators].last["value"]).to eq (september_investment.value + august_investment.value)
+      expect(response[:project_indicators].last["value"]).to be_a Float
     end
   end
 end
