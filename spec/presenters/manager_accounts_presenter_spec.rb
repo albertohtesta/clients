@@ -18,9 +18,7 @@ RSpec.describe ManagerAccountsPresenter do
         "role_debt",
         "alert",
         "team_balance",
-        "client_management",
         "performance",
-        "gross_margin",
         "morale",
         "velocity",
         "manager_id"
