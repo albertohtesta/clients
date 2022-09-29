@@ -1,46 +1,48 @@
 # frozen_string_literal: true
 
 class InvestmentPresenter < ApplicationPresenter
-  def month
-    date.month
-  end
-
-  def quarter
-    (month / 3.0).ceil
-  end
-
   class << self
     def order_by_quarters(investments)
-      quarters = prepare_items(investments, 4, "quarter")
-
-      prepare_hash(quarters, "quarter")
+      return {} if investments.blank?
+      # quarters setup for a single year
+      quarters = {}
+      current_quarter = (Time.now.to_date.month / 3.0).ceil
+      (1..current_quarter).each do |q|
+        quarters[q] = 0.to_d
       end
-
-    def order_by_months(investments)
-      months = prepare_items(investments, 12, "month")
-
-      prepare_hash(months, "month")
+      investments.each do |invested|
+        quarter = (invested.date.month / 3.0).ceil
+        quarters[quarter] = quarters[quarter].to_d + invested.value.to_d
+      end
+      {
+        project_indicators: data_hash(quarters, "quarter")
+      }
     end
 
-      private
-        def prepare_hash(items, type)
-          items.map do |id, value|
-            {
-              "id" => id,
-              "label" => (type == "month") ? Date::MONTHNAMES[id] : "q#{id}",
-              "value" => value.round(2)
-            }
-          end
-          end
+    def order_by_months(investments)
+      return {} if investments.blank?
+      months = {}
+      final_month = Time.now.to_date.month - 1
+      (1..final_month).each do |m|
+        months[m] = 0.to_d
+      end
+      investments.each do |invested|
+        months[invested.date.month] = months[invested.date.month].to_d + invested.value.to_d
+      end
+      {
+        project_indicators: data_hash(months, "month")
+      }
+    end
 
-        def prepare_items(investments, slots, type)
-          items = (1..slots).map { |n| { n => 0 } }.reduce(:merge)
-
-          investments.each do |investment|
-            presenter = InvestmentPresenter.new(investment)
-            items[presenter.send(type)] += presenter.value
-          end
-          items
+    private
+      def data_hash(items, type)
+        items.map do |id, value|
+          {
+            "id" => id,
+            "label" => (type == "month") ? Date::MONTHNAMES[id] : "q#{id}",
+            "value" => value.to_f
+          }
         end
+      end
   end
 end
