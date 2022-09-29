@@ -12,7 +12,7 @@ class InvestmentPresenter < ApplicationPresenter
       end
       investments.each do |invested|
         quarter = (invested.date.month / 3.0).ceil
-        quarters[quarter] = quarters[quarter].to_d + invested.value
+        quarters[quarter] = quarters[quarter].to_d + invested.value.to_d
       end
       {
         project_indicators: data_hash(quarters, "quarter")
@@ -27,7 +27,7 @@ class InvestmentPresenter < ApplicationPresenter
         months[m] = 0.to_d
       end
       investments.each do |invested|
-        months[invested.date.month] = months[invested.date.month].to_d + invested.value
+        months[invested.date.month] = months[invested.date.month].to_d + invested.value.to_d
       end
       {
         project_indicators: data_hash(months, "month")
@@ -40,7 +40,7 @@ class InvestmentPresenter < ApplicationPresenter
           {
             "id" => id,
             "label" => (type == "month") ? Date::MONTHNAMES[id] : "q#{id}",
-            "value" => value.round(2)
+            "value" => value.to_f
           }
         end
       end
