@@ -172,7 +172,7 @@ deploy-qa:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_USERNAME","value":"vefqvdwt"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_PASSWORD","value":"EfI20crJRCDGAu41BpRImZAcDfjg3Ies"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_LOG_TO_STDOUT","value":"true"}]') >  input.json
-    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_GvFAv7rEnRyb24AEyu9xyQ4rxW5XgGcMq5CCfqHo6tYw_h2eKzgc9jw7H"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_7HUqaRyDUSDddj3sWXZYDRASftLSuQCwnMxsEweP86bQ_3mJqwU6xk1AaTh"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
@@ -218,7 +218,7 @@ deploy-staging:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_USERNAME","value":"wirfzcpt"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_PASSWORD","value":"L6FNqZTsqXPsNArTraTmYXAHEF0v_mGh"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_LOG_TO_STDOUT","value":"true"}]') >  input.json
-    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_GvFAv7rEnRyb24AEyu9xyQ4rxW5XgGcMq5CCfqHo6tYw_h2eKzgc9jw7H"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_7HUqaRyDUSDddj3sWXZYDRASftLSuQCwnMxsEweP86bQ_3mJqwU6xk1AaTh"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
@@ -263,7 +263,7 @@ deploy-production:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_USERNAME","value":"wirfzcpt"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"CLOUDAMQP_PASSWORD","value":"L6FNqZTsqXPsNArTraTmYXAHEF0v_mGh"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"RAILS_LOG_TO_STDOUT","value":"true"}]') >  input.json
-    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_GvFAv7rEnRyb24AEyu9xyQ4rxW5XgGcMq5CCfqHo6tYw_h2eKzgc9jw7H"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"TYPE_FORM_ACCESS_TOKEN","value":"tfp_7HUqaRyDUSDddj3sWXZYDRASftLSuQCwnMxsEweP86bQ_3mJqwU6xk1AaTh"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
