@@ -20,6 +20,7 @@ class Team < ApplicationRecord
   private
     def add_team_balance
       balance = TeamBalance.new
+      balance.account_id = self.project.account_id
       balance.team_id = self.id
       balance.balance_date = self.balance_date
       balance.balance = TeamBalanceService.new(id).process
