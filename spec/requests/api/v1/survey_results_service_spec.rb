@@ -64,4 +64,11 @@ RSpec.describe "survey results" do
     response = SurveyResultsService.survey_results(0, @survey.year + 1, @survey.team_id, "Q")
     expect(response).to eq({})
   end
+
+  it "returns empty hash if the survey has no questions" do
+    @survey.questions_detail = { "questions": nil }
+    @survey.save
+    response = SurveyResultsService.survey_results(2, @survey.year + 1, @survey.team_id, "Q")
+    expect(response).to eq({})
+  end
 end
