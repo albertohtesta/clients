@@ -20,7 +20,9 @@ module Api
             id: @data[:id],
             alert_status: @data[:alert_status],
             mitigation_strategy: @data[:mitigation_strategy],
-            manager_id: @data[:manager_id]
+            manager_id: @data[:manager_id],
+            account_id: @data[:account_id],
+            metric_type: @data[:metric_type]
           )
 
           return render json: { message: "Metric updated" }, status: :ok
@@ -36,7 +38,7 @@ module Api
 
         def metric_historial_params
           # TODO: replace id param, use metric type and account_id
-          params.permit(:id, :manager_id, :alert_status, :mitigation_strategy)
+          params.permit(:id, :metric_type, :account_id, :manager_id, :alert_status, :mitigation_strategy)
         end
     end
   end

@@ -56,12 +56,6 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
   private
     def metric_priority(metric_type)
-      return MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority unless self.projects.blank?
-
-      {
-        amount: 0,
-        alert: "low",
-        data_follow_up: []
-      }
+      MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
     end
 end
