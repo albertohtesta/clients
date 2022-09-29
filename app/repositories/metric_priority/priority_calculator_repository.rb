@@ -37,7 +37,7 @@ module MetricPriority
       end
 
       def calculate_amount
-        return 0 if account_metric_result.empty?
+        return 0 if account_metric_result.blank?
 
         amount = find_metric(account_metric_result)
         amount["value"] / amount["amount_of_metrics_by_type"]
@@ -50,17 +50,29 @@ module MetricPriority
       end
 
       def account_metric_result
-        @account_metric_result ||= account.metrics
+        @account_metric_result ||= metrics_by_type
+      end
+
+      def metrics_by_type
+        metrics_by_teams
           .where(date: date_of_last_metric.at_beginning_of_month..date_of_last_metric.end_of_month)
           .where(indicator_type: metric_type)
           .select("indicator_type, sum(value) as value, count(indicator_type) as amount_of_metrics_by_type")
           .group("indicator_type")
       end
 
-      def date_of_last_metric
-        last_record = account.metrics.where(indicator_type: metric_type).last
+      def metrics_by_teams
+        @metrics_by_teams ||= teams.map { |team| team.metrics }.first
+      end
 
-        return 1.month.ago if last_record.nil?
+      def teams
+        @teams ||= account.teams.includes(:metrics)
+      end
+
+      def date_of_last_metric
+        last_record = metrics_by_teams.where(indicator_type: metric_type).last
+
+        return 1.month.ago if last_record.blank?
 
         last_record["date"]
       end
@@ -74,7 +86,7 @@ module MetricPriority
       end
 
       def high_rate?
-        return false if account_metric_result.empty?
+        return false if account_metric_result.blank?
 
         high_metric_limit = find_metric_limit(high_metric_limits)
         result = find_metric(account_metric_result)["value"]
@@ -82,7 +94,7 @@ module MetricPriority
       end
 
       def medium_rate?
-        return false if account_metric_result.empty?
+        return false if account_metric_result.blank?
 
         medium_metric_limit = find_metric_limit(medium_metric_limits)
         result = find_metric(account_metric_result)["value"]

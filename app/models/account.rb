@@ -14,6 +14,7 @@ class Account < ApplicationRecord
   has_many :team_balances
   has_many :teams, through: :team_balances
   has_and_belongs_to_many :collaborators
+  has_many :teams, through: :projects
 
   validates :account_uuid, :name, presence: true
 
