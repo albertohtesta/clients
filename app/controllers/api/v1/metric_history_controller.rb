@@ -16,7 +16,7 @@ module Api
       def update
         @data = metric_historial_params
         if @data.permitted?
-          MetricFollowUpRepository.update_historial(
+          MetricFollowUpRepository.add_follow_up(
             id: @data[:id],
             alert_status: @data[:alert_status],
             mitigation_strategy: @data[:mitigation_strategy],
@@ -35,6 +35,7 @@ module Api
         end
 
         def metric_historial_params
+          # TODO: replace id param, use metric type and account_id
           params.permit(:id, :manager_id, :alert_status, :mitigation_strategy)
         end
     end
