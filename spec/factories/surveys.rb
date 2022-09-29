@@ -6,7 +6,7 @@ FactoryBot.define do
     survey_url { "MyString" }
     requested_answers { 1 }
     current_answers { 1 }
-    deadline { Date.today }
+    deadline { Date.today + 1.month }
     period { 1 }
     questions_detail { "" }
     answers_detail { "" }
