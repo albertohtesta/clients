@@ -7,20 +7,16 @@ class SurveyResponsesService < ApplicationService
     @survey ||= Survey.find_by_id(survey_id)
   end
 
-  def put_responses_in_survey
-    return unless @survey.remote_survey_id.present?
-
-    surveys = get_remote_responses(@survey.remote_survey_id)
-    questions = get_questions(surveys)
-    questions = calculate_questions_average(questions, surveys.length)
-    @survey.questions_detail = get_questions_detail(questions)
-    @survey.save
-  end
-
   def close_survey
     return unless survey_should_be_closed?
     close_remote_survey unless @survey.remote_survey_id.blank?
     @survey.update(status: :closed)
+  end
+
+  def self.average_of_last_survey_of_team(team_id)
+    survey = SurveyRepository.last_survey_of_team(team_id)
+    return unless survey
+    survey.questions.avg(:final_score)
   end
 
   private
@@ -33,37 +29,51 @@ class SurveyResponsesService < ApplicationService
     end
 
     def close_remote_survey
-      put_responses_in_survey unless @survey.remote_survey_id.nil?
+      include_responses_in_survey unless !@survey.remote_survey_id
       TypeFormService::RemoteSurveys.update(@survey.remote_survey_id, { "op": "replace", "path": "/settings/is_public", "value": false })
     end
 
-    def get_remote_responses(remote_survey_id)
+    def include_responses_in_survey
+      return unless @survey.remote_survey_id.present?
+
+      surveys = remote_responses(@survey.remote_survey_id)
+      questions = questions(surveys)
+      questions = calculate_questions_average(questions, surveys.length)
+      @survey.questions_detail = questions_detail(questions)
+      @survey.save
+    end
+
+    def remote_responses(remote_survey_id)
       survey_responses = TypeFormService::Responses.new
       survey_responses.all(remote_survey_id)[:items]
     end
 
-    def get_questions(surveys)
-      questions = {}
+    def questions(surveys)
+      questions = questions_catalog
       surveys.map { |survey| questions = accumulate_questions(survey[:variables], questions) }
       questions
     end
 
     def accumulate_questions(variables, questions)
-      variables.each do |var|
-       key = var[:key]
-       survey_question = SurveyQuestion.find_by(question: key)
-       if survey_question.present?
-         questions.key?(key) ? questions[key] += var[:number] : questions[key] = var[:number]
-       end
-     end
-      questions
+      variables.inject(questions) do |result, element|
+        key = element[:key]
+        questions[key] += element[:number] unless !questions.key?(key)
+        questions
+      end
+    end
+
+    def questions_catalog
+      SurveyQuestionRepository.all.to_a.inject({}) do |questions, item|
+        questions[item[:question]] = 0
+        questions
+      end
     end
 
     def calculate_questions_average(questions, surveys_length)
       questions.transform_values { |v| v / surveys_length }
     end
 
-    def get_questions_detail(questions)
+    def questions_detail(questions)
       questions_detail = questions.map do |key, value|
         question = SurveyQuestion.find_by(question: key)
         { "title": key,
