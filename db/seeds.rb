@@ -154,7 +154,7 @@ Collaborator.find(7).update(badges: Badge.where({ id: [1, 2, 3, 11] }))
 # CREATING ADVANTA ACCOUNT DATA FOR QA
 # ****************************************************************************
 advanta = Account.create(
-  { id: 1, account_uuid: "8d861f12-2277-11ed-861d-0242ac120002", manager: Collaborator.find(101), name: "ADVANTA", blended_rate: 6400, contact_name: Faker::Name.unique.name, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, salesforce_id: random_salesforce_id(15), city: "New Jersey", client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
+  { id: 1, account_uuid: "8d861f12-2277-11ed-861d-0242ac120002", manager: Collaborator.find(101), name: "ADVANTA", blended_rate: 6400, logo: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/clients/advanta-logo+1.png", contact_name: Faker::Name.unique.name, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, salesforce_id: random_salesforce_id(15), city: "New Jersey", client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
 )
 project_advanta = Project.create(
   { name: advanta.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "ADVANTA PROJECT", account_id: advanta.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
@@ -287,7 +287,7 @@ Contact.create ([
 # CREATING BREAKTHROGHT BROKER ACCOUNT DATA FOR QA
 # ****************************************************************************
 broker = Account.create(
-  { id: 2, manager: Collaborator.find(101), name: "Breakthrough Broker",  contact_name: "John Doe",  contact_email: "JohnDoe@breakthrough.com",  contact_phone: "1 720-440-6236",  country: "Unitated States", account_status_id: AccountStatus.first.id,  account_uuid: "8d8620e8-2277-11ed-861d-0242ac120002",  salesforce_id: "0014R00002lebET",  city: "Denver, Colorado", client_satisfaction: 100,  moral: rand(0..100),  blended_rate: 4600, bugs_detected: rand(0..100),  permanence: rand(0..100),  productivity: rand(0..100),  speed: rand(0..100)  }.merge(account_amounts)
+  { id: 2, manager: Collaborator.find(101), name: "Breakthrough Broker",  contact_name: "John Doe",  contact_email: "JohnDoe@breakthrough.com", logo: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/clients/Breakthrough+Broker.png", contact_phone: "1 720-440-6236",  country: "Unitated States", account_status_id: AccountStatus.first.id,  account_uuid: "8d8620e8-2277-11ed-861d-0242ac120002",  salesforce_id: "0014R00002lebET",  city: "Denver, Colorado", client_satisfaction: 100,  moral: rand(0..100),  blended_rate: 4600, bugs_detected: rand(0..100),  permanence: rand(0..100),  productivity: rand(0..100),  speed: rand(0..100)  }.merge(account_amounts)
 )
 project_broker = Project.create(
   { name: broker.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "breakthrough_broker project", account_id: broker.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
