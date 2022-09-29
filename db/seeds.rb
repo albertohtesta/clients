@@ -407,7 +407,32 @@ attributes.each do |attribute, questions|
   end
 end
 
-
+Survey.create(
+  status: 2,
+  survey_url: "datos historicos",
+  requested_answers: 4,
+  current_answers: 4,
+  created_at: Date.today,
+  deadline: Date.today,
+  period: 1,
+  period_value: 2,
+  description: "Advanta Q2 abril a junio - 2022",
+  year: 2022,
+  team_id: team_advanta.id,
+  questions_detail: { questions:
+                      [ { title: "question01", category: "IMPARCIALIDAD", final_score: 81 },
+                        { title: "question02", category: "IMPARCIALIDAD", final_score: 63 },
+                        { title: "question03", category: "COMPAÑERISMO", final_score: 56 },
+                        { title: "question04", category: "RELACION CON LIDER", final_score: 63 },
+                        { title: "question05", category: "RELACION CON CLIENTE", final_score: 63 },
+                        { title: "question06", category: "BALANCE DE VIDA", final_score: 69 },
+                        { title: "question07", category: "HERRAMIENTAS DE TRABAJO", final_score: 63 },
+                        { title: "question08", category: "ORGULLO", final_score: 63 },
+                        { title: "question09", category: "RETOS PROFESIONALES", final_score: 63 },
+                        { title: "question10", category: "PLAN DE CARRERA", final_score: 56 }
+                      ]
+                    }
+)
 
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"
