@@ -110,7 +110,6 @@ GEM
     clockwork (3.0.0)
       activesupport
       tzinfo
-    coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crack (0.4.5)
       rexml
@@ -197,14 +196,6 @@ GEM
     parser (3.1.2.0)
       ast (~> 2.4.1)
     pg (1.4.1)
-    pry (0.14.1)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
-    pry-byebug (3.10.1)
-      byebug (~> 11.0)
-      pry (>= 0.13, < 0.15)
-    pry-rails (0.3.9)
-      pry (>= 0.10.4)
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -390,9 +381,6 @@ DEPENDENCIES
   minitest
   overcommit
   pg (~> 1.1)
-  pry
-  pry-byebug
-  pry-rails
   puma (~> 5.0)
   pundit
   rack-cors
