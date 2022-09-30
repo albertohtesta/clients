@@ -176,7 +176,7 @@ deploy-qa:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
-    - sed -i "s@#SMTP_ADDRESS#@SMTP_ADDRESS@" input.json
+    - sed -i "s@#SMTP_ADDRESS#@$SMTP_ADDRESS@" input.json
     - sed -i "s@#SMTP_USER#@$SMTP_USER@" input.json
     - sed -i "s@#SMTP_PASSWORD#@$SMTP_PASSWORD@" input.json
     - sed -i "s@#AWS_ACCESS_KEY_ID#@$AWS_ACCESS_KEY_ID@" input.json
@@ -222,7 +222,7 @@ deploy-staging:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
-    - sed -i "s@#SMTP_ADDRESS#@SMTP_ADDRESS@" input.json
+    - sed -i "s@#SMTP_ADDRESS#@$SMTP_ADDRESS@" input.json
     - sed -i "s@#SMTP_USER#@$SMTP_USER@" input.json
     - sed -i "s@#SMTP_PASSWORD#@$SMTP_PASSWORD@" input.json
     - sed -i "s@#AWS_ACCESS_KEY_ID#@$AWS_ACCESS_KEY_ID_STAGING@" input.json
@@ -267,7 +267,7 @@ deploy-production:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
-    - sed -i "s@#SMTP_ADDRESS#@SMTP_ADDRESS@" input.json
+    - sed -i "s@#SMTP_ADDRESS#@$SMTP_ADDRESS@" input.json
     - sed -i "s@#SMTP_USER#@$SMTP_USER@" input.json
     - sed -i "s@#SMTP_PASSWORD#@$SMTP_PASSWORD@" input.json
     - sed -i "s@#AWS_ACCESS_KEY_ID#@$AWS_ACCESS_KEY_ID_STAGING@" input.json
