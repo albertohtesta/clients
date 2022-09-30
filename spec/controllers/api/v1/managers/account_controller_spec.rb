@@ -90,6 +90,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
           { "id" => account.id,
             "account_uuid" => account.account_uuid,
             "name" => "MyString",
+            "logo" => nil,
             "location" => "city",
             "last_follow_up_text" => "No follow ups found",
             "priority" => "medium",

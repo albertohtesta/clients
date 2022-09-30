@@ -4,14 +4,15 @@ require "rails_helper"
 
 RSpec.describe ManagerAccountsPresenter do
   describe "presenter validation" do
-    let!(:account) { build(:account) }
-    let!(:presenter) { described_class.new(account) }
+    let(:account) { create(:account) }
+    let(:presenter) { described_class.new(account) }
 
     it "must return formated json" do
       expected_keys = [
         "id",
         "account_uuid",
         "name",
+        "logo",
         "location",
         "last_follow_up_text",
         "priority",

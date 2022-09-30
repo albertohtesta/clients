@@ -3,7 +3,7 @@
 require "rails_helper"
 require "swagger_helper"
 
-RSpec.describe "Team metrcis", type: :request do
+RSpec.describe "/api/v1/teams/{team_id}/metrics", type: :request do
   include WebmockHelper
   include_context "login_user"
 
