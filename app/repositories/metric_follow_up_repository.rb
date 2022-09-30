@@ -7,20 +7,25 @@ class MetricFollowUpRepository < ApplicationRepository
     end
 
     def add_follow_up(**args)
-      scope.create!(alert_status: args[:alert_status],
-        mitigation_strategy: args[:mitigation_strategy],
-        manager_id: args[:manager_id],
+      follow_up = scope.where(
         account_id: account_id(args),
         follow_date: Date.today,
         metric_type: metric_type(args)
-      )
+      ).first_or_initialize
+      follow_up.update!(alert_status: args[:alert_status],
+        mitigation_strategy: args[:mitigation_strategy],
+        manager_id: manager_id(args))
     end
 
     private
+      def manager_id(args)
+        return args[:manager_id].to_i if args[:manager_id]
+        Account.find(args[:account_id]).manager_id
+      end
+
       def account_id(args)
         return args[:account_id].to_i if args[:account_id]
-        account = Account.find_by(manager_id: args[:manager_id])
-        account ? account.id : 0
+        Account.find_by(manager_id: args[:manager_id]).id
       end
 
       def metric_type(args)
