@@ -19,9 +19,9 @@ class SurveyCreateService < ApplicationService
 
     def calculate_started_at(period, period_value, year)
       case period
-      when 0
+      when "month"
         "01/#{period_value}/#{year}".to_date
-      when 1
+      when "quarter"
         date_for_quarter(period_value, year)
       else
         "01/01/#{year}".to_date
