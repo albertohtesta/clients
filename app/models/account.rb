@@ -47,10 +47,6 @@ class Account < ApplicationRecord
     account_follow_ups.blank? ? nil : account_follow_ups.last
   end
 
-  def last_metric_follow_up_date
-    metrics.blank? ? nil : metrics.order("date DESC").first["date"]
-  end
-
   def assign_uuid
     self.account_uuid = SecureRandom.uuid unless account_uuid
   end
