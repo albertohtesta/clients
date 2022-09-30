@@ -8,8 +8,10 @@ FactoryBot.define do
     current_answers { 1 }
     deadline { Date.today + 1.month }
     period { 1 }
+    period_value { 1 }
     questions_detail { "" }
     answers_detail { "" }
+    description { "New survey for this team" }
     team
   end
 end

@@ -2,7 +2,7 @@
 
 class InvestmentPresenter < ApplicationPresenter
   class << self
-    def order_by_quarters(investments)
+    def order_by_quarter(investments)
       return {} if investments.blank?
       # quarters setup for a single year
       quarters = {}
@@ -19,7 +19,7 @@ class InvestmentPresenter < ApplicationPresenter
       }
     end
 
-    def order_by_months(investments)
+    def order_by_monthly(investments)
       return {} if investments.blank?
       months = {}
       final_month = Time.now.to_date.month - 1

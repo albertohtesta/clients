@@ -13,7 +13,7 @@ RSpec.describe InvestmentPresenter, type: :presenter do
 
     it "expects data by month" do
       investments = [august_investment, september_investment]
-      response = described_class.order_by_months(investments)
+      response = described_class.order_by_monthly(investments)
       expect(response[:project_indicators].length).to eq 9
       expect(response[:project_indicators].last["label"]).to eq "September"
       expect(response[:project_indicators].last["value"]).to eq september_investment.value
@@ -22,7 +22,7 @@ RSpec.describe InvestmentPresenter, type: :presenter do
 
     it "expects investment sum for current quarter" do
       investments = [august_investment, september_investment]
-      response = described_class.order_by_quarters(investments)
+      response = described_class.order_by_quarter(investments)
       expect(response[:project_indicators].length).to eq 3
       expect(response[:project_indicators].last["label"]).to eq "q3"
       expect(response[:project_indicators].last["value"]).to eq (september_investment.value + august_investment.value)

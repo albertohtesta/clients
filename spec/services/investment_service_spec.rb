@@ -22,7 +22,7 @@ RSpec.describe InvestmentService, type: :service do
     end
 
     it "expects monthly records for the team" do
-      investments = described_class.investments_by_team_for_period team.id, :months
+      investments = described_class.investments_by_team_for_period team.id, :monthly
       expect(investments.size).to eq 2
       expect(investments[0].value).to eq 10
       expect(investments[0].date.month).to eq july.month
@@ -31,7 +31,7 @@ RSpec.describe InvestmentService, type: :service do
     end
 
     it "expects current month for the quarterly report" do
-      investments = described_class.investments_by_team_for_period team.id, :quarters
+      investments = described_class.investments_by_team_for_period team.id, :quarter
       expect(investments.size).to eq 3
       expect(investments[2].value).to eq 123
       expect(investments[2].date.month).to eq september.month
