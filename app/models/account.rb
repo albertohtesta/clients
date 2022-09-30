@@ -55,6 +55,10 @@ class Account < ApplicationRecord
     self.account_status = AccountStatusRepository.find_by(status_code: :new_project) if account_status.nil?
   end
 
+  def collaborators_number
+    collaborator_ids.count
+  end
+
   def update_from_salesforce(client, contacts)
     update({ name: client[:Name], contact_name: contacts.first[:Name],
              contact_email: client[:Email__c], contact_phone: client[:Phone],

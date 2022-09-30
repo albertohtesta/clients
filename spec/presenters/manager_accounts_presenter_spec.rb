@@ -13,6 +13,7 @@ RSpec.describe ManagerAccountsPresenter do
         "account_uuid",
         "name",
         "location",
+        "collaborators_number",
         "last_follow_up_text",
         "priority",
         "role_debt",

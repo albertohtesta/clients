@@ -107,6 +107,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
               "alert" => false,
               "data_follow_up" => JSON.parse(metric_follow_up_performance.to_json(except: [:created_at, :updated_at]))
             },
+            "collaborators_number" => 0,
             "gross_margin" => {
               "amount" => 95,
               "alert" => false,
