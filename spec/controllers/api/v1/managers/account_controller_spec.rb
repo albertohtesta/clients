@@ -11,6 +11,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       let(:collaborator) { create(:collaborator) }
       let(:account_status) { create(:account_status, status: "new", status_code: "new") }
       let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
+      let(:project) { create(:project, account:) }
+      let(:team) { create(:team, project:) }
       let(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
       let(:project) { create(:project, account:) }
       let(:team) { create(:team, project:) }

@@ -11,7 +11,7 @@ RSpec.describe "Team Investments", type: :request do
   let(:team_id) { team.id }
 
   context "on investment data existing for a team" do
-    let!(:investment) { create(:investment, team:, date: 1.month.ago.to_date) }
+    let!(:investment) { create(:investment, team:, date: 2.month.ago.to_date) }
 
     path "/api/v1/teams/{team_id}/investments" do
       get "Investments for a quarter" do
@@ -41,7 +41,7 @@ RSpec.describe "Team Investments", type: :request do
   end
 
   context "on investment data non existent" do
-    path "/api/v1/teams/{team_id}/investments?group_by=months" do
+    path "/api/v1/teams/{team_id}/investments" do
       get "Investment data not found" do
         security [ Bearer: [] ]
         produces "application/json"
@@ -49,6 +49,7 @@ RSpec.describe "Team Investments", type: :request do
         parameter name: :group_by, in: :query
 
         response(404, "not found") do
+          let(:team_id) { 0 }
           let(:group_by) { "quarter" }
           run_test!
         end

@@ -3,17 +3,24 @@
 module Api
   module  V1
     module Teams
-      class InvestmentsController < ApiController
+      class InvestmentsController < ApplicationController
         before_action :validate_required_params
+
         def index
-          investments = InvestmentService.investments_by_team_for_period(params[:team_id], params[:group_by])
-          return render json: { message: "No investments data found" }, status: :not_found if investments.blank?
-          render json: InvestmentPresenter.send("group_by_#{params[:group_by]}", investments)
+          investments = investments_of_team_of_this_year
+          return render json: { message: "No investments data found" }, status: :not_found if investments.empty?
+
+          investments_formated = InvestmentPresenter.send("order_by_#{params[:group_by]}", investments)
+          render json: investments_formated
         end
 
         private
+          def investments_of_team_of_this_year
+            InvestmentService.investments_by_team_for_period(params[:team_id], params[:group_by])
+          end
+
           def validate_required_params
-            params.require([:group_by, :team_id])
+            params.require([:group_by])
           rescue ActionController::ParameterMissing
             render json: { message: "Parameters missing" }, status: :bad_request
           end
