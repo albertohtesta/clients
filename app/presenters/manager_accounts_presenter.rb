@@ -27,6 +27,11 @@ class ManagerAccountsPresenter < ApplicationPresenter
     "#{(Date.today - date).to_i} days ago"
   end
 
+  def last_metric_follow_up_date
+    last_metric_follow_up = MetricFollowUp.where(account_id: id).order("follow_date DESC").first
+    last_metric_follow_up ? last_metric_follow_up.follow_date : nil
+  end
+
   def role_debt
     TeamRequirementRepository.role_deb_by_account(id).count
   end
