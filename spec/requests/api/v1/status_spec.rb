@@ -3,6 +3,7 @@
 require "swagger_helper"
 
 RSpec.describe "api/v1/team_morale/surveys", type: :request do
+  include_context "login_user"
   before(:each) do
     create(:survey, id: 1)
   end
