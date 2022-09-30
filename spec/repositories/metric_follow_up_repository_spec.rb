@@ -20,10 +20,26 @@ RSpec.describe MetricFollowUpRepository do
       expect { update_metric }.not_to raise_error
     end
 
-    it "raise error historial and mitigation_strategy" do
+    it "creates follow up with required id or metric_type" do
+      update_metric = described_class.add_follow_up(metric_type: "balance",
+        alert_status: "blocked",
+        mitigation_strategy: "NA",
+        account_id: account.id)
+      expect { update_metric }.not_to raise_error
+    end
+
+    it "creates follow up with required accunt_id or manager_id" do
+      update_metric = described_class.add_follow_up(metric_type: "balance",
+        alert_status: "blocked",
+        mitigation_strategy: "NA",
+        manager_id: manager.id)
+      expect { update_metric }.not_to raise_error
+    end
+
+    it "raise error on invalid status" do
       alert_status = "not_exist"
       mitigation_strategy = "mitigation_strategy"
-      expect { described_class.add_follow_up(id: metric_follow_up.id, alert_status:, mitigation_strategy:) }.to raise_error(ArgumentError)
+      expect { described_class.add_follow_up(id: metric_follow_up.id, account_id: account.id, alert_status:, mitigation_strategy:) }.to raise_error(ArgumentError)
     end
   end
 end
