@@ -40,6 +40,7 @@ RSpec.describe "survey results" do
 
   context "results by month by attribute " do
     let (:response) { SurveyResultsService.survey_results(0, @survey.year, @survey.team_id, "A") }
+    let(:current_month) {  Time.new.strftime("%B") }
 
     it "returns the average by attribute" do
       expect(response[current_month].last).to eq(75)
