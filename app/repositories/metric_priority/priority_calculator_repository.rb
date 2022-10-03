@@ -44,9 +44,11 @@ module MetricPriority
       end
 
       def nivel_of_priority
-        return true if high_rate? || medium_rate?
+        return "high" if high_rate?
 
-        false
+        return "medium" if medium_rate?
+
+        "low"
       end
 
       def account_metric_result
