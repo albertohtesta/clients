@@ -11,4 +11,5 @@ bundle exec rails db:migrate &
 bundle exec rake sneakers:run &
 
 
+
 exec "$@"
