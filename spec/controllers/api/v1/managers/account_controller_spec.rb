@@ -18,7 +18,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       let(:team) { create(:team, project:) }
       let!(:team_balance) { create(:team_balance, account_id: account.id, team:) }
 
-      let!(:account_metric_team_balance) { create(:metric, related: team, date:, indicator_type: "balance", value: 95) }
+      let!(:account_metric_team_balance) { create(:metric, related: team, date:, indicator_type: "balance", value: 55) }
       let!(:account_metric_velocity) { create(:metric, related: team, date:, indicator_type: "velocity", value: 95) }
       let!(:account_metric_client_management) { create(:metric, related: team, date:, indicator_type: "client_management", value: 95) }
       let!(:account_metric_performance) { create(:metric, related: team, date:, indicator_type: "performance", value: 95) }
@@ -63,12 +63,12 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
         create(
           :metric_limit,
           indicator_type: "balance",
-          low_priority_min: 90,
+          low_priority_min: 81,
           low_priority_max: 100,
-          medium_priority_min: 80,
-          medium_priority_max: 89,
+          medium_priority_min: 60,
+          medium_priority_max: 80,
           high_priority_min: 0,
-          high_priority_max: 79
+          high_priority_max: 59
         )
       }
 
@@ -97,33 +97,33 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "role_debt" => 0,
             "alert" => true,
             "team_balance" => {
-              "amount" => 95,
-              "alert" => false,
+              "amount" => 55,
+              "alert" => "high",
               "data_follow_up" => JSON.parse(metric_follow_up_team_balance.to_json(except: [:created_at, :updated_at]))
             },
             "client_management" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_client_management.to_json(except: [:created_at, :updated_at]))
             },
             "performance" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_performance.to_json(except: [:created_at, :updated_at]))
             },
             "gross_margin" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_gross_margin.to_json(except: [:created_at, :updated_at]))
             },
             "morale" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_morale.to_json(except: [:created_at, :updated_at]))
             },
             "velocity" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_velocity.to_json(except: [:created_at, :updated_at]))
             },
           "manager_id" => collaborator.id

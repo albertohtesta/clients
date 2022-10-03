@@ -55,11 +55,11 @@ Role.create!([
   { name: "ACCOUNT MANAGER" }
 ])
 
-MetricLimit.create!([
-  { indicator_type: :balance, label: METRICS_TYPES[:balance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  { indicator_type: :client_management, label: METRICS_TYPES[:client_management], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  { indicator_type: :performance, label: METRICS_TYPES[:performance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  { indicator_type: :morale, label: METRICS_TYPES[:morale], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
+MetricLimit.create([
+  { indicator_type: :balance, label: METRICS_TYPES[:balance], low_priority_min: 81, low_priority_max: 100, medium_priority_min: 60, medium_priority_max: 80, high_priority_min: 0, high_priority_max: 59 },
+  { indicator_type: :client_engagement, label: METRICS_TYPES[:client_engagement], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
+  { indicator_type: :performance, label: METRICS_TYPES[:performance], low_priority_min: 81, low_priority_max: 100, medium_priority_min: 60, medium_priority_max: 80, high_priority_min: 0, high_priority_max: 59 },
+  { indicator_type: :morale, label: METRICS_TYPES[:morale], low_priority_min: 81, low_priority_max: 100, medium_priority_min: 60, medium_priority_max: 80, high_priority_min: 0, high_priority_max: 59 },
   { indicator_type: :gross_margin, label: METRICS_TYPES[:gross_margin], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 },
   { indicator_type: :velocity, label: METRICS_TYPES[:velocity], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
 ])
