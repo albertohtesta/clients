@@ -44,10 +44,7 @@ Rails.application.routes.draw do
       resources :posts, only: [:show]
 
       namespace :public do
-        resources :collaborators, only: [:show]
-        resources :accounts do
-          resources :collaborators, only: [:index]
-        end
+        resources :collaborators, only: %i[index show]
       end
 
       namespace :team_morale do
