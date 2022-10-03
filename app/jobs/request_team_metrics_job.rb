@@ -10,7 +10,6 @@ class RequestTeamMetricsJob < ApplicationJob
     request = Requests::NetHttpLib.new(url: METRICS_API_BI_URL)
     request.with_query_params(params)
     response = request.resolve
-    Rollbar.info("Request metrics from BI API", params:, response:)
 
     if response
       puts "API Response success", JSON.parse(response, symbolize_names: true)
