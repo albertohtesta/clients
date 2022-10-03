@@ -19,33 +19,35 @@ RSpec.describe "survey results" do
 
   context "results by month by question " do
     let (:response) { SurveyResultsService.survey_results(0, @survey.year, @survey.team_id, "Q") }
+    let(:current_month) {  Time.new.strftime("%B") }
 
     it "returns the month that haves surveys" do
-      expect(response["September"]).to be_truthy
+      expect(response[current_month]).to be_truthy
     end
 
     it "returns the average by Question" do
-      expect(response["September"].last).to eq(75)
+      expect(response[current_month].last).to eq(75)
     end
 
     it "returns a hash of questions responses" do
-      expect(response["September"][0].class).to eq(Hash)
+      expect(response[current_month][0].class).to eq(Hash)
     end
 
     it "returns the score of a question" do
-      expect(response["September"][0][:final_score]).to eq(100)
+      expect(response[current_month][0][:final_score]).to eq(100)
     end
   end
 
   context "results by month by attribute " do
     let (:response) { SurveyResultsService.survey_results(0, @survey.year, @survey.team_id, "A") }
+    let(:current_month) {  Time.new.strftime("%B") }
 
     it "returns the average by attribute" do
-      expect(response["September"].last).to eq(75)
+      expect(response[current_month].last).to eq(75)
     end
 
     it "returns the score of a attribute" do
-      expect(response["September"][0][:final_score]).to eq(75)
+      expect(response[current_month][0][:final_score]).to eq(75)
     end
   end
 
