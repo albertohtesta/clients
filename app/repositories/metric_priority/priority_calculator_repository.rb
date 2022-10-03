@@ -3,7 +3,9 @@
 module MetricPriority
   class PriorityCalculatorRepository < ApplicationRepository
     def self.last_follow_up_date(account_id)
-      metrics_follow_up = MetricFollowUp.where(account_id:).order_by(follow_date: :desc).first
+      metrics_follow_up = MetricFollowUp.where(account_id:)
+      .where.not(follow_date: [nil, ""])
+      .order(follow_date: :desc).first
       return metrics_follow_up.follow_date unless metrics_follow_up.nil?
       nil
     end
@@ -26,7 +28,7 @@ module MetricPriority
       attr_reader :account, :metric_type
 
       def attended_after_metric
-        date_of_last_metric.present? && last_follow_up_date.present? && date_of_last_metric < last_follow_up_date
+        date_of_last_metric.present? && last_follow_up_date.present? && date_of_last_metric <= last_follow_up_date
       end
 
       def date_of_last_metric

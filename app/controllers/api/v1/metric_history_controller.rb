@@ -37,7 +37,7 @@ module Api
         end
 
         def metric_historial_params
-          # TODO: replace id param, use metric type and account_id
+          # TODO: depcreate id param, use :metric type and :account_id instead
           params.permit(:id, :metric_type, :account_id, :manager_id, :alert_status, :mitigation_strategy)
         end
     end

@@ -7,20 +7,19 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
 
   describe "#index" do
     context "when an account has metrics follow ups" do
+      let(:metric_date) { 3.weeks.ago.beginning_of_day }
       let(:date) { 2.weeks.ago.beginning_of_day }
-      let(:collaborator) { create(:collaborator) }
-      let(:account_status) { create(:account_status, status: "new", status_code: "new") }
-      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
-      let(:project) { create(:project, account:) }
-      let(:team) { create(:team, project:) }
-      let(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
+      let!(:collaborator) { create(:collaborator) }
+      let!(:account_status) { create(:account_status, status: "new", status_code: "new") }
+      let!(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
+      let!(:project) { create(:project, account:) }
+      let!(:team) { create(:team, project:) }
+      let!(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
 
-      let!(:account_metric_team_balance) { create(:metric, related: account, date:, indicator_type: "balance", value: 95) }
-      let!(:account_metric_velocity) { create(:metric, related: account, date:, indicator_type: "velocity", value: 95) }
-      let!(:account_metric_client_management) { create(:metric, related: account, date:, indicator_type: "client_management", value: 95) }
-      let!(:account_metric_performance) { create(:metric, related: account, date:, indicator_type: "performance", value: 95) }
-      let!(:account_metric_gross_margin) { create(:metric, related: account, date:, indicator_type: "gross_margin", value: 95) }
-      let!(:account_metric_morale) { create(:metric, related: account, date:, indicator_type: "morale", value: 95) }
+      let!(:account_metric_team_balance) { create(:metric, related: account, date: metric_date, indicator_type: "balance", value: 95) }
+      let!(:account_metric_velocity) { create(:metric, related: account, date: metric_date, indicator_type: "velocity", value: 95) }
+      let!(:account_metric_performance) { create(:metric, related: account, date: metric_date, indicator_type: "performance", value: 95) }
+      let!(:account_metric_morale) { create(:metric, related: account, date: metric_date, indicator_type: "morale", value: 95) }
 
       let!(:metric_follow_up_team_balance) {
         @metric_follow_up_team_balance = create(:metric_follow_up, follow_date: date, metric_type: "balance", account:, manager: collaborator, created_at: date, updated_at: date)
@@ -33,19 +32,17 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
         @metric_follow_up_performance
       }
       let!(:metric_follow_up_morale) {
-        @metric_follow_up_morale ||= create(:metric_follow_up, follow_date: date, metric_type: "morale", account:, manager: collaborator, created_at: date, updated_at: date)
+        @metric_follow_up_morale ||= create(:metric_follow_up, follow_date: metric_date, metric_type: "morale", account:, manager: collaborator, created_at: date, updated_at: date)
         @metric_follow_up_morale.id = account_metric_morale.id
         @metric_follow_up_morale
       }
       let!(:metric_follow_up_velocity) {
-        @metric_follow_up_velocity = create(:metric_follow_up, follow_date: date, metric_type: "velocity", account:, manager: collaborator, created_at: date, updated_at: date)
+        @metric_follow_up_velocity = create(:metric_follow_up, follow_date: nil, metric_type: "velocity", account:, manager: collaborator, created_at: date, updated_at: date)
         @metric_follow_up_velocity.id = account_metric_velocity.id
         @metric_follow_up_velocity
       }
 
-      let!(:metric_limit_balance) { create(:metric_limit, indicator_type: "balance") }
       let!(:metric_limit_velocity) { create(:metric_limit, indicator_type: "velocity") }
-      let!(:metric_limit_gross_marging) { create(:metric_limit, indicator_type: "gross_margin") }
       let!(:metric_limit_morale) {
         create(
           :metric_limit,
@@ -83,19 +80,6 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
         )
       }
 
-      let!(:metric_limit_client_management) {
-        create(
-          :metric_limit,
-          indicator_type: "client_management",
-          low_priority_min: 90,
-          low_priority_max: 100,
-          medium_priority_min: 80,
-          medium_priority_max: 89,
-          high_priority_min: 0,
-          high_priority_max: 79
-        )
-      }
-
       it "must return each metric value" do
         expected_keys = [
           { "id" => account.id,
@@ -103,26 +87,26 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "name" => "MyString",
             "location" => "city",
             "last_follow_up_text" => "14 days ago",
-            "priority" => "medium",
+            "priority" => "low",
             "role_debt" => 0,
             "alert" => false,
             "team_balance" => {
               "amount" => 95,
               "alert" => false,
-              "attended_after_metric" => false,
+              "attended_after_metric" => true,
               "data_follow_up" => JSON.parse(metric_follow_up_team_balance.to_json(except: [:created_at, :updated_at]))
             },
             "performance" => {
               "amount" => 95,
               "alert" => false,
-              "attended_after_metric" => false,
+              "attended_after_metric" => true,
               "data_follow_up" => JSON.parse(metric_follow_up_performance.to_json(except: [:created_at, :updated_at]))
             },
             "morale" => {
               "amount" => 95,
               "alert" => false,
               "data_follow_up" => JSON.parse(metric_follow_up_morale.to_json(except: [:created_at, :updated_at])),
-              "attended_after_metric" => false
+              "attended_after_metric" => true
             },
             "velocity" => {
               "amount" => 95,
@@ -134,6 +118,78 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
           }
         ]
 
+        request.headers["Authorization"] = @token
+        get :index, params: { manager_id: account.manager_id }
+        expect(JSON.parse(response.body)).to eql(expected_keys)
+      end
+    end
+
+    context "when an account has no follow ups" do
+      let(:metric_date) { 3.weeks.ago.beginning_of_day }
+      let(:date) { 2.weeks.ago.beginning_of_day }
+      let!(:collaborator) { create(:collaborator) }
+      let!(:account_status) { create(:account_status, status: "new", status_code: "new") }
+      let!(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
+      let!(:project) { create(:project, account:) }
+      let!(:team) { create(:team, project:) }
+
+      it "must respond on empty values" do
+        expected_keys = [
+          { "id" => account.id,
+            "account_uuid" => account.account_uuid,
+            "name" => "MyString",
+            "location" => "city",
+            "last_follow_up_text" => "No follow ups found",
+            "priority" => "medium",
+            "role_debt" => 0,
+            "alert" => false,
+            "team_balance" => {
+              "amount" => 0,
+              "alert" => false,
+              "attended_after_metric" => false,
+              "data_follow_up" => {
+                "account_id" => account.id,
+                "id" => nil,
+                "manager_id" => account.manager_id,
+                "metric_type" => "balance"
+                }
+            },
+            "performance" => {
+              "amount" => 0,
+              "alert" => false,
+              "attended_after_metric" => false,
+              "data_follow_up" => {
+                "account_id" => account.id,
+                "id" => nil,
+                "manager_id" => account.manager_id,
+                "metric_type" => "performance"
+                }
+            },
+            "morale" => {
+              "amount" => 0,
+              "alert" => false,
+              "data_follow_up" => {
+                "account_id" => account.id,
+                "id" => nil,
+                "manager_id" => account.manager_id,
+                "metric_type" => "morale"
+                },
+              "attended_after_metric" => false
+            },
+            "velocity" => {
+              "amount" => 0,
+              "alert" => false,
+              "attended_after_metric" => false,
+              "data_follow_up" => {
+                "account_id" => account.id,
+                "id" => nil,
+                "manager_id" => account.manager_id,
+                "metric_type" => "velocity"
+                }
+            },
+          "manager_id" => collaborator.id
+          }
+        ]
         request.headers["Authorization"] = @token
         get :index, params: { manager_id: account.manager_id }
         expect(JSON.parse(response.body)).to eql(expected_keys)
