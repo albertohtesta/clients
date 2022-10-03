@@ -31,6 +31,7 @@ class MetricFollowUpRepository < ApplicationRepository
       def metric_type(args)
         return args[:metric_type] if args[:metric_type]
         id = args[:id]
+        raise ArgumentError if id.nil?
         metric = Metric.find_by(id:)
         metric ? metric.indicator_type : MetricFollowUp.find_by(id:).metric_type
       end

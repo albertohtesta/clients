@@ -27,11 +27,6 @@ class ManagerAccountsPresenter < ApplicationPresenter
     "#{(Date.today - date).to_i} days ago"
   end
 
-  def last_metric_follow_up_date
-    last_metric_follow_up = MetricFollowUp.where(account_id: id).order("follow_date DESC").first
-    last_metric_follow_up ? last_metric_follow_up.follow_date : nil
-  end
-
   def role_debt
     TeamRequirementRepository.role_deb_by_account(id).count
   end
@@ -44,23 +39,27 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def team_balance
-    @team_balance ||= metric_priority("balance")
+    @team_balance ||= metric_priority(METRICS_TYPES[:balance])
   end
 
   def performance
-    @performance ||= metric_priority("performance")
+    @performance ||= metric_priority(METRICS_TYPES[:performance])
   end
 
   def morale
-    @morale ||= metric_priority("morale")
+    @morale ||= metric_priority(METRICS_TYPES[:morale])
   end
 
   def velocity
-    @velocity ||= metric_priority("velocity")
+    @velocity ||= metric_priority(METRICS_TYPES[:velocity])
   end
 
   private
     def metric_priority(metric_type)
       MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
+    end
+
+    def last_metric_follow_up_date
+      MetricPriority::PriorityCalculatorRepository.last_follow_up_date(id)
     end
 end

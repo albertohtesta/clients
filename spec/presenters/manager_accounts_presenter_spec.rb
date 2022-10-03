@@ -2,10 +2,11 @@
 
 require "rails_helper"
 
-RSpec.describe ManagerAccountsPresenter do
+RSpec.describe ManagerAccountsPresenter, type: :presenter do
   describe "presenter validation" do
-    let!(:account) { build(:account) }
+    let!(:account) { create(:account) }
     let!(:presenter) { described_class.new(account) }
+    let!(:metric_follow_up) { create(:metric_follow_up, account:) }
 
     it "must return formated json" do
       expected_keys = [
@@ -25,6 +26,23 @@ RSpec.describe ManagerAccountsPresenter do
       ]
 
       expect(presenter.json.keys).to eql(expected_keys)
+    end
+
+    it "expects to read priority status" do
+      expect(presenter.last_follow_up).to be_nil
+      expect(presenter.priority).to_not eq "low"
+    end
+
+    it "expects metric to read by category" do
+      expect(metric_follow_up.metric_type).to eq METRICS_TYPES[:morale]
+    end
+
+    it "expects metric alert to be false when no metrics" do
+      expect(presenter.alert).to be false
+    end
+
+    it "expects to read metrics date" do
+      expect(presenter.last_metric_follow_up_date).to eq metric_follow_up.follow_date
     end
   end
 end
