@@ -30,15 +30,12 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
 
     it "expects to read priority status" do
       expect(presenter.last_follow_up).to be_nil
-      expect(presenter.priority).to_not eq "low"
+      expect(presenter.priority).to be "medium"
+      expect(presenter.alert).to be "medium"
     end
 
     it "expects metric to read by category" do
       expect(metric_follow_up.metric_type).to eq METRICS_TYPES[:morale]
-    end
-
-    it "expects metric alert to be false when no metrics" do
-      expect(presenter.alert).to be false
     end
   end
 end

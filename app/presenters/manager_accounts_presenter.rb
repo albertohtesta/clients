@@ -33,10 +33,34 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def alert
-    (team_balance[:alert] && !team_balance[:attended_after_metric]) ||
-    (performance[:alert] && !performance[:attended_after_metric]) ||
-    (morale[:alert] && !morale[:attended_after_metric]) ||
-    (velocity[:alert] && !velocity[:attended_after_metric])
+    statuses = []
+    if !team_balance[:attended_after_metric]
+      statuses.push team_balance[:alert]
+    end
+    if !performance[:attended_after_metric]
+      statuses.push performance[:alert]
+    end
+    if !morale[:attended_after_metric]
+      statuses.push morale[:alert]
+    end
+    if !velocity[:attended_after_metric]
+      statuses.push velocity[:alert]
+    end
+    statuses.push priority_on_account_follow_up
+
+    return "high" if statuses.any? "high"
+
+    return "medium" if statuses.any? "medium"
+
+    "low"
+  end
+
+  def priority_on_account_follow_up
+    if last_follow_up.nil?
+      just_assigned = manager_started_date.nil? || manager_started_date > 1.month.ago
+      return just_assigned ? "medium" : "high"
+    end
+    "low"
   end
 
   def team_balance

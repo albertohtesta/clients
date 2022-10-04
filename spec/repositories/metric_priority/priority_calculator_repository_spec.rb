@@ -3,8 +3,8 @@
 require "rails_helper"
 
 RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository do
-  describe ".high_priority" do
-    context "when the metric is high" do
+  describe "Account metrics follow-ups" do
+    context "when account has follow ups" do
       let(:date) { 2.weeks.ago }
       let!(:account) { create(:account) }
       let!(:account_follow_up) { create(:account_follow_up, follow_date: 2.months.ago, account:) }
@@ -20,7 +20,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
         create(:metric_limit, indicator_type: "performance", high_priority_max: 24)
       }
 
-      it "should return false because priority is high" do
+      it "should alert low because priority out of ranges" do
         performance_priority = MetricPriority::PriorityCalculatorRepository
           .new(account, "performance")
           .priority
@@ -32,7 +32,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
         expect(performance_priority[:data_follow_up]["metric_type"]).to eq("performance")
       end
 
-      it "should return true because priority is low" do
+      it "should return true because priority matches high limits" do
         balance_priority = MetricPriority::PriorityCalculatorRepository
           .new(account, "balance")
           .priority
