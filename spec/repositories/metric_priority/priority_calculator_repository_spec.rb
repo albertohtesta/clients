@@ -25,7 +25,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
           .new(account, "performance")
           .priority
         expect(performance_priority[:amount]).to eq(75)
-        expect(performance_priority[:alert]).to eq(false)
+        expect(performance_priority[:alert]).to eq("low")
         expect(performance_priority[:attended_after_metric]).to eq(false)
         expect(performance_priority[:data_follow_up]["id"]).to eq(account_metric_performance.id)
         expect(performance_priority[:data_follow_up]["account_id"]).to eq(account.id)
@@ -37,14 +37,14 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
           .new(account, "balance")
           .priority
         expect(balance_priority[:amount]).to eq(75)
-        expect(balance_priority[:alert]).to eq(true)
+        expect(balance_priority[:alert]).to eq("high")
       end
 
       it "should have default" do
         default_priority = MetricPriority::PriorityCalculatorRepository.new(account, "unverified").priority
         expect(default_priority[:amount]).to eq(0)
         expect(default_priority[:attended_after_metric]).to eq(false)
-        expect(default_priority[:alert]).to be false
+        expect(default_priority[:alert]).to be "low"
         expect(default_priority[:data_follow_up]["metric_type"]).to eq("unverified")
       end
     end

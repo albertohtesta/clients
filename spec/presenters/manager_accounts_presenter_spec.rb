@@ -4,8 +4,8 @@ require "rails_helper"
 
 RSpec.describe ManagerAccountsPresenter, type: :presenter do
   describe "presenter validation" do
-    let!(:account) { create(:account) }
-    let!(:presenter) { described_class.new(account) }
+    let(:account) { create(:account) }
+    let(:presenter) { described_class.new(account) }
     let!(:metric_follow_up) { create(:metric_follow_up, account:) }
 
     it "must return formated json" do
@@ -13,6 +13,7 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
         "id",
         "account_uuid",
         "name",
+        "logo",
         "location",
         "last_follow_up_text",
         "priority",

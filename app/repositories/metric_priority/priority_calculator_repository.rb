@@ -72,7 +72,9 @@ module MetricPriority
       end
 
       def alert
-        high_rate? || medium_rate?
+        return "high" if high_rate?
+        return "medium" if medium_rate?
+        "low"
       end
 
       def average_value

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ManagerAccountsPresenter < ApplicationPresenter
-  ATTRS = %i[id account_uuid name].freeze
+  ATTRS = %i[id account_uuid name logo].freeze
   METHODS = %i[location last_follow_up_text priority role_debt alert team_balance
     performance morale velocity manager_id].freeze
 
@@ -33,10 +33,10 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def alert
-    (team_balance[:alert] && !team_balance[:attended_after_metric]) ||
-    (performance[:alert] && !performance[:attended_after_metric]) ||
-    (morale[:alert] && !morale[:attended_after_metric]) ||
-    (velocity[:alert] && !velocity[:attended_after_metric])
+    (team_balance[:alert] != "low" && !team_balance[:attended_after_metric]) ||
+    (performance[:alert] != "low" && !performance[:attended_after_metric]) ||
+    (morale[:alert] != "low" && !morale[:attended_after_metric]) ||
+    (velocity[:alert] != "low" && !velocity[:attended_after_metric])
   end
 
   def team_balance

@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require "rails_helper"
 require "swagger_helper"
 
 RSpec.describe "/api/v1/teams/{team_id}/metrics", type: :request do
+  include WebmockHelper
   include_context "login_user"
 
   before do

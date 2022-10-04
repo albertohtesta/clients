@@ -15,6 +15,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       let(:project) { create(:project, account:) }
       let(:team) { create(:team, project:) }
       let!(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
+      let!(:team_balance) { create(:team_balance, account_id: account.id, team:) }
 
       let!(:account_metric_team_balance) { create(:metric, related: account, date: metric_date, indicator_type: "balance", value: 95) }
       let!(:account_metric_velocity) { create(:metric, related: account, date: metric_date, indicator_type: "velocity", value: 95) }
@@ -71,12 +72,12 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
         create(
           :metric_limit,
           indicator_type: "balance",
-          low_priority_min: 90,
+          low_priority_min: 81,
           low_priority_max: 100,
-          medium_priority_min: 80,
-          medium_priority_max: 89,
+          medium_priority_min: 60,
+          medium_priority_max: 80,
           high_priority_min: 0,
-          high_priority_max: 79
+          high_priority_max: 59
         )
       }
 
@@ -85,6 +86,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
           { "id" => account.id,
             "account_uuid" => account.account_uuid,
             "name" => "MyString",
+            "logo" => nil,
             "location" => "city",
             "last_follow_up_text" => "14 days ago",
             "priority" => "low",
@@ -92,25 +94,25 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "alert" => false,
             "team_balance" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => true,
               "data_follow_up" => JSON.parse(metric_follow_up_team_balance.to_json(except: [:created_at, :updated_at]))
             },
             "performance" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => true,
               "data_follow_up" => JSON.parse(metric_follow_up_performance.to_json(except: [:created_at, :updated_at]))
             },
             "morale" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_morale.to_json(except: [:created_at, :updated_at])),
               "attended_after_metric" => true
             },
             "velocity" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => JSON.parse(metric_follow_up_velocity.to_json(except: [:created_at, :updated_at]))
             },
@@ -139,13 +141,14 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "account_uuid" => account.account_uuid,
             "name" => "MyString",
             "location" => "city",
+            "logo" => nil,
             "last_follow_up_text" => "No follow ups found",
             "priority" => "medium",
             "role_debt" => 0,
             "alert" => false,
             "team_balance" => {
               "amount" => 0,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,
@@ -156,7 +159,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             },
             "performance" => {
               "amount" => 0,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,
@@ -167,7 +170,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             },
             "morale" => {
               "amount" => 0,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => {
                 "account_id" => account.id,
                 "id" => nil,
@@ -178,7 +181,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             },
             "velocity" => {
               "amount" => 0,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,

@@ -74,14 +74,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_210816) do
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
 
-  create_table "accounts_collaborators", force: :cascade do |t|
+  create_table "accounts_collaborators", id: false, force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "collaborator_id", null: false
     t.integer "status", default: 1
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_accounts_collaborators_on_account_id"
-    t.index ["collaborator_id"], name: "index_accounts_collaborators_on_collaborator_id"
+    t.index ["account_id", "collaborator_id"], name: "index_accounts_collaborators_on_account_id_and_collaborator_id"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -407,8 +404,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_210816) do
   add_foreign_key "account_follow_ups", "accounts"
   add_foreign_key "accounts", "account_statuses"
   add_foreign_key "accounts", "collaborators", column: "manager_id"
-  add_foreign_key "accounts_collaborators", "accounts"
-  add_foreign_key "accounts_collaborators", "collaborators"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "collaborators", "roles"

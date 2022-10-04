@@ -22,7 +22,7 @@ class CollaboratorRepository < ApplicationRepository
       talent_pool = scope
                       .includes(:accounts)
                       .where(accounts: { id: account_id })
-                      .select(:id, :profile, :position, :nickname, :uuid)
+                      .select(:id, :first_name, :last_name, :profile, :position, :nickname, :uuid)
                       .where(id: public_profiles_ids)
 
       return talent_pool.where(category:) unless category.blank?

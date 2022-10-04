@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :account_status do
-    status_code { "my_string" }
-    status { "MyString" }
+    status_code { Faker::Name.name }
+    status { Faker::Name.name }
   end
 end
