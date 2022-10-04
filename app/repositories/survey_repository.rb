@@ -14,9 +14,8 @@ class SurveyRepository < ApplicationRepository
     end
 
     def last_survey_of_team(team_id)
-      scope.where(["team_id = :team_id and status = :status", team_id: team_id, status: 2])
+      scope.where(["team_id = :team_id and status = :status", team_id:, status: 2])
       .select(:id, "questions_detail -> 'questions' AS questions").last
     end
-
   end
 end
