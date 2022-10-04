@@ -19,6 +19,7 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
   def last_follow_up_text
     return "No follow ups found" if last_follow_up.nil? && last_metric_follow_up_date.nil?
+
     if last_follow_up.nil? || last_metric_follow_up_date.nil?
       date = last_follow_up.present? ? last_follow_up.follow_date : last_metric_follow_up_date
     else

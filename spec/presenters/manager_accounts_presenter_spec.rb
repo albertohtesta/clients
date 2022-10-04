@@ -40,9 +40,5 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
     it "expects metric alert to be false when no metrics" do
       expect(presenter.alert).to be false
     end
-
-    it "expects to read metrics date" do
-      expect(presenter.last_metric_follow_up_date).to eq metric_follow_up.follow_date
-    end
   end
 end
