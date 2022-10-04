@@ -9,11 +9,11 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
     context "when an account has metrics follow ups" do
       let(:metric_date) { 3.weeks.ago.beginning_of_day }
       let(:date) { 2.weeks.ago.beginning_of_day }
-      let!(:collaborator) { create(:collaborator) }
-      let!(:account_status) { create(:account_status, status: "new", status_code: "new") }
-      let!(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
-      let!(:project) { create(:project, account:) }
-      let!(:team) { create(:team, project:) }
+      let(:collaborator) { create(:collaborator) }
+      let(:account_status) { create(:account_status, status: "new", status_code: "new") }
+      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
+      let(:project) { create(:project, account:) }
+      let(:team) { create(:team, project:) }
       let!(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
 
       let!(:account_metric_team_balance) { create(:metric, related: account, date: metric_date, indicator_type: "balance", value: 95) }
@@ -127,11 +127,11 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
     context "when an account has no follow ups" do
       let(:metric_date) { 3.weeks.ago.beginning_of_day }
       let(:date) { 2.weeks.ago.beginning_of_day }
-      let!(:collaborator) { create(:collaborator) }
-      let!(:account_status) { create(:account_status, status: "new", status_code: "new") }
-      let!(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
-      let!(:project) { create(:project, account:) }
-      let!(:team) { create(:team, project:) }
+      let(:collaborator) { create(:collaborator) }
+      let(:account_status) { create(:account_status, status: "new", status_code: "new") }
+      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
+      let(:project) { create(:project, account:) }
+      let(:team) { create(:team, project:) }
 
       it "must respond on empty values" do
         expected_keys = [
