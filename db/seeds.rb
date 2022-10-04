@@ -409,8 +409,6 @@ attributes.each do |attribute, questions|
   end
 end
 
-
-
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"
 p "Seed... #{Tool.count} Tool created"

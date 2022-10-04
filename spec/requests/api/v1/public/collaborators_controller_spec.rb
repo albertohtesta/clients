@@ -9,8 +9,6 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
   end
 
   context "Collaborators" do
-    # let(:Authorization) { @token }
-
     path "/api/v1/public/collaborators/{id}" do
       get "Get a collaborator" do
         tags "Collaborators"
@@ -19,6 +17,7 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
         consumes "application/json"
         produces "application/json"
         parameter name: :id, in: :path, type: :integer, description: "id of the collaborator"
+        parameter name: :Authorization, in: :headers, type: :string, description: "authorization token with the user info"
 
         response "200", "collaborator found" do
           let!(:collaborator) { create(:collaborator) }
@@ -35,14 +34,14 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
       end
     end
 
-    path "/api/v1/public/accounts/{account_id}/collaborators" do
+    path "/api/v1/public/collaborators" do
       get "Get talent pool directory" do
         tags "Collaborators"
 
         security [ Bearer: [] ]
         consumes "application/json"
         produces "application/json"
-        parameter name: :account_id, in: :path, type: :integer, description: "id of the account"
+        parameter name: :Authorization, in: :headers, type: :string, description: "authorization token with the user info"
 
         response "200", "talent pool directory found" do
           let(:account_id) { Account.first.id }
@@ -63,15 +62,15 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
       end
     end
 
-    path "/api/v1/public/accounts/{account_id}/collaborators" do
+    path "/api/v1/public/collaborators" do
       get "Get talent pool directory" do
         tags "Collaborators"
 
         security [ Bearer: [] ]
         consumes "application/json"
         produces "application/json"
-        parameter name: :account_id, in: :path, type: :integer, description: "id of the account"
         parameter name: :category, in: :query, type: :string, description: "filter by category", required: false, allowReserved: true
+        parameter name: :Authorization, in: :headers, type: :string, description: "authorization token with the user info"
 
         response "200", "talent pool directory filtered found" do
           let(:account_id) { Account.first.id }

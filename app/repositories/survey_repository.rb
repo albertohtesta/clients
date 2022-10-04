@@ -12,5 +12,9 @@ class SurveyRepository < ApplicationRepository
         started_at: args[:initial_date]..args[:end_date] }).
         select(:id, "questions_detail -> 'questions' AS questions")
     end
+
+    def last_survey_of_team(team_id)
+      scope.where(["team_id = ?", team_id]).select(:id, "questions_detail -> 'questions' AS questions").last
+    end
   end
 end

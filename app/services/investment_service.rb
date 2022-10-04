@@ -6,10 +6,10 @@ class InvestmentService < ApplicationService
       current_date = Time.now.to_date
       start_date = current_date.at_beginning_of_year
       case period.to_sym
-      when :months then
+      when :monthly then
         end_date = (Time.now - 1.month).to_date.at_end_of_month
         return [] if end_date < start_date
-      when :quarters then
+      when :quarter then
         end_date = current_date
       else
         return []
