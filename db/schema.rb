@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_21_210816) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_04_182711) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_210816) do
     t.date "manager_started_date"
     t.string "logo"
     t.integer "display_brand", default: 2
+    t.string "minilogo"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end

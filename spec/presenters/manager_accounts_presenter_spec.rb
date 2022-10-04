@@ -12,7 +12,7 @@ RSpec.describe ManagerAccountsPresenter do
         "id",
         "account_uuid",
         "name",
-        "logo",
+        "minilogo",
         "location",
         "last_follow_up_text",
         "priority",
