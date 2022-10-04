@@ -41,12 +41,13 @@ RSpec.describe "#metric_historial", type: :request do
         parameter name: :id, in: :path
         parameter name: :metric_follow_up, in: :body
         parameter name: :metric_historial, in: :body
+        parameter name: :account_id, in: :body
         parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
 
         response(200, "successful") do
           let!(:account) { create(:account, city: "city") }
           let!(:metric_follow_up) { create(:metric_follow_up, account:) }
-          let!(:metric_historial) { create(:metric_history, metric_follow_up:) }
+          let!(:account_id) { account.id  }
           let(:id) { metric_follow_up.id }
           run_test!
         end
