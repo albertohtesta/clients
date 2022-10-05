@@ -34,19 +34,10 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
   def alert
     statuses = []
-    if !team_balance[:attended_after_metric]
-      statuses.push team_balance[:alert]
-    end
-    if !performance[:attended_after_metric]
-      statuses.push performance[:alert]
-    end
-    if !morale[:attended_after_metric]
-      statuses.push morale[:alert]
-    end
-    if !velocity[:attended_after_metric]
-      statuses.push velocity[:alert]
-    end
-    statuses.push priority_on_account_follow_up
+    statuses.push(team_balance[:alert]) unless team_balance[:attended_after_metric]
+    statuses.push(performance[:alert]) unless performance[:attended_after_metric]
+    statuses.push(morale[:alert]) unless morale[:attended_after_metric]
+    statuses.push(priority_on_account_follow_up)
 
     return "high" if statuses.any? "high"
 
