@@ -37,7 +37,7 @@ RSpec.describe "Survey responses service" do
 
   describe "Average of a survey" do
     before(:each) do
-      morale_attribute_with_survey_questions
+      create(:morale_attribute, :with_questions)
       create(:team, id: 1)
       @survey = create(:survey, team_id: 1, deadline: Date.today + 1.month, status: "closed",
           period: "month", period_value: Date.today.month, started_at: Date.today,
