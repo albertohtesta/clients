@@ -5,8 +5,8 @@ FactoryBot.define do
     name { "ORGULLO" }
     trait :with_questions do
       after(:create) do |morale_attribute|
-        FactoryBot.create(:survey_question, morale_attribute:)
-        FactoryBot.create(:survey_question, question: "question02", morale_attribute:)
+        create(:survey_question, morale_attribute:)
+        create(:survey_question, question: "question02", morale_attribute:)
       end
     end
   end

@@ -39,13 +39,11 @@ RSpec.describe "Survey responses service" do
     before(:each) do
       create(:morale_attribute, :with_questions)
       create(:team, id: 1)
-      @survey = create(:survey, team_id: 1, deadline: Date.today + 1.month, status: "closed",
-          period: "month", period_value: Date.today.month, started_at: Date.today,
-          year: Date.today.year, description: "TEST MONTHLY survey", survey_url: "www.fictional.com",
-          questions_detail:
-          { "questions": [{ "title": "question01", "category": "ORGULLO", "final_score": 100 },
-                          { "title": "question02", "category": "ORGULLO", "final_score": 50 }]
-          })
+      @survey = create(:survey_with_dates, team_id: 1, status: "closed", description: "TEST MONTHLY survey",
+                       survey_url: "www.fictional.com", questions_detail:
+                       { "questions": [{ "title": "question01", "category": "ORGULLO", "final_score": 100 },
+                                       { "title": "question02", "category": "ORGULLO", "final_score": 50 }]
+                       })
     end
 
     it "returns the average of the last survey of a team" do
