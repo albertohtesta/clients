@@ -15,6 +15,7 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
         "name",
         "minilogo",
         "location",
+        "collaborators_number",
         "last_follow_up_text",
         "priority",
         "role_debt",

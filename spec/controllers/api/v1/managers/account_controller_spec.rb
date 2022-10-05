@@ -104,6 +104,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
               "attended_after_metric" => true,
               "data_follow_up" => JSON.parse(metric_follow_up_performance.to_json(except: [:created_at, :updated_at]))
             },
+            "collaborators_number" => 0,
             "morale" => {
               "amount" => 95,
               "alert" => "low",
