@@ -107,6 +107,61 @@ paths:
           description: Account information
         '401':
           description: Unauthorized
+  "/api/v1/managers/{manager_id}/accounts/{account_id}/account_follow_ups":
+    get:
+      summary: Get all accounts follow ups for a manager and an  account
+      tags:
+      - Managers
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: manager_id
+        in: path
+        description: id of the manager
+        required: true
+        schema:
+          type: integer
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: accounts follow ups found
+    post:
+      summary: Create a follow up for an account as a manager
+      tags:
+      - Managers
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: manager_id
+        in: path
+        description: id of the manager
+        required: true
+        schema:
+          type: integer
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: create accounts follow ups found
   "/api/v1/managers/{manager_id}/accounts":
     get:
       summary: Get all accounts of a mannager and with priorities
@@ -260,7 +315,63 @@ paths:
         '200':
           description: successful
         '400':
-          description: No results found
+          description: invalid request
+  "/api/v1/team_morale/surveys":
+    post:
+      summary: Creates a Survey
+      tags:
+      - Surveys
+      parameters: []
+      responses:
+        '200':
+          description: survey created
+        '400':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team_id:
+                  type: integer
+                deadline:
+                  type: date
+                period:
+                  type: string
+                period_value:
+                  type: integer
+                year:
+                  type: integer
+                survey_url:
+                  type: string
+                description:
+                  type: string
+              required:
+              - team_id
+              - deadline
+              - period
+              - period_value
+              - year
+              - survey_url
+              - description
+    get:
+      summary: surveys list
+      responses:
+        '200':
+          description: successful
+  "/api/v1/team_morale/surveys/{id}":
+    delete:
+      summary: close survey
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
   "/api/v1/team_balance/balances":
     get:
       summary: list balances

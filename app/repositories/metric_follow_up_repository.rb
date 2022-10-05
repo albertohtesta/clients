@@ -19,13 +19,11 @@ class MetricFollowUpRepository < ApplicationRepository
 
     private
       def manager_id(args)
-        return args[:manager_id].to_i if args[:manager_id]
-        Account.find(args[:account_id]).manager_id
+        args[:manager_id] ? args[:manager_id].to_i : Account.find(args[:account_id]).manager_id
       end
 
       def account_id(args)
-        return args[:account_id].to_i if args[:account_id]
-        Account.find_by(manager_id: args[:manager_id]).id
+        args[:account_id] ? args[:account_id].to_i : Account.find_by(manager_id: args[:manager_id]).id
       end
 
       def metric_type(args)

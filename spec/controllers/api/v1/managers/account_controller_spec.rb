@@ -91,7 +91,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "last_follow_up_text" => "14 days ago",
             "priority" => "low",
             "role_debt" => 0,
-            "alert" => false,
+            "alert" => "low",
             "team_balance" => {
               "amount" => 95,
               "alert" => "low",
@@ -145,7 +145,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "last_follow_up_text" => "No follow ups found",
             "priority" => "medium",
             "role_debt" => 0,
-            "alert" => false,
+            "alert" => "medium",
             "team_balance" => {
               "amount" => 0,
               "alert" => "low",
