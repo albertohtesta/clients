@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_14_215443) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_21_210816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_215443) do
     t.integer "speed", default: 0
     t.datetime "deleted_at", precision: nil
     t.date "manager_started_date"
+    t.string "logo"
+    t.integer "display_brand", default: 2
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
     t.index ["manager_id"], name: "index_accounts_on_manager_id"
   end
@@ -269,6 +271,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_215443) do
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url"
     t.index ["collaborator_id"], name: "index_posts_on_collaborator_id"
     t.index ["project_id"], name: "index_posts_on_project_id"
   end

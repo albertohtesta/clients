@@ -12,13 +12,17 @@ class Account < ApplicationRecord
   has_many :account_contact_collaborators
   has_many :account_follow_ups, -> { order("follow_date ASC") }
   has_many :team_balances
+  has_many :teams, through: :team_balances
   has_and_belongs_to_many :collaborators
+  has_many :teams, through: :projects
 
   validates :account_uuid, :name, presence: true
 
   alias_attribute :status, :account_status
   before_validation :assign_uuid, on: :create
   before_validation :assign_status_by_default
+
+  enum display_brand: { logo: 0, company_name: 1, logo_and_company_name: 2 }
 
   def tech_stacks
     projects.map { |project| project.tech_stacks.pluck(:name) }.flatten.uniq

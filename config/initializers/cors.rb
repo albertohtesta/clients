@@ -9,7 +9,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
             "https://qa-core.nordhen.com",
             "https://staging-core.nordhen.com",
             "https://core.nordhen.com",
-            "https://qa-core-api.nordhen.com"
+            "https://qa-core-api.nordhen.com",
+            "https://staging-clients.nordhen.com",
+            "https://clients.nordhen.com"
     resource "*",
       headers: :any,
       methods: %i[get post put patch delete options head]

@@ -60,7 +60,8 @@ MetricLimit.create([
   { indicator_type: :client_engagement, label: METRICS_TYPES[:client_engagement], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :performance, label: METRICS_TYPES[:performance], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
   { indicator_type: :morale, label: METRICS_TYPES[:morale], low_priority_min: 90, low_priority_max: 100, medium_priority_min: 80, medium_priority_max: 89, high_priority_min: 0, high_priority_max: 79 },
-  { indicator_type: :gross_margin, label: METRICS_TYPES[:gross_margin], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
+  { indicator_type: :gross_margin, label: METRICS_TYPES[:gross_margin], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 },
+  { indicator_type: :velocity, label: METRICS_TYPES[:velocity], low_priority_min: 40, low_priority_max: 100, medium_priority_min: 25, medium_priority_max: 39, high_priority_min: 0, high_priority_max: 24 }
 ])
 
 # **************************************
@@ -91,6 +92,18 @@ Collaborator.create!([
                         role:,
                         position: "ACCOUNT MANAGER",
                         phone: "+523123236909",
+                      },
+                      {
+                        id: 103,
+                        first_name: "Savid",
+                        last_name: "Salazar",
+                        uuid: "a08de416-5545-4a0a-971c-6387296f8804",
+                        email: "ssalazar@arkus-solutions.com",
+                        tech_stacks: TechStack.all.sample(2),
+                        tools: Tool.all.sample(2),
+                        role:,
+                        position: "ADMIN",
+                        phone: "+523123236909",
                       }
                     ])
 
@@ -120,7 +133,7 @@ Collaborator.create([
   { id: 3, seniority: "JUNIOR", english_level: "C1", profile: "https://res.cloudinary.com/djd2dcqmc/image/upload/v1660248754/Work/image_cpp_nbi_angel_davila_sr59ea.png", work_modality: "REMOTE", position: "SOFTWARE ENGINEER", first_name: "ANGEL ARTURO", last_name: "DAVILA\tGOVEA", email: "adavila@arkusnexus.com", role:, uuid: "e1bb5bda-c5c1-475a-aa06-f5fc5693d2fd", about: "Engineer in software development, aiming to develop backend solutions yet focused on learning any technology required.", nickname: "ANGEL", category: "DEVELOPER" },
   { id: 4, seniority: "MIDDLE", english_level: "C1", profile: "https://res.cloudinary.com/djd2dcqmc/image/upload/v1660248756/Work/cpp_nbi_luis_ayon_twkgqa.jpg", work_modality: "REMOTE", position: "SOFTWARE ENGINEER", first_name: "ANGEL", last_name: "AYON\tLUIS", email: "layon@arkusnexus.com", role:, uuid: "d8e255fc-673e-4f49-a3f8-96c0c5ec86bf", about: "Web and Desktop Software Developer. I am a passionate person in what I do, I constantly seek personal and work growth where I fulfill all the goals that are assigned to me. My hobbies are drawing, exercising, playing video games, reading articles, and playing guitar.", nickname: "ANGEL", category: "DEVELOPER" },
   { id: 5, seniority: "SENIOR", english_level: "C2", profile: "https://res.cloudinary.com/djd2dcqmc/image/upload/v1660248758/Work/image_cpp_nbi_luis_renteria_roqwlt.jpg", work_modality: "REMOTE", position: "SOFTWARE ENGINEER", first_name: "LUIS ARTURO", last_name: "RENTERIA\tTOSTADO", email: "lrenteria@arkusnexus.com", role:, uuid: "faf9abc4-d6d3-4517-8f75-501ded7dc795", about: "Im a developer,  I have 8 years of expierence with java developing web-based aplications also  I worked with php for 3 years developing web-basaed aplications and in the last 7 years  I gained expierence with .net and ecommerce platforms.", nickname: "LOLO", category: "DEVELOPER" },
-  { id: 6, seniority: "SENIOR", english_level: "C1", profile: "https://res.cloudinary.com/djd2dcqmc/image/upload/v1660248761/Work/image_cpp_nbi_angel_espinosa_rdwsmv.jpg", work_modality: "MIXED", position: "SOFTWARE ENGINEER", first_name: "ANGEL MARIN", last_name: "RENTERIA\tTOSTADO", email: "aespinoza@arkusnexus.com", role:, uuid: "b8db61c5-77e2-4b5d-a8f5-947ea87b9278", about: "Senior Android developer with more than 8 years of experience. Angel has experience with Java and Kotlin for application development and has held a technical lead position. also has experience in some other programming languages for backend.", nickname: "ANGEL", category: "DEVELOPER" },
+  { id: 6, seniority: "SENIOR", english_level: "C1", profile: "https://res.cloudinary.com/djd2dcqmc/image/upload/v1660248761/Work/image_cpp_nbi_angel_espinosa_rdwsmv.jpg", work_modality: "MIXED", position: "SOFTWARE ENGINEER", first_name: "ANGEL MARIN", last_name: "ESPINOZA\tRODRIGUEZ", email: "aespinoza@arkusnexus.com", role:, uuid: "b8db61c5-77e2-4b5d-a8f5-947ea87b9278", about: "Senior Android developer with more than 8 years of experience. Angel has experience with Java and Kotlin for application development and has held a technical lead position. also has experience in some other programming languages for backend.", nickname: "ANGEL", category: "DEVELOPER" },
   { id: 7, seniority: "MIDDLE", english_level: "B2", profile: "https://res.cloudinary.com/djd2dcqmc/image/upload/v1660248764/Work/image_cpp_nbi_francisco_escobar_tqgmk1.jpg", work_modality: "REMOTE", position: "SOFTWARE ENGINEER", first_name: "FRANCISCO EDUARDO", last_name: "ESCOBAR\tESPINOSA", email: "paco.escobar@michelada.io", role:, uuid: "67d34804-f1fe-4f6f-a932-24af1ba1680b", about: "Mid developer with 4 year of experience working in Swift, 1 years with Objective-C and React Native and currently learning SwiftUI. Francisco loves to learn new things and he's not afraid to take on challenges, learn quickly and adapt to whatever the client needs", nickname: "PACO", category: "DEVELOPER" },
   { id: 8, seniority: "MIDDLE", english_level: "B1", profile: "https://res.cloudinary.com/djd2dcqmc/image/upload/v1660248767/Work/image_cpp_nbi_fernanda_cerezo_skve3v.jpg", work_modality: "REMOTE", position: "SOFTWARE ENGINEER", first_name: "MARIA FERNANDA", last_name: "CEREZO\tGOMEZ", email: "mcerezo@arkusnexus.com", role:, uuid: "face9cc5-ba9c-49f0-ad8e-147d2595a3d4", about: "Fernanda is a developer with 2 year of experience and has worked with clients from both the US and Mexico. Fernanda has experience with several technologies and she is always looking for new challenges. During these recent years she had the opportunity to implement solutions and resolve problems with software.", nickname: "FERNANDA", category: "DEVELOPER" },
   { id: 9, seniority: "MIDDLE", english_level: "B2", profile: "https://res.cloudinary.com/djd2dcqmc/image/upload/v1660248772/Work/image_cpp_nbi_miguel_felix_uzudzd.png", work_modality: "REMOTE", position: "PRODUCT OWNER", first_name: "MIGUEL ANGEL", last_name: "FELIX\tGARCIA", email: "mfelix@arkusnexus.com", role:, uuid: "af4d7b28-51ca-447d-9611-bf51a7ccff17", about: "Product Owner and Scrum Master with +10 years of experience and has worked with clients from Mexico. Experience being the bridge between the clients and the developers. During these years he had the opportunity to implement solutions and resolve problems with client requirements.", nickname: "MIKE", category: "MANAGER" },
@@ -142,7 +155,7 @@ Collaborator.find(7).update(badges: Badge.where({ id: [1, 2, 3, 11] }))
 # CREATING ADVANTA ACCOUNT DATA FOR QA
 # ****************************************************************************
 advanta = Account.create(
-  { id: 1, account_uuid: "8d861f12-2277-11ed-861d-0242ac120002", manager: Collaborator.find(101), name: "ADVANTA", blended_rate: 6400, contact_name: Faker::Name.unique.name, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, salesforce_id: random_salesforce_id(15), city: "New Jersey", client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
+  { id: 1, account_uuid: "8d861f12-2277-11ed-861d-0242ac120002", manager: Collaborator.find(101), name: "ADVANTA", manager_started_date: "01/01/2018", blended_rate: 6400, logo: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/clients/advanta-logo+1.png", contact_name: Faker::Name.unique.name, contact_email: Faker::Internet.unique.email, contact_phone: Faker::PhoneNumber.unique.phone_number, account_status_id: AccountStatus.first.id, salesforce_id: random_salesforce_id(15), city: "New Jersey", client_satisfaction: rand(0..100), moral: rand(0..100), bugs_detected: rand(0..100), permanence: rand(0..100), productivity: rand(0..100), speed: rand(0..100) }.merge(account_amounts)
 )
 project_advanta = Project.create(
   { name: advanta.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "ADVANTA PROJECT", account_id: advanta.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
@@ -275,7 +288,7 @@ Contact.create ([
 # CREATING BREAKTHROGHT BROKER ACCOUNT DATA FOR QA
 # ****************************************************************************
 broker = Account.create(
-  { id: 2, manager: Collaborator.find(101), name: "Breakthrough Broker",  contact_name: "John Doe",  contact_email: "JohnDoe@breakthrough.com",  contact_phone: "1 720-440-6236",  country: "Unitated States", account_status_id: AccountStatus.first.id,  account_uuid: "8d8620e8-2277-11ed-861d-0242ac120002",  salesforce_id: "0014R00002lebET",  city: "Denver, Colorado", client_satisfaction: 100,  moral: rand(0..100),  blended_rate: 4600, bugs_detected: rand(0..100),  permanence: rand(0..100),  productivity: rand(0..100),  speed: rand(0..100)  }.merge(account_amounts)
+  { id: 2, manager: Collaborator.find(101), name: "Breakthrough Broker",  contact_name: "John Doe", manager_started_date: "01/01/2018", contact_email: "JohnDoe@breakthrough.com", logo: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/clients/Breakthrough+Broker.png", contact_phone: "1 720-440-6236",  country: "Unitated States", account_status_id: AccountStatus.first.id,  account_uuid: "8d8620e8-2277-11ed-861d-0242ac120002",  salesforce_id: "0014R00002lebET",  city: "Denver, Colorado", client_satisfaction: 100,  moral: rand(0..100),  blended_rate: 4600, bugs_detected: rand(0..100),  permanence: rand(0..100),  productivity: rand(0..100),  speed: rand(0..100)  }.merge(account_amounts)
 )
 project_broker = Project.create(
   { name: broker.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "breakthrough_broker project", account_id: broker.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
@@ -374,17 +387,6 @@ Contact.create ([
         ])
 
 
-posts_for_collaborators = []
-CollaboratorRepository.by_role_name("DEVELOPER").all.each do |collaborator|
-  posts_for_collaborators << {
-    title: Faker::Name.unique.name,
-    description: Faker::Lorem.sentence,
-    collaborator_id: collaborator.id,
-    project_id: collaborator.teams&.first&.project&.id
-  }
-end
-Post.create(posts_for_collaborators)
-
 attributes =
 {
   "IMPARCIALIDAD" => ["question01", "question02" ],
@@ -406,8 +408,6 @@ attributes.each do |attribute, questions|
     question_in_table.update(question:, morale_attribute: attribute_in_table)
   end
 end
-
-
 
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"

@@ -27,25 +27,24 @@ Rails.application.routes.draw do
           resources :contacts_collaborators, only: %i[index]
           resources :invitations, only: [:create]
           resources :customers_information, only: %i[index]
+          resources :teams, only: %i[index]
         end
       end
 
       resources :teams, only: [:index] do
         scope module: :teams do
           resources :collaborators, only: [:index]
-          get "investments/:order_by" => "investments#show", as: :investments_organized
+          get "investments/:order_by" => "investments#index", as: :investments_organized # Legacy route, delete ASAP
+          resources :investments, only: [:index]
+          resources :metrics, only: [:index]
         end
       end
 
-      resources :metrics, only: [:index]
       resources :projects, only: [:index]
       resources :posts, only: [:show]
 
       namespace :public do
-        resources :collaborators, only: [:show]
-        resources :accounts do
-          resources :collaborators, only: [:index]
-        end
+        resources :collaborators, only: %i[index show]
       end
 
       namespace :team_morale do

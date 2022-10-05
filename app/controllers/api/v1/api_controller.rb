@@ -19,6 +19,10 @@ module Api
           @current_user ||= ContactRepository.find_by({ email: user_service.logged_user_email, uuid: decoded_token[0]["sub"] })
         elsif decoded_token[0]["cognito:groups"]&.include?("collaborator")
           @current_user ||= CollaboratorRepository.find_by({ email: user_service.logged_user_email, uuid: decoded_token[0]["sub"] })
+        elsif decoded_token[0]["cognito:groups"]&.include?("admin")
+          @current_user ||= CollaboratorRepository.find_by({ email: user_service.logged_user_email, uuid: decoded_token[0]["sub"] })
+        else
+          render json: { message: "User not register in the app" }, status: :forbidden
         end
       end
 
