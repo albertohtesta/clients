@@ -107,6 +107,61 @@ paths:
           description: Account information
         '401':
           description: Unauthorized
+  "/api/v1/managers/{manager_id}/accounts/{account_id}/account_follow_ups":
+    get:
+      summary: Get all accounts follow ups for a manager and an  account
+      tags:
+      - Managers
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: manager_id
+        in: path
+        description: id of the manager
+        required: true
+        schema:
+          type: integer
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: accounts follow ups found
+    post:
+      summary: Create a follow up for an account as a manager
+      tags:
+      - Managers
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: manager_id
+        in: path
+        description: id of the manager
+        required: true
+        schema:
+          type: integer
+      - name: account_id
+        in: path
+        description: id of the account
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: create accounts follow ups found
   "/api/v1/managers/{manager_id}/accounts":
     get:
       summary: Get all accounts of a mannager and with priorities
@@ -128,7 +183,31 @@ paths:
           type: integer
       responses:
         '200':
-          description: accounts found
+          description: when I am an admin
+  "/api/v1/managers/{id}":
+    get:
+      summary: show information of a manager
+      tags:
+      - Managers
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: id of the manager collaborator
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: managers show
+        '404':
+          description: managers not found error
   "/api/v1/metric_history/{id}":
     get:
       summary: metric_history
@@ -171,7 +250,7 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/metrics":
+  "/api/v1/teams/{team_id}/metrics":
     get:
       summary: Get metrics of team
       tags:
@@ -185,8 +264,9 @@ paths:
         schema:
           type: string
       - name: team_id
-        in: query
+        in: path
         description: team id
+        required: true
         schema:
           type: integer
       - name: indicator_type
@@ -199,6 +279,23 @@ paths:
           description: metrics found
         '404':
           description: Not metrics found
+  "/api/v1/posts/{id}":
+    get:
+      summary: Get a post of a collaborator
+      tags:
+      - Posts
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: post id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: posts found
   "/api/v1/public/collaborators/{id}":
     get:
       summary: Get a collaborator
@@ -288,7 +385,63 @@ paths:
         '200':
           description: successful
         '400':
-          description: No results found
+          description: invalid request
+  "/api/v1/team_morale/surveys":
+    post:
+      summary: Creates a Survey
+      tags:
+      - Surveys
+      parameters: []
+      responses:
+        '200':
+          description: survey created
+        '400':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team_id:
+                  type: integer
+                deadline:
+                  type: date
+                period:
+                  type: string
+                period_value:
+                  type: integer
+                year:
+                  type: integer
+                survey_url:
+                  type: string
+                description:
+                  type: string
+              required:
+              - team_id
+              - deadline
+              - period
+              - period_value
+              - year
+              - survey_url
+              - description
+    get:
+      summary: surveys list
+      responses:
+        '200':
+          description: successful
+  "/api/v1/team_morale/surveys/{id}":
+    delete:
+      summary: close survey
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
   "/api/v1/team_balance/balances":
     get:
       summary: list balances
@@ -305,6 +458,44 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/teams/{team_id}/collaborators":
+    get:
+      summary: list collaborators by team
+      tags:
+      - Teams
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: team_id
+        in: path
+        description: team id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: teams collaborators index
+  "/api/v1/teams/{team_id}/investments":
+    get:
+      summary: Investment data not found
+      security:
+      - Bearer: []
+      parameters:
+      - name: team_id
+        in: path
+        required: true
+      - name: group_by
+        in: query
+      responses:
+        '200':
+          description: successful
+        '404':
+          description: not found
   "/build-info":
     get:
       summary: gets the build info

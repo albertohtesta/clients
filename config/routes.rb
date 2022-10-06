@@ -59,6 +59,8 @@ Rails.application.routes.draw do
       end
 
       resources :metric_history, only: %i[show update]
+      put "/metric_history", to: "metric_history#update"
+
       namespace :team_balance do
         resources :balances, only: %i[index]
       end
