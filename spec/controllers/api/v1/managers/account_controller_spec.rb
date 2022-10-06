@@ -107,13 +107,13 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "collaborators_number" => 0,
             "morale" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_morale.to_json(except: [:created_at, :updated_at])),
               "attended_after_metric" => false
             },
             "velocity" => {
               "amount" => 95,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => JSON.parse(metric_follow_up_velocity.to_json(except: [:created_at, :updated_at]))
             },
@@ -150,7 +150,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "collaborators_number" => 0,
             "team_balance" => {
               "amount" => 0,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,
@@ -161,7 +161,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             },
             "performance" => {
               "amount" => 0,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,
@@ -173,7 +173,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "collaborators_number" => 0,
             "morale" => {
               "amount" => 0,
-              "alert" => false,
+              "alert" => "low",
               "data_follow_up" => {
                 "account_id" => account.id,
                 "id" => nil,
@@ -184,7 +184,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             },
             "velocity" => {
               "amount" => 0,
-              "alert" => false,
+              "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,
