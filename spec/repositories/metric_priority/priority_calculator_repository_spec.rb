@@ -85,7 +85,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
         expect(priority[:attended_after_metric]).to eq(false)
       end
 
-      it "should return true because points are lower than collabs multiplied by ten" do
+      it "should return high because points are lower than collabs multiplied by ten" do
         account_metric_velocity.update(value: 1)
         priority = MetricPriority::PriorityCalculatorRepository.new(account, "velocity").priority
 

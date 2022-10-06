@@ -28,7 +28,7 @@ module MetricPriority
       attr_reader :account, :metric_type
 
       def attended_after_metric
-        date_of_last_metric.present? && last_follow_up_date.present? && last_follow_up_date >= 7.days.ago.to_date
+        date_of_last_metric.present? && (date_of_last_metric >= 7.days.ago.to_date || last_follow_up_date.present? && last_follow_up_date >= 7.days.ago.to_date)
       end
 
       def date_of_last_metric
@@ -76,7 +76,7 @@ module MetricPriority
 
         return "high" if high_rate?
 
-        return (attended_after_metric ? "medium" : "high") if medium_rate?
+        return attended_after_metric ? "medium" : "high" if medium_rate?
 
         "low"
       end

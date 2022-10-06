@@ -26,6 +26,7 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
           "velocity",
           "manager_id"
         ]
+
         expect(presenter.json.keys).to eql(expected_keys)
       end
 
