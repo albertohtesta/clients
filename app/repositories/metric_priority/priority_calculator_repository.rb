@@ -4,7 +4,7 @@ module MetricPriority
   class PriorityCalculatorRepository < ApplicationRepository
     def self.last_follow_up_date(account_id)
       metrics_follow_up = MetricFollowUp.where(account_id:)
-      .where.not(follow_date: [nil, ""])
+      .where.not(follow_date: [nil])
       .order(follow_date: :desc).first
       return metrics_follow_up.follow_date unless metrics_follow_up.nil?
       nil
@@ -28,7 +28,7 @@ module MetricPriority
       attr_reader :account, :metric_type
 
       def attended_after_metric
-        date_of_last_metric.present? && last_follow_up_date.present? && date_of_last_metric <= last_follow_up_date
+        date_of_last_metric.present? && (date_of_last_metric >= 7.days.ago.to_date || last_follow_up_date.present? && last_follow_up_date >= 7.days.ago.to_date)
       end
 
       def last_follow_up_date
@@ -74,11 +74,20 @@ module MetricPriority
       def alert
         return alert_for_velocity if metric_type == METRICS_TYPES[:velocity]
 
-        high_rate? || medium_rate?
+        return "high" if high_rate?
+
+        return attended_after_metric ? "medium" : "high" if medium_rate?
+
+        "low"
       end
 
       def alert_for_velocity
-        MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly).has_alert?
+        velocity_metrics = MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly)
+        return "high" if velocity_metrics.high_rate?
+
+        return (attended_after_metric ? "medium" : "high") if velocity_metrics.medium_rate?
+
+        "low"
       end
 
       def average_value
