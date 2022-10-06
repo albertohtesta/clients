@@ -13,7 +13,9 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
           "id",
           "account_uuid",
           "name",
+          "minilogo",
           "location",
+          "collaborators_number",
           "last_follow_up_text",
           "priority",
           "role_debt",
@@ -24,7 +26,6 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
           "velocity",
           "manager_id"
         ]
-
         expect(presenter.json.keys).to eql(expected_keys)
       end
 

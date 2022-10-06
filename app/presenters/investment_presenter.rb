@@ -38,8 +38,7 @@ class InvestmentPresenter < ApplicationPresenter
       def data_hash(items, type)
         items.map do |id, value|
           {
-            "id" => id,
-            "label" => (type == "month") ? Date::MONTHNAMES[id] : "q#{id}",
+            "label" => (type == "month") ? Date::MONTHNAMES[id] : "Q#{id}",
             "value" => value.to_f
           }
         end

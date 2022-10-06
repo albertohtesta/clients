@@ -389,7 +389,6 @@ DEPENDENCIES
   redis
   rest-client
   rollbar
-  rest-client
   rspec-rails (~> 6.0.0.rc1)
   rswag
   rswag-specs

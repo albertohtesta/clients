@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class ManagerAccountsPresenter < ApplicationPresenter
-  ATTRS = %i[id account_uuid name].freeze
-  METHODS = %i[location last_follow_up_text priority role_debt alert team_balance
-    performance morale velocity manager_id].freeze
+  ATTRS = %i[id account_uuid name minilogo].freeze
+  METHODS = %i[location collaborators_number last_follow_up_text priority role_debt alert team_balance
+    client_management performance gross_margin morale velocity manager_id].freeze
 
   def location
     city

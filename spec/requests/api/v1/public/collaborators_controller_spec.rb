@@ -74,7 +74,7 @@ RSpec.describe "/api/v1/public/collaborators", type: :request do
 
         response "200", "talent pool directory filtered found" do
           let(:account_id) { Account.first.id }
-          collaborator_ids = [1, 2, 3, 4, 5, 6, 7, 200, 201, 202, 203]
+          collaborator_ids = [1, 2, 3, 4, 5, 6, 7, 200, 202, 203]
           collaborator_ids.map do |id|
             let!(:"collaborator#{id}") { create(:collaborator, id:) }
             let!(:"accounts_collaborator#{id}") { create(:accounts_collaborator, collaborator_id: id, account_id: Account.first.id) }

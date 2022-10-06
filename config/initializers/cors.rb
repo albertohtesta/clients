@@ -10,6 +10,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
             "https://staging-core.nordhen.com",
             "https://core.nordhen.com",
             "https://qa-core-api.nordhen.com",
+            "https://qa-clients-api.nordhen.com",
             "https://staging-clients.nordhen.com",
             "https://clients.nordhen.com"
     resource "*",

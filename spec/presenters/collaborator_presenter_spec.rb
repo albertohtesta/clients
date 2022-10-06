@@ -9,7 +9,6 @@ RSpec.describe CollaboratorPresenter do
 
     it "must return formated json" do
       expected_keys = %w[id uuid position name posts_count img post]
-
       expect(presenter.json.keys).to eq(expected_keys)
     end
 

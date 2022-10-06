@@ -31,6 +31,15 @@ module MetricPriority
         date_of_last_metric.present? && last_follow_up_date.present? && last_follow_up_date >= 7.days.ago.to_date
       end
 
+      def date_of_last_metric
+        return 1.month.ago if last_metric.nil?
+        last_metric["date"]
+      end
+
+      def last_metric
+        @last_metric ||= find_by_type(account.metrics.order("date DESC"))
+      end
+
       def last_follow_up_date
         last_follow_up.nil? ? nil : last_follow_up.follow_date
       end
@@ -40,15 +49,6 @@ module MetricPriority
           metric_type:,
           account_id: account.id
         )
-      end
-
-      def date_of_last_metric
-        return 1.month.ago if last_metric.nil?
-        last_metric["date"]
-      end
-
-      def last_metric
-        @last_metric ||= find_by_type(account.metrics.order("date DESC"))
       end
 
       def json_follow_up

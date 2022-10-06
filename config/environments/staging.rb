@@ -8,10 +8,10 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
-  config.hosts << "localhost:4001"
+  config.hosts << "localhost:4000"
   config.hosts << "norden-clients-integration.herokuapp.com"
-  config.hosts << "qa-clients-api.nordhen.com"
-  config.hosts << "qa-clients.nordhen.com"
+  config.hosts << "staging-clients-api.nordhen.com"
+  config.hosts << "staging-clients.nordhen.com"
 
   # Exclude requests for the /build-info path from host checking
   Rails.application.config.host_authorization = {
@@ -68,10 +68,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.mail_from = %(NORDHEN <Info@nordhen.com>)
-  config.action_mailer.default_url_options = { host: "nordhen.com" }
-  config.action_mailer.smtp_settings = { address: ENV["SMTP_ADDRESS"], user_name: ENV["SMTP_USER"], password: ENV["SMTP_PASSWORD"] }
-  config.action_mailer.raise_delivery_errors = true
+  # Ignore bad email addresses and do not raise email delivery errors.
+  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
