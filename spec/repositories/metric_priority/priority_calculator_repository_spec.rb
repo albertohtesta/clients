@@ -47,7 +47,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
           .new(account, "balance")
           .priority
         expect(balance_priority[:amount]).to eq(75)
-        expect(balance_priority[:alert]).to eq("high")
+        expect(balance_priority[:alert]).to eq(true)
       end
     end
 
