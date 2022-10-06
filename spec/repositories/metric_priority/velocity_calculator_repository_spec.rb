@@ -12,24 +12,24 @@ RSpec.describe MetricPriority::VelocityCalculatorRepository, type: :repository d
       let!(:collaborators_team) { create(:collaborators_team, team:, collaborator:) }
       let!(:account_metric_velocity) { create(:metric, value: 11, related: account, indicator_type: "velocity", date: 2.weeks.ago) }
 
-      it "should return false because points are upper than collabs multiplied by ten" do
+      it "should return no rate because points are upper than collabs multiplied by ten" do
         priority = MetricPriority::VelocityCalculatorRepository.new(account, account_metric_velocity.value, account_metric_velocity)
-
-        expect(priority.has_alert?).to eq(false)
+        expect(priority.high_rate?).to eq(false)
+        expect(priority.medium_rate?).to eq(false)
       end
 
-      it "should return true because points are lower than collabs multiplied by ten" do
+      it "should return high because points are lower than 60% from expectations" do
         account_metric_velocity.update(value: 1)
         priority = MetricPriority::VelocityCalculatorRepository.new(account, account_metric_velocity.value, account_metric_velocity)
-
-        expect(priority.has_alert?).to eq(true)
+        expect(priority.high_rate?).to eq(true)
+        expect(priority.medium_rate?).to eq(false)
       end
 
       it "should return true because points are betewwn 60 and 90 percent" do
         account_metric_velocity.update(value: 9)
         priority = MetricPriority::VelocityCalculatorRepository.new(account, account_metric_velocity.value, account_metric_velocity)
-
-        expect(priority.has_alert?).to eq(true)
+        expect(priority.high_rate?).to eq(false)
+        expect(priority.medium_rate?).to eq(true)
       end
     end
   end
