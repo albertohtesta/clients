@@ -81,7 +81,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
         priority = MetricPriority::PriorityCalculatorRepository.new(account, "velocity").priority
 
         expect(priority[:amount]).to eq(11)
-        expect(priority[:alert]).to eq(false)
+        expect(priority[:alert]).to eq("low")
         expect(priority[:attended_after_metric]).to eq(false)
       end
 
@@ -89,7 +89,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
         account_metric_velocity.update(value: 1)
         priority = MetricPriority::PriorityCalculatorRepository.new(account, "velocity").priority
 
-        expect(priority[:alert]).to eq(true)
+        expect(priority[:alert]).to eq("high")
         expect(priority[:attended_after_metric]).to eq(false)
       end
     end

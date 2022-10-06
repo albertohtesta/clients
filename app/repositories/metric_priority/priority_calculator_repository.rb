@@ -76,15 +76,18 @@ module MetricPriority
 
         return "high" if high_rate?
 
-        if medium_rate?
-          return attended_after_metric ? "medium" : "high"
-        end
+        return (attended_after_metric ? "medium" : "high") if medium_rate?
 
         "low"
       end
 
       def alert_for_velocity
-        MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly).has_alert?
+        velocity_metrics = MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly)
+        return "high" if velocity_metrics.high_rate?
+
+        return (attended_after_metric ? "medium" : "high") if velocity_metrics.medium_rate?
+
+        "low"
       end
 
       def average_value
