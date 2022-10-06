@@ -21,8 +21,8 @@ class MetricRepository < ApplicationRepository
       return if team_metrics.empty?
 
       (1..Date.today.month).step(3).map do |quarter|
-        quarter_metrics = team_metrics.where("extract(month from date) IN (?)", (quarter..quarter + 3))
-        quarter_metrics = last_team_metrics_in_a_month(filter_params, quarter + 3) if quarter_metrics.empty?
+        quarter_metrics = team_metrics.where("extract(month from date) IN (?)", (quarter...quarter + 3))
+        quarter_metrics = last_team_metrics_in_a_month(filter_params, quarter) if quarter_metrics.empty?
 
         unless quarter_metrics.empty?
           { value: promediate_metrics(quarter_metrics), label: "Q#{quarter / 3 + 1}" }
