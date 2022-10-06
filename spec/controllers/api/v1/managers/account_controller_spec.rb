@@ -71,12 +71,12 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
         create(
           :metric_limit,
           indicator_type: "balance",
-          low_priority_min: 90,
+          low_priority_min: 81,
           low_priority_max: 100,
-          medium_priority_min: 80,
-          medium_priority_max: 89,
+          medium_priority_min: 60,
+          medium_priority_max: 80,
           high_priority_min: 0,
-          high_priority_max: 79
+          high_priority_max: 59
         )
       }
 
