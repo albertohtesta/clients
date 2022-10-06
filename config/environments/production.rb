@@ -66,7 +66,7 @@ Rails.application.configure do
   # action_mailer configuration
   config.mail_from = %(NORDHEN <Info@nordhen.com>)
   config.action_mailer.default_url_options = { host: "nordhen.com" }
-  config.action_mailer.smtp_settings = { address: ENV["SMTP_ADDRESS"], user_name: ENV["SMTP_USER"], password: ENV["SMTP_PASSWORD"] }
+  config.action_mailer.smtp_settings = { port: 587, address: ENV["SMTP_ADDRESS"], user_name: ENV["SMTP_USER"], password: ENV["SMTP_PASSWORD"] }
   config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
