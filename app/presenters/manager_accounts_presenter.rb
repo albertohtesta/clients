@@ -10,22 +10,14 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def priority
-    if last_follow_up.nil?
-      just_assigned = manager_started_date.nil? || manager_started_date > 1.month.ago
-      return just_assigned ? "medium" : "high"
-    end
-    AccountPriority::PriorityCalculatorRepository.new(self, last_follow_up.follow_date).priority
+    # deprecated. TODO: remove duplicated attributes
+    alert
   end
 
   def last_follow_up_text
-    return "No follow ups found" if last_follow_up.nil? && last_metric_follow_up_date.nil?
+    return "No follow ups found" if last_follow_up_date.nil?
 
-    if last_follow_up.nil? || last_metric_follow_up_date.nil?
-      date = last_follow_up.present? ? last_follow_up.follow_date : last_metric_follow_up_date
-    else
-      date = [last_follow_up.follow_date, last_metric_follow_up_date].max
-    end
-    "#{(Date.today - date).to_i} days ago"
+    "#{(Date.today - last_follow_up_date).to_i} days ago"
   end
 
   def role_debt
@@ -47,7 +39,7 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def priority_on_account_follow_up
-    if last_follow_up.nil?
+    if last_follow_up_date.nil?
       just_assigned = manager_started_date.nil? || manager_started_date > 1.month.ago
       return just_assigned ? "medium" : "high"
     end
@@ -75,7 +67,16 @@ class ManagerAccountsPresenter < ApplicationPresenter
       MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
     end
 
+    def last_follow_up_date
+      return if last_follow_up.nil? && last_metric_follow_up_date.nil?
+
+      if last_follow_up.nil? || last_metric_follow_up_date.nil?
+        return last_follow_up.present? ? last_follow_up.follow_date : last_metric_follow_up_date
+      end
+      [last_follow_up.follow_date, last_metric_follow_up_date].max
+    end
+
     def last_metric_follow_up_date
-      MetricPriority::PriorityCalculatorRepository.last_follow_up_date(id)
+      @last_metric_follow_up_date ||= MetricPriority::PriorityCalculatorRepository.last_follow_up_date(id)
     end
 end

@@ -3,49 +3,68 @@
 require "rails_helper"
 
 RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository do
-  describe "Account metrics follow-ups" do
-    context "when account has follow ups" do
+  describe "Account metrics response" do
+    let!(:account) { create(:account) }
+
+    context "when account has metrics" do
       let(:date) { 2.weeks.ago }
-      let!(:account) { create(:account) }
-      let!(:account_follow_up) { create(:account_follow_up, follow_date: 2.months.ago, account:) }
 
       let!(:account_metric_balance) { create(:metric, related: account, indicator_type: "balance", date:) }
       let!(:metric_limit_balance) { create(:metric_limit, indicator_type: "balance") }
 
-      let!(:account_metric_morale) { create(:metric, indicator_type: "morale", related: account, date:) }
+      let!(:morale1) { create(:metric, indicator_type: "morale", value: 90, related: account, date:) }
+      let!(:morale2) { create(:metric, indicator_type: "morale", value: 96, related: account, date: date.end_of_month) }
       let!(:metric_limit_morale) { create(:metric_limit, indicator_type: "morale") }
 
-      let!(:account_metric_performance) { create(:metric, indicator_type: "performance", related: account, date:) }
-      let!(:metric_limit_performance) {
-        create(:metric_limit, indicator_type: "performance", high_priority_max: 24)
-      }
+      let!(:metric_performance) { create(:metric, indicator_type: "performance", related: account, value: 30) }
+      let!(:metric_limit_performance) { create(:metric_limit, indicator_type: "performance",
+        high_priority_max: 24, medium_priority_min: 25) }
 
-      it "should alert low because priority out of ranges" do
+      it "should consider multiple value for average amount" do
+        priority = MetricPriority::PriorityCalculatorRepository
+          .new(account, "morale")
+          .priority
+        expect(priority[:amount]).to eq(93)
+      end
+
+      it "should be high alert if range is in medium but there is no follow up" do
         performance_priority = MetricPriority::PriorityCalculatorRepository
           .new(account, "performance")
           .priority
-        expect(performance_priority[:amount]).to eq(75)
-        expect(performance_priority[:alert]).to eq(false)
-        expect(performance_priority[:attended_after_metric]).to eq(false)
-        expect(performance_priority[:data_follow_up]["id"]).to eq(account_metric_performance.id)
-        expect(performance_priority[:data_follow_up]["account_id"]).to eq(account.id)
-        expect(performance_priority[:data_follow_up]["metric_type"]).to eq("performance")
+        expect(performance_priority[:alert]).to eq("high")
       end
 
-      it "should return true because priority matches high limits" do
+      it "should on medium alert with a recent follow up" do
+        create(:metric_follow_up, follow_date: 7.days.ago, metric_type: "performance", account:)
+        performance_priority = MetricPriority::PriorityCalculatorRepository
+          .new(account, "performance")
+          .priority
+        expect(performance_priority[:alert]).to eq("medium")
+      end
+
+      it "should return true because value matches high limits" do
         balance_priority = MetricPriority::PriorityCalculatorRepository
           .new(account, "balance")
           .priority
         expect(balance_priority[:amount]).to eq(75)
-        expect(balance_priority[:alert]).to eq(true)
+        expect(balance_priority[:alert]).to eq("high")
+      end
+    end
+
+    context "when account has no metrics and no follow ups" do
+      it "should return blank values" do
+        priority = MetricPriority::PriorityCalculatorRepository.new(account, "balance").priority
+        expect(priority[:amount]).to eq(0)
+        expect(priority[:attended_after_metric]).to eq(false)
+        expect(priority[:alert]).to eq("low")
+        expect(priority[:data_follow_up]["id"]).to eq(nil)
+        expect(priority[:data_follow_up]["account_id"]).to eq(account.id)
+        expect(priority[:data_follow_up]["manager_id"]).to eq(account.manager_id)
+        expect(priority[:data_follow_up]["metric_type"]).to eq("balance")
       end
 
-      it "should have default" do
-        default_priority = MetricPriority::PriorityCalculatorRepository.new(account, "unverified").priority
-        expect(default_priority[:amount]).to eq(0)
-        expect(default_priority[:attended_after_metric]).to eq(false)
-        expect(default_priority[:alert]).to be false
-        expect(default_priority[:data_follow_up]["metric_type"]).to eq("unverified")
+      it "has no follow up dates" do
+        expect(MetricPriority::PriorityCalculatorRepository.last_follow_up_date(account.id)).to be_nil
       end
     end
   end
