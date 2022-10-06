@@ -10,9 +10,4 @@ FactoryBot.define do
       end
     end
   end
-
-  factory :survey_question do
-    question { "question01" }
-    morale_attribute
-  end
 end
