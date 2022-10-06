@@ -72,6 +72,8 @@ module MetricPriority
       end
 
       def alert
+        return alert_for_velocity if metric_type == METRICS_TYPES[:velocity]
+
         return "high" if high_rate?
 
         if medium_rate?
@@ -79,6 +81,10 @@ module MetricPriority
         end
 
         "low"
+      end
+
+      def alert_for_velocity
+        MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly).has_alert?
       end
 
       def average_value

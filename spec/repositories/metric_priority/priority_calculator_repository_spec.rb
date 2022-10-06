@@ -67,5 +67,31 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
         expect(MetricPriority::PriorityCalculatorRepository.last_follow_up_date(account.id)).to be_nil
       end
     end
+
+    context "when the metric is velocity" do
+      let(:date) { 2.weeks.ago }
+      let!(:account) { create(:account) }
+      let!(:project) { create(:project, account:) }
+      let!(:team) { create(:team, project:) }
+      let!(:collaborator) { create(:collaborator, position: "SOFTWARE ENGINEER") }
+      let!(:collaborators_team) { create(:collaborators_team, team:, collaborator:) }
+      let!(:account_metric_velocity) { create(:metric, value: 11, related: account, indicator_type: "velocity", date:) }
+
+      it "should return false because points are upper than collabs multiplied by ten" do
+        priority = MetricPriority::PriorityCalculatorRepository.new(account, "velocity").priority
+
+        expect(priority[:amount]).to eq(11)
+        expect(priority[:alert]).to eq(false)
+        expect(priority[:attended_after_metric]).to eq(false)
+      end
+
+      it "should return true because points are lower than collabs multiplied by ten" do
+        account_metric_velocity.update(value: 1)
+        priority = MetricPriority::PriorityCalculatorRepository.new(account, "velocity").priority
+
+        expect(priority[:alert]).to eq(true)
+        expect(priority[:attended_after_metric]).to eq(false)
+      end
+    end
   end
 end
