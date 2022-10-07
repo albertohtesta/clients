@@ -15,8 +15,8 @@ class SurveyResponsesService < ApplicationService
 
   def self.average_of_last_survey_of_team(team_id)
     survey = SurveyRepository.last_survey_of_team(team_id)
-    return unless survey
-    survey.questions.avg(:final_score)
+    return unless survey && survey.questions
+    survey.questions.inject(0) { |sum, element| sum + element["final_score"] } / survey.questions.length
   end
 
   private
@@ -37,9 +37,11 @@ class SurveyResponsesService < ApplicationService
       return unless @survey.remote_survey_id.present?
 
       surveys = remote_responses(@survey.remote_survey_id)
-      questions = questions(surveys)
-      questions = calculate_questions_average(questions, surveys.length)
-      @survey.questions_detail = questions_detail(questions)
+      if surveys.length > 0
+        questions = questions(surveys)
+        questions = calculate_questions_average(questions, surveys.length)
+        @survey.questions_detail = questions_detail(questions)
+      end
       @survey.save
     end
 

@@ -2,6 +2,7 @@
 
 class SurveyRepository < ApplicationRepository
   class << self
+    CLOSED = 2
     def find_by_id(id)
       scope.includes(team: :collaborators).find_by_id(id)
     end
@@ -14,7 +15,8 @@ class SurveyRepository < ApplicationRepository
     end
 
     def last_survey_of_team(team_id)
-      scope.where(["team_id = ?", team_id]).select(:id, "questions_detail -> 'questions' AS questions").last
+      scope.where(["team_id = :team_id and status = :status", team_id:, status: CLOSED])
+      .select(:id, "questions_detail -> 'questions' AS questions").last
     end
   end
 end

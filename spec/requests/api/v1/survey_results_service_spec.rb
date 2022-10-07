@@ -4,9 +4,7 @@ require "swagger_helper"
 
 RSpec.describe "survey results" do
   before(:each) do
-    create(:morale_attribute, id: 1)
-    create(:survey_question, question: "question01", morale_attribute_id: 1)
-    create(:survey_question, question: "question02", morale_attribute_id: 1)
+    create(:morale_attribute, :with_questions)
     create(:team, id: 1)
     @survey = create(:survey, team_id: 1, deadline: Date.today + 1.month, status: "closed",
         period: "month", period_value: Date.today.month, started_at: Date.today,
