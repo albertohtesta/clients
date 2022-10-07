@@ -37,9 +37,11 @@ class SurveyResponsesService < ApplicationService
       return unless @survey.remote_survey_id.present?
 
       surveys = remote_responses(@survey.remote_survey_id)
-      questions = questions(surveys)
-      questions = calculate_questions_average(questions, surveys.length)
-      @survey.questions_detail = questions_detail(questions)
+      if surveys.length > 0
+        questions = questions(surveys)
+        questions = calculate_questions_average(questions, surveys.length)
+        @survey.questions_detail = questions_detail(questions)
+      end
       @survey.save
     end
 
