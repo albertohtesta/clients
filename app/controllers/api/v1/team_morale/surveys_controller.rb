@@ -15,9 +15,10 @@ module Api
           @survey = Survey.new(survey_params)
           if SurveyRepository.save(@survey)
             SurveyCreateService.create_job(@survey)
+            SurveySenderJob.perform_later @survey.id
             render json: SurveyPresenter.new(@survey).json, status: :ok
           else
-            render json: { errors: @survey.errors.full_messages }, status: :bad_request
+            render json: { errors: survey.errors.full_messages }, status: :bad_request
           end
         end
 
@@ -34,6 +35,9 @@ module Api
         end
 
         private
+          def survey
+            @survey ||= Survey.new(survey_params.merge(status: "preparation"))
+          end
           def survey_params
             params.require(:survey).permit(:team_id, :deadline, :period, :survey_url, :year, :status, :requested_answers,
                                            :remote_survey_id, :period_value, :description, :current_answers,
