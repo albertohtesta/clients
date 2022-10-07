@@ -2,7 +2,7 @@
     "type": "quiz",
     "title": "Moral2022Q3",
     "workspace": {
-        "href": "https://api.typeform.com/workspaces/AM4bPL"
+        "href": "https://api.typeform.com/workspaces/WR43Sb"
     },
     "theme": {
         "href": "https://api.typeform.com/themes/gVQedeis"
