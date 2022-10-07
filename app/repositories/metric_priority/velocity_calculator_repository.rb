@@ -18,6 +18,10 @@ module MetricPriority
       average_value.between?(total_points_required * 0.60, total_points_required * 0.99)
     end
 
+    def total_points_required
+      total_collabs_in_account * 10
+    end
+
     private
       attr_reader :account, :average_value, :last_monthly_metric
 
@@ -26,10 +30,6 @@ module MetricPriority
         @total_collabs_in_account ||= Collaborator.includes(:teams).where({
           teams: { id: account.teams.ids }, position: "SOFTWARE ENGINEER"
         }).count
-      end
-
-      def total_points_required
-        total_collabs_in_account * 10
       end
   end
 end

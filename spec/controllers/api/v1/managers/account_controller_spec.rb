@@ -109,7 +109,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
               "attended_after_metric" => false
             },
             "velocity" => {
-              "amount" => 95,
+              "amount" => 0,
               "alert" => "low",
               "attended_after_metric" => false,
               "data_follow_up" => JSON.parse(metric_follow_up_velocity.to_json(except: [:created_at, :updated_at]))
