@@ -10,11 +10,13 @@ module MetricPriority
 
     def high_rate?
       return false if last_monthly_metric.nil?
+
       average_value < (total_points_required * 0.60)
     end
 
     def medium_rate?
       return false if last_monthly_metric.nil?
+
       average_value.between?(total_points_required * 0.60, total_points_required * 0.99)
     end
 

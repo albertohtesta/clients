@@ -17,10 +17,11 @@ module MetricPriority
 
     def priority
       {
-        amount: calculate_value,
+        amount: average_value,
         alert:,
         data_follow_up: json_follow_up,
-        attended_after_metric:
+        attended_after_metric:,
+        expected_points:
       }
     end
 
@@ -93,10 +94,10 @@ module MetricPriority
         @velocity_metrics ||= MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly)
       end
 
-      def calculate_value
-        return velocity_metrics.total_points_required if metric_type == METRICS_TYPES[:velocity]
+      def expected_points
+        return 0 if metric_type != METRICS_TYPES[:velocity]
 
-        average_value
+        velocity_metrics.total_points_required
       end
 
       def average_value

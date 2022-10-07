@@ -94,24 +94,28 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
               "amount" => 95,
               "alert" => "low",
               "attended_after_metric" => false,
+              "expected_points" => 0,
               "data_follow_up" => JSON.parse(metric_follow_up_team_balance.to_json(except: [:created_at, :updated_at]))
             },
             "performance" => {
               "amount" => 95,
               "alert" => "low",
               "attended_after_metric" => false,
+              "expected_points" => 0,
               "data_follow_up" => JSON.parse(metric_follow_up_performance.to_json(except: [:created_at, :updated_at]))
             },
             "morale" => {
               "amount" => 95,
               "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_morale.to_json(except: [:created_at, :updated_at])),
-              "attended_after_metric" => false
+              "attended_after_metric" => false,
+              "expected_points" => 0,
             },
             "velocity" => {
-              "amount" => 0,
+              "amount" => 95,
               "alert" => "low",
               "attended_after_metric" => false,
+              "expected_points" => 0,
               "data_follow_up" => JSON.parse(metric_follow_up_velocity.to_json(except: [:created_at, :updated_at]))
             },
           "manager_id" => collaborator.id
@@ -152,7 +156,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "id" => nil,
                 "manager_id" => account.manager_id,
                 "metric_type" => "balance"
-                }
+                },
+                "expected_points" => 0
             },
             "performance" => {
               "amount" => 0,
@@ -163,7 +168,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "id" => nil,
                 "manager_id" => account.manager_id,
                 "metric_type" => "performance"
-                }
+                },
+                "expected_points" => 0
             },
             "morale" => {
               "amount" => 0,
@@ -174,7 +180,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "manager_id" => account.manager_id,
                 "metric_type" => "morale"
                 },
-              "attended_after_metric" => false
+              "attended_after_metric" => false,
+              "expected_points" => 0
             },
             "velocity" => {
               "amount" => 0,
@@ -185,7 +192,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "id" => nil,
                 "manager_id" => account.manager_id,
                 "metric_type" => "velocity"
-                }
+                },
+              "expected_points" => 0
             },
           "manager_id" => collaborator.id
           }
