@@ -1,25 +1,25 @@
 {
     "type": "quiz",
-    "title": "Survey from my App",
+    "title": "Moral2022Q3",
     "workspace": {
-        "href": "https://api.typeform.com/workspaces/WR43Sb"
+        "href": "https://api.typeform.com/workspaces/AM4bPL"
     },
     "theme": {
-        "href": "https://api.typeform.com/themes/qHWOQ7"
+        "href": "https://api.typeform.com/themes/gVQedeis"
     },
     "settings": {
-        "language": "en",
+        "language": "es",
         "progress_bar": "proportion",
         "meta": {
             "allow_indexing": false
         },
-        "hide_navigation": false,
+        "hide_navigation": true,
         "is_public": true,
         "is_trial": false,
         "show_progress_bar": true,
         "show_typeform_branding": true,
         "are_uploads_public": false,
-        "show_time_to_complete": true,
+        "show_time_to_complete": false,
         "show_number_of_submissions": false,
         "show_cookie_consent": false,
         "show_question_number": true,
@@ -33,25 +33,26 @@
     },
     "thankyou_screens": [
         {
-            "ref": "01GCVVCZ5ARVQA94633DH6A22C",
-            "title": "",
+            "ref": "01GDB8CMDB2WM7Z9CRJ6X7S7HA",
+            "title": "Te agradecemos el tiempo que dedicaste a realizar esta encuesta.\n ¡Muchas gracias por tu apoyo!",
             "type": "thankyou_screen",
             "properties": {
-                "show_button": true,
-                "share_icons": true,
+                "show_button": false,
+                "share_icons": false,
                 "button_mode": "default_redirect",
-                "button_text": "Create a typeform"
+                "button_text": "repetir",
+                "description": "\n\n_Ya puedes cerrar esta ventana._"
             }
         },
         {
             "ref": "default_tys",
-            "title": "Thanks for completing this typeform\nNow *create your own* — it's free, easy, & beautiful",
+            "title": "Gracias por completar este typeform. \n*Crea ahora el tuyo*. ¡Es gratis, fácil y bonito!",
             "type": "thankyou_screen",
             "properties": {
                 "show_button": true,
                 "share_icons": false,
                 "button_mode": "default_redirect",
-                "button_text": "Create a *typeform*"
+                "button_text": "Crea un *typeform*"
             },
             "attachment": {
                 "type": "image",
@@ -59,377 +60,410 @@
             }
         }
     ],
+    "welcome_screens": [
+        {
+            "ref": "72b36c35-e067-487f-8915-b1fbbaf97ef5",
+            "title": "Team Check Up Q3\n",
+            "properties": {
+                "show_button": true,
+                "button_text": "Comenzar",
+                "description": "¡Hola! Terminó un Q más y nos gustaría saber cómo has sentido colaborando con tu equipo de trabajo.\nPor favor contesta las siguientes preguntas considerando tu participación con tu equipo de trabajo de la cuenta o departamento en el que te encuentras. ¡Ojo! esta encuesta no pretende conocer aspectos generales de como te sientes a nivel Mind, solamente con tu equipo de trabajo con el que interactúas día con día."
+            }
+        }
+    ],
     "fields": [
         {
+            "title": "Por favor Identifica tu cuenta/equipo",
+            "ref": "e370c745-31c9-47e1-88a7-cc6844fa2007",
+            "properties": {
+                "randomize": false,
+                "alphabetical_order": true,
+                "choices": [
+                    {
+                        "ref": "2e594fb3-9c73-4ea0-a8bc-65491f565375",
+                        "label": "Advanta"
+                    },
+                    {
+                        "ref": "2ededdb0-0edf-4f89-9b2e-01dee8f6f245",
+                        "label": "Identiv"
+                    },
+                    {
+                        "ref": "91e2451c-8d96-4dde-94a9-910c79e811f4",
+                        "label": "LionDesk"
+                    },
+                    {
+                        "ref": "62cc1c68-1d26-477e-95f5-a6df332d6db7",
+                        "label": "Revenue Masters"
+                    },
+                    {
+                        "ref": "73feb902-25b9-41f6-a350-7baf212d22ee",
+                        "label": "Figo"
+                    },
+                    {
+                        "ref": "6e586b57-8f57-4bf6-a598-33bbb35c9275",
+                        "label": "Semantic"
+                    },
+                    {
+                        "ref": "50107678-1652-4822-80de-8c084a71e627",
+                        "label": "Paradise 4 Paws"
+                    },
+                    {
+                        "ref": "d4bd6492-03e3-4f79-bce0-995d1df27b71",
+                        "label": "Catalytic"
+                    },
+                    {
+                        "ref": "46f2bd50-b2e6-4f69-a86a-2596f932538f",
+                        "label": "Ambry Hill Technologies"
+                    },
+                    {
+                        "ref": "e58b93dc-0156-48b7-ba96-f2458be32400",
+                        "label": "ETAN"
+                    },
+                    {
+                        "ref": "0b34807d-9e48-40ad-95bd-daef8fc800fa",
+                        "label": "Voyage Text"
+                    },
+                    {
+                        "ref": "161165b4-420e-4c3a-aebf-f58b71fb327f",
+                        "label": "Trapac"
+                    },
+                    {
+                        "ref": "e2e65e9c-bbdc-4d79-bf37-4ee3a9811ec8",
+                        "label": "Drata"
+                    },
+                    {
+                        "ref": "4a2d1f0b-d1b6-4ddc-9bfa-f3ed961dd6e0",
+                        "label": "MLTPLY"
+                    },
+                    {
+                        "ref": "b99f2e6b-77c4-4818-8490-2f2cec0485b5",
+                        "label": "Easy Pay"
+                    },
+                    {
+                        "ref": "b019fafb-61ae-4de5-acaa-c0bb1cda4377",
+                        "label": "Breakthrough Broker"
+                    },
+                    {
+                        "ref": "0c2adc43-ba63-4a0d-a533-70a41f4ad285",
+                        "label": "RentMoola"
+                    },
+                    {
+                        "ref": "d5d5560f-b2c2-4541-8c4b-cab4e554c6c7",
+                        "label": "Taylor Made"
+                    },
+                    {
+                        "ref": "fe9856f5-1456-4158-aeee-27415b88c613",
+                        "label": "CTO.AL"
+                    },
+                    {
+                        "ref": "7e8adf6a-8299-498a-a49f-67fd5d302919",
+                        "label": "CTM"
+                    },
+                    {
+                        "ref": "4ebed0e2-a8d8-4a4b-95dd-ef6bdc512c35",
+                        "label": "Evolution Nutrition"
+                    },
+                    {
+                        "ref": "2ca931b0-e132-4192-9c5d-a58abd4e1731",
+                        "label": "Audible Magic"
+                    },
+                    {
+                        "ref": "ef2ef8a3-6461-4f1c-b680-79e6c05621bd",
+                        "label": "Seekr"
+                    },
+                    {
+                        "ref": "150b5226-dccd-4db6-9bf4-8f5916837b82",
+                        "label": "GTR"
+                    },
+                    {
+                        "ref": "81058321-8ca6-4f3b-aa01-a6c9ddaf06f9",
+                        "label": "Club Lia - MT"
+                    },
+                    {
+                        "ref": "00b1dc76-3113-411c-a436-3d58af031b6d",
+                        "label": "Tenney 110 - Switch"
+                    },
+                    {
+                        "ref": "9bcd7c15-0be6-40c7-bd2e-c9664bacb202",
+                        "label": "PistilData"
+                    },
+                    {
+                        "ref": "e2602458-eab0-4498-a372-5e8f3f1e8698",
+                        "label": "Genoa Telepsychiatry"
+                    },
+                    {
+                        "ref": "8e1f70ce-fcd7-4b4e-a4be-23598305669f",
+                        "label": "Codefied Inc. dba Housecall Pro"
+                    },
+                    {
+                        "ref": "35611dde-31f5-41a8-9eda-8930f2b0c383",
+                        "label": "Clear to Go, Inc"
+                    },
+                    {
+                        "ref": "0582fb19-7498-48ef-af5d-6de4c545ecc9",
+                        "label": "Janie and Jack, Inc"
+                    },
+                    {
+                        "ref": "17c5a7fe-5a37-44d0-8dbd-0fb78f313312",
+                        "label": "Juvo Mobile, Inc"
+                    },
+                    {
+                        "ref": "81d47891-fedd-453c-8102-bfc9b467e28d",
+                        "label": "Branded Online, Inc"
+                    },
+                    {
+                        "ref": "d253c869-2523-48bc-8539-64e09fcc6bf8",
+                        "label": "GlueGroups, Inc"
+                    },
+                    {
+                        "ref": "49b79320-8d5c-4a04-91e5-daad28667f15",
+                        "label": "Interfolio, Inc"
+                    },
+                    {
+                        "ref": "eb7bb2c6-4912-4381-bd17-f8276d03c601",
+                        "label": "Kueski - MT"
+                    },
+                    {
+                        "ref": "16e96932-06bc-427a-993a-5e6ffbd256e3",
+                        "label": "Corefact"
+                    },
+                    {
+                        "ref": "5a75b303-6637-44ce-8607-5851d6d0baa4",
+                        "label": "Norden - MT"
+                    },
+                    {
+                        "ref": "29d07682-3b74-4539-8034-c96c7991cdcf",
+                        "label": "Blockchain - MT"
+                    },
+                    {
+                        "ref": "c0b3142f-75f0-4193-8d31-ed6181726e10",
+                        "label": "Metaverso - MT"
+                    },
+                    {
+                        "ref": "91f4b5f6-aeac-4d21-b4b0-1ebf2f02f2c9",
+                        "label": "IUNU"
+                    },
+                    {
+                        "ref": "a7a6df98-d72c-45e8-8366-d5a0f06cf83b",
+                        "label": "People Care"
+                    },
+                    {
+                        "ref": "9d2d2872-c170-4a42-a32b-1bd854bcc9cc",
+                        "label": "Atracción de Talento"
+                    },
+                    {
+                        "ref": "f8b66aab-c819-4518-8f20-20ddc8b2b740",
+                        "label": "Finanzas"
+                    },
+                    {
+                        "ref": "e783de64-0f00-47f1-b161-e8e97a25396a",
+                        "label": "Desarrollo de Talento"
+                    },
+                    {
+                        "ref": "5d2475ee-fb2b-42a8-81ef-b625d63625d1",
+                        "label": "Soul Creative"
+                    },
+                    {
+                        "ref": "c546cd49-61f1-418e-95e7-e948b483f371",
+                        "label": "Comercial"
+                    },
+                    {
+                        "ref": "c7d2f2c6-c3cc-40b9-aae5-6fda66d87865",
+                        "label": "TI"
+                    },
+                    {
+                        "ref": "57147c5d-247b-4728-b9a3-912398638fed",
+                        "label": "Ops Managers"
+                    },
+                    {
+                        "ref": "0c4ff429-bf95-48f3-a046-d9558cf59568",
+                        "label": "Zellify"
+                    }
+                ]
+            },
+            "validations": {
+                "required": true
+            },
+            "type": "dropdown"
+        },
+        {
             "title": "Me siento seguro de ser quien realmente soy y de compartir lo que pienso. Participo cada vez que puedo en pláticas constructivas con mi equipo.",
-            "ref": "01GCVVCZ5A04C7EVWD8KBQZR2K",
+            "ref": "d68c9e26-345b-49e7-898a-5fd3d2e9071e",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "d6135d18-e3be-4cb6-a38e-4b4b6bf9ef00",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "40930a08-8c75-4dcc-8be8-c140a3158cd6",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "83ad3f47-8e4b-4b17-9c28-949ac456e60e",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "01GCVVCZ5AY709KHB6624AJQ98",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "01GCVVCZ5A7QRAKHJPXZ1RQXFR",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
-            },
-            "validations": {
-                "required": false
-            },
-            "type": "multiple_choice",
-            "attachment": {
-                "type": "image",
-                "href": "https://images.typeform.com/images/WMALzu59xbXQ"
-            },
-            "layout": {
-                "type": "split",
-                "attachment": {
-                    "type": "image",
-                    "href": "https://images.typeform.com/images/WMALzu59xbXQ"
+                "description": "Confianza y seguridad",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
                 }
-            }
-        },
-        {
-            "title": "En el equipo existen las mismas oportunidades de ser reconocida/reconocido por nuestro trabajo y empeño.",
-            "ref": "b7740d1e-5ab0-4ae9-a92f-022101b4ba1f",
-            "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "7929ddcd-46d6-407a-bffc-804995cee7fd",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "d2c576d9-29d7-4000-82c3-42f9f71f1b13",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "ee85a416-a5de-4cb2-aa33-cf42aef31730",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "f669f148-1758-4e13-a513-7319a3eb7dfb",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "671fdcc1-00ca-4631-8e4b-53db7221feda",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
             },
             "validations": {
-                "required": false
+                "required": true
             },
-            "type": "multiple_choice"
+            "type": "opinion_scale"
         },
         {
-            "title": "Realmente siento que a menudo trabajamos de manera muy cercana todas las personas del equipo, colaboramos para lograr objetivos en común.",
-            "ref": "01892575-43c3-4fd2-a843-ffcb698cd165",
+            "title": "Tengo las mismas oportunidades que los demás de ser reconocida/reconocido por mi trabajo y empeño",
+            "ref": "f468042c-a997-4468-bc20-15355c471045",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "1f705065-7119-407c-af3e-628783325c7f",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "2fff4568-c3e7-42ed-8648-faa930e43657",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "a84f62ec-a0dc-42c7-a876-a1b18213e5ce",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "8bbfdf98-46f0-4b1d-be5d-7a53181c62f7",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "8094204b-36c8-4396-aee3-348a07917941",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
+                "description": "Imparcialidad",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
             },
             "validations": {
-                "required": false
+                "required": true
             },
-            "type": "multiple_choice"
+            "type": "opinion_scale"
+        },
+        {
+            "title": "Realmente siento que a menudo trabajamos de manera muy cercana todas las personas del equipo y colaboramos para lograr objetivos en común.",
+            "ref": "0e2fe9d7-cf2e-46d3-ab3c-32caf156db42",
+            "properties": {
+                "description": "Trabajo en equipo",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
+            },
+            "validations": {
+                "required": true
+            },
+            "type": "opinion_scale"
         },
         {
             "title": "Nos compartimos feedback positivo, pero también ofrecemos feedback constructivo cuando existen comportamientos o acciones improductivas en el equipo.",
-            "ref": "d49d58db-e57a-491d-a19e-1d82a5e6a560",
+            "ref": "02cc047d-9dbb-42cd-aa13-3ecdb10d9668",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "140b8d9f-a8b6-4fb2-8e01-a7d2dc2a2753",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "a4a06fbf-cdd9-41c4-8c25-f6d180fad9ee",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "41b65b8d-7779-412f-8027-bc26140a12be",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "1ff0d96c-c216-475d-8eb6-96b4a699590f",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "870a9deb-f5cb-4109-851c-8d53d1a0095f",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
+                "description": "Feedback",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
             },
             "validations": {
-                "required": false
+                "required": true
             },
-            "type": "multiple_choice"
+            "type": "opinion_scale"
         },
         {
-            "title": "Siento orgullo del valor que entregamos a los usuarios y stakeholders a través de nuestro trabajo. Como equipo, medimos nuestro impacto y seguimos aprendiendo de ello.",
-            "ref": "2d2d7df9-ff61-4029-bc4a-63ecd4e34e98",
+            "title": "Siento orgullo del valor que entrego a los usuarios y stakeholders a través de mi trabajo.",
+            "ref": "5c999ff1-43f2-4c66-8b38-cd3c800c389e",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "de0fda0a-83e1-452d-bef5-79bba7131296",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "c8bf4441-8ea8-4f51-bec9-ebf1e94ca5bf",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "5dbd4143-3768-45cd-bdb3-0582718b36b9",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "e2d9b6e9-b02d-41d1-8ce4-293a94dfc20f",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "be22df7f-1995-493a-b85a-f898df316da1",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
+                "description": "Valor que aporta mi trabajo",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
             },
             "validations": {
-                "required": false
+                "required": true
             },
-            "type": "multiple_choice"
+            "type": "opinion_scale"
         },
         {
-            "title": "Cumplo con mis metas en el trabajo y aún tengo tiempo para mi familia, amigos y pasatiempos. Tengo tiempo suficiente para dormir y comer como se debe. No necesito estar al tanto del trabajo cuando me encuentro en casa.",
-            "ref": "0b2f5357-2996-46a7-86fe-c0347cf96238",
+            "title": "Cumplo con mis metas en el trabajo y aún tengo tiempo para mi familia, amigos y pasatiempos.",
+            "ref": "c5b39331-cb2a-481a-acc7-3221c7d99131",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "7136c331-1939-4b8d-990a-352acd15f883",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "71bea0c3-3dfa-45e8-9384-946a8fd3ceb6",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "98a6dc21-fce5-4d48-b234-5c3cb425b58c",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "70567e69-8270-46bc-bd46-3aecab29d56e",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "50b0634c-b328-4874-b582-3c1fcafc0b98",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
+                "description": "Balance trabajo-vida personal",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
             },
             "validations": {
-                "required": false
+                "required": true
             },
-            "type": "multiple_choice"
+            "type": "opinion_scale"
         },
         {
-            "title": "Tengo todo lo que necesito para hacer mi trabajo. Mi laptop no se calienta, tengo audífonos para mis llamadas y si necesito un software para hacer mejor mi trabajo, sin duda puedo solicitarlo.",
-            "ref": "06e120b7-618e-435e-a176-216a35978b14",
+            "title": "Cuento con las herramientas de trabajo necesarias y funcionan de manera óptima (Hardware y Software).",
+            "ref": "d147a8be-b983-4cff-9db3-0e0f841cda37",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "d7557deb-e399-4652-acf0-0b6b5d33e1e3",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "defbac7d-2b14-47b9-992d-9d6dc69ebe90",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "c388c15c-bc56-4f88-93a7-4c3960c5e34e",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "76cefc64-8938-48ae-accb-bf4a2958a828",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "3ef60db2-d96b-455a-93a9-8a14031e6d86",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
+                "description": "Herramientas",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
             },
             "validations": {
-                "required": false
+                "required": true
             },
-            "type": "multiple_choice"
+            "type": "opinion_scale"
         },
         {
-            "title": "Constantemente le cuento a todo el mundo lo mucho que me gusta trabajar en MIND y quiero compartir la felicidad de trabajar aquí con la mayor cantidad posible de personas.",
-            "ref": "310c12d7-65fa-4aeb-93ef-8e0a3f1f1968",
+            "title": "Genuinamente me siento motivado y me da gusto trabajar con mi equipo de trabajo",
+            "ref": "e856df51-4b16-4f56-a133-e6301a71abcc",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "4c80e7db-33e8-4150-8724-3434010271b8",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "60f7e87d-5e93-453d-894a-8df8676a8a04",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "2694aa49-a880-44ff-b072-f6454b4e6fa6",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "b370d2ec-c56c-4ee5-8c29-505f47bdf9cb",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "fae9f3ba-9788-4a18-8301-26a2e97c16be",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
+                "description": "Orgullo por mi trabajo",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
             },
             "validations": {
-                "required": false
+                "required": true
             },
-            "type": "multiple_choice"
+            "type": "opinion_scale"
         },
         {
-            "title": "Me encanta este proyecto, los retos que se me presentan me mantien motivada/motivado y me ayudan a crecer. Además constantenente estoy aprendiendo cosas nuevas",
-            "ref": "4c91a485-58d9-4735-a9fc-07f7b736649c",
+            "title": "Constantemente me siento desafiado por las actividades que llevo a cabo dentro de mi equipo (nuevas tecnologías, metas, complejidad en las tareas).",
+            "ref": "0504e321-c111-424b-b8c3-f4edf29afa59",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "3c34c03f-96bd-4cce-bc4d-5dc7c782e6ca",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "f882f3d6-722c-44ba-aa39-0a640930498c",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "69877337-a887-44e4-8224-5f88b9c4bfd8",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "1e201e40-ae1f-4ec2-8cba-d21b9e5ecc1f",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "9f2ef6fa-9d88-448c-bf82-b747e138fec7",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
+                "description": "Retos",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
             },
             "validations": {
-                "required": false
+                "required": true
             },
-            "type": "multiple_choice"
+            "type": "opinion_scale"
         },
         {
-            "title": "He tenido desarrollo interno en mi cuenta. Mi mentor o mi tech lead me ayudan a definir mis siguientes retos para continuar en movimiento con mi plan de carrera.",
-            "ref": "e0b1a98e-2d6e-4da8-8f38-733b05c159f7",
+            "title": "Constantemente tengo pláticas y seguimiento que dan claridad sobre mi career path.",
+            "ref": "4f39df33-60fd-40da-8aa6-834fc6b73926",
             "properties": {
-                "randomize": false,
-                "allow_multiple_selection": false,
-                "allow_other_choice": false,
-                "vertical_alignment": true,
-                "choices": [
-                    {
-                        "ref": "1ca0ab0c-731e-42a2-913a-43b0804e07d6",
-                        "label": "Totalmente de acuerdo"
-                    },
-                    {
-                        "ref": "74d465fd-ab78-4efc-9026-052319b71e50",
-                        "label": "De acuerdo"
-                    },
-                    {
-                        "ref": "432af791-2690-4ce3-9e5a-3533d5b011ed",
-                        "label": "Medianamente de acuerdo"
-                    },
-                    {
-                        "ref": "0ce8c66f-0572-4348-b9cb-3e75daad7e1a",
-                        "label": "En desacuerdo"
-                    },
-                    {
-                        "ref": "b8b5ee9d-0e65-43f3-ae42-deec3d983457",
-                        "label": "Totalmente en desacuerdo"
-                    }
-                ]
+                "description": "Career path",
+                "start_at_one": true,
+                "steps": 5,
+                "labels": {
+                    "left": "Totalmente en desacuerdo",
+                    "right": "Totalmente de acuerdo"
+                }
             },
+            "validations": {
+                "required": true
+            },
+            "type": "opinion_scale"
+        },
+        {
+            "title": "¿Hay algo más que quisieras compartirnos?",
+            "ref": "0189fef9-06bd-4c9c-ad9c-f66ff8d980ad",
+            "properties": {},
             "validations": {
                 "required": false
             },
-            "type": "multiple_choice"
+            "type": "long_text"
         }
     ],
     "variables": {
@@ -443,12 +477,17 @@
         "question08": 0,
         "question09": 0,
         "question10": 0,
-        "score": 0
+        "score": 0,
+        "value0": 0,
+        "value100": 100,
+        "value25": 25,
+        "value50": 38,
+        "value75": 75
     },
     "logic": [
         {
             "type": "field",
-            "ref": "01GCVVCZ5A04C7EVWD8KBQZR2K",
+            "ref": "d68c9e26-345b-49e7-898a-5fd3d2e9071e",
             "actions": [
                 {
                     "action": "add",
@@ -459,71 +498,19 @@
                         },
                         "value": {
                             "type": "constant",
-                            "value": 100
+                            "value": 0
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "01GCVVCZ5A04C7EVWD8KBQZR2K"
+                                "value": "d68c9e26-345b-49e7-898a-5fd3d2e9071e"
                             },
                             {
-                                "type": "choice",
-                                "value": "d6135d18-e3be-4cb6-a38e-4b4b6bf9ef00"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question01"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "01GCVVCZ5A04C7EVWD8KBQZR2K"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "40930a08-8c75-4dcc-8be8-c140a3158cd6"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question01"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "01GCVVCZ5A04C7EVWD8KBQZR2K"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "83ad3f47-8e4b-4b17-9c28-949ac456e60e"
+                                "type": "constant",
+                                "value": 1
                             }
                         ]
                     }
@@ -541,25 +528,220 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "01GCVVCZ5A04C7EVWD8KBQZR2K"
+                                "value": "d68c9e26-345b-49e7-898a-5fd3d2e9071e"
                             },
                             {
-                                "type": "choice",
-                                "value": "01GCVVCZ5AY709KHB6624AJQ98"
+                                "type": "constant",
+                                "value": 2
                             }
                         ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question01"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d68c9e26-345b-49e7-898a-5fd3d2e9071e"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question01"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d68c9e26-345b-49e7-898a-5fd3d2e9071e"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question01"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d68c9e26-345b-49e7-898a-5fd3d2e9071e"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 5
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "jump",
+                    "details": {
+                        "to": {
+                            "type": "field",
+                            "value": "f468042c-a997-4468-bc20-15355c471045"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "b7740d1e-5ab0-4ae9-a92f-022101b4ba1f",
+            "ref": "f468042c-a997-4468-bc20-15355c471045",
             "actions": [
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question02"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 0
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "f468042c-a997-4468-bc20-15355c471045"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question02"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 25
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "f468042c-a997-4468-bc20-15355c471045"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 2
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question02"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "f468042c-a997-4468-bc20-15355c471045"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question02"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "f468042c-a997-4468-bc20-15355c471045"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
                 {
                     "action": "add",
                     "details": {
@@ -573,102 +755,37 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "b7740d1e-5ab0-4ae9-a92f-022101b4ba1f"
+                                "value": "f468042c-a997-4468-bc20-15355c471045"
                             },
                             {
-                                "type": "choice",
-                                "value": "7929ddcd-46d6-407a-bffc-804995cee7fd"
+                                "type": "constant",
+                                "value": 5
                             }
                         ]
                     }
                 },
                 {
-                    "action": "add",
+                    "action": "jump",
                     "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question02"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
+                        "to": {
+                            "type": "field",
+                            "value": "0e2fe9d7-cf2e-46d3-ab3c-32caf156db42"
                         }
                     },
                     "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "b7740d1e-5ab0-4ae9-a92f-022101b4ba1f"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "d2c576d9-29d7-4000-82c3-42f9f71f1b13"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question02"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "b7740d1e-5ab0-4ae9-a92f-022101b4ba1f"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "ee85a416-a5de-4cb2-aa33-cf42aef31730"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question02"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 25
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "b7740d1e-5ab0-4ae9-a92f-022101b4ba1f"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "f669f148-1758-4e13-a513-7319a3eb7dfb"
-                            }
-                        ]
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "01892575-43c3-4fd2-a843-ffcb698cd165",
+            "ref": "0e2fe9d7-cf2e-46d3-ab3c-32caf156db42",
             "actions": [
                 {
                     "action": "add",
@@ -679,71 +796,19 @@
                         },
                         "value": {
                             "type": "constant",
-                            "value": 100
+                            "value": 0
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "01892575-43c3-4fd2-a843-ffcb698cd165"
+                                "value": "0e2fe9d7-cf2e-46d3-ab3c-32caf156db42"
                             },
                             {
-                                "type": "choice",
-                                "value": "1f705065-7119-407c-af3e-628783325c7f"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question03"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "01892575-43c3-4fd2-a843-ffcb698cd165"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "2fff4568-c3e7-42ed-8648-faa930e43657"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question03"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "01892575-43c3-4fd2-a843-ffcb698cd165"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "a84f62ec-a0dc-42c7-a876-a1b18213e5ce"
+                                "type": "constant",
+                                "value": 1
                             }
                         ]
                     }
@@ -761,25 +826,220 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "01892575-43c3-4fd2-a843-ffcb698cd165"
+                                "value": "0e2fe9d7-cf2e-46d3-ab3c-32caf156db42"
                             },
                             {
-                                "type": "choice",
-                                "value": "8bbfdf98-46f0-4b1d-be5d-7a53181c62f7"
+                                "type": "constant",
+                                "value": 2
                             }
                         ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question03"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "0e2fe9d7-cf2e-46d3-ab3c-32caf156db42"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question03"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "0e2fe9d7-cf2e-46d3-ab3c-32caf156db42"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question03"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "0e2fe9d7-cf2e-46d3-ab3c-32caf156db42"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 5
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "jump",
+                    "details": {
+                        "to": {
+                            "type": "field",
+                            "value": "02cc047d-9dbb-42cd-aa13-3ecdb10d9668"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "d49d58db-e57a-491d-a19e-1d82a5e6a560",
+            "ref": "02cc047d-9dbb-42cd-aa13-3ecdb10d9668",
             "actions": [
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question04"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 0
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "02cc047d-9dbb-42cd-aa13-3ecdb10d9668"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question04"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 25
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "02cc047d-9dbb-42cd-aa13-3ecdb10d9668"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 2
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question04"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "02cc047d-9dbb-42cd-aa13-3ecdb10d9668"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question04"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "02cc047d-9dbb-42cd-aa13-3ecdb10d9668"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
                 {
                     "action": "add",
                     "details": {
@@ -793,102 +1053,37 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "d49d58db-e57a-491d-a19e-1d82a5e6a560"
+                                "value": "02cc047d-9dbb-42cd-aa13-3ecdb10d9668"
                             },
                             {
-                                "type": "choice",
-                                "value": "140b8d9f-a8b6-4fb2-8e01-a7d2dc2a2753"
+                                "type": "constant",
+                                "value": 5
                             }
                         ]
                     }
                 },
                 {
-                    "action": "add",
+                    "action": "jump",
                     "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question04"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
+                        "to": {
+                            "type": "field",
+                            "value": "5c999ff1-43f2-4c66-8b38-cd3c800c389e"
                         }
                     },
                     "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "d49d58db-e57a-491d-a19e-1d82a5e6a560"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "a4a06fbf-cdd9-41c4-8c25-f6d180fad9ee"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question04"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "d49d58db-e57a-491d-a19e-1d82a5e6a560"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "41b65b8d-7779-412f-8027-bc26140a12be"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question04"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 25
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "d49d58db-e57a-491d-a19e-1d82a5e6a560"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "1ff0d96c-c216-475d-8eb6-96b4a699590f"
-                            }
-                        ]
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "2d2d7df9-ff61-4029-bc4a-63ecd4e34e98",
+            "ref": "5c999ff1-43f2-4c66-8b38-cd3c800c389e",
             "actions": [
                 {
                     "action": "add",
@@ -899,71 +1094,19 @@
                         },
                         "value": {
                             "type": "constant",
-                            "value": 100
+                            "value": 0
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "2d2d7df9-ff61-4029-bc4a-63ecd4e34e98"
+                                "value": "5c999ff1-43f2-4c66-8b38-cd3c800c389e"
                             },
                             {
-                                "type": "choice",
-                                "value": "de0fda0a-83e1-452d-bef5-79bba7131296"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question05"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "2d2d7df9-ff61-4029-bc4a-63ecd4e34e98"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "c8bf4441-8ea8-4f51-bec9-ebf1e94ca5bf"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question05"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "2d2d7df9-ff61-4029-bc4a-63ecd4e34e98"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "5dbd4143-3768-45cd-bdb3-0582718b36b9"
+                                "type": "constant",
+                                "value": 1
                             }
                         ]
                     }
@@ -981,25 +1124,220 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "2d2d7df9-ff61-4029-bc4a-63ecd4e34e98"
+                                "value": "5c999ff1-43f2-4c66-8b38-cd3c800c389e"
                             },
                             {
-                                "type": "choice",
-                                "value": "e2d9b6e9-b02d-41d1-8ce4-293a94dfc20f"
+                                "type": "constant",
+                                "value": 2
                             }
                         ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question05"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "5c999ff1-43f2-4c66-8b38-cd3c800c389e"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question05"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "5c999ff1-43f2-4c66-8b38-cd3c800c389e"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question05"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "5c999ff1-43f2-4c66-8b38-cd3c800c389e"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 5
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "jump",
+                    "details": {
+                        "to": {
+                            "type": "field",
+                            "value": "c5b39331-cb2a-481a-acc7-3221c7d99131"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "0b2f5357-2996-46a7-86fe-c0347cf96238",
+            "ref": "c5b39331-cb2a-481a-acc7-3221c7d99131",
             "actions": [
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question06"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 0
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "c5b39331-cb2a-481a-acc7-3221c7d99131"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question06"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 25
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "c5b39331-cb2a-481a-acc7-3221c7d99131"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 2
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question06"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "c5b39331-cb2a-481a-acc7-3221c7d99131"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question06"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "c5b39331-cb2a-481a-acc7-3221c7d99131"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
                 {
                     "action": "add",
                     "details": {
@@ -1013,102 +1351,37 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "0b2f5357-2996-46a7-86fe-c0347cf96238"
+                                "value": "c5b39331-cb2a-481a-acc7-3221c7d99131"
                             },
                             {
-                                "type": "choice",
-                                "value": "7136c331-1939-4b8d-990a-352acd15f883"
+                                "type": "constant",
+                                "value": 5
                             }
                         ]
                     }
                 },
                 {
-                    "action": "add",
+                    "action": "jump",
                     "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question06"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
+                        "to": {
+                            "type": "field",
+                            "value": "d147a8be-b983-4cff-9db3-0e0f841cda37"
                         }
                     },
                     "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "0b2f5357-2996-46a7-86fe-c0347cf96238"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "71bea0c3-3dfa-45e8-9384-946a8fd3ceb6"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question06"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "0b2f5357-2996-46a7-86fe-c0347cf96238"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "98a6dc21-fce5-4d48-b234-5c3cb425b58c"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question06"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 25
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "0b2f5357-2996-46a7-86fe-c0347cf96238"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "70567e69-8270-46bc-bd46-3aecab29d56e"
-                            }
-                        ]
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "06e120b7-618e-435e-a176-216a35978b14",
+            "ref": "d147a8be-b983-4cff-9db3-0e0f841cda37",
             "actions": [
                 {
                     "action": "add",
@@ -1119,71 +1392,19 @@
                         },
                         "value": {
                             "type": "constant",
-                            "value": 100
+                            "value": 0
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "06e120b7-618e-435e-a176-216a35978b14"
+                                "value": "d147a8be-b983-4cff-9db3-0e0f841cda37"
                             },
                             {
-                                "type": "choice",
-                                "value": "d7557deb-e399-4652-acf0-0b6b5d33e1e3"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question07"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "06e120b7-618e-435e-a176-216a35978b14"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "defbac7d-2b14-47b9-992d-9d6dc69ebe90"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question07"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "06e120b7-618e-435e-a176-216a35978b14"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "c388c15c-bc56-4f88-93a7-4c3960c5e34e"
+                                "type": "constant",
+                                "value": 1
                             }
                         ]
                     }
@@ -1201,24 +1422,115 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "06e120b7-618e-435e-a176-216a35978b14"
+                                "value": "d147a8be-b983-4cff-9db3-0e0f841cda37"
                             },
                             {
-                                "type": "choice",
-                                "value": "76cefc64-8938-48ae-accb-bf4a2958a828"
+                                "type": "constant",
+                                "value": 2
                             }
                         ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question07"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d147a8be-b983-4cff-9db3-0e0f841cda37"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question07"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d147a8be-b983-4cff-9db3-0e0f841cda37"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question07"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "d147a8be-b983-4cff-9db3-0e0f841cda37"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 5
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "jump",
+                    "details": {
+                        "to": {
+                            "type": "field",
+                            "value": "e856df51-4b16-4f56-a133-e6301a71abcc"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "310c12d7-65fa-4aeb-93ef-8e0a3f1f1968",
+            "ref": "e856df51-4b16-4f56-a133-e6301a71abcc",
             "actions": [
                 {
                     "action": "add",
@@ -1229,71 +1541,19 @@
                         },
                         "value": {
                             "type": "constant",
-                            "value": 100
+                            "value": 0
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "310c12d7-65fa-4aeb-93ef-8e0a3f1f1968"
+                                "value": "e856df51-4b16-4f56-a133-e6301a71abcc"
                             },
                             {
-                                "type": "choice",
-                                "value": "4c80e7db-33e8-4150-8724-3434010271b8"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question08"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "310c12d7-65fa-4aeb-93ef-8e0a3f1f1968"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "60f7e87d-5e93-453d-894a-8df8676a8a04"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question08"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "310c12d7-65fa-4aeb-93ef-8e0a3f1f1968"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "2694aa49-a880-44ff-b072-f6454b4e6fa6"
+                                "type": "constant",
+                                "value": 1
                             }
                         ]
                     }
@@ -1311,24 +1571,115 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "310c12d7-65fa-4aeb-93ef-8e0a3f1f1968"
+                                "value": "e856df51-4b16-4f56-a133-e6301a71abcc"
                             },
                             {
-                                "type": "choice",
-                                "value": "b370d2ec-c56c-4ee5-8c29-505f47bdf9cb"
+                                "type": "constant",
+                                "value": 2
                             }
                         ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question08"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "e856df51-4b16-4f56-a133-e6301a71abcc"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question08"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "e856df51-4b16-4f56-a133-e6301a71abcc"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question08"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "e856df51-4b16-4f56-a133-e6301a71abcc"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 5
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "jump",
+                    "details": {
+                        "to": {
+                            "type": "field",
+                            "value": "0504e321-c111-424b-b8c3-f4edf29afa59"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "4c91a485-58d9-4735-a9fc-07f7b736649c",
+            "ref": "0504e321-c111-424b-b8c3-f4edf29afa59",
             "actions": [
                 {
                     "action": "add",
@@ -1339,71 +1690,19 @@
                         },
                         "value": {
                             "type": "constant",
-                            "value": 100
+                            "value": 0
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "4c91a485-58d9-4735-a9fc-07f7b736649c"
+                                "value": "0504e321-c111-424b-b8c3-f4edf29afa59"
                             },
                             {
-                                "type": "choice",
-                                "value": "3c34c03f-96bd-4cce-bc4d-5dc7c782e6ca"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question09"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "4c91a485-58d9-4735-a9fc-07f7b736649c"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "f882f3d6-722c-44ba-aa39-0a640930498c"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question09"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "4c91a485-58d9-4735-a9fc-07f7b736649c"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "69877337-a887-44e4-8224-5f88b9c4bfd8"
+                                "type": "constant",
+                                "value": 1
                             }
                         ]
                     }
@@ -1421,24 +1720,115 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "4c91a485-58d9-4735-a9fc-07f7b736649c"
+                                "value": "0504e321-c111-424b-b8c3-f4edf29afa59"
                             },
                             {
-                                "type": "choice",
-                                "value": "1e201e40-ae1f-4ec2-8cba-d21b9e5ecc1f"
+                                "type": "constant",
+                                "value": 2
                             }
                         ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question09"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "0504e321-c111-424b-b8c3-f4edf29afa59"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question09"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "0504e321-c111-424b-b8c3-f4edf29afa59"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question09"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "0504e321-c111-424b-b8c3-f4edf29afa59"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 5
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "jump",
+                    "details": {
+                        "to": {
+                            "type": "field",
+                            "value": "4f39df33-60fd-40da-8aa6-834fc6b73926"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
         },
         {
             "type": "field",
-            "ref": "e0b1a98e-2d6e-4da8-8f38-733b05c159f7",
+            "ref": "4f39df33-60fd-40da-8aa6-834fc6b73926",
             "actions": [
                 {
                     "action": "add",
@@ -1449,71 +1839,19 @@
                         },
                         "value": {
                             "type": "constant",
-                            "value": 100
+                            "value": 0
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "e0b1a98e-2d6e-4da8-8f38-733b05c159f7"
+                                "value": "4f39df33-60fd-40da-8aa6-834fc6b73926"
                             },
                             {
-                                "type": "choice",
-                                "value": "1ca0ab0c-731e-42a2-913a-43b0804e07d6"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question10"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 75
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "e0b1a98e-2d6e-4da8-8f38-733b05c159f7"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "74d465fd-ab78-4efc-9026-052319b71e50"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "action": "add",
-                    "details": {
-                        "target": {
-                            "type": "variable",
-                            "value": "question10"
-                        },
-                        "value": {
-                            "type": "constant",
-                            "value": 50
-                        }
-                    },
-                    "condition": {
-                        "op": "is",
-                        "vars": [
-                            {
-                                "type": "field",
-                                "value": "e0b1a98e-2d6e-4da8-8f38-733b05c159f7"
-                            },
-                            {
-                                "type": "choice",
-                                "value": "432af791-2690-4ce3-9e5a-3533d5b011ed"
+                                "type": "constant",
+                                "value": 1
                             }
                         ]
                     }
@@ -1531,17 +1869,108 @@
                         }
                     },
                     "condition": {
-                        "op": "is",
+                        "op": "equal",
                         "vars": [
                             {
                                 "type": "field",
-                                "value": "e0b1a98e-2d6e-4da8-8f38-733b05c159f7"
+                                "value": "4f39df33-60fd-40da-8aa6-834fc6b73926"
                             },
                             {
-                                "type": "choice",
-                                "value": "0ce8c66f-0572-4348-b9cb-3e75daad7e1a"
+                                "type": "constant",
+                                "value": 2
                             }
                         ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question10"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 50
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "4f39df33-60fd-40da-8aa6-834fc6b73926"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 3
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question10"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 75
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "4f39df33-60fd-40da-8aa6-834fc6b73926"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 4
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "add",
+                    "details": {
+                        "target": {
+                            "type": "variable",
+                            "value": "question10"
+                        },
+                        "value": {
+                            "type": "constant",
+                            "value": 100
+                        }
+                    },
+                    "condition": {
+                        "op": "equal",
+                        "vars": [
+                            {
+                                "type": "field",
+                                "value": "4f39df33-60fd-40da-8aa6-834fc6b73926"
+                            },
+                            {
+                                "type": "constant",
+                                "value": 5
+                            }
+                        ]
+                    }
+                },
+                {
+                    "action": "jump",
+                    "details": {
+                        "to": {
+                            "type": "field",
+                            "value": "0189fef9-06bd-4c9c-ad9c-f66ff8d980ad"
+                        }
+                    },
+                    "condition": {
+                        "op": "always",
+                        "vars": []
                     }
                 }
             ]
