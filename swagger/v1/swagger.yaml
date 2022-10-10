@@ -184,6 +184,30 @@ paths:
       responses:
         '200':
           description: when I am an admin
+  "/api/v1/managers/{id}":
+    get:
+      summary: show information of a manager
+      tags:
+      - Managers
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: id of the manager collaborator
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: managers show
+        '404':
+          description: managers not found error
   "/api/v1/metric_history/{id}":
     get:
       summary: metric_history
@@ -226,6 +250,23 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/posts/{id}":
+    get:
+      summary: Get a post of a collaborator
+      tags:
+      - Posts
+      security:
+      - Bearer: []
+      parameters:
+      - name: id
+        in: path
+        description: post id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: posts found
   "/api/v1/public/collaborators/{id}":
     get:
       summary: Get a collaborator
@@ -388,21 +429,29 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/teams/{team_id}/investments":
+  "/api/v1/teams/{team_id}/collaborators":
     get:
-      summary: Investments for the previous month
+      summary: list collaborators by team
+      tags:
+      - Teams
       security:
       - Bearer: []
       parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
       - name: team_id
         in: path
+        description: team id
         required: true
-      - name: group_by
-        in: query
+        schema:
+          type: integer
       responses:
         '200':
-          description: successful
-  "/api/v1/teams/{team_id}/investments?group_by=months":
+          description: teams collaborators index
+  "/api/v1/teams/{team_id}/investments":
     get:
       summary: Investment data not found
       security:
@@ -414,6 +463,8 @@ paths:
       - name: group_by
         in: query
       responses:
+        '200':
+          description: successful
         '404':
           description: not found
   "/api/v1/teams/{team_id}/metrics":
