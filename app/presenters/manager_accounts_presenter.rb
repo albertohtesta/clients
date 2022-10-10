@@ -63,7 +63,7 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def collaborators_number
-    CollaboratorRepository.collaborators_number_by_team_id(id)
+    CollaboratorRepository.collaborators_count_by_team_id(id)
   end
 
   private
