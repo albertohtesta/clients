@@ -6,8 +6,10 @@ class CollaboratorRepository < ApplicationRepository
       scope.includes(:posts, :teams).where(teams: { id: team_id })
     end
 
-    def collaborators_count_by_team_id(team_id)
-      find_collaborators_by_team_id(team_id).ids.count
+    def collaborators_number_by_account(account)
+      scope.includes(:teams).where({
+        teams: { id: account.teams.ids }
+      }).size
     end
 
     def by_role_name(name)

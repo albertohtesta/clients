@@ -62,6 +62,10 @@ class ManagerAccountsPresenter < ApplicationPresenter
     @velocity ||= metric_priority(METRICS_TYPES[:velocity])
   end
 
+  def collaborators_number
+    CollaboratorRepository.collaborators_number_by_account(self)
+  end
+
   private
     def metric_priority(metric_type)
       MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
