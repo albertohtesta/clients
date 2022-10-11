@@ -14,14 +14,10 @@ RSpec.describe MetricFollowUpRepository, type: :repository do
 
     context "on an update" do
       it "finds the key attributes from metric id reference" do
-        expect(described_class.add_follow_up(id: metric.id,
+        updated_account = described_class.add_follow_up(id: metric.id,
           alert_status:,
-          mitigation_strategy:)).to be true
-        updated_follow_up = MetricFollowUp.last
-        expect(updated_follow_up.id).to eq(metric_follow_up.id)
-        expect(updated_follow_up.metric_type).to eq(metric_follow_up.metric_type)
-        expect(updated_follow_up.account_id).to eq(metric_follow_up.account_id)
-        expect(updated_follow_up.manager_id).to eq(metric_follow_up.manager_id)
+          mitigation_strategy:)
+        expect(updated_account).to be_a MetricFollowUp
       end
 
       it "sets status and mitigation_strategy" do
@@ -38,24 +34,25 @@ RSpec.describe MetricFollowUpRepository, type: :repository do
 
     context "on a creation" do
       it "creates follow up with required id or metric_type" do
-        update_metric = described_class.add_follow_up(metric_type: "balance",
+        follow_up = described_class.add_follow_up(metric_type: "balance",
           alert_status: "blocked",
           mitigation_strategy: "NA",
           account_id: account.id)
-        follow_up = MetricFollowUp.last
-        expect(update_metric).to be true
+        expect(follow_up).to be_a MetricFollowUp
+        last = MetricFollowUp.last
+        expect(follow_up).to eq(last)
         expect(follow_up.id).to_not eq(metric_follow_up.id)
       end
 
       it "creates follow up with required accunt_id or manager_id" do
-        update_metric = described_class.add_follow_up(metric_type: "balance",
+        created = described_class.add_follow_up(metric_type: "balance",
           alert_status: "blocked",
           mitigation_strategy: "NA",
           manager_id: manager.id,
           account_id: account.id)
         follow_up = MetricFollowUp.last
-        expect(update_metric).to be true
-        expect(follow_up.id).to_not eq(metric_follow_up.id)
+        expect(created.id).to eq(follow_up.id)
+        expect(created.id).to_not eq(metric_follow_up.id)
       end
     end
 

@@ -16,7 +16,7 @@ module Api
       def update
         @data = metric_historial_params
         if @data.permitted?
-          MetricFollowUpRepository.add_follow_up(
+          follow_up = MetricFollowUpRepository.add_follow_up(
             id: @data[:id],
             alert_status: @data[:alert_status],
             mitigation_strategy: @data[:mitigation_strategy],
@@ -24,7 +24,7 @@ module Api
             account_id: @data[:account_id],
             metric_type: @data[:metric_type]
           )
-          return render json: { message: "Metric updated" }, status: :ok
+          return render json: ManagerAccountsPresenter.new(AccountRepository.find_by(id: follow_up.account_id)).json, status: :ok
         end
 
         render json: { error: "Unable to update. Data not permitted: #{@data.inspect}" }, status: :not_found
