@@ -7,7 +7,7 @@ class ContactRepository < ApplicationRepository
     end
 
     def contacts_by_account_and_email(account_id, emails)
-      scope.where({ account_id:, email: emails })
+      scope.select(:email).where({ account_id:, email: emails })
     end
 
     def create_invitations_for(account_id, contacts_emails)

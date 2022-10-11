@@ -10,9 +10,10 @@ RSpec.describe SurveySenderJob, type: :job do
     let!(:survey) { create(:survey, team:) }
 
     it "Sends email" do
-      expect do
-        SurveySenderJob.perform_now survey.id
-      end.to change { ActionMailer::Base.deliveries.count }.by(team.collaborators.count)
+      ActiveJob::Base.queue_adapter = :test
+      expect {
+        SurveySenderJob.perform_later survey.id
+      }.to have_enqueued_job
     end
   end
 end

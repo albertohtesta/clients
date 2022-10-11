@@ -15,7 +15,7 @@ RSpec.describe ContactRepository do
     it "must return contacts by account_id and emails" do
       selected_contacts = described_class.contacts_by_account_and_email(contact.account_id, [contact.email])
 
-      expect(selected_contacts).to match_array([contact])
+      expect(selected_contacts.first.email).to eql(contact.email)
     end
 
     it "must create invitation for contacts" do

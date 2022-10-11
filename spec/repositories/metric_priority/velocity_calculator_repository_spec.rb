@@ -30,7 +30,6 @@ RSpec.describe MetricPriority::VelocityCalculatorRepository, type: :repository d
       it "should be medium because points are betewwn 60 and 90 percent" do
         account_metric_velocity.update(value: 9)
         priority = MetricPriority::VelocityCalculatorRepository.new(account, account_metric_velocity.value, account_metric_velocity)
-
         expect(priority.high_rate?).to eq(false)
         expect(priority.medium_rate?).to eq(true)
       end

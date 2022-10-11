@@ -16,6 +16,11 @@ class Account < ApplicationRecord
   has_and_belongs_to_many :collaborators
   has_many :teams, through: :projects
 
+  has_many :teams_accounts, through: :team_balances, source: :team
+  has_many :projects_accounts, through: :projects, source: :project
+  # has_many :teams, through: :team_balances
+  # has_many :teams, through: :projects
+
   validates :account_uuid, :name, presence: true
 
   alias_attribute :status, :account_status
@@ -53,6 +58,10 @@ class Account < ApplicationRecord
 
   def assign_status_by_default
     self.account_status = AccountStatusRepository.find_by(status_code: :new_project) if account_status.nil?
+  end
+
+  def collaborators_number
+    CollaboratorRepository.collaborators_count_by_team_id(id)
   end
 
   def update_from_salesforce(client, contacts)

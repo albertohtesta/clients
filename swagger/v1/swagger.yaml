@@ -250,35 +250,6 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/teams/{team_id}/metrics":
-    get:
-      summary: Get metrics of team
-      tags:
-      - Metrics
-      security:
-      - Bearer: []
-      parameters:
-      - name: group_by
-        in: query
-        description: "[quarters, monthly]"
-        schema:
-          type: string
-      - name: team_id
-        in: path
-        description: team id
-        required: true
-        schema:
-          type: integer
-      - name: indicator_type
-        in: query
-        description: "['balance', 'velocity', 'morale', 'performance']"
-        schema:
-          type: string
-      responses:
-        '200':
-          description: metrics found
-        '404':
-          description: Not metrics found
   "/api/v1/posts/{id}":
     get:
       summary: Get a post of a collaborator
@@ -496,6 +467,35 @@ paths:
           description: successful
         '404':
           description: not found
+  "/api/v1/teams/{team_id}/metrics":
+    get:
+      summary: Get metrics of team
+      tags:
+      - Metrics
+      security:
+      - Bearer: []
+      parameters:
+      - name: group_by
+        in: query
+        description: "[quarters, monthly]"
+        schema:
+          type: string
+      - name: team_id
+        in: path
+        description: team id
+        required: true
+        schema:
+          type: integer
+      - name: indicator_type
+        in: query
+        description: "['balance', 'velocity', 'morale', 'performance']"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: metrics found
+        '404':
+          description: Not metrics found
   "/build-info":
     get:
       summary: gets the build info

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rails_helper"
+
 RSpec.describe InvestmentPresenter, type: :presenter do
   include ActiveSupport::Testing::TimeHelpers
 
@@ -24,7 +26,7 @@ RSpec.describe InvestmentPresenter, type: :presenter do
       investments = [august_investment, september_investment]
       response = described_class.order_by_quarter(investments)
       expect(response[:project_indicators].length).to eq 3
-      expect(response[:project_indicators].last["label"]).to eq "q3"
+      expect(response[:project_indicators].last["label"]).to eq "Q3"
       expect(response[:project_indicators].last["value"]).to eq (september_investment.value + august_investment.value)
       expect(response[:project_indicators].last["value"]).to be_a Float
     end

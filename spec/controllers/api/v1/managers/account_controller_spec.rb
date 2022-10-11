@@ -15,7 +15,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       let(:project) { create(:project, account:) }
       let(:team) { create(:team, project:) }
       let!(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
-
+      let!(:team_balance) { create(:team_balance, account_id: account.id, team:) }
       let!(:account_metric_team_balance) { create(:metric, related: account, date: metric_date, indicator_type: "balance", value: 95) }
       let!(:account_metric_velocity) { create(:metric, related: account, date: metric_date, indicator_type: "velocity", value: 95) }
       let!(:account_metric_performance) { create(:metric, related: account, date: metric_date, indicator_type: "performance", value: 95) }
@@ -85,33 +85,39 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
           { "id" => account.id,
             "account_uuid" => account.account_uuid,
             "name" => "MyString",
+            "minilogo" => nil,
             "location" => "city",
             "last_follow_up_text" => "14 days ago",
             "priority" => "low",
             "role_debt" => 0,
             "alert" => "low",
+            "collaborators_number" => 0,
             "team_balance" => {
               "amount" => 95,
               "alert" => "low",
               "attended_after_metric" => false,
+              "expected_points" => 0,
               "data_follow_up" => JSON.parse(metric_follow_up_team_balance.to_json(except: [:created_at, :updated_at]))
             },
             "performance" => {
               "amount" => 95,
               "alert" => "low",
               "attended_after_metric" => false,
+              "expected_points" => 0,
               "data_follow_up" => JSON.parse(metric_follow_up_performance.to_json(except: [:created_at, :updated_at]))
             },
             "morale" => {
               "amount" => 95,
               "alert" => "low",
               "data_follow_up" => JSON.parse(metric_follow_up_morale.to_json(except: [:created_at, :updated_at])),
-              "attended_after_metric" => false
+              "attended_after_metric" => false,
+              "expected_points" => 0,
             },
             "velocity" => {
               "amount" => 95,
               "alert" => "low",
               "attended_after_metric" => false,
+              "expected_points" => 0,
               "data_follow_up" => JSON.parse(metric_follow_up_velocity.to_json(except: [:created_at, :updated_at]))
             },
           "manager_id" => collaborator.id
@@ -139,10 +145,12 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "account_uuid" => account.account_uuid,
             "name" => "MyString",
             "location" => "city",
+            "minilogo" => nil,
             "last_follow_up_text" => "No follow ups found",
             "priority" => "medium",
             "role_debt" => 0,
             "alert" => "medium",
+            "collaborators_number" => 0,
             "team_balance" => {
               "amount" => 0,
               "alert" => "low",
@@ -152,7 +160,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "id" => nil,
                 "manager_id" => account.manager_id,
                 "metric_type" => "balance"
-                }
+                },
+                "expected_points" => 0
             },
             "performance" => {
               "amount" => 0,
@@ -163,7 +172,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "id" => nil,
                 "manager_id" => account.manager_id,
                 "metric_type" => "performance"
-                }
+                },
+                "expected_points" => 0
             },
             "morale" => {
               "amount" => 0,
@@ -174,7 +184,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "manager_id" => account.manager_id,
                 "metric_type" => "morale"
                 },
-              "attended_after_metric" => false
+              "attended_after_metric" => false,
+              "expected_points" => 0
             },
             "velocity" => {
               "amount" => 0,
@@ -185,7 +196,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "id" => nil,
                 "manager_id" => account.manager_id,
                 "metric_type" => "velocity"
-                }
+                },
+              "expected_points" => 0
             },
           "manager_id" => collaborator.id
           }

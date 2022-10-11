@@ -20,7 +20,8 @@ module MetricPriority
         amount: average_value,
         alert:,
         data_follow_up: json_follow_up,
-        attended_after_metric:
+        attended_after_metric:,
+        expected_points:
       }
     end
 
@@ -29,6 +30,15 @@ module MetricPriority
 
       def attended_after_metric
         date_of_last_metric.present? && (date_of_last_metric >= 7.days.ago.to_date || last_follow_up_date.present? && last_follow_up_date >= 7.days.ago.to_date)
+      end
+
+      def date_of_last_metric
+        return 1.month.ago if last_metric.nil?
+        last_metric["date"]
+      end
+
+      def last_metric
+        @last_metric ||= find_by_type(account.metrics.order("date DESC"))
       end
 
       def last_follow_up_date
@@ -40,15 +50,6 @@ module MetricPriority
           metric_type:,
           account_id: account.id
         )
-      end
-
-      def date_of_last_metric
-        return 1.month.ago if last_metric.nil?
-        last_metric["date"]
-      end
-
-      def last_metric
-        @last_metric ||= find_by_type(account.metrics.order("date DESC"))
       end
 
       def json_follow_up
@@ -90,8 +91,19 @@ module MetricPriority
         "low"
       end
 
+      def velocity_metrics
+        @velocity_metrics ||= MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly)
+      end
+
+      def expected_points
+        return 0 if metric_type != METRICS_TYPES[:velocity]
+
+        velocity_metrics.total_points_required
+      end
+
       def average_value
         return 0 if account_last_metric_monthly.nil?
+
         account_last_metric_monthly["value"] / account_last_metric_monthly["amount_of_metrics_by_type"]
       end
 

@@ -10,8 +10,13 @@ Rails.application.configure do
 
   config.hosts << "localhost:4000"
   config.hosts << "norden-clients-integration.herokuapp.com"
-  config.hosts << "clients-api.nordhen.com"
-  config.hosts << "clients.nordhen.com"
+  config.hosts << "staging-clients-api.nordhen.com"
+  config.hosts << "staging-clients.nordhen.com"
+
+  # Exclude requests for the /build-info path from host checking
+  Rails.application.config.host_authorization = {
+    exclude: ->(request) { request.path =~ /build-info/ }
+  }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -37,7 +42,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :amazon
+  config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -49,7 +54,7 @@ Rails.application.configure do
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :info
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
@@ -63,11 +68,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  # action_mailer configuration
-  config.mail_from = %(NORDHEN <Info@nordhen.com>)
-  config.action_mailer.default_url_options = { host: "nordhen.com" }
-  config.action_mailer.smtp_settings = { port: 587, address: ENV["SMTP_ADDRESS"], user_name: ENV["SMTP_USER"], password: ENV["SMTP_PASSWORD"] }
-  config.action_mailer.raise_delivery_errors = true
+  # Ignore bad email addresses and do not raise email delivery errors.
+  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
