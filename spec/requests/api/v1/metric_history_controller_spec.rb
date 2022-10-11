@@ -39,16 +39,15 @@ RSpec.describe "#metric_historial", type: :request do
         consumes "application/json"
         produces "application/json"
         parameter name: :id, in: :path
-        parameter name: :metric_follow_up, in: :body
-        parameter name: :metric_historial, in: :body
         parameter name: :account_id, in: :body
         parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
 
         response(200, "successful") do
-          let!(:account) { create(:account, city: "city") }
-          let!(:metric_follow_up) { create(:metric_follow_up, account:) }
+          let!(:manager) { create(:collaborator) }
+          let!(:account) { create(:account, manager:, city: "LA") }
+          let!(:metric) { create(:metric, related: account) }
           let!(:account_id) { account.id  }
-          let(:id) { metric_follow_up.id }
+          let(:id) { metric.id }
           run_test!
         end
       end
