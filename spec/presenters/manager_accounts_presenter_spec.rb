@@ -57,6 +57,7 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
 
       it "expects to ignore metric alert if attended recently" do
         expect(presenter.alert).to eq("low")
+        expect(presenter.priority).to eq("high")
         expect(presenter.morale[:alert]).to eq("high")
         expect(presenter.morale[:attended_after_metric]).to eq(true)
       end

@@ -24,11 +24,10 @@ module Api
             account_id: @data[:account_id],
             metric_type: @data[:metric_type]
           )
-
           return render json: { message: "Metric updated" }, status: :ok
         end
 
-        render json: { error: "Metric not found" }, status: :not_found
+        render json: { error: "Unable to update. Data not permitted: #{@data.inspect}" }, status: :not_found
       end
 
       private
@@ -37,7 +36,7 @@ module Api
         end
 
         def metric_historial_params
-          # TODO: depcreate id param, use :metric type and :account_id instead
+          # TODO: deprecate :id param, use :metric type and :account_id instead
           params.permit(:id, :metric_type, :account_id, :manager_id, :alert_status, :mitigation_strategy)
         end
     end

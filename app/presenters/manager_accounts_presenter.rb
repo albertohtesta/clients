@@ -9,19 +9,22 @@ class ManagerAccountsPresenter < ApplicationPresenter
     city
   end
 
-  def priority
-    # deprecated. TODO: remove duplicated attributes
-    alert
-  end
-
-  def last_follow_up_text
-    return "No follow ups found" if last_follow_up_date.nil?
-
-    "#{(Date.today - last_follow_up_date).to_i} days ago"
-  end
-
   def role_debt
     TeamRequirementRepository.role_deb_by_account(id).count
+  end
+
+  def priority
+    statuses = []
+    statuses.push(team_balance[:alert])
+    statuses.push(performance[:alert])
+    statuses.push(morale[:alert])
+    statuses.push(priority_on_account_follow_up)
+
+    return "high" if statuses.any? "high"
+
+    return "medium" if statuses.any? "medium"
+
+    "low"
   end
 
   def alert
@@ -35,14 +38,6 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
     return "medium" if statuses.any? "medium"
 
-    "low"
-  end
-
-  def priority_on_account_follow_up
-    if last_follow_up_date.nil?
-      just_assigned = manager_started_date.nil? || manager_started_date > 1.month.ago
-      return just_assigned ? "medium" : "high"
-    end
     "low"
   end
 
@@ -60,6 +55,21 @@ class ManagerAccountsPresenter < ApplicationPresenter
 
   def velocity
     @velocity ||= metric_priority(METRICS_TYPES[:velocity])
+  end
+
+  def priority_on_account_follow_up
+    if last_follow_up_date.nil?
+      just_assigned = manager_started_date.nil? || manager_started_date > 1.month.ago
+      return just_assigned ? "medium" : "high"
+    end
+    "low"
+  end
+
+  def last_follow_up_text
+    return "No follow ups found" if last_follow_up_date.nil?
+
+    days = (Date.today - last_follow_up_date).to_i
+    days == 0 ? "Today" : "#{days} days ago"
   end
 
   def collaborators_number
