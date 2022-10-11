@@ -176,6 +176,7 @@ deploy-qa:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"BUCKET_NAME","value":"nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni"}]') >  input.json
     - sed -i "s@#SMTP_ADDRESS#@$SMTP_ADDRESS@" input.json
     - sed -i "s@#SMTP_USER#@$SMTP_USER@" input.json
     - sed -i "s@#SMTP_PASSWORD#@$SMTP_PASSWORD@" input.json
@@ -222,6 +223,7 @@ deploy-staging:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"BUCKET_NAME","value":"nrdn-s3-stagingstack-s3staging61dc0f4a5c5b192856e-156dfnr4y9hb3"}]') >  input.json
     - sed -i "s@#SMTP_ADDRESS#@$SMTP_ADDRESS@" input.json
     - sed -i "s@#SMTP_USER#@$SMTP_USER@" input.json
     - sed -i "s@#SMTP_PASSWORD#@$SMTP_PASSWORD@" input.json
@@ -267,6 +269,7 @@ deploy-production:
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_ADDRESS","value":"#SMTP_ADDRESS#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_USER","value":"#SMTP_USER#"}]') >  input.json
     - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"SMTP_PASSWORD","value":"#SMTP_PASSWORD#"}]') >  input.json
+    - echo $(cat input.json | jq '.taskDefinition.containerDefinitions[].environment += [{"name":"BUCKET_NAME","value":"nrdn-s3-stagingstack-s3staging61dc0f4a5c5b192856e-156dfnr4y9hb3"}]') >  input.json
     - sed -i "s@#SMTP_ADDRESS#@$SMTP_ADDRESS@" input.json
     - sed -i "s@#SMTP_USER#@$SMTP_USER@" input.json
     - sed -i "s@#SMTP_PASSWORD#@$SMTP_PASSWORD@" input.json
