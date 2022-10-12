@@ -3,8 +3,11 @@
 require "swagger_helper"
 
 RSpec.describe "api/v1/team_morale/survey_results", type: :request do
+  include_context "login_user"
   path "/api/v1/team_morale/survey_results" do
     get("list survey results") do
+      security [ Bearer: [] ]
+      consumes "application/json"
       tags "Surveys"
       parameter name: :period, in: :query, type: :string
       parameter name: :year, in: :query, type: :string
@@ -26,6 +29,8 @@ RSpec.describe "api/v1/team_morale/survey_results", type: :request do
     end
 
     get("list survey results with missing parameter") do
+      security [ Bearer: [] ]
+      consumes "application/json"
       tags "Surveys"
       parameter name: :period, in: :query, type: :string
       parameter name: :year, in: :query, type: :string

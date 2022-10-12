@@ -3,7 +3,7 @@
 module Api
   module V1
     module TeamMorale
-      class SurveyResultsController < ApplicationController
+      class SurveyResultsController < ApiController
         before_action :validate_required_params, :validate_period, :validate_processing_type, only: %i[ index ]
 
         def index

@@ -50,9 +50,9 @@ class SurveyResponsesService < ApplicationService
       survey_responses.all(remote_survey_id)[:items]
     end
 
-    def questions(surveys)
+    def questions(responses)
       questions = questions_catalog
-      surveys.map { |survey| questions = accumulate_questions(survey[:variables], questions) }
+      responses.map { |response| questions = accumulate_questions(response[:variables], questions) }
       questions
     end
 
@@ -71,8 +71,8 @@ class SurveyResponsesService < ApplicationService
       end
     end
 
-    def calculate_questions_average(questions, surveys_length)
-      questions.transform_values { |v| v / surveys_length }
+    def calculate_questions_average(questions, responses_length)
+      questions.transform_values { |v| v / responses_length }
     end
 
     def questions_detail(questions)
