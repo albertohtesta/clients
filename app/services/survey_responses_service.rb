@@ -34,14 +34,11 @@ class SurveyResponsesService < ApplicationService
     end
 
     def include_responses_in_survey
-      return unless @survey.remote_survey_id.present?
-
-      surveys = remote_responses(@survey.remote_survey_id)
-      if surveys.length > 0
-        questions = questions(surveys)
-        questions = calculate_questions_average(questions, surveys.length)
-        @survey.questions_detail = questions_detail(questions)
-      end
+      responses = remote_responses(@survey.remote_survey_id)
+      return unless @survey.remote_survey_id.present? && responses.length > 0
+      questions = questions(responses)
+      questions = calculate_questions_average(questions, responses.length)
+      @survey.questions_detail = questions_detail(questions)
       @survey.save
     end
 
@@ -50,9 +47,9 @@ class SurveyResponsesService < ApplicationService
       survey_responses.all(remote_survey_id)[:items]
     end
 
-    def questions(surveys)
+    def questions(responses)
       questions = questions_catalog
-      surveys.map { |survey| questions = accumulate_questions(survey[:variables], questions) }
+      responses.map { |response| questions = accumulate_questions(response[:variables], questions) }
       questions
     end
 
@@ -71,8 +68,8 @@ class SurveyResponsesService < ApplicationService
       end
     end
 
-    def calculate_questions_average(questions, surveys_length)
-      questions.transform_values { |v| v / surveys_length }
+    def calculate_questions_average(questions, responses_length)
+      questions.transform_values { |v| v / responses_length }
     end
 
     def questions_detail(questions)
