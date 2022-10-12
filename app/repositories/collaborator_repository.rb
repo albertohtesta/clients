@@ -12,10 +12,6 @@ class CollaboratorRepository < ApplicationRepository
       }).size
     end
 
-    def collaborators_count_by_team_id(team_id)
-      find_collaborators_by_team_id(team_id).ids.count
-    end
-
     def by_role_name(name)
       scope.includes(:role).where(role: RoleRepository.find_by(name:))
     end

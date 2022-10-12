@@ -115,12 +115,14 @@ module MetricPriority
       end
 
       def high_rate?
-        return false if account_last_metric_monthly.nil?
+        return false if account_last_metric_monthly.nil? || high_metric_limit.nil?
+
         average_value.between?(high_metric_limit.min, high_metric_limit.max)
       end
 
       def medium_rate?
-        return false if account_last_metric_monthly.nil?
+        return false if account_last_metric_monthly.nil? || medium_metric_limit.nil?
+
         average_value.between?(medium_metric_limit.min, medium_metric_limit.max)
       end
 

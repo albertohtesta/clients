@@ -16,6 +16,7 @@ class MetricFollowUpRepository < ApplicationRepository
       ).first_or_initialize
       follow_up.update!(alert_status: args[:alert_status],
         mitigation_strategy: args[:mitigation_strategy])
+      follow_up
     end
 
     private
