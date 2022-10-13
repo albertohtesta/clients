@@ -6,6 +6,12 @@ class CollaboratorRepository < ApplicationRepository
       scope.includes(:posts, :teams).where(teams: { id: team_id })
     end
 
+    def collaborators_by_account(account)
+      scope.includes(:teams).where({
+        teams: { id: account.teams.ids }
+      })
+    end
+
     def collaborators_number_by_account(account)
       scope.includes(:teams).where({
         teams: { id: account.teams.ids }

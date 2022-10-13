@@ -2,7 +2,7 @@
 
 class ManagerAccountsPresenter < ApplicationPresenter
   ATTRS = %i[id account_uuid name minilogo].freeze
-  METHODS = %i[location collaborators_number last_follow_up_text priority role_debt alert team_balance
+  METHODS = %i[location collaborators_number collaborators last_follow_up_text priority role_debt alert team_balance
     performance morale velocity manager_id].freeze
 
   def location
@@ -73,7 +73,11 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def collaborators_number
-    CollaboratorRepository.collaborators_number_by_account(self)
+    collaborators.size
+  end
+
+  def collaborators
+    @collaborators ||= CollaboratorPresenter.json_collection CollaboratorRepository.collaborators_by_account(self)
   end
 
   private

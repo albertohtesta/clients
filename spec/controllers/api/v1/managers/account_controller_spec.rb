@@ -92,6 +92,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "role_debt" => 0,
             "alert" => "low",
             "collaborators_number" => 0,
+            "collaborators" => [],
             "team_balance" => {
               "amount" => 95,
               "alert" => "low",
@@ -151,6 +152,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "role_debt" => 0,
             "alert" => "medium",
             "collaborators_number" => 0,
+            "collaborators" => [],
             "team_balance" => {
               "amount" => 0,
               "alert" => "low",
