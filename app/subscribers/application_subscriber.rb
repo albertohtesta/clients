@@ -17,7 +17,7 @@ class ApplicationSubscriber
 
   protected
     def permitted_attributes
-      @permitted_attributes ||= self.class::ATTRS.keys.each_with_object({}) do |key, memo|
+      self.class::ATTRS.keys.each_with_object({}) do |key, memo|
         memo[key] = attribute(key)
         memo
       end
