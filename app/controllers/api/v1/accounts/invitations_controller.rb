@@ -5,21 +5,23 @@ module Api
     module Accounts
       class InvitationsController < ApiController
         def create
-          get_contacts_from_account.each do |contact|
-            ClientRegistrationService.request_user_client({ email: contact.email })
+          contacts_emails.each do |email|
+            ClientRegistrationService.request_user_client({ email: })
           end
-          ContactRepository.create_invitations_for(params[:account_id], invitated_contacts)
+          ContactRepository.create_invitations_for(params[:account_id], contacts_emails)
 
           render json: {}, status: :ok
         end
 
         private
-          def invitated_contacts
-            params.require(:emails)
+          def contacts_emails
+            @contacts_emails ||= ContactRepository.create_or_get_contacts_by_account(params[:account_id], invitated_contacts[:contacts])
           end
 
-          def get_contacts_from_account
-            ContactRepository.contacts_by_account_and_email(params[:account_id], invitated_contacts)
+          def invitated_contacts
+            params.permit(contacts: [:email, :first_name, :last_name])
+          rescue ActionController::ParameterMissing
+            render json: { message: "Parameters missing" }, status: :bad_request
           end
       end
     end

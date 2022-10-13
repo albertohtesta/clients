@@ -12,10 +12,19 @@ RSpec.describe ContactRepository do
       expect(selected_contacts).to match_array([contact])
     end
 
-    it "must return contacts by account_id and emails" do
-      selected_contacts = described_class.contacts_by_account_and_email(contact.account_id, [contact.email])
+    it "must return contacts by account_id and email" do
+      exist_contact = { email: contact.email, first_name: contact.first_name, last_name: contact.last_name }
+      selected_contacts = described_class.create_or_get_contacts_by_account(contact.account_id, [exist_contact])
 
-      expect(selected_contacts.first.email).to eql(contact.email)
+      expect(selected_contacts).to match_array([contact[:email]])
+    end
+
+    it "must create a contact related with account" do
+      new_contact = { email: "fake@gmail.com", first_name: "first_name", last_name: "last_name" }
+      selected_contacts = described_class.create_or_get_contacts_by_account(contact.account_id, [new_contact])
+
+      expect(selected_contacts).to match_array([new_contact[:email]])
+      expect(Contact.where({ email: "fake@gmail.com" }).count).to eq(1)
     end
 
     it "must create invitation for contacts" do
