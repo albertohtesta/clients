@@ -1,32 +1,29 @@
 # frozen_string_literal: true
 
 module MetricPriority
-  class VelocityCalculatorRepository < ApplicationRepository
-    def initialize(account, average_value, last_monthly_metric)
-      @account = account
-      @average_value = average_value
-      @last_monthly_metric = last_monthly_metric
+  class VelocityCalculatorRepository < PriorityCalculatorRepository
+    def initialize(account)
+      super(account, METRICS_TYPES[:velocity])
     end
 
-    def high_rate?
-      return false if last_monthly_metric.nil?
-
-      average_value < (total_points_required * 0.60)
-    end
-
-    def medium_rate?
-      return false if last_monthly_metric.nil?
-
-      average_value.between?(total_points_required * 0.60, total_points_required * 0.99)
-    end
-
-    def total_points_required
+    def expected_points
       total_collabs_in_account * 10
     end
 
-    private
-      attr_reader :account, :average_value, :last_monthly_metric
+    protected
+      def high_rate?
+        return false if account_last_metric_monthly.nil? || expected_points.to_i == 0
 
+        average_value < (expected_points * 0.60)
+      end
+
+      def medium_rate?
+        return false if account_last_metric_monthly.nil? || expected_points.to_i == 0
+
+        average_value.between?(expected_points * 0.60, expected_points * 0.99)
+      end
+
+    private
       def total_collabs_in_account
         # TODO: replase position with a constant or catalog
         @total_collabs_in_account ||= Collaborator.includes(:teams).where({

@@ -19,12 +19,11 @@ class ManagerAccountsPresenter < ApplicationPresenter
     statuses.push(performance[:alert])
     statuses.push(morale[:alert])
     statuses.push(priority_on_account_follow_up)
+    return ALERT[:high] if statuses.any? ALERT[:high]
 
-    return "high" if statuses.any? "high"
+    return ALERT[:medium] unless (statuses & [ALERT[:medium], ALERT[:no_connector], ALERT[:no_team]]).empty?
 
-    return "medium" if statuses.any? "medium"
-
-    "low"
+    ALERT[:low]
   end
 
   def alert
@@ -33,12 +32,13 @@ class ManagerAccountsPresenter < ApplicationPresenter
     statuses.push(performance[:alert]) unless performance[:attended_after_metric]
     statuses.push(morale[:alert]) unless morale[:attended_after_metric]
     statuses.push(priority_on_account_follow_up)
+    return ALERT[:no_dataset] unless (statuses & [ALERT[:no_connector], ALERT[:no_team]]).empty?
 
-    return "high" if statuses.any? "high"
+    return ALERT[:high] if statuses.any? ALERT[:high]
 
-    return "medium" if statuses.any? "medium"
+    return ALERT[:medium] if statuses.any? ALERT[:medium]
 
-    "low"
+    ALERT[:low]
   end
 
   def team_balance
@@ -77,12 +77,27 @@ class ManagerAccountsPresenter < ApplicationPresenter
   end
 
   def collaborators
-    @collaborators ||= CollaboratorPresenter.json_collection CollaboratorRepository.collaborators_by_account(self)
+    @collaborators ||= CollaboratorPresenter.json_collection(CollaboratorRepository.collaborators_by_account(self))
   end
 
   private
     def metric_priority(metric_type)
-      MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
+      priority =
+        case metric_type
+        when METRICS_TYPES[:velocity] then
+          MetricPriority::VelocityCalculatorRepository.new(self).priority
+        else
+          MetricPriority::PriorityCalculatorRepository.new(self, metric_type).priority
+        end
+      priority[:alert] = ALERT[:no_team] if collaborators_number == 0
+      if !connector_enabled && (metric_type == METRICS_TYPES[:velocity] || metric_type == METRICS_TYPES[:performance])
+        priority[:alert] = ALERT[:no_connector]
+      end
+      priority
+    end
+
+    def connector_enabled
+      @connector_enabled ||= self.teams.where.not(board_id: nil).any?
     end
 
     def last_follow_up_date

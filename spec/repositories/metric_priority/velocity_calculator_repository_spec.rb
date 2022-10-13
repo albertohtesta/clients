@@ -10,28 +10,23 @@ RSpec.describe MetricPriority::VelocityCalculatorRepository, type: :repository d
       let!(:team) { create(:team, project:) }
       let!(:collaborator) { create(:collaborator, position: "SOFTWARE ENGINEER") }
       let!(:collaborators_team) { create(:collaborators_team, team:, collaborator:) }
-      let!(:account_metric_velocity) { create(:metric, value: 11, related: account, indicator_type: "velocity", date: 2.weeks.ago) }
+      let!(:account_metric_velocity) { create(:metric, value: 11, related: account, indicator_type: "velocity", date: 6.days.ago) }
 
       it "should be false because points are upper than collabs multiplied by ten" do
-        priority = MetricPriority::VelocityCalculatorRepository.new(account, account_metric_velocity.value, account_metric_velocity)
-
-        expect(priority.high_rate?).to eq(false)
-        expect(priority.medium_rate?).to eq(false)
+        priority = MetricPriority::VelocityCalculatorRepository.new(account).priority
+        expect(priority[:alert]).to eq(ALERT[:low])
       end
 
       it "should be high because points are lower than collabs multiplied by ten" do
         account_metric_velocity.update(value: 1)
-        priority = MetricPriority::VelocityCalculatorRepository.new(account, account_metric_velocity.value, account_metric_velocity)
-
-        expect(priority.high_rate?).to eq(true)
-        expect(priority.medium_rate?).to eq(false)
+        priority = MetricPriority::VelocityCalculatorRepository.new(account).priority
+        expect(priority[:alert]).to eq(ALERT[:high])
       end
 
       it "should be medium because points are betewwn 60 and 90 percent" do
         account_metric_velocity.update(value: 9)
-        priority = MetricPriority::VelocityCalculatorRepository.new(account, account_metric_velocity.value, account_metric_velocity)
-        expect(priority.high_rate?).to eq(false)
-        expect(priority.medium_rate?).to eq(true)
+        priority = MetricPriority::VelocityCalculatorRepository.new(account).priority
+        expect(priority[:alert]).to eq(ALERT[:medium])
       end
     end
   end

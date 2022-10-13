@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
   describe "#index" do
     context "when an account has metrics follow ups" do
-      let(:collaborator) { create(:collaborator) }
+      let(:collaborator) { create(:collaborator, position: "SOFTWARE ENGINEER") }
       let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
       let(:contact) { create(:contact, :user, account:) }
       let(:Authorization) { @token }
@@ -13,7 +13,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       let(:date) { 2.weeks.ago.beginning_of_day }
       let(:account_status) { create(:account_status, status: "new", status_code: "new") }
       let(:project) { create(:project, account:) }
-      let(:team) { create(:team, project:) }
+      let(:team) { create(:team, project:, board_id: 1) }
+      let!(:collaborators_team) { create(:collaborators_team, team:, collaborator:) }
       let!(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
       let!(:team_balance) { create(:team_balance, account_id: account.id, team:) }
       let!(:account_metric_team_balance) { create(:metric, related: account, date: metric_date, indicator_type: "balance", value: 95) }
@@ -92,8 +93,16 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "priority" => "low",
             "role_debt" => 0,
             "alert" => "low",
-            "collaborators_number" => 0,
-            "collaborators" => [],
+            "collaborators_number" => 1,
+            "collaborators" => [{
+              "id" => collaborator.id,
+              "img" => "www.mystring.com",
+              "name" => "#{collaborator.first_name} #{collaborator.last_name}",
+              "position" => collaborator.position,
+              "post" => [],
+              "posts_count" => 0,
+              "uuid" => collaborator.uuid
+            }],
             "team_balance" => {
               "amount" => 95,
               "alert" => "low",
@@ -119,7 +128,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
               "amount" => 95,
               "alert" => "low",
               "attended_after_metric" => false,
-              "expected_points" => 0,
+              "expected_points" => 10,
               "data_follow_up" => JSON.parse(metric_follow_up_velocity.to_json(except: [:created_at, :updated_at]))
             },
           "manager_id" => collaborator.id
@@ -132,7 +141,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       end
     end
 
-    context "when an account has no follow ups" do
+    context "when an account has no team, no connectors and no follow ups" do
       let(:collaborator) { create(:collaborator) }
       let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
       let(:contact) { create(:contact, :user, account:) }
@@ -154,12 +163,12 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
             "last_follow_up_text" => "No follow ups found",
             "priority" => "medium",
             "role_debt" => 0,
-            "alert" => "medium",
+            "alert" => "no-dataset",
             "collaborators_number" => 0,
             "collaborators" => [],
             "team_balance" => {
-              "amount" => 0,
-              "alert" => "low",
+              "amount" => nil,
+              "alert" => "no-team",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,
@@ -170,8 +179,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "expected_points" => 0
             },
             "performance" => {
-              "amount" => 0,
-              "alert" => "low",
+              "amount" => nil,
+              "alert" => "no-connector",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,
@@ -182,8 +191,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
                 "expected_points" => 0
             },
             "morale" => {
-              "amount" => 0,
-              "alert" => "low",
+              "amount" => nil,
+              "alert" => "no-team",
               "data_follow_up" => {
                 "account_id" => account.id,
                 "id" => nil,
@@ -194,8 +203,8 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
               "expected_points" => 0
             },
             "velocity" => {
-              "amount" => 0,
-              "alert" => "low",
+              "amount" => nil,
+              "alert" => "no-connector",
               "attended_after_metric" => false,
               "data_follow_up" => {
                 "account_id" => account.id,

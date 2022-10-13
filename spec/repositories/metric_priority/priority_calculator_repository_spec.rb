@@ -54,7 +54,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
     context "when account has no metrics and no follow ups" do
       it "should return blank values" do
         priority = MetricPriority::PriorityCalculatorRepository.new(account, "balance").priority
-        expect(priority[:amount]).to eq(0)
+        expect(priority[:amount]).to be_nil
         expect(priority[:attended_after_metric]).to eq(false)
         expect(priority[:alert]).to eq("low")
         expect(priority[:data_follow_up]["id"]).to eq(nil)
@@ -78,7 +78,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
       let!(:account_metric_velocity) { create(:metric, value: 11, related: account, indicator_type: "velocity", date:) }
 
       it "should return false because points are upper than collabs multiplied by ten" do
-        priority = MetricPriority::PriorityCalculatorRepository.new(account, "velocity").priority
+        priority = MetricPriority::VelocityCalculatorRepository.new(account).priority
 
         expect(priority[:amount]).to eq(11)
         expect(priority[:alert]).to eq("low")
@@ -87,7 +87,7 @@ RSpec.describe MetricPriority::PriorityCalculatorRepository, type: :repository d
 
       it "should return high because points are lower than collabs multiplied by ten" do
         account_metric_velocity.update(value: 1)
-        priority = MetricPriority::PriorityCalculatorRepository.new(account, "velocity").priority
+        priority = MetricPriority::VelocityCalculatorRepository.new(account).priority
 
         expect(priority[:alert]).to eq("high")
         expect(priority[:attended_after_metric]).to eq(false)
