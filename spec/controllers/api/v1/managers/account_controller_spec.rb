@@ -3,15 +3,15 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
-  include_context "login_user"
-
   describe "#index" do
     context "when an account has metrics follow ups" do
+      let(:collaborator) { create(:collaborator) }
+      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
+      let(:contact) { create(:contact, :user, account:) }
+      let(:Authorization) { @token }
       let(:metric_date) { 3.weeks.ago.beginning_of_day }
       let(:date) { 2.weeks.ago.beginning_of_day }
-      let(:collaborator) { create(:collaborator) }
       let(:account_status) { create(:account_status, status: "new", status_code: "new") }
-      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
       let(:project) { create(:project, account:) }
       let(:team) { create(:team, project:) }
       let!(:account_follow_up) { create(:account_follow_up, account:, follow_date: date) }
@@ -81,6 +81,7 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
       }
 
       it "must return each metric value" do
+        login_as(contact)
         expected_keys = [
           { "id" => account.id,
             "account_uuid" => account.account_uuid,
@@ -132,15 +133,18 @@ RSpec.describe Api::V1::Managers::AccountsController, type: :controller do
     end
 
     context "when an account has no follow ups" do
+      let(:collaborator) { create(:collaborator) }
+      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
+      let(:contact) { create(:contact, :user, account:) }
+      let(:Authorization) { @token }
       let(:metric_date) { 3.weeks.ago.beginning_of_day }
       let(:date) { 2.weeks.ago.beginning_of_day }
-      let(:collaborator) { create(:collaborator) }
       let(:account_status) { create(:account_status, status: "new", status_code: "new") }
-      let(:account) { create(:account, city: "city", manager: collaborator, account_status:) }
       let(:project) { create(:project, account:) }
       let(:team) { create(:team, project:) }
 
       it "must respond on empty values" do
+        login_as(contact)
         expected_keys = [
           { "id" => account.id,
             "account_uuid" => account.account_uuid,

@@ -184,6 +184,28 @@ paths:
       responses:
         '200':
           description: when I am an admin
+  "/api/v1/managers/:manager_id/account_as_admin":
+    get:
+      summary: Get all accounts of a mannager and with priorities
+      tags:
+      - Managers
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: manager_id
+        in: path
+        description: id of the manager
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: when I am an admin
   "/api/v1/managers/{id}":
     get:
       summary: show information of a manager
