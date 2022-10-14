@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
       resources :managers, only: [:show] do
         scope module: :managers do
-          get "/account_as_admin", to: "accounts#as_admin"
           resources :accounts, only: [:show, :index] do
             scope module: :accounts do
               resources :account_follow_ups, only: %i[create index]
