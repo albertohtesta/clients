@@ -319,18 +319,30 @@ paths:
   "/api/v1/team_morale/surveys/not_found":
     get:
       summary: Survey does not exist
+      tags:
+      - Surveys
+      security:
+      - Bearer: []
       responses:
         '404':
           description: not found
   "/api/v1/team_morale/surveys/2":
     get:
       summary: Survey does not exist
+      tags:
+      - Surveys
+      security:
+      - Bearer: []
       responses:
         '404':
           description: not found
   "/api/v1/team_morale/surveys/1":
     get:
       summary: get survey status
+      tags:
+      - Surveys
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful
@@ -362,9 +374,16 @@ paths:
   "/api/v1/team_morale/surveys":
     post:
       summary: Creates a Survey
+      security:
+      - Bearer: []
       tags:
       - Surveys
-      parameters: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
       responses:
         '200':
           description: survey created
@@ -400,16 +419,29 @@ paths:
               - description
     get:
       summary: surveys list
+      security:
+      - Bearer: []
+      tags:
+      - Surveys
       responses:
         '200':
           description: successful
   "/api/v1/team_morale/surveys/{id}":
     delete:
       summary: close survey
+      security:
+      - Bearer: []
+      tags:
+      - Surveys
       parameters:
       - name: id
         in: path
         required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
         schema:
           type: string
       responses:

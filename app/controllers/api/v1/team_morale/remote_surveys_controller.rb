@@ -3,7 +3,7 @@
 module Api
   module V1
     module TeamMorale
-      class RemoteSurveysController < ApplicationController
+      class RemoteSurveysController < ApiController
         def index
           render json: TypeFormService::RemoteSurveys.all
         end

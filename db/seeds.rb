@@ -419,7 +419,6 @@ project_morale_api = Project.create(
 )
 morale_api_collaborators = Collaborator.create([
   { id: 1000, role:, position: "PRODUCT OWNER", first_name: "Aldo", last_name: "Enriquez", email: "aldo.enriquez@michelada.io", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Diego+Medrano.jfif", seniority: "SENIOR", uuid: Faker::IDNumber.unique.invalid },
-  { id: 1001, role:, position: "SCRUM MASTER", first_name: "Savid", last_name: "Salazar", email: "ssalazar@arkus-solutions.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Raul+Galvan.jfif", seniority: "SENIOR", uuid: Faker::IDNumber.unique.invalid },
   { id: 1002, role:, position: "SOFTWARE ENGINEER", first_name: "Alberto", last_name: "Hernandez", email: "alberto.testa@michelada.io", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Edgar+Alcantara.jfif", seniority: "MIDDLE", uuid: Faker::IDNumber.unique.invalid }
 ])
 Team.create(

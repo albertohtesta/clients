@@ -3,7 +3,7 @@
 module Api
   module V1
     module TeamMorale
-      class WebhooksController < ApplicationController
+      class WebhooksController < ApiController
         def index
           @webhooks = TypeFormService::Webhooks.new
           render json: @webhooks.all(params[:survey_id])
