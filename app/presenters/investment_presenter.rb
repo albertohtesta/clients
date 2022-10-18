@@ -36,10 +36,12 @@ class InvestmentPresenter < ApplicationPresenter
 
     private
       def data_hash(items, type)
+        last_valid_investment = 0
         items.map do |id, value|
+          last_valid_investment = value.positive? ? value : last_valid_investment
           {
             "label" => (type == "month") ? Date::MONTHNAMES[id] : "Q#{id}",
-            "value" => value.to_f
+            "value" => last_valid_investment.to_f
           }
         end
       end
