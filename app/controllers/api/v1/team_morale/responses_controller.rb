@@ -3,7 +3,7 @@
 module Api
   module V1
     module TeamMorale
-      class ResponsesController < ApplicationController
+      class ResponsesController < ApiController
         def index
           @survey_responses = TypeFormService::Responses.new
           render json: @survey_responses.all(params[:survey_id])

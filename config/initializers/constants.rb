@@ -16,3 +16,12 @@ SENIORITY_TYPES = {
   middle: "Middle",
   senior: "Senior"
 }
+
+ALERT = {
+  high: "high",
+  medium: "medium",
+  low: "low",
+  no_team: "no-team",
+  no_connector: "no-connector",
+  no_dataset: "no-dataset"
+}

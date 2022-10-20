@@ -25,7 +25,7 @@ module MetricPriority
       }
     end
 
-    private
+    protected
       attr_reader :account, :metric_type
 
       def attended_after_metric
@@ -73,36 +73,19 @@ module MetricPriority
       end
 
       def alert
-        return alert_for_velocity if metric_type == METRICS_TYPES[:velocity]
+        return ALERT[:high] if high_rate?
 
-        return "high" if high_rate?
+        return attended_after_metric ? ALERT[:medium] : ALERT[:high] if medium_rate?
 
-        return attended_after_metric ? "medium" : "high" if medium_rate?
-
-        "low"
-      end
-
-      def alert_for_velocity
-        velocity_metrics = MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly)
-        return "high" if velocity_metrics.high_rate?
-
-        return (attended_after_metric ? "medium" : "high") if velocity_metrics.medium_rate?
-
-        "low"
-      end
-
-      def velocity_metrics
-        @velocity_metrics ||= MetricPriority::VelocityCalculatorRepository.new(account, average_value, account_last_metric_monthly)
+        ALERT[:low]
       end
 
       def expected_points
-        return 0 if metric_type != METRICS_TYPES[:velocity]
-
-        velocity_metrics.total_points_required
+        0
       end
 
       def average_value
-        return 0 if account_last_metric_monthly.nil?
+        return nil if account_last_metric_monthly.nil?
 
         account_last_metric_monthly["value"] / account_last_metric_monthly["amount_of_metrics_by_type"]
       end

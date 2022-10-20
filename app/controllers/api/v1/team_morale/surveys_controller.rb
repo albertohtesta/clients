@@ -3,7 +3,7 @@
 module Api
   module V1
     module TeamMorale
-      class SurveysController < ApplicationController
+      class SurveysController < ApiController
         before_action :survey_by_id, only: %i[show destroy]
 
         def index

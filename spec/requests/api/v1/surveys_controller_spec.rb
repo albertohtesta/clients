@@ -2,11 +2,14 @@
 
 require "swagger_helper"
 
-RSpec.describe "/api/v1/team_morale/surveys" do
+RSpec.describe "/api/v1/team_morale/surveys", type: :request do
+  include_context "login_user"
   path "/api/v1/team_morale/surveys" do
     post "Creates a Survey" do
+      security [ Bearer: [] ]
       tags "Surveys"
       consumes "application/json"
+      produces "application/json"
       parameter name: :survey, in: :body, schema: {
         type: :object,
         properties: {
@@ -20,8 +23,10 @@ RSpec.describe "/api/v1/team_morale/surveys" do
         },
         required: [ "team_id", "deadline", "period", "period_value", "year", "survey_url", "description" ]
       }
+      parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
 
       response "200", "survey created" do
+        consumes "application/json"
         let(:team) { create(:team) }
         let(:survey) {
             { "team_id": team.id,
@@ -36,6 +41,7 @@ RSpec.describe "/api/v1/team_morale/surveys" do
       end
 
       response "400", "invalid request" do
+        consumes "application/json"
         let(:survey) {
           { "deadline": Date.today + 1.month,
           "period": "month",
@@ -49,6 +55,9 @@ RSpec.describe "/api/v1/team_morale/surveys" do
     end
 
     get("surveys list") do
+      security [ Bearer: [] ]
+      tags "Surveys"
+      consumes "application/json"
       response 200, "successful" do
         let(:survey) { create(:survey, id: 1) }
         run_test! do |response|
@@ -61,7 +70,12 @@ RSpec.describe "/api/v1/team_morale/surveys" do
 
   path "/api/v1/team_morale/surveys/{id}" do
     delete("close survey") do
+      security [ Bearer: [] ]
+      tags "Surveys"
+      consumes "application/json"
+      produces "application/json"
       parameter name: :id, in: :path, type: :string
+      parameter name: :Authorization, in: :headers, type: :string, description: "autorizartion token with the user info"
       response 200, "successful" do
         let(:id) { create(:survey).id }
         run_test! do |response|

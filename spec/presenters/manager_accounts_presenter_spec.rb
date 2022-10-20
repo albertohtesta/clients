@@ -33,7 +33,7 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
 
       it "expects values for a newly created account" do
         expect(presenter.last_follow_up_text).to eq("No follow ups found")
-        expect(presenter.alert).to be "medium"
+        expect(presenter.alert).to be ALERT[:no_dataset]
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
 
       it "expects to display last follow up from account" do
         expect(presenter.last_follow_up_text).to eq("7 days ago")
-        expect(presenter.alert).to be "low"
+        expect(presenter.alert).to be ALERT[:no_dataset]
       end
     end
 
@@ -51,15 +51,19 @@ RSpec.describe ManagerAccountsPresenter, type: :presenter do
       let!(:metric_limit) { create(:metric_limit, indicator_type: "morale") }
       let!(:metric_follow_up) { create(:metric_follow_up, follow_date: 5.days.ago, account:) }
       let!(:account_follow_up) { create(:account_follow_up, follow_date: 2.month.ago.to_date, account:) }
+      let!(:project) { create(:project, account:) }
+      let!(:team) { create(:team, project:, board_id: 1) }
+      let!(:collaborator) { create(:collaborator, position: "SOFTWARE ENGINEER") }
+      let!(:collaborators_team) { create(:collaborators_team, team:, collaborator:) }
 
       it "expects to retrieve latest follow up date" do
         expect(presenter.last_follow_up_text).to eq("5 days ago")
       end
 
       it "expects to ignore metric alert if attended recently" do
-        expect(presenter.alert).to eq("low")
+        expect(presenter.alert).to eq(ALERT[:low])
         expect(presenter.priority).to eq("high")
-        expect(presenter.morale[:alert]).to eq("high")
+        expect(presenter.morale[:alert]).to eq(ALERT[:high])
         expect(presenter.morale[:attended_after_metric]).to eq(true)
       end
     end

@@ -9,6 +9,7 @@ class SurveyResponsesService < ApplicationService
 
   def close_survey
     return unless survey_should_be_closed?
+
     close_remote_survey unless @survey.remote_survey_id.blank?
     @survey.update(status: :closed)
   end
@@ -16,6 +17,7 @@ class SurveyResponsesService < ApplicationService
   def self.average_of_last_survey_of_team(team_id)
     survey = SurveyRepository.last_survey_of_team(team_id)
     return unless survey && survey.questions
+
     survey.questions.inject(0) { |sum, element| sum + element["final_score"] } / survey.questions.length
   end
 
@@ -34,14 +36,12 @@ class SurveyResponsesService < ApplicationService
     end
 
     def include_responses_in_survey
-      return unless @survey.remote_survey_id.present?
+      responses = remote_responses(@survey.remote_survey_id)
+      return unless @survey.remote_survey_id.present? && responses.length > 0
 
-      surveys = remote_responses(@survey.remote_survey_id)
-      if surveys.length > 0
-        questions = questions(surveys)
-        questions = calculate_questions_average(questions, surveys.length)
-        @survey.questions_detail = questions_detail(questions)
-      end
+      questions = questions(responses)
+      questions = calculate_questions_average(questions, responses.length)
+      @survey.questions_detail = questions_detail(questions)
       @survey.save
     end
 

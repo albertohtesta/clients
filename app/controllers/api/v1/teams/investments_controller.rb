@@ -4,7 +4,7 @@ module Api
   module  V1
     module Teams
       class InvestmentsController < ApplicationController
-        before_action :validate_required_params
+        before_action :validate_required_params, only: :index
 
         def index
           investments = investments_of_team_of_this_year
@@ -14,9 +14,13 @@ module Api
           render json: investments_formated
         end
 
+        def years
+          render json: InvestmentService.years_for_a_team(params[:team_id])
+        end
+
         private
           def investments_of_team_of_this_year
-            InvestmentService.investments_by_team_for_period(params[:team_id], params[:group_by])
+            InvestmentService.investments_by_team_for_period(params[:team_id], params[:group_by], params[:year])
           end
 
           def validate_required_params
