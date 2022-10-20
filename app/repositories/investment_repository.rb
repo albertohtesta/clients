@@ -10,5 +10,13 @@ class InvestmentRepository < ApplicationRepository
         .select("team_id, sum(value) as value, date_trunc('month',date) as date")
         .order(Arel.sql("date_trunc('month',date)"))
     end
+    def find_years_by_team(team_id)
+      scope
+        .distinct.select("date_trunc('year',date) as trunc")
+        .where(team_id:)
+        .map { |rel| rel.trunc.year }
+        .to_a
+        .sort
+    end
   end
 end

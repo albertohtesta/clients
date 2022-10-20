@@ -16,5 +16,11 @@ RSpec.describe InvestmentRepository do
       expect(monthly_investments.first["value"]).to eq investment.value
       expect(monthly_investments.first["date"].month).to eq investment.date.month
     end
+
+    it "must return years with investments" do
+      years = described_class.find_years_by_team team.id
+      expect(years).to be_a Array
+      expect(years).to contain_exactly(Date.today.year)
+    end
   end
 end

@@ -19,8 +19,10 @@ RSpec.describe "Team Investments", type: :request do
         produces "application/json"
         parameter name: :team_id, in: :path
         parameter name: :group_by, in: :query
+        parameter name: :year, in: :query
         response(200, "successful") do
           let(:group_by) { "quarter" }
+          let(:year) { investment.date.year }
           run_test!
         end
       end
@@ -32,8 +34,10 @@ RSpec.describe "Team Investments", type: :request do
         produces "application/json"
         parameter name: :team_id, in: :path
         parameter name: :group_by, in: :query
+        parameter name: :year, in: :query
         response(200, "successful") do
           let(:group_by) { "monthly" }
+          let(:year) { investment.date.year }
           run_test!
         end
       end
@@ -51,6 +55,17 @@ RSpec.describe "Team Investments", type: :request do
         response(404, "not found") do
           let(:team_id) { 0 }
           let(:group_by) { "quarter" }
+          run_test!
+        end
+      end
+    end
+
+    path "/api/v1/teams/{team_id}/investments/years" do
+      get "Investments years" do
+        security [ Bearer: [] ]
+        produces "application/json"
+        parameter name: :team_id, in: :path
+        response(200, "successful") do
           run_test!
         end
       end
