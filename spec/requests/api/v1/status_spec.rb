@@ -5,7 +5,7 @@ require "swagger_helper"
 RSpec.describe "api/v1/team_morale/surveys", type: :request do
   include_context "login_user"
   before(:each) do
-    create(:survey, id: 1)
+    create(:survey, id: 1, remote_survey_id: "Eo9SGMK4")
   end
 
   path "/api/v1/team_morale/surveys/not_found" do
@@ -43,9 +43,30 @@ RSpec.describe "api/v1/team_morale/surveys", type: :request do
       consumes "application/json"
       produces "application/json"
       response 200, "successful" do
-        run_test! do |response|
-          expect(response.body).not_to be_empty
-          expect(response).to have_http_status(:success)
+        before do |example|
+          stub_request(:get, "https://api.typeform.com/forms/Eo9SGMK4/responses").
+            with(
+              headers: {
+                "Accept" => "*/*",
+                "Authorization" => "Bearer tfp_7HUqaRyDUSDddj3sWXZYDRASftLSuQCwnMxsEweP86bQ_3mJqwU6xk1AaTh",
+                "Host" => "api.typeform.com"
+              }
+            ).
+            to_return(
+              status: 200,
+              body: {
+                "total_items": 2,
+                "page_count": 1,
+                "items": [
+                ]
+              }.to_json,
+              headers: {}
+            )
+          submit_request(example.metadata)
+        end
+
+        it "return a valid 200 response" do |example|
+          assert_response_matches_metadata(example.metadata)
         end
       end
     end
