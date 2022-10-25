@@ -5,7 +5,6 @@ require "swagger_helper"
 RSpec.describe "api/v1/team_morale/surveys", type: :request do
   include_context "login_user"
   before(:each) do
-    ACCESS_TOKEN = ENV["TYPE_FORM_ACCESS_TOKEN"]
     create(:survey, id: 1, remote_survey_id: "Eo9SGMK4")
   end
 
@@ -45,24 +44,7 @@ RSpec.describe "api/v1/team_morale/surveys", type: :request do
       produces "application/json"
       response 200, "successful" do
         before do |example|
-          stub_request(:get, "https://api.typeform.com/forms/Eo9SGMK4/responses").
-            with(
-              headers: {
-                "Accept" => "*/*",
-                "Authorization" => "Bearer #{ACCESS_TOKEN}",
-                "Host" => "api.typeform.com"
-              }
-            ).
-            to_return(
-              status: 200,
-              body: {
-                "total_items": 2,
-                "page_count": 1,
-                "items": [
-                ]
-              }.to_json,
-              headers: {}
-            )
+          get_survey_stubs
           submit_request(example.metadata)
         end
 
