@@ -271,7 +271,6 @@ Contact.create!([
           }
         ])
 
-
 # ****************************************************************************
 # CREATING BREAKTHROGHT BROKER ACCOUNT DATA FOR QA
 # ****************************************************************************
@@ -456,6 +455,11 @@ Survey.create(
                       ]
                     }
 )
+
+
+Account.create(id: 38, account_uuid: "20161846-4e60-11ed-bdc3-0242ac120002", name: "Mind Teams", account_status_id: 42, country: "USA", state: "California")
+Project.create(id: 55, name: "Mind Teams", account_id: 38, start_date: "2021-01-01 10:00:00", description: "Mind Teams")
+Team.create(id: 55, added_date: "2021-01-01 10:00:00", team_type_id: TeamType.first.id, project_id: 55)
 
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"

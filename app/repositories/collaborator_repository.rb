@@ -6,6 +6,15 @@ class CollaboratorRepository < ApplicationRepository
       scope.includes(:posts, :teams).where(teams: { id: team_id })
     end
 
+    def delete_collaborator_from_account(collaborator_team_ids, collaborator_id)
+      ActiveRecord::Base.transaction do
+        # To Do: this id is just temporal we need to add name to team table
+        if CollaboratorsTeam.destroy(collaborator_team_ids)
+          CollaboratorsTeam.create(team_id: Team.find(Team::UNDEFINED_TEAM), collaborator_id:)
+        end
+      end
+    end
+
     def collaborators_by_account(account)
       scope.includes(:teams).where({
         teams: { id: account.teams.ids }

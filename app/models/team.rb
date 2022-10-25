@@ -18,6 +18,7 @@ class Team < ApplicationRecord
   validates :added_date, presence: true
 
   after_save :add_team_balance
+  UNDEFINED_TEAM = 55
 
   private
     def add_team_balance
