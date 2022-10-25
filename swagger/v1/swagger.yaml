@@ -89,6 +89,8 @@ paths:
           application/json:
             schema:
               type: array
+        description: array of emails of the contacts to invite should contain [email,
+          first_name, last_name]
   "/api/v1/accounts":
     get:
       summary: list accounts
@@ -184,6 +186,40 @@ paths:
       responses:
         '200':
           description: when I am an admin
+  "/api/v1/managers/{manager_id}/accounts/{account_id}/collaborators/{id}":
+    delete:
+      summary: A collaborator from account
+      tags:
+      - Managers
+      security:
+      - Bearer: []
+      parameters:
+      - name: Authorization
+        in: headers
+        description: autorizartion token with the user info
+        schema:
+          type: string
+      - name: account_id
+        in: path
+        description: accound_id
+        required: true
+        schema:
+          type: integer
+      - name: manager_id
+        in: path
+        description: accound_id
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: collaborator_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: collaborator deleted
   "/api/v1/managers/{id}":
     get:
       summary: show information of a manager
@@ -501,6 +537,18 @@ paths:
           description: successful
         '404':
           description: not found
+  "/api/v1/teams/{team_id}/investments/years":
+    get:
+      summary: Investments years
+      security:
+      - Bearer: []
+      parameters:
+      - name: team_id
+        in: path
+        required: true
+      responses:
+        '200':
+          description: successful
   "/api/v1/teams/{team_id}/metrics":
     get:
       summary: Get metrics of team
