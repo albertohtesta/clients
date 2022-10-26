@@ -176,7 +176,8 @@ team_advanta = Team.create!(
     team_type_id: TeamType.find_by({ name: "POD" }).id,
     collaborators: advanta_collaborators,
     project: project_advanta,
-    board_id: 8
+    board_id: 8,
+    monthly_amount: 40000
   }
 )
 Metric.create!([
@@ -300,7 +301,7 @@ broker_collaborators = Collaborator.create!([
   { id: 30, role:, position: "UX/UI", first_name: "ELBA", last_name: "ECHEVARRIA", email: "eechevarria@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/ECHEVARRIA+ORNELAS+ELBA.jfif", seniority: "JUNIOR", uuid: "93de1e52-2270-11ed-861d-0242ac120002" }
 ])
 team_broker = Team.create!(
-  { added_date: project_broker.start_date, team_type_id: TeamType.find_by({ name: "POD" }).id, collaborators: broker_collaborators, project: project_broker, board_id: 18 }
+  { added_date: project_broker.start_date, team_type_id: TeamType.find_by({ name: "POD" }).id, collaborators: broker_collaborators, project: project_broker, board_id: 18, monthly_amount: 50000 }
 )
 Metric.create!([
   # PERFORMANCE

@@ -22,10 +22,9 @@ class InvestmentPresenter < ApplicationPresenter
     def order_by_monthly(investments)
       return {} if investments.blank?
       months = {}
-      final_month = Time.now.to_date.month - 1
-      (1..final_month).each do |m|
-        months[m] = 0.to_d
-      end
+
+      InvestmentService.investments_by_team(investments)
+
       investments.each do |invested|
         months[invested.date.month] = months[invested.date.month].to_d + invested.value.to_d
       end
@@ -36,12 +35,10 @@ class InvestmentPresenter < ApplicationPresenter
 
     private
       def data_hash(items, type)
-        last_valid_investment = 0
         items.map do |id, value|
-          last_valid_investment = value.positive? ? value : last_valid_investment
           {
             "label" => (type == "month") ? Date::MONTHNAMES[id] : "Q#{id}",
-            "value" => last_valid_investment.to_f
+            "value" => value.to_f
           }
         end
       end

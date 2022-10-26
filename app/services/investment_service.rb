@@ -11,6 +11,12 @@ class InvestmentService < ApplicationService
       InvestmentRepository.retrieve_monthly_investments_by_team(team_id, start_date, end_date).to_a
     end
 
+    def investments_by_team(investments)
+      raise ArgumentError.new("Investments must belong to the same team") if investments.map { |i| i.team_id }.uniq.size > 1
+
+      find_empty_month(investments)
+    end
+
     def years_for_a_team(team_id)
       throw ArgumentError.new("team_id is required") unless team_id
 
@@ -29,6 +35,24 @@ class InvestmentService < ApplicationService
         when :quarter then
           Time.now.to_date
         end
+      end
+
+      def find_empty_month(investments)
+        final_month = Time.now.to_date.month - 1
+
+        (1..final_month).each do |m|
+          if investments.select { |investment| investment.date.month == m }.empty?
+            create_investment(investments, m)
+          end
+        end
+      end
+
+      def create_investment(investments, month)
+        first_investment = investments.first
+        value = TeamRepository.monthly_amount(first_investment.team_id)
+
+        inv = Investment.create!(team_id: first_investment.team_id, value:, date: "#{first_investment.date.year}-#{(month)}-15")
+        investments.push(inv)
       end
   end
 end
