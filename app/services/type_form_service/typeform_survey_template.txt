@@ -1,8 +1,8 @@
 {
     "type": "quiz",
-    "title": "Moral2022Q3",
+    "title": "Moral API",
     "workspace": {
-        "href": "https://api.typeform.com/workspaces/WR43Sb"
+        "href": "https://api.typeform.com/workspaces/AM4bPL"
     },
     "theme": {
         "href": "https://api.typeform.com/themes/gVQedeis"

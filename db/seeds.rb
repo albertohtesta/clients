@@ -414,21 +414,6 @@ attributes.each do |attribute, questions|
   end
 end
 
-project_morale_api = Project.create(
-  { name: advanta.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "MORALE API PROJECT", account_id: advanta.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
-)
-morale_api_collaborators = Collaborator.create([
-  { id: 1000, role:, position: "PRODUCT OWNER", first_name: "Aldo", last_name: "Enriquez", email: "aldo.enriquez@michelada.io", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Diego+Medrano.jfif", seniority: "SENIOR", uuid: Faker::IDNumber.unique.invalid }
-])
-Team.create(
-  {
-    added_date: project_morale_api.start_date,
-    team_type_id: TeamType.find_by({ name: "POD" }).id,
-    collaborators: morale_api_collaborators,
-    project: project_morale_api,
-    board_id: 8
-  }
-)
 Survey.create(
   status: 2,
   survey_url: "datos historicos de Advanta",
