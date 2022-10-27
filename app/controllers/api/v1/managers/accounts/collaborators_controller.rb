@@ -7,8 +7,12 @@ module Api
         class CollaboratorsController < ApiController
           def destroy
             begin
-              CollaboratorRepository.delete_collaborator_from_account(collaborator_team_ids, params[:collaborator_id])
-            rescue ActiveRecord::RecordNotFound => invalid
+              return render json: {
+                message: "collaborator doesnt belong to this account"
+              }, status: :bad_request if collaborator_team_ids.empty?
+
+              CollaboratorRepository.change_collaborator_from_account(collaborator_team_ids, params[:collaborator_id])
+            rescue ActiveRecord => invalid
               return render json: { message: invalid }, status: :bad_request
             end
             render json: { message: "user deleted" }, status: :ok
