@@ -18,14 +18,4 @@ class Collaborator < ApplicationRecord
   belongs_to :role
 
   validates :first_name, :last_name, :email, :uuid, presence: true
-
-  after_update :calculate_team_balance
-
-  private
-    def calculate_team_balance
-      self.teams.each do |team|
-        team_balance = TeamBalanceService.new(team.id).process
-        TeamBalance.new({ team_id: team.id, balance_date: Date.today, balance: team_balance }).save
-      end
-    end
 end

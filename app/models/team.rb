@@ -7,13 +7,13 @@ class Team < ApplicationRecord
   has_many :investments
   has_many :team_requirements
   has_many :surveys
+
   has_many :team_balances
   has_many :teams_accounts, through: :team_balances, source: :account
-  has_many :projects_accounts, through: :projects, source: :project
-  has_many :accounts, through: :team_balances
 
   belongs_to :team_type
   belongs_to :project
+  delegate :account, to: :project
 
   validates :added_date, presence: true
 
