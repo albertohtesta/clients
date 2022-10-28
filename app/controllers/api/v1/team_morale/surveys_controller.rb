@@ -23,7 +23,11 @@ module Api
         end
 
         def show
-          render json: SurveyPresenter.new(@survey).json, status: :ok
+          survey_responses = TypeFormService::Responses.new
+          tf_current_answers = survey_responses.all(@survey.remote_survey_id)[:total_items]
+          SurveyRepository.update_current_answers(@survey.id, tf_current_answers) unless @survey.current_answers == tf_current_answers
+          SurveyResponsesService.new(@survey.id).close_survey unless tf_current_answers < @survey.requested_answers
+          render json: SurveyPresenter.new(@survey.reload).json, status: :ok
         end
 
         def destroy

@@ -13,5 +13,6 @@ class SurveySenderJob < ApplicationJob
         survey_url: survey.survey_url
       ).survey_created.deliver_now
     end
+    SurveyRepository.mark_survey_as_sent(survey.id)
   end
 end

@@ -176,7 +176,8 @@ team_advanta = Team.create!(
     team_type_id: TeamType.find_by({ name: "POD" }).id,
     collaborators: advanta_collaborators,
     project: project_advanta,
-    board_id: 8
+    board_id: 8,
+    monthly_amount: 40000
   }
 )
 Metric.create!([
@@ -271,7 +272,6 @@ Contact.create!([
           }
         ])
 
-
 # ****************************************************************************
 # CREATING BREAKTHROGHT BROKER ACCOUNT DATA FOR QA
 # ****************************************************************************
@@ -301,7 +301,7 @@ broker_collaborators = Collaborator.create!([
   { id: 30, role:, position: "UX/UI", first_name: "ELBA", last_name: "ECHEVARRIA", email: "eechevarria@arkusnexus.com", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/ECHEVARRIA+ORNELAS+ELBA.jfif", seniority: "JUNIOR", uuid: "93de1e52-2270-11ed-861d-0242ac120002" }
 ])
 team_broker = Team.create!(
-  { added_date: project_broker.start_date, team_type_id: TeamType.find_by({ name: "POD" }).id, collaborators: broker_collaborators, project: project_broker, board_id: 18 }
+  { added_date: project_broker.start_date, team_type_id: TeamType.find_by({ name: "POD" }).id, collaborators: broker_collaborators, project: project_broker, board_id: 18, monthly_amount: 50000 }
 )
 Metric.create!([
   # PERFORMANCE
@@ -414,22 +414,6 @@ attributes.each do |attribute, questions|
   end
 end
 
-project_morale_api = Project.create(
-  { name: advanta.name, start_date: Faker::Date.between(from: 10.months.ago, to: 5.months.ago), description: "MORALE API PROJECT", account_id: advanta.id, tech_stacks: TechStack.all.sample(3), tools: Tool.all.sample(2) }
-)
-morale_api_collaborators = Collaborator.create([
-  { id: 1000, role:, position: "PRODUCT OWNER", first_name: "Aldo", last_name: "Enriquez", email: "aldo.enriquez@michelada.io", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Diego+Medrano.jfif", seniority: "SENIOR", uuid: Faker::IDNumber.unique.invalid },
-  { id: 1002, role:, position: "SOFTWARE ENGINEER", first_name: "Alberto", last_name: "Hernandez", email: "alberto.testa@michelada.io", profile: "https://nrdn-s3-qastack-s3qa61dc0f4a5c5b192856ecb6eabucke-1hdholr13v0ni.s3.us-west-1.amazonaws.com/collaborators/Edgar+Alcantara.jfif", seniority: "MIDDLE", uuid: Faker::IDNumber.unique.invalid }
-])
-Team.create(
-  {
-    added_date: project_morale_api.start_date,
-    team_type_id: TeamType.find_by({ name: "POD" }).id,
-    collaborators: morale_api_collaborators,
-    project: project_morale_api,
-    board_id: 8
-  }
-)
 Survey.create(
   status: 2,
   survey_url: "datos historicos de Advanta",
@@ -456,6 +440,11 @@ Survey.create(
                       ]
                     }
 )
+
+
+Account.create(id: 38, account_uuid: "20161846-4e60-11ed-bdc3-0242ac120002", name: "Mind Teams", account_status_id: 42, country: "USA", state: "California")
+Project.create(id: 55, name: "Mind Teams", account_id: 38, start_date: "2021-01-01 10:00:00", description: "Mind Teams")
+Team.create(id: 55, added_date: "2021-01-01 10:00:00", team_type_id: TeamType.first.id, project_id: 55)
 
 p "Seed... #{AccountStatus.count} AccountStatus created"
 p "Seed... #{TeamType.count} TeamType created"

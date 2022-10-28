@@ -18,5 +18,30 @@ class SurveyRepository < ApplicationRepository
       scope.where(["team_id = :team_id and status = :status", team_id:, status: CLOSED])
       .select(:id, "questions_detail -> 'questions' AS questions").last
     end
+
+    def update_survey_responses(survey_id, num_of_answers)
+      survey = scope.find_by_id(survey_id)
+      return unless survey
+      unless survey.update(current_answers: num_of_answers)
+        logger = Logger.new(STDOUT)
+        logger.info("Survey: #{survey.id} current answers could not be updated")
+      end
+    end
+
+    def surveys_ongoing
+      scope.where({ status: !CLOSED })
+    end
+
+    def mark_survey_as_sent(id)
+      survey = scope.includes(team: :collaborators).find_by_id(id)
+      survey.update!(status: :sent, requested_answers: survey.team.collaborators.size)
+      survey
+    end
+
+    def update_current_answers(id, tf_current_answers)
+      survey = scope.find_by_id(id)
+      survey.update!(current_answers: tf_current_answers)
+      survey
+    end
   end
 end

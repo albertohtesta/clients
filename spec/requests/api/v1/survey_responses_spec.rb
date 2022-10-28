@@ -56,4 +56,15 @@ RSpec.describe "Survey responses service" do
       expect(SurveyResponsesService.average_of_last_survey_of_team(1)).to be_nil
     end
   end
+
+  describe "update status" do
+    before(:each) do
+        @survey = create(:survey, id: 1, remote_survey_id: "Eo9SGMK4", current_answers: 0, requested_answers: 2)
+        get_survey_stubs
+      end
+    it "get answers and update the status of the surveys" do
+      expect { SurveyResponsesService.surveys_status_update }
+      .to change { @survey.reload.status }.from("preparation").to("closed")
+    end
+  end
 end

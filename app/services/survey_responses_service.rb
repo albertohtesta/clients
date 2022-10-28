@@ -10,8 +10,12 @@ class SurveyResponsesService < ApplicationService
   def close_survey
     return unless survey_should_be_closed?
 
-    close_remote_survey unless @survey.remote_survey_id.blank?
-    @survey.update(status: :closed)
+    if @survey.update(status: :closed)
+      close_remote_survey unless @survey.remote_survey_id.blank?
+      true
+    else
+      false
+    end
   end
 
   def self.average_of_last_survey_of_team(team_id)
@@ -19,6 +23,18 @@ class SurveyResponsesService < ApplicationService
     return unless survey && survey.questions
 
     survey.questions.inject(0) { |sum, element| sum + element["final_score"] } / survey.questions.length
+  end
+
+  def self.survey_status_updating(survey_id)
+    survey = SurveyRepository.find_by_id(survey_id)
+    return unless survey.present?
+    remote_responses = number_of_remote_responses(survey.remote_survey_id) unless survey.remote_survey_id.blank?
+    SurveyRepository.update_survey_responses(survey.id, remote_responses) unless remote_responses.blank?
+    SurveyResponsesService.new(survey.id).close_survey unless survey.status == "closed"
+  end
+
+  def self.surveys_status_update
+    SurveyRepository.surveys_ongoing.each { |survey| survey_status_updating(survey.id) }
   end
 
   private
@@ -46,8 +62,15 @@ class SurveyResponsesService < ApplicationService
     end
 
     def remote_responses(remote_survey_id)
-      survey_responses = TypeFormService::Responses.new
-      survey_responses.all(remote_survey_id)[:items]
+      survey_responses = TypeFormService::Responses.new.all(remote_survey_id)
+      return unless survey_responses
+      survey_responses[:items]
+    end
+
+    def self.number_of_remote_responses(remote_survey_id)
+      survey_responses = TypeFormService::Responses.new.all(remote_survey_id)
+      return unless survey_responses
+      survey_responses[:total_items]
     end
 
     def questions(responses)

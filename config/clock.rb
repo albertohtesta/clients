@@ -13,4 +13,5 @@ module Clockwork
 
   # TODO: Change programation for every day
   every(1.hour, "Executing Job: ") { TeamsOudatedMetricsJob.perform_now }
+  every(1.day, "Executing Survey status update Job: ", at: "00:00") { SurveysStatusUpdateJob.perform_now }
 end

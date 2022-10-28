@@ -33,4 +33,40 @@ module WebmockHelper
 
     @token = JWT.encode(payload, jwk.keypair, "RS256", headers)
   end
+
+  def get_survey_stubs
+    access_token = ENV.fetch("TYPE_FORM_ACCESS_TOKEN")
+    stub_request(:get, "https://api.typeform.com/forms/Eo9SGMK4/responses").
+    with(
+      headers: {
+        "Accept" => "*/*",
+        "Authorization" => "Bearer #{access_token}",
+        "Host" => "api.typeform.com"
+      }
+    ).
+    to_return(
+      status: 200,
+      body: {
+        "total_items": 2,
+        "page_count": 1,
+        "items": [
+        ]
+      }.to_json,
+      headers: {}
+    )
+
+    stub_request(:patch, "https://api.typeform.com/forms/Eo9SGMK4").
+    with(
+      body: "[{\"op\":\"replace\",\"path\":\"/settings/is_public\",\"value\":false}]",
+      headers: {
+      "Accept" => "application/json",
+      "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Authorization" => "Bearer #{access_token}",
+      "Content-Length" => "61",
+      "Content-Type" => "application/json",
+      "Host" => "api.typeform.com",
+      "User-Agent" => "rest-client/2.1.0 (linux-musl x86_64) ruby/3.1.1p18"
+      }).
+    to_return(status: 200, body: "", headers: {})
+  end
 end

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         scope module: :managers do
           resources :accounts, only: [:show, :index] do
             scope module: :accounts do
+              resources :collaborators, only: [:destroy], param: "collaborator_id"
               resources :account_follow_ups, only: %i[create index]
             end
           end
