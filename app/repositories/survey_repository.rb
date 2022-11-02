@@ -2,7 +2,10 @@
 
 class SurveyRepository < ApplicationRepository
   class << self
+    PREPARATION = 0
+    SENT = 1
     CLOSED = 2
+
     def find_by_id(id)
       scope.includes(team: :collaborators).find_by_id(id)
     end
@@ -14,7 +17,7 @@ class SurveyRepository < ApplicationRepository
         select(:id, "questions_detail -> 'questions' AS questions")
     end
 
-    def last_survey_of_team(team_id)
+    def last_closed_survey_of_team(team_id)
       scope.where(["team_id = :team_id and status = :status", team_id:, status: CLOSED])
       .select(:id, "questions_detail -> 'questions' AS questions").last
     end
@@ -29,7 +32,12 @@ class SurveyRepository < ApplicationRepository
     end
 
     def surveys_ongoing
-      scope.where({ status: !CLOSED })
+      scope.where([ "status = :preparation or status = :sent", preparation: PREPARATION, sent: SENT ])
+    end
+
+    def team_has_surveys_ongoing?(team_id)
+      scope.where([ "team_id = :team_id and (status = :preparation or status = :sent)", 
+        team_id: team_id, preparation: PREPARATION, sent: SENT ]).limit(1).length > 0
     end
 
     def mark_survey_as_sent(id)

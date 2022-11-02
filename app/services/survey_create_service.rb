@@ -42,6 +42,7 @@ class SurveyCreateService < ApplicationService
     end
 
     def create_job(survey)
+      return unless !survey.closed?
       survey_closing_date = survey.deadline.to_datetime + 1
       SurveyJob.set(wait_until: survey_closing_date).perform_later(survey)
     end

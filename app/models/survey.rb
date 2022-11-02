@@ -12,17 +12,21 @@ class Survey < ApplicationRecord
   validates_inclusion_of :period, in: periods
   validates_inclusion_of :status, in: statuses
 
-  validates :status, uniqueness: { scope: :team_id, message: "There is a survey ongoing for this team.", conditions: -> { where.not(status: "closed") } }
-  validate :deadline_date_cannot_be_in_the_past, unless: -> { deadline.blank? }
-
+  validate :deadline_date_cannot_be_in_the_past, on: :create, unless: -> { deadline.blank? }
+  validate :no_survey_ongoing, on: :create, unless: -> { self.closed? }
   before_validation :set_defaults
 
   before_create do
     get_survey_url unless self.survey_url.present?
   end
 
+  def no_survey_ongoing
+    errors.add(:status, :blank, message: 
+      "There is a survey ongoing for this team") unless !SurveyRepository.team_has_surveys_ongoing?(team_id)
+  end
+
   def deadline_date_cannot_be_in_the_past
-    if deadline < Date.today && status != "closed"
+    if self.deadline < Date.today && !self.closed?
       errors.add(:deadline, :blank, message: "can't be in the past.")
     end
   end
