@@ -22,7 +22,7 @@ class Survey < ApplicationRecord
   end
 
   def no_survey_ongoing
-    errors.add(:status, :blank, message: 
+    errors.add(:status, :blank, message:
       "There is a survey ongoing for this team") unless !SurveyRepository.team_has_surveys_ongoing?(team_id)
   end
 

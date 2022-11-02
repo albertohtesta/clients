@@ -54,7 +54,7 @@ module Api
 
             if @survey.remote_survey_id.present?
               survey_responses = TypeFormService::Responses.new.all(@survey.remote_survey_id)
-              unless survey_responses.blank? 
+              unless survey_responses.blank?
                 tf_current_answers = survey_responses[:total_items]
                 SurveyRepository.update_current_answers(@survey.id, tf_current_answers) unless @survey.current_answers == tf_current_answers
               end
@@ -69,7 +69,7 @@ module Api
           end
 
           def validate_period
-            render json: { message: "Period invalid must be [month, quarter or year]" }, status: :bad_request unless ['month', 'quarter', 'year'].include?(params[:period])
+            render json: { message: "Period invalid must be [month, quarter or year]" }, status: :bad_request unless ["month", "quarter", "year"].include?(params[:period])
           end
 
           def validate_period_value
@@ -87,7 +87,6 @@ module Api
             SurveyCreateService.create_job(@survey)
             SurveySenderJob.perform_later @survey.id
           end
-
       end
     end
   end

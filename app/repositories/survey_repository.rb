@@ -36,8 +36,8 @@ class SurveyRepository < ApplicationRepository
     end
 
     def team_has_surveys_ongoing?(team_id)
-      scope.where([ "team_id = :team_id and (status = :preparation or status = :sent)", 
-        team_id: team_id, preparation: PREPARATION, sent: SENT ]).limit(1).length > 0
+      scope.where([ "team_id = :team_id and (status = :preparation or status = :sent)",
+        team_id:, preparation: PREPARATION, sent: SENT ]).limit(1).length > 0
     end
 
     def mark_survey_as_sent(id)
