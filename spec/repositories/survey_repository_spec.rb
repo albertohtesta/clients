@@ -24,7 +24,7 @@ RSpec.describe SurveyRepository do
     # end
 
     it "must return team's last survey" do
-      selected_survey = described_class.last_survey_of_team(team.id)
+      selected_survey = described_class.last_closed_survey_of_team(team.id)
 
       expect(selected_survey).to eql(closed_survey)
     end

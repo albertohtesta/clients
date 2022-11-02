@@ -12,7 +12,8 @@ class Survey < ApplicationRecord
   validates_inclusion_of :period, in: periods
   validates_inclusion_of :status, in: statuses
 
-  validate :deadline_date_cannot_be_in_the_past, on: :create, unless: -> { deadline.blank? }
+  # TODO: validate only in create, problem with rspec
+  validate :deadline_date_cannot_be_in_the_past, unless: -> { deadline.blank? }
   validate :no_survey_ongoing, on: :create, unless: -> { self.closed? }
   before_validation :set_defaults
 
